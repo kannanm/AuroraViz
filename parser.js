@@ -8,168 +8,159 @@
 */
 
 var jsonData = {
-	"chartType" : "Bar", // chartType could be Bar/Pie/Line (data) mBar/mPie/mLine/(dataset)  Area/(areaData) Bubble/(scatterData)  nodeLink/SuBurst (treeData)
-	"barType"   : "v", // Vertical or Horizontal
-    "caption": "Top 5 Sales Person", // Title of the Chart
-    "yAxisName": "Names", // Y Axis Name
-	"xAxisName": "Sales Figure", // X Axis Name
-    "width": 500, // Panel Height
-    "height": 500, // Panel Width
-	"palette": 1, // Needs a Palette. If 0 default colours
-	"showValues" : 1, // Show Values on the Graph, Axis Values
-	"showLabels" : 1, // Show Labels on the Graph
-	"toolTip": 1, // Show Tooltip
-	"borderColor": "red", // Plot the canvas border Color
-	"grid" : "yes", // For data grid
-	"innerRadius" : null, // For Pie/Donut Graphs
-	"outerRadius" : null, // For Pie/Donut Graphs
-	"angle" : null, // For Pie/Donut Graphs
-	"startAngle" : null, // For Pie/Donut Graphs
-	"endAngle" : null, // For Pie/Donut Graphs
-	"lineStyle" : "step", // If Step, step graph is plot or otherwise normal Graph
-	"areaSegemented" : true, // By default segmented is true, can be set to false as well - Area Specific
-	"areaInterpolate" : false, // By default interpolate is false, can be set to true as well - Area Specific
-	"root" : "Aurora", // This is for the tree graph - Represents the root of the tree.. 
-	"margin" : "n", //  This is for the tree graph again, the margin is by default set to n and for now, you can't change it. 
-   
-   // data is for bar/line/pie graphs. For other graphs this will be null... 
-    "data": [{
-        "label": "data1",
-        "value": 15
-	},
-    {
-        "label": "data2",
-        "value": 3
-	},
-    {
-        "label": "data3",
-        "value": 2
-	},
-    {
-        "label": "data4",
-        "value": 3
-	},
-
-    {
-        "label": "data5",
-        "value": 3
-	}
-	], 
-	
-	// Dataset is for multi bar, multi line graphs, for other graphs this will be null.. 
-	"dataset" : [
-		{
-			"data": [{
-			"label": "1data",
-			"value": 15,
-			"toolTipText": "label:1data, value:15" // If you don't mention the toolTipText your default toolTipText is the Label.
-			}, {
-			"label": "2data",
-			"value": 3
-			}, {
-			"label": "3data",
-			"value": 2
-			} ]
-	},
-	
-	{
-		"data": [{
-			"label": "1data",
-			"value": 10,
-			"toolTipText": "label:1data, value:10"
-			}, {
-			"label": "2data",
-			"value": 5
-			}, {
-			"label": "3data",
-			"value": 6
-			}]
-	}
-	],
-	
-	// "Area Graph Data"
-	"areaData": [{
-			"x": 3,
-			"y": 1.3
-	},
-    {
-			"x": 2,
-			"y": 4
-	},
-    {
-			"x": 2,
-			"y": 1.0
-	},
-    {
-			"x": 3,
-			"y": 1.5
-	},
-
-    {
-			"x": 3,
-			"y": 1.3
-	}
-	],
-	
-	// "Bubble GraphData"
-	"scatterData" : [
-                {
-                    "x": 30,
-                    "y": 1.3,
-                    "z": 116,
-                    "toolTipText": "Traders"
+    "chartType":"Bar",
+    "barType":"v",
+    "caption":"Top5SalesPerson",
+    "yAxisName":"Names",
+    "xAxisName":"SalesFigure",
+    "width":500,
+    "height":500,
+    "palette":1,
+    "showValues":1,
+    "showLabels":1,
+    "toolTip":1,
+    "borderColor":"red",
+    "grid":"yes",
+    "innerRadius":null,
+    "outerRadius":null,
+    "angle":null,
+    "startAngle":null,
+    "endAngle":null,
+    "lineStyle":"step",
+    "areaSegemented":true,
+    "areaInterpolate":false,
+    "root":"Aurora",
+    "margin":"n",
+    "data":[{
+            "label":"data1",
+            "value":15
+        },
+        {
+            "label":"data2",
+            "value":3
+        },
+        {
+            "label":"data3",
+            "value":2
+        },
+        {
+            "label":"data4",
+            "value":3
+        },
+        {
+            "label":"data5",
+            "value":3
+        }
+    ],
+    "dataset":[{
+            "data":[{
+                    "label":"1data",
+                    "value":15,
+                    "toolTipText":"label: 1data, value: 15"
                 },
                 {
-                    "x": 32,
-                    "y": 3.5,
-                    "z": 99,
-                    "toolTipText": "Farmers"
+                    "label":"2data",
+                    "value":3
                 },
                 {
-                    "x": 8,
-                    "y": 2.1,
-                    "z": 33,
-                    "toolTipText": "Individuals"
-                },
-                {
-                    "x": 62,
-                    "y": 2.5,
-                    "z": 72,
-                    "toolTipText": "Medium Business Houses"
-                },
-                {
-                    "x": 78,
-                    "y": 2.3,
-                    "z": 55,
-                    "toolTipText": "Corporate Group A"
+                    "label":"3data",
+                    "value":2
                 }
-            ],
-     
-     // "treeGraphData"
-     "treeData":{
-        "Pramati Technologies":{
-            "production department": "100",
-            "research department": "100",
-            "quality engineering": "100",
-            "algorithms": "100",
-            "pramati labs": "100"
+            ]
         },
-        "Imaginea Technologies":{
-			"Platform Development": "100",
-            "Community Development": "100",
-            "Research on Tools": "100",
-            "Social Computing": "100"
+        {
+            "data":[{
+                    "label":"1data",
+                    "value":10,
+                    "toolTipText":"label: 1data, value: 10"
+                },
+                {
+                    "label":"2data",
+                    "value":5
+                },
+                {
+                    "label":"3data",
+                    "value":6
+                }
+            ]
+        }
+    ],
+    "areaData":[{
+            "x":3,
+            "y":1.3
         },
-        "Social Twist":{
-            "Social Computing":"100",
-            "Tell a Friend":"100",
-            "Social Research":"100"
+        {
+            "x":2,
+            "y":4
+        },
+        {
+            "x":2,
+            "y":1
+        },
+        {
+            "x":3,
+            "y":1.5
+        },
+        {
+            "x":3,
+            "y":1.3
+        }
+    ],
+    "scatterData":[{
+            "x":30,
+            "y":1.3,
+            "z":116,
+            "toolTipText":"Traders"
+        },
+        {
+            "x":32,
+            "y":3.5,
+            "z":99,
+            "toolTipText":"Farmers"
+        },
+        {
+            "x":8,
+            "y":2.1,
+            "z":33,
+            "toolTipText":"Individuals"
+        },
+        {
+            "x":62,
+            "y":2.5,
+            "z":72,
+            "toolTipText":"MediumBusinessHouses"
+        },
+        {
+            "x":78,
+            "y":2.3,
+            "z":55,
+            "toolTipText":"CorporateGroupA"
+        }
+    ],
+    "treeData":{
+        "PramatiTechnologies":{
+            "productiondepartment":"100",
+            "researchdepartment":"100",
+            "qualityengineering":"100",
+            "algorithms":"100",
+            "pramatilabs":"100"
+        },
+        "ImagineaTechnologies":{
+            "PlatformDevelopment":"100",
+            "CommunityDevelopment":"100",
+            "ResearchonTools":"100",
+            "SocialComputing":"100"
+        },
+        "SocialTwist":{
+            "SocialComputing":"100",
+            "TellaFriend":"100",
+            "SocialResearch":"100"
         },
         "Qontext":{
-            "Community Building":"100",
-            "Knowledge Management":"100"
+            "CommunityBuilding":"100",
+            "KnowledgeManagement":"100"
         }
-    } 
+    }
 };
 
 /* AP is the parserNameSpace*/
