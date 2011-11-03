@@ -3,5 +3,5 @@ Current TODO/Work in Progress Aurora - Iteration 1
 
 1) Standardize the JSON Structure for all the graphs - (Done - Version 1 of it checked in test/jsonDataSample
 2) Design and Develop a Rich Web Interface for AuroraViz - (Currently underway)
-3) Build a Parser to understand UI events and build JSON Structures at run time for rendering - (Currently underway)
+3) Build a Parser to understand UI events and build JSON Structures at run time for rendering - (Version 1 Done - Working on Clean up and Recursive construction to make the code look elegant - Working version1 on server)
 4) Browser Compatibility (IE8 and below)

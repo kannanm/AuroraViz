@@ -380,7 +380,7 @@ AP.buildTreeData = function(parentNode, childNodeList, childNodeValues){
  * **/
  
  /**
- * This is the API that will exposed to an external js to build the JSON structure for conventional graphs
+ * This is the API that will be exposed to an external js to build the JSON structure for conventional graphs
  * Unidimension or MultiLine however! 
  */ 
 AP.populateSimpleJSONData = function(categoryList, dataList, dataToolTipList){
