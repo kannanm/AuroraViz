@@ -1,3 +1,4 @@
+/**@author : koushikr*/
 /**
  * The basefunction for the Stacked Area Graph initialization. Need x and y co-ordinates.  
  * Initializes the StackedAreaGraph. Sets the data
@@ -192,7 +193,7 @@ AR.StackedAreaGraph = function(graphDef){
 		}
 	},
 	
-	"b" : function () {
+	"yes" : function () {
 		if(graphDef.data){
 			var xmaxVal = AR.Utility.getSingleDimensionData(graphDef.data,AR.Utility.Dimension.y).max();
 			self.setHorRules(xmaxVal,AR.Utility.scale.linear);
@@ -221,7 +222,7 @@ AR.StackedAreaGraph = function(graphDef){
 	 
 	};
 	
-	setRules[graphDef.type || "b"]();
+	setRules[graphDef.grid || "yes"]();
 	
 	if(graphDef.dataset){
 			var dataset = graphDef.dataset;

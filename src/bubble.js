@@ -1,3 +1,6 @@
+
+/**@authors : Aditya Gaur, koushikr*/
+
 /**
  * The basefunction for the Bubble initialization. 
  * Initializes the BubbleGraph. Sets the data

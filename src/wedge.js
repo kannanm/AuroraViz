@@ -1,3 +1,6 @@
+
+/**@authors : Aditya Gaur, koushikr*/
+
 /**
  * The basefunction for the Wedge initialization. 
  * Initializes the WedgeGraph. Sets the data

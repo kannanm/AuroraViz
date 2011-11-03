@@ -1,3 +1,5 @@
+/**@authors : Aditya Gaur, koushikr*/
+
 /**
  * The basefunction for the Line initialization. 
  * Initializes the LineGraph. Sets the data

@@ -1,6 +1,8 @@
+/**@authors : Aditya Gaur, koushikr*/
+
 AR.Utility = {};
 /**
- * @author Aditya Gaur Finds the maximum value in the data sent for the graph
+ * Finds the maximum value in the data sent for the graph
  *         creation.
  * @param {object}
  *            [graphDef] An object containing the graph properties and the data

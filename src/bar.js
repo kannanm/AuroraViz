@@ -1,3 +1,5 @@
+/**@authors : Aditya Gaur, koushikr*/
+
 /**
  * The basefunction for the bar initialization. 
  * Initializes the barGraph. Sets the data
@@ -206,7 +208,7 @@ AR.BarGraph = function (graphDef) {
 	}
 	
 	};
-	var setRules = {
+	/*var setRules = {
 	"v" : function () {
 		if(graphDef.dataset){
 			var dataArray = new Array();
@@ -236,17 +238,48 @@ AR.BarGraph = function (graphDef) {
 	}
 	};
 
-	setRules[graphDef.type || "v"]();
+	setRules[graphDef.type || "v"]();*/
+	
+	var setRules = function(){
+		if(graphDef.dataset){
+			var dataArray = new Array();
+			for(i=0; i<graphDef.dataset.length; i++){
+				var max = AR.Utility.findMax(graphDef.dataset[i].data);
+				var maxMap = {"value" : max};
+				dataArray.push(maxMap);
+			}
+			self.setHorRules(AR.Utility.findMax(dataArray),AR.Utility.scale.linear);
+		}
+		else
+			self.setHorRules(AR.Utility.findMax(graphDef.data),AR.Utility.scale.linear);
+			
+		if(graphDef.dataset){
+			var dataArray = new Array();
+			for(i=0; i<graphDef.dataset.length; i++){
+				var max = AR.Utility.findMax(graphDef.dataset[i].data);
+				var maxMap = {	"label" : "data",
+								"value" : max};
+				dataArray.push(maxMap);
+			}
+			self.setVerticalRules(AR.Utility.findMax(dataArray), AR.Utility.scale.linear);
+		}else
+			self.setVerticalRules(AR.Utility.findMax(graphDef.data),AR.Utility.scale.linear);
+	};
+	
+	setRules();
 	createBars[graphDef.type || "v"]();
+	
 	this.setWidth = function (width) {
 		AR.Graph.prototype.setWidth.call(self, width);
 		bar.adjustPosition(self._dimension);
-		setRules[graphDef.type || "v"]();
+		//setRules[graphDef.type || "v"]();
+		setRules();
 	};
 	this.setHeight = function (height) {
 		AR.Graph.prototype.setHeight.call(self, height);
 		bar.adjustPosition(self._dimension);
-		setRules[graphDef.type || "v"]();
+		//setRules[graphDef.type || "v"]();
+		setRules();
 	};
 	this.setPalette = function (paletteCode) {
 		bar.setPalette(paletteCode);

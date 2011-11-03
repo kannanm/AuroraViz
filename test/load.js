@@ -1,3 +1,7 @@
+/** 
+ * @author : koushikr
+ * This is to automatically create the chart_gallery.html with the JSON data supplied at the end of this page
+ */
 $(document).ready(function() { 
 	
 	// TODO write generateDivs to dynamically generate the Divs instead of writing them statically.. 

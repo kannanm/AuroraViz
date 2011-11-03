@@ -1,3 +1,5 @@
+/**@author : Aditya Gaur*/
+
 Array.prototype.max = Array.prototype.max || function (){
 	var max = this[0];
 	var len = this.length;

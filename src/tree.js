@@ -1,4 +1,4 @@
-
+/**@author : koushikr*/
 /**
  * The basefunction for the Node Link initialization. 
  * Initializes the Node Link. Sets the data
