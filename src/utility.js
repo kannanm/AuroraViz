@@ -63,6 +63,7 @@ AR.Utility.getJSONContentChart= function (data, type) {
 	return arr;
 };
 
+
 AR.Utility.Dimension = {
 	x : "x",
 	y : "y",
