@@ -4,7 +4,10 @@ What is AuroraViz?
 AuroraViz is a visualization helper, so to say. The product is aimed at helping people realize their data with different kinds of visualizations, themes etc. It is not targetted at one individual client or domain, per se. It is a generic product that can help anyone having to deal with visualizations, data representations and analytics. AuroraViz can provide you with subtle yet elegant visualizations for your data. We believe in keeping things simple as long as the need for complexity doesn't arise. And AuroraViz is so close to finishing its first prototype. 
 
 
+How to run?
+==============
 
+Right now, the Aurora Web Interface is a work in progress. To see different kinds of charts, go to test/index.html or test/chart_gallery.html and open it on your browser (Firefox/Chrome/IE9). Trying to fix problems with lower versions of IE
 
 
 © Imaginea Technologies
