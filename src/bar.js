@@ -12,7 +12,7 @@
  * This is a base class and is called by different bar implementations (Eg : Vertical, Horizontal, Multivalued etc)
  * Adds Bar graph container to the panel, assigns data, sets anchor and tooltip with the given data
  */
-AR.Bar = function (graphDef, data, parentDimension, panel) {
+AR.Bar = function (graphDef, data, parentDimension, panel, color) {
 	var self = this;
 	this._bar = panel.add(pv.Bar);
 	this._parentDimension = parentDimension;
@@ -36,6 +36,9 @@ AR.Bar = function (graphDef, data, parentDimension, panel) {
 	if (graphDef.palette) {
 		AR.Utility.setPalette(self._bar, graphDef.palette);
 	}
+	if(color){
+		self._bar.fillStyle("#"+color);
+	}
 };
 // TODO - Some kind of a factory that sets the following properties has to be made. 
 AR.Bar.prototype.properties = ["fillStyle", "strokeStyle"];
@@ -50,9 +53,9 @@ AR.Bar.prototype.properties = ["fillStyle", "strokeStyle"];
  *            displayed
  * @extends AR.Bar
  */
-AR.HBar = function (graphDef, data, parentDimension, panel, maxValue) {
+AR.HBar = function (graphDef, data, parentDimension, panel, maxValue, color, seriesname) {
 	var self = this;
-	AR.Bar.apply(self, [graphDef, data, parentDimension, panel]);
+	AR.Bar.apply(self, [graphDef, data, parentDimension, panel, color]);
 	var adjustWidth = function (parentDimension) {
 		var barWidth = pv.Scale.linear(0, maxValue).range(0, parentDimension.width - 40);
 		self._bar.width(function (d) {
@@ -76,7 +79,7 @@ AR.HBar = function (graphDef, data, parentDimension, panel, maxValue) {
 	
 	self.adjustLabel = function (parentDimension) {
 		self._bar.anchor("left").add(pv.Label).textBaseline("right").text(function () {
-			return data[this.index].label;
+				return seriesname ? seriesname : data[this.index].label;
 		}).textAngle(-Math.PI / 4).textAlign("right");
 	};
 	
@@ -103,9 +106,9 @@ AR.HBar.prototype = AR.extend(AR.Bar);
  *            displayed
  * @extends AR.Bar
  */
-AR.VBar = function (graphDef, data, parentDimension, panel, maxValue) {
+AR.VBar = function (graphDef, data, parentDimension, panel, maxValue, color, seriesname) {
 	var self = this;
-	AR.Bar.apply(self, [graphDef, data, parentDimension, panel]);
+	AR.Bar.apply(self, [graphDef, data, parentDimension, panel, color]);
 	
 	var adjustHeight = function (parentDimension) {
 		var barHeight = pv.Scale.linear(0, maxValue).range(0, parentDimension.height - 40);
@@ -130,7 +133,7 @@ AR.VBar = function (graphDef, data, parentDimension, panel, maxValue) {
 	};
 	self.adjustLabel = function (parentDimension) {
 		self._bar.anchor("bottom").add(pv.Label).textBaseline("top").text(function () {
-			return data[this.index].label;
+			return seriesname ? seriesname : data[this.index].label;
 		}).textAngle(-Math.PI / 4).textAlign("right");
 	};
 	// TODO define a layout designer which does the following
@@ -176,7 +179,7 @@ AR.BarGraph = function (graphDef) {
 			for(i = 0; i< graphDef.dataset.length; i++){
 				 var noOfRecords = dataset.length* dataset[i].data.length;
 				 panel = self._panel.add(pv.Panel).left(i * (self._dimension.width - 30) / (noOfRecords) );
-				 bar = new AR.VBar(graphDef, dataset[i].data, self._dimension, panel, maxValue);
+				 bar = new AR.VBar(graphDef, dataset[i].data, self._dimension, panel, maxValue, dataset[i].color, dataset[i].seriesname);
 			}
 		}
 		else{
@@ -187,7 +190,7 @@ AR.BarGraph = function (graphDef) {
 	"h" : function () {
 		var maxValue;
 		if(graphDef.dataset){
-			var dataArray = new Array();
+			var dataArray = [];
 			for(i=0; i<graphDef.dataset.length; i++){
 				var max = AR.Utility.findMax(graphDef.dataset[i].data);
 				var maxMap = {	"label" : "data",
@@ -199,7 +202,7 @@ AR.BarGraph = function (graphDef) {
 			for(i = 0; i< graphDef.dataset.length; i++){
 				 var noOfRecords = dataset.length* dataset[i].data.length;
 				 panel = self._panel.add(pv.Panel).bottom(i * (self._dimension.height - 30) / (noOfRecords) );
-				 bar = new AR.HBar(graphDef, dataset[i].data, self._dimension, panel, maxValue);
+				 bar = new AR.HBar(graphDef, dataset[i].data, self._dimension, panel, maxValue, dataset[i].color, dataset[i].seriesname);
 			}
 		}
 		else{
@@ -240,8 +243,9 @@ AR.BarGraph = function (graphDef) {
 
 	setRules[graphDef.type || "v"]();*/
 	
-	var setRules = function(){
-		if(graphDef.dataset){
+	var setRules = { 
+		"v": function(){
+			if(graphDef.dataset){
 			var dataArray = new Array();
 			for(i=0; i<graphDef.dataset.length; i++){
 				var max = AR.Utility.findMax(graphDef.dataset[i].data);
@@ -252,8 +256,9 @@ AR.BarGraph = function (graphDef) {
 		}
 		else
 			self.setHorRules(AR.Utility.findMax(graphDef.data),AR.Utility.scale.linear);
-			
-		if(graphDef.dataset){
+		},
+		"h": function (){
+			if(graphDef.dataset){
 			var dataArray = new Array();
 			for(i=0; i<graphDef.dataset.length; i++){
 				var max = AR.Utility.findMax(graphDef.dataset[i].data);
@@ -264,9 +269,10 @@ AR.BarGraph = function (graphDef) {
 			self.setVerticalRules(AR.Utility.findMax(dataArray), AR.Utility.scale.linear);
 		}else
 			self.setVerticalRules(AR.Utility.findMax(graphDef.data),AR.Utility.scale.linear);
+		}
 	};
 	
-	setRules();
+	setRules[graphDef.type || "v"]();
 	createBars[graphDef.type || "v"]();
 	
 	this.setWidth = function (width) {
