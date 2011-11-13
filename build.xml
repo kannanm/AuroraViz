@@ -1,0 +1,109 @@
+<project name="aurora" default="all" xmlns:ac="antlib:net.sf.antcontrib" xmlns:jsl="antlib:com.googlecode.jslint4java" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<property name="basedir" location="." />
+	<property name="app.name" value="aurora" />
+	<property name="app.war" value="${app.name}.war" />
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="css.dir" value="${basedir}/css" />
+	<property name="lib.dir" value="${basedir}/lib" />
+	<property name="tools.dir" value="${basedir}/tools" />
+	<property name="staging.dir" value="${basedir}/staging" />
+	<property name="docs.dir" value="${staging.dir}/docs" />
+	<property name="js.docs.dir" value="${docs.dir}/js" />
+	<property name="app.dir" value="${staging.dir}/${app.name}" />
+	<property file="${basedir}/aurora.properties" />
+
+	<!-- Test Properties -->
+
+	<taskdef uri="antlib:net.sf.antcontrib" resource="net/sf/antcontrib/antlib.xml" classpath="${tools.dir}/jslint/ant-contrib.jar" />
+
+	<taskdef uri="antlib:com.googlecode.jslint4java" resource="com/googlecode/jslint4java/antlib.xml" classpath="${tools.dir}/jslint/jslint4java.jar" />
+
+	<taskdef name="jsdoctoolkit" classname="uk.co.darrenhurley.ant.tasks.JsDocToolkit" classpath="${tools.dir}/jsdoc/jsdoc-toolkit-ant-task-1.1.2.jar;${tools.dir}/jsdoc/jsdoc-toolkit/jsrun.jar" />
+
+
+	<target name="init">
+		<mkdir dir="${staging.dir}" />
+		<mkdir dir="${app.dir}" />
+	</target>
+
+
+	<!-- war staging -->
+	<target name="war-staging">
+		<echo>${app.dir}</echo>
+		<mkdir dir="${app.dir}/src" />
+		<copy toDir="${app.dir}/src">
+			<fileset dir="${src.dir}">
+			</fileset>
+		</copy>
+		<mkdir dir="${app.dir}/css" />
+		<copy toDir="${app.dir}/css">
+			<fileset dir="${css.dir}">
+			</fileset>
+		</copy>
+		<mkdir dir="${app.dir}/lib" />
+		<copy toDir="${app.dir}/lib">
+			<fileset dir="${lib.dir}">
+			</fileset>
+		</copy>
+		<mkdir dir="${app.dir}/test" />
+		<copy toDir="${app.dir}/test">
+			<fileset dir="${basedir}/test">
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- make war -->
+	<target name="war" depends="war-staging">
+		<war warfile="${staging.dir}/${app.war}" needxmlfile="false">
+			<fileset dir="${app.dir}">
+			</fileset>
+		</war>
+	</target>
+
+
+	<!-- deploy -->
+	<target name="deploy" depends="war">
+		<copy toDir="${TOMCAT_HOME}/webapps">
+			<fileset dir="${staging.dir}">
+				<include name="*.war" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- docs -->
+	<target name="jsdoc">
+		<jsdoctoolkit jsdochome="${tools.dir}/jsdoc/jsdoc-toolkit/" includeundocumented="true" template="jsdoc" outputdir="${js.docs.dir}" inputdir="${src.dir}" />
+		<echo> JS Docs generated at ${js.docs.dir} </echo>
+	</target>
+
+
+
+	<target name="jslint">
+		<jsl:jslint haltOnFailure="false" options="es5,evil,fragment,forin,continue">
+			<formatter type="plain" />
+			<fileset dir="${src.dir}" includes="*.js">
+				<exclude name="**/*-min.js" />
+				<exclude name="**/jQuery*.js" />
+			</fileset>
+		</jsl:jslint>
+	</target>
+
+
+	<target name="all" description="Makes the war and deploys" depends="clean-staging, dev, deploy">
+		<echo> Deploying the war ${staging.dir}/${app.war} to your app-server, start the server and go to {Server address}:{port}/aurora/test </echo>
+	</target>
+
+	<target name="dev" description="prepares a dev build, is incremental" depends="jslint, jsdoc, war">
+		<echo>Building the war in dev-mode</echo>
+	</target>
+
+	<target name="clean-staging" description="Cleans up all the staging resources and log files">
+		<delete dir="${staging.dir}" />
+	</target>
+
+	<target name="clean-tomcat" description="Cleans up all the tomcat">
+		<echo message="Removing the aurora folder from tomcat" />
+		<delete dir="${TOMCAT_HOME}/webapps/aurora" />
+	</target>
+</project>
