@@ -1,0 +1,132 @@
+var jsonSample = {
+	"canvas" : {
+		"height" : 100,
+		"width"  : 100,
+		"palette" : "1"
+	},
+	
+	"grid" : {
+		"horizontal" : "yes",
+		"vertical" 	 : "yes"
+	},
+	
+	"chart" : {
+		 "caption"	:	"Top5SalesPerson",
+		 "yAxisName":	"Names",
+         "xAxisName":	"SalesFigure",
+         "toolTip"	:	1,
+         "Color" : [] 
+	},
+	
+	"bardata" : {
+		"type" 	:   "bar",
+		"align" : "h",
+		"showLables" : "1",
+		"series":[
+				{
+					"values":[4,29,-39,14,-16,-49,30,7,-32,25],
+					"label":"Item 0"
+				},
+				{
+					"values":[-29,48,44,-11,7,50,-20,-21,-5,26],
+					"label":"Item 1"
+				}
+		   ]
+	},
+	
+	"linedata" : {
+		"type" 	:   "line",
+		"lineStyle":"step",
+		"series":[
+				{
+					"values":[4,29,-39,14,-16,-49,30,7,-32,25],
+					"label":"Item 0"
+				},
+				{
+					"values":[-29,48,44,-11,7,50,-20,-21,-5,26],
+					"label":"Item 1"
+				}
+		   ]
+	},
+
+	"piedata" : {
+		"type" 	:   "pie",
+		"showValues":1,
+		"showLabels":1,
+		"Radius" : "5", 
+		"angle" : "5", 
+		"startAngle" : "5", 
+		"endAngle" : "5", 
+		"series":[
+				{
+					"values":[4,29,-39,14,-16,-49,30,7,-32,25],
+					"label":"Item 0"
+				},
+				{
+					"values":[-29,48,44,-11,7,50,-20,-21,-5,26],
+					"label":"Item 1"
+				}
+		   ]
+	},
+	
+	"scatterdata" : {
+		"type" 	:   "scatter",
+		"series":[
+				{
+					"values":[[1,2,4], [2,3,6]],
+					"label":"Item 0"
+				},
+				{
+					"values":[[1,2,4], [2,3,6]],
+					"label":"Item 1"
+				}
+		   ]
+	},
+	
+	"donutdata" : {
+		"type" 	:   "donut",
+		"showValues":1,
+		"showLabels":1,
+		"innerRadius" : "5", 
+		"outerRadius" : "5", 
+		"angle" : "5", 
+		"series":[
+				{
+					"values":[4,29,-39,14,-16,-49,30,7,-32,25],
+					"label":"Item 0"
+				},
+				{
+					"values":[-29,48,44,-11,7,50,-20,-21,-5,26],
+					"label":"Item 1"
+				}
+		   ]
+	},
+
+	"areadata" : {
+		"type" 	:   "area",
+		"areaSegemented":true,
+		"areaInterpolate":false,
+		"series":[
+				{
+					"values":[[1,2], [2,3]],
+					"label":"Item 0"
+				},
+				{
+					"values":[[2,4], [3,6]],
+					"label":"Item 1"
+				}
+		   ]
+	}
+	 
+};
+
+
+Data Function
+====================
+1) Plots : No of sets in the series.. 
+2) Ticks : No of elements in each plot...
+3) Range : Total number of elements in the range.  {Start Range, End Range}
+4) We always provide a series input, when there is just one value in the series, then its a normal graph
+5) In the values array, if its a bubble, then everyelement is a 3D value
+6) If it is an area graph i.e. if the type is area, then everyelement is a 2D Value. 
+
