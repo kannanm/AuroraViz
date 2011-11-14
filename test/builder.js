@@ -7,6 +7,7 @@ var barLineGraph = {
 	"palette": 1,
 	"type":"h",
 	"grid" : "y",
+	"toolTip" : 1,
     "data": [
 	{
         "label": "data1",
@@ -42,6 +43,7 @@ var pieDonutGraph = {
 	"outerRadius" : null,
 	"angle" : null,
 	"grid" : "y",
+	"toolTip" : 1,
 	"wedgeType" : "pie",
     "data": [{
         "label": "data1",
@@ -151,21 +153,7 @@ var multiBarGraph = {
     "height": 500,
 	 "type": "v",
 	 "grid" : "y",
-	 "categories": [
-        {
-            "category": [
-                {
-                    "label": "Hardware"
-                },
-                {
-                    "label": "Software"
-                },
-                {
-                    "label": "Service"
-                }
-            ]
-        }
-    ],
+	 "toolTip" : 1,
     "dataset": [
         {
             "seriesname": "2004",
@@ -209,6 +197,7 @@ var multiLineGraph = {
     "width": 500,
     "height": 500,
 	"palette": 1,
+	"toolTip" : 1,
 	"grid" : "y",
 	"style": "step",
 	 "dataset" : [
@@ -284,20 +273,15 @@ var jsonSample = {
 	"canvas" : {
 		"height" : 100,
 		"width"  : 100,
-		"palette" : "1"
-	},
-	
-	"grid" : {
-		"horizontal" : "yes",
-		"vertical" 	 : "yes"
-	},
-	
+		"palette" : 1,
+		"grid" : "y"
+	},	
 	"chart" : {
 		 "caption"	:	"Top5SalesPerson",
 		 "yAxisName":	"Names",
-         "xAxisName":	"SalesFigure",
-         "toolTip"	:	1,
-         "Color" : [] 
+      		  "xAxisName":	"SalesFigure",
+       		 "toolTip"	:	1,
+       		  "Color" : ["FFFFFF", "EFEFEF"] 
 	},
 	
 	"bardata" : {
@@ -307,11 +291,11 @@ var jsonSample = {
 		"series":[
 				{
 					"values":[4,29,-39,14,-16,-49,30,7,-32,25],
-					"label":"Item 0"
+					"label":["Item 0", "Item 1"]
 				},
 				{
 					"values":[-29,48,44,-11,7,50,-20,-21,-5,26],
-					"label":"Item 1"
+					"label":["Item 0", "Item 1"]
 				}
 		   ]
 	},
@@ -322,11 +306,11 @@ var jsonSample = {
 		"series":[
 				{
 					"values":[4,29,-39,14,-16,-49,30,7,-32,25],
-					"label":"Item 0"
+					"label":["Item 0", "Item 1"]
 				},
 				{
 					"values":[-29,48,44,-11,7,50,-20,-21,-5,26],
-					"label":"Item 1"
+					"label":["Item 0", "Item 1"]
 				}
 		   ]
 	},
@@ -335,32 +319,27 @@ var jsonSample = {
 		"type" 	:   "pie",
 		"showValues":1,
 		"showLabels":1,
-		"Radius" : "5", 
+		"outerRadius" : "5", 
 		"angle" : "5", 
-		"startAngle" : "5", 
-		"endAngle" : "5", 
 		"series":[
 				{
 					"values":[4,29,-39,14,-16,-49,30,7,-32,25],
-					"label":"Item 0"
-				},
-				{
-					"values":[-29,48,44,-11,7,50,-20,-21,-5,26],
-					"label":"Item 1"
+					"label":["Item 0", "Item 1"]
 				}
 		   ]
 	},
 	
 	"scatterdata" : {
 		"type" 	:   "scatter",
+		"fillColor": "silver"
 		"series":[
 				{
 					"values":[[1,2,4], [2,3,6]],
-					"label":"Item 0"
+					"label":["Item 0", "Item 1"]
 				},
 				{
 					"values":[[1,2,4], [2,3,6]],
-					"label":"Item 1"
+					"label":["Item 0", "Item 1"]
 				}
 		   ]
 	},
@@ -375,11 +354,7 @@ var jsonSample = {
 		"series":[
 				{
 					"values":[4,29,-39,14,-16,-49,30,7,-32,25],
-					"label":"Item 0"
-				},
-				{
-					"values":[-29,48,44,-11,7,50,-20,-21,-5,26],
-					"label":"Item 1"
+					"label":["Item 0", "Item 1"]
 				}
 		   ]
 	},
@@ -391,11 +366,11 @@ var jsonSample = {
 		"series":[
 				{
 					"values":[[1,2], [2,3]],
-					"label":"Item 0"
+					"label":["Item 0", "Item 1"]
 				},
 				{
 					"values":[[2,4], [3,6]],
-					"label":"Item 1"
+					"label":["Item 0", "Item 1"]
 				}
 		   ]
 	}
@@ -417,6 +392,172 @@ setData = function(key,val,obj) {
 //=========================================================================================================
 //=========================================================================================================
 //=========================================================================================================
+populateJSON = function(jsonSample){
+	if(jsonSample.data.type == "bar"){
+		if(jsonSample.data.series.length > 1){
+			return getBarData(jsonSample)
+		}else{
+			return getmultiBarData(jsonSample);
+		}
+	}
+	if(jsonSample.data.type == "line"){
+		if(jsonSample.data.series.length > 1){
+			return getLineData(jsonSample);
+		}else{
+			return getmultiLineData(jsonSample);
+		}
+	}
+	if(jsonSample.data.type == "pie" || jsonSample.data.type == "donut"){
+		return getPieDonutData(jsonSample);
+	}
+	if(jsonSample.data.type == "scatter"){
+		return getScatterData(jsonSample);
+	}
+	if(jsonSample.data.type == "area"){
+		return getareaData(jsonSample);
+	}
+};
+getBarData = function(jsonSample){
+	barLineGraph.height = jsonSample.canvas.height;
+	barLineGraph.width = jsonSample.canvas.width;
+	barLineGraph.caption = jsonSample.chart.caption;
+	barLineGraph.xAxisName = jsonSample.chart.xAxisName;
+	barLineGraph.yAxisName = jsonSample.chart.yAxisName;
+	barLineGraph.palette = jsonSample.canvas.palette;
+	barLineGraph.grid = jsonSample.canvas.grid;
+	barLineGraph.toolTip = jsonSample.chart.toolTip;
+	if(jsonSample.bardata.align)
+		barLineGraph.type = jsonSample.bardata.align;
+	if(jsonSample.bardata.showLabels)
+		barLineGraph.showLabels = jsonSample.bardata.showLabels;
+	var data = [];
+	for(var i=0; i < jsonSample.bardata.series.values.length; i++){
+		data.push({label : jsonSample.bardata.series[0].label[i], value : jsonSample.bardata.series[0].values[i]});
+	}
+	barLineGraph.data = data;
+	return barLineGraph;
+};
 
-getBarLineData = function(jsonSample){
+getLineData = function(jsonSample){
+	barLineGraph.height = jsonSample.canvas.height;
+	barLineGraph.width = jsonSample.canvas.width;
+	barLineGraph.caption = jsonSample.chart.caption;
+	barLineGraph.xAxisName = jsonSample.chart.xAxisName;
+	barLineGraph.yAxisName = jsonSample.chart.yAxisName;
+	barLineGraph.palette = jsonSample.canvas.palette;
+	barLineGraph.grid = jsonSample.canvas.grid;
+	if(jsonSample.linedata.lineStyle)
+		barLineGraph.style = jsonSample.linedata.lineStyle;
+	barLineGraph.toolTip = jsonSample.chart.toolTip;
+	var data = [];
+	for(var i=0; i < jsonSample.linedata.series.values.length; i++){
+		data.push({label : jsonSample.linedata.series[0].label[i], value : jsonSample.linedata.series[0].values[i]});
+	}
+	barLineGraph.data = data;
+	return barLineGraph;
+};
+
+getPieDonutData = function(jsonSample){
+	pieDonutGraph.height = jsonSample.canvas.height;
+	pieDonutGraph.width = jsonSample.canvas.width;
+	pieDonutGraph.caption = jsonSample.chart.caption;
+	pieDonutGraph.toolTip = jsonSample.chart.toolTip;
+	pieDonutGraph.showValues = jsonSample.piedata.showValues;
+	pieDonutGraph.showLabels = jsonSample.piedata.showLabels;
+	pieDonutGraph.palette = jsonSample.canvas.palette;
+	pieDonutGraph.outerRadius = jsonSample.piedata.outerRadius;
+	pieDonutGraph.angle = jsonSample.piedata.angle;
+	if(jsonSample.donutdata.innerRadius)
+		pieDonutGraph.innerRadius = jsonSample.donutdata.innerRadius;
+	var data = [];
+	for(var i=0; i < jsonSample.piedata.series.values.length; i++){
+		data.push({label : jsonSample.piedata.series[0].label[i], value : jsonSample.piedata.series[0].values[i]});
+	}
+	pieDonutGraph.data = data;
+	return pieDonutGraph;
+};
+
+getScatterData = function(jsonSample){
+	scatterGraph.height = jsonSample.canvas.height;
+	scatterGraph.width = jsonSample.canvas.width;
+	scatterGraph.caption = jsonSample.chart.caption;
+	scatterGraph.toolTip = jsonSample.chart.toolTip;
+	scatterGraph.xAxisName = jsonSample.chart.xAxisName;
+	scatterGraph.yAxisName = jsonSample.chart.yAxisName;
+	scatterGraph.palette = jsonSample.canvas.palette;
+	scatterGraph.grid = jsonSample.canvas.grid;
+	scatterGraph.fillColor = jsonSample.scatterdata.fillColor;
+	var data = [];
+	for(var i=0; i < jsonSample.scatterdata.series.values.length; i++){
+		data.push({toolTipText : jsonSample.scatterdata.series[0].label[i], x : jsonSample.scatterdata.series[0].values[i][0], y : jsonSample.scatterdata.series[0].values[i][1], z : jsonSample.scatterdata.series[0].values[i][2]});
+	}
+	scatterGraph.data = data;
+	return scatterGraph;
+};
+
+getareaData = function(jsonSample){
+	areaGraph.height = jsonSample.canvas.height;
+	areaGraph.width = jsonSample.canvas.width;
+	areaGraph.toolTip = jsonSample.chart.toolTip;
+	areaGraph.caption = jsonSample.chart.caption;
+	areaGraph.xAxisName = jsonSample.chart.xAxisName;
+	areaGraph.yAxisName = jsonSample.chart.yAxisName;
+	areaGraph.palette = jsonSample.canvas.palette;
+	areaGraph.grid = jsonSample.canvas.grid;
+	var data = [];
+	for(var i=0; i < jsonSample.areadata.series.values.length; i++){
+		data.push({x : jsonSample.areadata.series[0].values[i][0], y : jsonSample.areadata.series[0].values[i][1]});
+	}
+	areaGraph.data = data;
+	return areaGraph;
+};
+
+getmultiBarData = function(jsonSample){
+	multiBarGraph.height = jsonSample.canvas.height;
+	multiBarGraph.width = jsonSample.canvas.width;
+	multiBarGraph.caption = jsonSample.chart.caption;
+	multiBarGraph.toolTip = jsonSample.chart.toolTip;
+	multiBarGraph.xAxisName = jsonSample.chart.xAxisName;
+	multiBarGraph.yAxisName = jsonSample.chart.yAxisName;
+	multiBarGraph.palette = jsonSample.canvas.palette;
+	multiBarGraph.grid = jsonSample.canvas.grid;
+	if(jsonSample.bardata.align)
+		multiBarGraph.type = jsonSample.bardata.align;
+	if(jsonSample.bardata.showLabels)
+		multiBarGraph.showLabels = jsonSample.bardata.showLabels;
+	var dataset = [];
+	for(var i=0; i < jsonSample.bardata.series.length; i++){
+		var tempContent = jsonSample.bardata.series[i].values;
+		dataset.push({seriesname : jsonSample.bardata.series[i].label[0], color : "FEEEAA" data : function(){
+			var content = [];
+			for(var j=0; j < tempContent.length; j++){
+				content.push({value : tempContent[i]});	
+			}
+			return content;
+		});
+	}
+	return multiBarGraph;
+};
+
+getmultiLineData = function(jsonSample){
+	multiLineGraph.height = jsonSample.canvas.height;
+	multiLineGraph.width = jsonSample.canvas.width;
+	multiLineGraph.caption = jsonSample.chart.caption;
+	multiLineGraph.toolTip = jsonSample.chart.toolTip;
+	multiLineGraph.xAxisName = jsonSample.chart.xAxisName;
+	multiLineGraph.yAxisName = jsonSample.chart.yAxisName;
+	multiLineGraph.palette = jsonSample.canvas.palette;
+	multiLineGraph.grid = jsonSample.canvas.grid;
+	var dataset = [];
+	for(var i=0; i < jsonSample.bardata.series.length; i++){
+		var tempContent = jsonSample.bardata.series[i].values;
+		dataset.push({data : function(){
+			var content = [];
+			for(var j=0; j < tempContent.length; j++){
+				content.push({value : tempContent[i], toolTipText : tempContent[i], label : jsonSample.bardata.series[i].label[0]});	
+			}
+			return content;
+		});
+	}
+	return multiLineGraph;
 };
