@@ -273,15 +273,20 @@ var jsonSample = {
 	"canvas" : {
 		"height" : 100,
 		"width"  : 100,
-		"palette" : 1,
-		"grid" : "y"
-	},	
+		"palette" : "1"
+	},
+	
+	"grid" : {
+		"horizontal" : "yes",
+		"vertical" 	 : "yes"
+	},
+	
 	"chart" : {
 		 "caption"	:	"Top5SalesPerson",
 		 "yAxisName":	"Names",
-      		  "xAxisName":	"SalesFigure",
-       		 "toolTip"	:	1,
-       		  "Color" : ["FFFFFF", "EFEFEF"] 
+         "xAxisName":	"SalesFigure",
+         "toolTip"	:	1,
+         "Color" : [] 
 	},
 	
 	"bardata" : {
@@ -291,11 +296,11 @@ var jsonSample = {
 		"series":[
 				{
 					"values":[4,29,-39,14,-16,-49,30,7,-32,25],
-					"label":["Item 0", "Item 1"]
+					"label":"Item 0"
 				},
 				{
 					"values":[-29,48,44,-11,7,50,-20,-21,-5,26],
-					"label":["Item 0", "Item 1"]
+					"label":"Item 1"
 				}
 		   ]
 	},
@@ -306,11 +311,11 @@ var jsonSample = {
 		"series":[
 				{
 					"values":[4,29,-39,14,-16,-49,30,7,-32,25],
-					"label":["Item 0", "Item 1"]
+					"label":"Item 0"
 				},
 				{
 					"values":[-29,48,44,-11,7,50,-20,-21,-5,26],
-					"label":["Item 0", "Item 1"]
+					"label":"Item 1"
 				}
 		   ]
 	},
@@ -319,27 +324,32 @@ var jsonSample = {
 		"type" 	:   "pie",
 		"showValues":1,
 		"showLabels":1,
-		"outerRadius" : "5", 
+		"Radius" : "5", 
 		"angle" : "5", 
+		"startAngle" : "5", 
+		"endAngle" : "5", 
 		"series":[
 				{
-					"values":[4,29,-39,14,-16,-49,30,7,-32,25],
-					"label":["Item 0", "Item 1"]
+					"values":4,
+					"label":"Item 0"
+				},
+				{
+					"values":6,
+					"label":"Item 1"
 				}
 		   ]
 	},
 	
 	"scatterdata" : {
 		"type" 	:   "scatter",
-		"fillColor": "silver"
 		"series":[
 				{
-					"values":[[1,2,4], [2,3,6]],
-					"label":["Item 0", "Item 1"]
+					"values":[1,2,4],
+					"label":"Item 0"
 				},
 				{
-					"values":[[1,2,4], [2,3,6]],
-					"label":["Item 0", "Item 1"]
+					"values":[2,3,6],
+					"label":"Item 1"
 				}
 		   ]
 	},
@@ -353,8 +363,12 @@ var jsonSample = {
 		"angle" : "5", 
 		"series":[
 				{
-					"values":[4,29,-39,14,-16,-49,30,7,-32,25],
-					"label":["Item 0", "Item 1"]
+					"values":4,
+					"label":"Item 0"
+				},
+				{
+					"values":6,
+					"label":"Item 1"
 				}
 		   ]
 	},
@@ -365,12 +379,12 @@ var jsonSample = {
 		"areaInterpolate":false,
 		"series":[
 				{
-					"values":[[1,2], [2,3]],
-					"label":["Item 0", "Item 1"]
+					"values":[1,2],
+					"label":"Item 0"
 				},
 				{
-					"values":[[2,4], [3,6]],
-					"label":["Item 0", "Item 1"]
+					"values":[2,4],
+					"label":"Item 1"
 				}
 		   ]
 	}
@@ -394,14 +408,14 @@ setData = function(key,val,obj) {
 //=========================================================================================================
 populateJSON = function(jsonSample){
 	if(jsonSample.data.type == "bar"){
-		if(jsonSample.data.series.length > 1){
+		if(jsonSample.data.series.values.length < 1){
 			return getBarData(jsonSample)
 		}else{
 			return getmultiBarData(jsonSample);
 		}
 	}
 	if(jsonSample.data.type == "line"){
-		if(jsonSample.data.series.length > 1){
+		if(jsonSample.data.series.values.length < 1){
 			return getLineData(jsonSample);
 		}else{
 			return getmultiLineData(jsonSample);
@@ -431,8 +445,8 @@ getBarData = function(jsonSample){
 	if(jsonSample.bardata.showLabels)
 		barLineGraph.showLabels = jsonSample.bardata.showLabels;
 	var data = [];
-	for(var i=0; i < jsonSample.bardata.series.values.length; i++){
-		data.push({label : jsonSample.bardata.series[0].label[i], value : jsonSample.bardata.series[0].values[i]});
+	for(var i=0; i < jsonSample.bardata.series.length; i++){
+		data.push({label : jsonSample.bardata.series[i].label, value : jsonSample.bardata.series[i].values[0]});
 	}
 	barLineGraph.data = data;
 	return barLineGraph;
@@ -450,8 +464,8 @@ getLineData = function(jsonSample){
 		barLineGraph.style = jsonSample.linedata.lineStyle;
 	barLineGraph.toolTip = jsonSample.chart.toolTip;
 	var data = [];
-	for(var i=0; i < jsonSample.linedata.series.values.length; i++){
-		data.push({label : jsonSample.linedata.series[0].label[i], value : jsonSample.linedata.series[0].values[i]});
+	for(var i=0; i < jsonSample.linedata.series.length; i++){
+		data.push({label : jsonSample.linedata.series[i].label, value : jsonSample.linedata.series[i].values[0]});
 	}
 	barLineGraph.data = data;
 	return barLineGraph;
@@ -470,8 +484,8 @@ getPieDonutData = function(jsonSample){
 	if(jsonSample.donutdata.innerRadius)
 		pieDonutGraph.innerRadius = jsonSample.donutdata.innerRadius;
 	var data = [];
-	for(var i=0; i < jsonSample.piedata.series.values.length; i++){
-		data.push({label : jsonSample.piedata.series[0].label[i], value : jsonSample.piedata.series[0].values[i]});
+	for(var i=0; i < jsonSample.piedata.series.length; i++){
+		data.push({label : jsonSample.piedata.series[i].label, value : jsonSample.piedata.series[i].values});
 	}
 	pieDonutGraph.data = data;
 	return pieDonutGraph;
@@ -488,8 +502,8 @@ getScatterData = function(jsonSample){
 	scatterGraph.grid = jsonSample.canvas.grid;
 	scatterGraph.fillColor = jsonSample.scatterdata.fillColor;
 	var data = [];
-	for(var i=0; i < jsonSample.scatterdata.series.values.length; i++){
-		data.push({toolTipText : jsonSample.scatterdata.series[0].label[i], x : jsonSample.scatterdata.series[0].values[i][0], y : jsonSample.scatterdata.series[0].values[i][1], z : jsonSample.scatterdata.series[0].values[i][2]});
+	for(var i=0; i < jsonSample.scatterdata.series.length; i++){
+		data.push({toolTipText : jsonSample.scatterdata.series[i].label, x : jsonSample.scatterdata.series[i].values[0], y : jsonSample.scatterdata.series[i].values[1], z : jsonSample.scatterdata.series[i].values[2]});
 	}
 	scatterGraph.data = data;
 	return scatterGraph;
@@ -505,8 +519,8 @@ getareaData = function(jsonSample){
 	areaGraph.palette = jsonSample.canvas.palette;
 	areaGraph.grid = jsonSample.canvas.grid;
 	var data = [];
-	for(var i=0; i < jsonSample.areadata.series.values.length; i++){
-		data.push({x : jsonSample.areadata.series[0].values[i][0], y : jsonSample.areadata.series[0].values[i][1]});
+	for(var i=0; i < jsonSample.areadata.series.length; i++){
+		data.push({x : jsonSample.areadata.series[i].values[0], y : jsonSample.areadata.series[i].values[1]});
 	}
 	areaGraph.data = data;
 	return areaGraph;
@@ -528,7 +542,7 @@ getmultiBarData = function(jsonSample){
 	var dataset = [];
 	for(var i=0; i < jsonSample.bardata.series.length; i++){
 		var tempContent = jsonSample.bardata.series[i].values;
-		dataset.push({seriesname : jsonSample.bardata.series[i].label[0], color : "FEEEAA" data : function(){
+		dataset.push({seriesname : jsonSample.bardata.series[i].label, color : "FEEEAA" data : function(){
 			var content = [];
 			for(var j=0; j < tempContent.length; j++){
 				content.push({value : tempContent[i]});	
@@ -554,7 +568,7 @@ getmultiLineData = function(jsonSample){
 		dataset.push({data : function(){
 			var content = [];
 			for(var j=0; j < tempContent.length; j++){
-				content.push({value : tempContent[i], toolTipText : tempContent[i], label : jsonSample.bardata.series[i].label[0]});	
+				content.push({value : tempContent[i], toolTipText : jsonSample.bardata.series[i].label+"-"+tempContent[i], label : jsonSample.bardata.series[i].label});	
 			}
 			return content;
 		});
