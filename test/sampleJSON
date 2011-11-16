@@ -59,11 +59,11 @@ var jsonSample = {
 		"endAngle" : "5", 
 		"series":[
 				{
-					"values":[4,29,-39,14,-16,-49,30,7,-32,25],
+					"values":4,
 					"label":"Item 0"
 				},
 				{
-					"values":[-29,48,44,-11,7,50,-20,-21,-5,26],
+					"values":6,
 					"label":"Item 1"
 				}
 		   ]
@@ -73,11 +73,11 @@ var jsonSample = {
 		"type" 	:   "scatter",
 		"series":[
 				{
-					"values":[[1,2,4], [2,3,6]],
+					"values":[1,2,4],
 					"label":"Item 0"
 				},
 				{
-					"values":[[1,2,4], [2,3,6]],
+					"values":[2,3,6],
 					"label":"Item 1"
 				}
 		   ]
@@ -92,11 +92,11 @@ var jsonSample = {
 		"angle" : "5", 
 		"series":[
 				{
-					"values":[4,29,-39,14,-16,-49,30,7,-32,25],
+					"values":4,
 					"label":"Item 0"
 				},
 				{
-					"values":[-29,48,44,-11,7,50,-20,-21,-5,26],
+					"values":6,
 					"label":"Item 1"
 				}
 		   ]
@@ -108,11 +108,11 @@ var jsonSample = {
 		"areaInterpolate":false,
 		"series":[
 				{
-					"values":[[1,2], [2,3]],
+					"values":[1,2],
 					"label":"Item 0"
 				},
 				{
-					"values":[[2,4], [3,6]],
+					"values":[2,4],
 					"label":"Item 1"
 				}
 		   ]
