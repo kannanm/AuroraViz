@@ -1,0 +1,90 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	height: 100%;
+	width: 100%;
+	background: #fbfbfb none repeat scroll 0 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bolder;
+	color: #0e2137;
+	font-size: 12px;
+}
+
+.float-left-nav {
+	float: left;
+}
+
+.float-right-nav {
+	float: right;
+}
+
+#topBar {
+	height: 75px;
+	width: 100%;
+	border: 1px solid #AAAAAA;
+	background: rgb(133,174,209); /* Old browsers */
+background: -moz-linear-gradient(top, rgba(133,174,209,1) 0%, rgba(227,234,237,1) 63%, rgba(242,245,246,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(133,174,209,1)), color-stop(63%,rgba(227,234,237,1)), color-stop(100%,rgba(242,245,246,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(133,174,209,1) 0%,rgba(227,234,237,1) 63%,rgba(242,245,246,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(133,174,209,1) 0%,rgba(227,234,237,1) 63%,rgba(242,245,246,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(133,174,209,1) 0%,rgba(227,234,237,1) 63%,rgba(242,245,246,1) 100%); /* IE10+ */
+background: linear-gradient(top, rgba(133,174,209,1) 0%,rgba(227,234,237,1) 63%,rgba(242,245,246,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#85aed1', endColorstr='#f2f5f6',GradientType=0 ); /* IE6-9 */
+}
+
+#accordion {
+	padding-bottom: 10px;
+}
+
+#tabs {
+	bottom: 0px;
+}
+
+#chart {
+	height: 500px;
+	border: 1px solid #AAAAAA;
+	border-bottom-right-radius: 4px;
+	border-top-right-radius: 4px;
+	border-bottom-left-radius: 4px; 
+	border-top-left-radius: 4px; 
+}
+
+label {
+	width: 100px;
+	float: left;
+	text-align: right;
+	padding-right: 4px
+}
+
+input select {
+	
+}
+
+.inline {
+	display: inline-table;
+}
+.in{
+	display: inline;
+}
+textarea{
+	font-weight:bold;
+
+	}
+.left-cont {
+width: 30%;
+/* padding-top: 10px; */
+}
+.right-cont {
+	width:69%;
+background: #fff;
+border-left: 1px solid #E3EAEE;
+min-height: 500px;
+}
+.gen-float {
+float: left;
+}
+.body-cont{
+	width:100%;
+}
+
+}
