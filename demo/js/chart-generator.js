@@ -1,28 +1,17 @@
-ARV.drawGraph = function(){
-	$("#chart").html("");
-	var graphType = $("select option:selected").attr("value");
-	var a = {};
-	for(index in ARV.con.commonParams){
-		var param =ARV.con.commonParams[index]
-		var value = $("#"+param).val();
-		$("#chart").append(param + ":" + value +"<br>");
-	}
-	var chartSpecificParams = ARV.con[graphType+"ChartParams"];
-	for(index in chartSpecificParams){
-		var param =chartSpecificParams[index];
-		var value = $("#"+param).val();
-		$("#chart").append(param + ":" + value +"<br>");
-	}
-};
-ARV.getUrlVars = function()
-{
-	var vars = [], hash;
-    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-    for(var i = 0; i < hashes.length; i++)
-    {
-        hash = hashes[i].split('=');
-        vars.push(hash[0]);
-        vars[hash[0]] = hash[1];
+ARV.drawGraph = function() {
+    var index, param, value;
+    $("#chart").html("");
+    var graphType = $("select option:selected").attr("value");
+    var a = {};
+    for (index = 0; index < ARV.con.commonParams.length; index++) {
+        param = ARV.con.commonParams[index];
+        value = $("#" + param).val();
+        $("#chart").append(param + ":" + value + "<br>");
     }
-    return vars;
-}
+    var chartSpecificParams = ARV.con[graphType + "ChartParams"];
+    for (index = 0; index < chartSpecificParams.length; index++) {
+        param = chartSpecificParams[index];
+        value = $("#" + param).val();
+        $("#chart").append(param + ":" + value + "<br>");
+    }
+};

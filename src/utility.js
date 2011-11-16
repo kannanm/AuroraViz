@@ -45,7 +45,7 @@ AR.Utility.getImageContentChart= function (data, type) {
 	var noOfRecords = data.length;
 	var arr, i;
 	for (i = 0; i < noOfRecords; i = i + 1) {
-		if(data[i].chart.type == type){
+		if(data[i].chart.type === type){
 			arr = data[i].chart.content.chart;
 		}
 	}
@@ -56,7 +56,7 @@ AR.Utility.getJSONContentChart= function (data, type) {
 	var noOfRecords = data.length;
 	var arr, i;
 	for (i = 0; i < noOfRecords; i = i + 1) {
-		if(data[i].chart.type == type){
+		if(data[i].chart.type === type){
 			arr = data[i].chart.content.jsoncontent;
 		}
 	}
