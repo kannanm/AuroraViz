@@ -204,7 +204,7 @@ AR.LineGraph = function (graphDef) {
 		}
 	};
 	
-	setRules[graphDef.grid || "y"]();
+	//setRules[graphDef.grid || "y"]();
 	
 	
 	

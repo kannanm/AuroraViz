@@ -18,7 +18,7 @@ AR.Wedge = function(parentDimension, panel, graphDef) {
     var dataValues = AR.Utility.getDataArray(graphDef.data);
     var self = this;
     var adjustRadius = function(parentDimension) {
-        if (graphDef.outerRadius !== null) {
+        if (graphDef.outerRadius != null) {
             wedge.outerRadius(graphDef.outerRadius);
         } else {
             wedge.outerRadius(function() {
@@ -28,7 +28,7 @@ AR.Wedge = function(parentDimension, panel, graphDef) {
     };
 
     var adjustAngle = function(parentDimension) {
-        if (graphDef.angle !== null) {
+        if (graphDef.angle != null) {
             wedge.angle(graphDef.angle);
         } else {
             wedge.angle(function(d) {

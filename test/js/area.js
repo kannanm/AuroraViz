@@ -222,7 +222,7 @@ AR.StackedAreaGraph = function(graphDef){
 	 
 	};
 	
-	setRules[graphDef.grid || "y"]();
+	//setRules[graphDef.grid || "y"]();
 	
 	if(graphDef.dataset){
 			var dataset = graphDef.dataset;

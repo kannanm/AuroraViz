@@ -22,7 +22,7 @@ AR.Bar = function (graphDef, data, parentDimension, panel, color) {
 		return AR.Utility.getToolTipText(data, this.index);
 	});
 	if (graphDef.toolTip && graphDef.toolTip === 1) {
-		this._bar.event("mouseover", pv.Behavior.tipsy({
+		this._bar.event("mouseover", pv.Behavior.pipsy({
 		gravity : function () {
 			return (self instanceof AR.HBar ? "w" : "s");
 		},
@@ -272,7 +272,7 @@ AR.BarGraph = function (graphDef) {
 		}
 	};
 	
-	setRules[graphDef.grid || "y"]();
+	//setRules[graphDef.grid || "y"]();
 	createBars[graphDef.type || "v"]();
 	
 	this.setWidth = function (width) {

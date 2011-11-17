@@ -10,6 +10,7 @@
 <script type="text/javascript" src="lib/jQuery/jquery-1.4.2.min.js"></script>
 <script type="text/javascript"
 	src="lib/jQuery/ui/js/jquery-ui-1.8.16.custom.min.js"></script>
+
 </head>
 <body>
 	<div id="topBar"></div>
@@ -55,12 +56,15 @@
 							name="chartTypes" id="chartTypes">
 							<option value="select">Select a Chart</option>
 							<option value="bar">Bar Chart</option>
+							<option value="multibar">Multi Bar Chart</option>
 							<option value="line">Line Chart</option>
+							<option value="multiline">Multi Line Chart</option>
 							<option value="pie">Pie Chart</option>
-							<option value="scatter">Scatter Chart</option>
 							<option value="donut">Donut Chart</option>
+							<option value="scatter">Scatter Chart</option>
 							<option value="area">Area Chart</option>
 							<option value="tree">Tree Chart</option>
+							<option value="sunburst">SunBurst Chart</option>
 						</select>
 					</div>
 				</div>
@@ -95,7 +99,7 @@
 	<button type="submit"  id="generate" style="float: right;">Generate</button>
 	</div>
 	<div class="right-cont gen-float">
-	<div id="chart"></div>
+	<div id="chart" overflow="true"></div>
 	<div id="tabs">
 		<ul>
 			<li><a href="#tabs-1">Chart JSON </a></li>
@@ -139,7 +143,7 @@
 }},</pre>
 		</div>
 		<div id="tabs-2">
-			<textarea cols="120" rows="20">
+			<textarea id="editJSON" cols="120" rows="20">
 "bardata" : {
 	"type" : "bar",
 	"align" : "h",
@@ -162,6 +166,19 @@
 	</div>
 	<script type="text/javascript" src="js/constants.js"></script>
 	<script type="text/javascript" src="js/chart-generator.js"></script>
+	<script type="text/javascript" src="../lib/protovis/protovis-d3.3.js"></script>
+	<script type="text/javascript" src="../test/js/aurora.js"></script>
+	<script type="text/javascript" src="../test/js/bar.js"></script>
+	<script type="text/javascript" src="../test/js/wedge.js"></script>
+	<script type="text/javascript" src="../test/js/utility.js"></script>
+	<script type="text/javascript" src="../test/js/bubble.js"></script>
+	<script type="text/javascript" src="../test/js/area.js"></script>
+	<script type="text/javascript" src="../test/js/line.js"></script>
+	<script type="text/javascript" src="../test/js/tree.js"></script>
+	<script type="text/javascript" src="../lib/jQuery/tipsy/jquery.tipsy.js"></script>
+	<script type="text/javascript" src="../lib/jQuery/tipsy/tipsy.js"></script>
+	
+	
 	<script type="text/javascript">
 		$(function() {
 			// Accordion

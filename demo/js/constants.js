@@ -17,7 +17,18 @@ ARV.getChartOptionsHTML = function(chartType) {
             '<option value = "ver" > Vertical </option>',
             '</select></div>',
             '</div>'].join(" "),
+        multibar: [
+            '<div class="inline"><label> Type: </label>',
+            '<select id="mbarChartTypes">',
+            '<option value="hor">Horizontal</option > ',
+            '<option value = "ver" > Vertical </option>',
+            '</select></div>',
+            '</div>'].join(" "),    
         line: [
+            '<div class="inline"><label> Step Graph: </label>',
+            '<input type="checkbox" id="lineStep"></input ></div> ',
+            '</div>'].join(" "),
+        multiline: [
             '<div class="inline"><label> Step Graph: </label>',
             '<input type="checkbox" id="lineStep"></input ></div> ',
             '</div>'].join(" "),
@@ -49,7 +60,9 @@ ARV.getChartOptionsHTML = function(chartType) {
             '<input type="checkbox" checked="checked" id="areaInterpolated"></input ></div> ',
             '</div>'].join(" "),
         tree: [
-            '</div>'].join(" ")
+            '</div>'].join(" "),
+        sunburst: [
+            '</div>'].join(" ")    
     }[chartType];
     return commonHTML + chartOptionsHTML;
 };
@@ -64,17 +77,25 @@ ARV.con = {
     xAxisName: "xAxisName",
     toolTip: "toolTip",
     barChartOptions: ARV.getChartOptionsHTML("bar"),
+    multibarChartOptions: ARV.getChartOptionsHTML("multibar"),
     lineChartOptions: ARV.getChartOptionsHTML("line"),
+    multilineChartOptions: ARV.getChartOptionsHTML("multiline"),
     pieChartOptions: ARV.getChartOptionsHTML("pie"),
-    scatterChartOptions: ARV.getChartOptionsHTML("scatter"),
     donutChartOptions: ARV.getChartOptionsHTML("donut"),
+    scatterChartOptions: ARV.getChartOptionsHTML("scatter"),
     areaChartOptions: ARV.getChartOptionsHTML("area"),
     treeChartOptions: ARV.getChartOptionsHTML("tree"),
+    sunburstChartOptions: ARV.getChartOptionsHTML("sunburst"),
     barChartParams: ["barChartTypes"],
+    multibarChartParams: ["mbarChartTypes"],
     lineChartParams: ["lineStep"],
+    multilineChartParams: ["mlineStep"],
     pieChartParams: ["pieRadius", "pieAngle", "pieStartAngle", "pieEndAngle"],
     donutChartParams: ["donutInnerRadius", "donutOuterRadius", "donutAngle"],
     areaChartParams: ["areaSegmented", "areaInterpolated"],
     commonParams: ["canvasHeight", "canvasWidth", "palette", "horGrid", "verGrid", "chartCaption",
-                          "yAxisName", "xAxisName", "toolTip", "showLabels", "showValues"]
+                          "yAxisName", "xAxisName", "toolTip", "showLabels", "showValues"],
+    treeChartParams: [],
+    scatterChartParams: [],
+    sunBurstChartParams: [],
 };
