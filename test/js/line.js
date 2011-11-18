@@ -175,9 +175,9 @@ AR.LineGraph = function (graphDef) {
 		line = new AR.Line(self._dimension, self._panel, graphDef, flag);
 	}
 	
-	var setRules = { 
-		"y": function (){
-			if(graphDef.dataset){
+	var setRules = {
+	"v" : function () {
+		if(graphDef.dataset){
 			var dataArray = new Array();
 			for(i=0; i<graphDef.dataset.length; i++){
 				var max = AR.Utility.findMax(graphDef.dataset[i].data);
@@ -188,9 +188,10 @@ AR.LineGraph = function (graphDef) {
 		}
 		else
 			self.setHorRules(AR.Utility.findMax(graphDef.data),AR.Utility.scale.linear);
-		
-		
-			if(graphDef.dataset){
+	},
+	
+	"h" : function () {
+		if(graphDef.dataset){
 			var dataArray = new Array();
 			for(i=0; i<graphDef.dataset.length; i++){
 				var max = AR.Utility.findMax(graphDef.dataset[i].data);
@@ -201,10 +202,15 @@ AR.LineGraph = function (graphDef) {
 			self.setVerticalRules(AR.Utility.findMax(dataArray), AR.Utility.scale.linear);
 		}else
 			self.setVerticalRules(AR.Utility.findMax(graphDef.data),AR.Utility.scale.linear);
-		}
-	};
+	},
 	
-	//setRules[graphDef.grid || "y"]();
+	"b" : function(){
+		setRules("h");
+		setRules("v");	
+	}
+	};
+
+	setRules[graphDef.type || "v"]();
 	
 	
 	

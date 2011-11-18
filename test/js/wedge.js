@@ -19,7 +19,7 @@ AR.Wedge = function (parentDimension, panel, graphDef) {
 	var dataValues = AR.Utility.getDataArray(graphDef.data);
 	var self = this;
 	var adjustRadius = function (parentDimension) {
-		if(graphDef.outerRadius != null){
+		if(graphDef.outerRadius != null && graphDef.outerRadius != ""){
 			wedge.outerRadius(graphDef.outerRadius);
 		}else{
 			wedge.outerRadius(function () {
@@ -29,7 +29,7 @@ AR.Wedge = function (parentDimension, panel, graphDef) {
 	};
 	
 	var adjustAngle = function (parentDimension) {
-		if(graphDef.angle != null){
+		if(graphDef.angle != null && graphDef.angle != ""){
 			wedge.angle(graphDef.angle);
 		}else{
 			wedge.angle(function (d) {
@@ -126,7 +126,7 @@ AR.Donut = function(parentDimension, panel, graphDef){
 	var dataValues = AR.Utility.getDataArray(graphDef.data);
 	var self = this;
 	var adjustRadius = function (parentDimension) {
-		if(graphDef.outerRadius != null){
+		if(graphDef.outerRadius != null && graphDef.outerRadius != ""){
 			wedge.outerRadius(graphDef.outerRadius);
 		}else {
 			wedge.outerRadius(function () {
@@ -134,7 +134,7 @@ AR.Donut = function(parentDimension, panel, graphDef){
 			});
 		}
 		
-		if(graphDef.innerRadius != null) {
+		if(graphDef.innerRadius != null && graphDef.innerRadius != "") {
 			wedge.innerRadius(graphDef.innerRadius);
 		}else{
 			wedge.innerRadius(function () {
@@ -144,7 +144,7 @@ AR.Donut = function(parentDimension, panel, graphDef){
 	};
 	
 	var adjustAngle = function (parentDimension) {
-		if(graphDef.angle != null){
+		if(graphDef.angle != null && graphDef.angle != ""){
 			wedge.angle(graphDef.angle);
 		}else{
 			wedge.angle(function (d) {

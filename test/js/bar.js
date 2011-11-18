@@ -22,7 +22,7 @@ AR.Bar = function (graphDef, data, parentDimension, panel, color) {
 		return AR.Utility.getToolTipText(data, this.index);
 	});
 	if (graphDef.toolTip && graphDef.toolTip === 1) {
-		this._bar.event("mouseover", pv.Behavior.pipsy({
+		this._bar.event("mouseover", pv.Behavior.tipsy({
 		gravity : function () {
 			return (self instanceof AR.HBar ? "w" : "s");
 		},
@@ -211,7 +211,7 @@ AR.BarGraph = function (graphDef) {
 	}
 	
 	};
-	/*var setRules = {
+	var setRules = {
 	"v" : function () {
 		if(graphDef.dataset){
 			var dataArray = new Array();
@@ -238,12 +238,17 @@ AR.BarGraph = function (graphDef) {
 			self.setVerticalRules(AR.Utility.findMax(dataArray), AR.Utility.scale.linear);
 		}else
 			self.setVerticalRules(AR.Utility.findMax(graphDef.data),AR.Utility.scale.linear);
+	},
+	
+	"b" : function(){
+		setRules("h");
+		setRules("v");	
 	}
 	};
 
-	setRules[graphDef.type || "v"]();*/
+	setRules[graphDef.type || "v"]();
 	
-	var setRules = { 
+	/*var setRules = { 
 		"y": function (){
 			if(graphDef.dataset){
 			var dataArray = new Array();
@@ -270,7 +275,7 @@ AR.BarGraph = function (graphDef) {
 		}else
 			self.setVerticalRules(AR.Utility.findMax(graphDef.data),AR.Utility.scale.linear);
 		}
-	};
+	};*/
 	
 	//setRules[graphDef.grid || "y"]();
 	createBars[graphDef.type || "v"]();

@@ -342,11 +342,11 @@ var jsonSample = {
 		"showLables" : "1",
 		"series":[
 				{
-					"values":[4,29,-39,14,-16,-49,30,7,-32,25],
+					"values":[4,29,14],
 					"label":"Item 0"
 				},
 				{
-					"values":[-29,48,44,-11,7,50,-20,-21,-5,26],
+					"values":[48,44,12],
 					"label":"Item 1"
 				}
 		   ]
@@ -357,11 +357,11 @@ var jsonSample = {
 		"lineStyle":"step",
 		"series":[
 				{
-					"values":[4,29,-39,14,-16,-49,30,7,-32,25],
+					"values":[4,29,14],
 					"label":"Item 0"
 				},
 				{
-					"values":[-29,48,44,-11,7,50,-20,-21,-5,26],
+					"values":[48,44,12],
 					"label":"Item 1"
 				}
 		   ]
@@ -426,12 +426,20 @@ var jsonSample = {
 		"areaInterpolate":false,
 		"series":[
 				{
-					"values":[1,2],
+					"values":[3,1.3],
 					"label":"Item 0"
 				},
 				{
 					"values":[2,4],
 					"label":"Item 1"
+				},
+				{
+					"values":[2,1],
+					"label":"Item 2"
+				},
+				{
+					"values":[3,1.5],
+					"label":"Item 3"
 				}
 		   ]
 	}
@@ -468,10 +476,12 @@ populateJSON = function(jsonSample){
 			return getmultiLineData(jsonSample);
 		}
 	}
-	if(jsonSample.data.type == "pie" || jsonSample.data.type == "donut"){
+	if(jsonSample.data.type == "pie"){
 		return getPieDonutData(jsonSample);
 	}
-	if(jsonSample.data.type == "scatter"){
+	if(jsonSample.data.type == "donut"){
+		return getDonutData(jsonSample);
+	}if(jsonSample.data.type == "scatter"){
 		return getScatterData(jsonSample);
 	}
 	if(jsonSample.data.type == "area"){
@@ -543,13 +553,32 @@ getPieDonutData = function(jsonSample){
 	pieDonutGraph.showValues = jsonSample.piedata.showValues;
 	pieDonutGraph.showLabels = jsonSample.piedata.showLabels;
 	pieDonutGraph.palette = jsonSample.canvas.palette;
-	pieDonutGraph.outerRadius = jsonSample.piedata.outerRadius;
+	pieDonutGraph.outerRadius = jsonSample.piedata.Radius;
 	pieDonutGraph.angle = jsonSample.piedata.angle;
-	if(jsonSample.donutdata.innerRadius)
-		pieDonutGraph.innerRadius = jsonSample.donutdata.innerRadius;
+	
 	var data = [];
 	for(var i=0; i < jsonSample.piedata.series.length; i++){
 		data.push({label : jsonSample.piedata.series[i].label, value : jsonSample.piedata.series[i].values});
+	}
+	pieDonutGraph.data = data;
+	return pieDonutGraph;
+};
+
+getDonutData = function(jsonSample){
+	pieDonutGraph.height = jsonSample.canvas.height;
+	pieDonutGraph.width = jsonSample.canvas.width;
+	pieDonutGraph.caption = jsonSample.chart.caption;
+	pieDonutGraph.toolTip = jsonSample.chart.toolTip;
+	pieDonutGraph.showValues = jsonSample.piedata.showValues;
+	pieDonutGraph.showLabels = jsonSample.piedata.showLabels;
+	pieDonutGraph.palette = jsonSample.canvas.palette;
+	pieDonutGraph.outerRadius = jsonSample.donutdata.outerRadius;
+	pieDonutGraph.angle = jsonSample.donutdata.angle;
+	if(jsonSample.donutdata.innerRadius)
+		pieDonutGraph.innerRadius = jsonSample.donutdata.innerRadius;
+	var data = [];
+	for(var i=0; i < jsonSample.donutdata.series.length; i++){
+		data.push({label : jsonSample.donutdata.series[i].label, value : jsonSample.donutdata.series[i].values});
 	}
 	pieDonutGraph.data = data;
 	return pieDonutGraph;
@@ -745,9 +774,9 @@ ARV.drawGraph = function() {
 				
 		}else if(graphType == "multibar"){
 			if($("#" + chartSpecificParams[0]).val() == "hor"){
-				jsonSample.bardata.align = "h";
+				jsonSample.mbardata.align = "h";
 			}else{
-				jsonSample.bardata.align = "v";
+				jsonSample.mbardata.align = "v";
 			}			
 		}else if(graphType == "line"){
 			if($("#" + chartSpecificParams[0]).val() == "on"){
@@ -828,7 +857,7 @@ renderChart = function(graphType){
 		var renderGraph = AR.WedgeGraph(graphDef);
 		renderGraph.render("chart");
 	}else if(graphType == "donut"){
-		var graphDef = getPieDonutData(jsonSample);
+		var graphDef = getDonutData(jsonSample);
 		document.getElementById("tabs-1").innerHTML = "<pre>"+JSON.stringify(graphDef)+"</pre>";
 		document.getElementById("editJSON").innerHTML = JSON.stringify(jsonSample.donutdata);
 		var renderGraph = AR.WedgeGraph(graphDef);

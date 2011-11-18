@@ -193,7 +193,7 @@ AR.StackedAreaGraph = function(graphDef){
 		}
 	},
 	
-	"y" : function () {
+	"b" : function () {
 		if(graphDef.data){
 			var xmaxVal = AR.Utility.getSingleDimensionData(graphDef.data,AR.Utility.Dimension.y).max();
 			self.setHorRules(xmaxVal,AR.Utility.scale.linear);
@@ -222,7 +222,7 @@ AR.StackedAreaGraph = function(graphDef){
 	 
 	};
 	
-	//setRules[graphDef.grid || "y"]();
+	setRules[graphDef.grid || "y"]();
 	
 	if(graphDef.dataset){
 			var dataset = graphDef.dataset;
