@@ -89,7 +89,7 @@ ARV.con = {
     barChartParams: ["barChartTypes"],
     multibarChartParams: ["mbarChartTypes"],
     lineChartParams: ["lineStep"],
-    multilineChartParams: ["mlineStep"],
+    multilineChartParams: ["lineStep"],
     pieChartParams: ["pieRadius", "pieAngle", "pieStartAngle", "pieEndAngle"],
     donutChartParams: ["donutInnerRadius", "donutOuterRadius", "donutAngle"],
     areaChartParams: ["areaSegmented", "areaInterpolated"],

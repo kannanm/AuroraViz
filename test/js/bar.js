@@ -212,7 +212,7 @@ AR.BarGraph = function (graphDef) {
 	
 	};
 	var setRules = {
-	"v" : function () {
+	"h" : function () {
 		if(graphDef.dataset){
 			var dataArray = new Array();
 			for(i=0; i<graphDef.dataset.length; i++){
@@ -226,7 +226,7 @@ AR.BarGraph = function (graphDef) {
 			self.setHorRules(AR.Utility.findMax(graphDef.data),AR.Utility.scale.linear);
 	},
 	
-	"h" : function () {
+	"v" : function () {
 		if(graphDef.dataset){
 			var dataArray = new Array();
 			for(i=0; i<graphDef.dataset.length; i++){
@@ -241,12 +241,38 @@ AR.BarGraph = function (graphDef) {
 	},
 	
 	"b" : function(){
-		setRules("h");
-		setRules("v");	
+		if(graphDef.dataset){
+			var dataArray = new Array();
+			for(i=0; i<graphDef.dataset.length; i++){
+				var max = AR.Utility.findMax(graphDef.dataset[i].data);
+				var maxMap = {"value" : max};
+				dataArray.push(maxMap);
+			}
+			self.setHorRules(AR.Utility.findMax(dataArray),AR.Utility.scale.linear);
+		}
+		else
+			self.setHorRules(AR.Utility.findMax(graphDef.data),AR.Utility.scale.linear);
+		
+		if(graphDef.dataset){
+			var dataArray = new Array();
+			for(i=0; i<graphDef.dataset.length; i++){
+				var max = AR.Utility.findMax(graphDef.dataset[i].data);
+				var maxMap = {	"label" : "data",
+								"value" : max};
+				dataArray.push(maxMap);
+			}
+			self.setVerticalRules(AR.Utility.findMax(dataArray), AR.Utility.scale.linear);
+		}else
+			self.setVerticalRules(AR.Utility.findMax(graphDef.data),AR.Utility.scale.linear);	
+		
+	},
+	
+	"y" : function(){
+		alert("no grid selected");
 	}
 	};
 
-	setRules[graphDef.type || "v"]();
+	setRules[graphDef.grid || "y"]();
 	
 	/*var setRules = { 
 		"y": function (){

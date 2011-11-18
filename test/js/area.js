@@ -218,6 +218,10 @@ AR.StackedAreaGraph = function(graphDef){
 			}
 			self.setHorRules(AR.Utility.findMax(YdataArray),AR.Utility.scale.linear);
 		}	
+	},
+	
+	"y" : function(){
+		
 	}
 	 
 	};

@@ -237,32 +237,73 @@ var treeGraph = {
     "width": 500,
     "height": 500,
 	"palette": 1,
-	"grid" : "y",
+	"type": "b",
 	"root" : "Pramati",
 	"margin" : "n",
+	"data":{
+        "Pramati Technologies":{
+            "production department": "100",	
+            "research department": "100",
+            "quality engineering": "100",
+            "algorithms": "100",
+            "pramati labs": "100"
+        },
+        "Imaginea Technologies":{
+			"Platform Development": "100",
+            "Community Development": "100",
+            "Research on Tools": "100",
+            "Social Computing": "100"
+        },
+        "Social Twist":{
+            "Social Computing":"100",
+            "Tell a Friend":"100",
+            "Social Research":"100"
+        },
+        "Qontext":{
+            "Community Building":"100",
+            "Knowledge Management":"100"
+        }
+    }
+};
+
+var sunBurstGraph = {
+    "caption": "Sun Burst Graph",
+	"toolTip": 1,
+    "width": 500,
+    "height": 500,
+	"palette": 1,
+	"type": "b",
+	"root" : "Pramati",
+	"margin" : "n",
+	"order" : "asc",
 	"orient" : "radial",
 	"data":{
-        "Pramati":[
-								"production department",	
-								"research department",
-								"quality engineering",
-								"algorithms",	
-								"pramati labs"],
-        "Imaginea":[
-								"Platform Development",
-								"Community Development",
-								"Research on Tools",
-								"Social Computing"
-        ],
-        "SocialTwist":[
-								"Social Computing",
-								"Tell a Friend",
-								"Social Research"
-        ],
-        "Qontext":[
-								"Community Building",
-								"Knowledge Management"
-        ]
+       "Pramati":{
+            "production": "100",
+            "research": "100",
+            "quality": "100",
+            "algorithms": "100",
+            "labs": "100",
+            "tester" : {
+				"test1": "100",
+				"test2": "100"
+			}
+        },
+        "Imaginea":{
+			"Platform": "100",
+            "Community": "100",
+            "Research": "100",
+            "Social": "100"
+        },
+        "SocialTwist":{
+            "Computing":"100",
+            "Tell a Friend":"100",
+            "Research":"100"
+        },
+        "Qontext":{
+            "Community":"100",
+            "Knowledge":"100"
+        }
     }
 };
 
@@ -498,16 +539,16 @@ getBarData = function(jsonSample){
 	if(jsonSample.grid.horizontal == "yes" && jsonSample.grid.vertical == "yes")
 		barLineGraph.grid = "b";
 	
-	if(jsonSample.grid.horizontal != "yes")
+	if(jsonSample.grid.horizontal != "yes" && jsonSample.grid.vertical == "yes")
 	    barLineGraph.grid = "v";
 	
-	if(jsonSample.grid.vertical != "yes")
+	if(jsonSample.grid.vertical != "yes" && jsonSample.grid.horizontal == "yes")
 	    barLineGraph.grid = "h";
 	    
 	barLineGraph.toolTip = jsonSample.chart.toolTip;
-	if(jsonSample.bardata.align)
+	if(jsonSample.bardata.align != null)
 		barLineGraph.type = jsonSample.bardata.align;
-	if(jsonSample.bardata.showLabels)
+	if(jsonSample.bardata.showLabels != null)
 		barLineGraph.showLabels = jsonSample.bardata.showLabels;
 	var data = [];
 	for(var i=0; i < jsonSample.bardata.series.length; i++){
@@ -528,15 +569,17 @@ getLineData = function(jsonSample){
 	if(jsonSample.grid.horizontal == "yes" && jsonSample.grid.vertical == "yes")
 		barLineGraph.grid = "b";
 	
-	if(jsonSample.grid.horizontal != "yes")
+	if(jsonSample.grid.horizontal != "yes" && jsonSample.grid.vertical == "yes")
 	    barLineGraph.grid = "v";
 	
-	if(jsonSample.grid.vertical != "yes")
+	if(jsonSample.grid.vertical != "yes" && jsonSample.grid.horizontal == "yes")
 	    barLineGraph.grid = "h";
 	    
-	if(jsonSample.linedata.lineStyle)
+	if(jsonSample.linedata.lineStyle != null){
 		barLineGraph.style = jsonSample.linedata.lineStyle;
+	}
 	barLineGraph.toolTip = jsonSample.chart.toolTip;
+	
 	var data = [];
 	for(var i=0; i < jsonSample.linedata.series.length; i++){
 		data.push({label : jsonSample.linedata.series[i].label, value : jsonSample.linedata.series[i].values[0]});
@@ -596,10 +639,10 @@ getScatterData = function(jsonSample){
 	if(jsonSample.grid.horizontal == "yes" && jsonSample.grid.vertical == "yes")
 		scatterGraph.grid = "b";
 	
-	if(jsonSample.grid.horizontal != "yes")
+	if(jsonSample.grid.horizontal != "yes" && jsonSample.grid.vertical == "yes")
 	    scatterGraph.grid = "v";
 	
-	if(jsonSample.grid.vertical != "yes")
+	if(jsonSample.grid.vertical != "yes" && jsonSample.grid.horizontal == "yes")
 	    scatterGraph.grid = "h";
 	
 	scatterGraph.fillColor = jsonSample.scatterdata.fillColor;
@@ -622,11 +665,12 @@ getareaData = function(jsonSample){
 	if(jsonSample.grid.horizontal == "yes" && jsonSample.grid.vertical == "yes")
 		areaGraph.grid = "b";
 	
-	if(jsonSample.grid.horizontal != "yes")
+	if(jsonSample.grid.horizontal != "yes" && jsonSample.grid.vertical == "yes")
 	    areaGraph.grid = "v";
 	
-	if(jsonSample.grid.vertical != "yes")
+	if(jsonSample.grid.vertical != "yes" && jsonSample.grid.horizontal == "yes")
 	    areaGraph.grid = "h";
+	
 	var data = [];
 	for(var i=0; i < jsonSample.areadata.series.length; i++){
 		data.push({x : jsonSample.areadata.series[i].values[0], y : jsonSample.areadata.series[i].values[1]});
@@ -645,17 +689,17 @@ getmultiBarData = function(jsonSample){
 	multiBarGraph.palette = jsonSample.canvas.palette;
 	
 	
-	if(multiBarGraph.grid.horizontal == "yes" && jsonSample.grid.vertical == "yes")
-		scatterGraph.grid = "b";
+	if(jsonSample.grid.horizontal == "yes" && jsonSample.grid.vertical == "yes")
+		multiBarGraph.grid = "b";
 	
-	if(multiBarGraph.grid.horizontal != "yes")
-	    scatterGraph.grid = "v";
+	if(jsonSample.grid.horizontal != "yes" && jsonSample.grid.vertical == "yes")
+	    multiBarGraph.grid = "v";
 	
-	if(multiBarGraph.grid.vertical != "yes")
-	    scatterGraph.grid = "h";
+	if(jsonSample.grid.vertical != "yes" && jsonSample.grid.horizontal == "yes")
+	    multiBarGraph.grid = "h";
 	
 	
-	if(jsonSample.mbardata.align)
+	if(jsonSample.mbardata.align != null)
 		multiBarGraph.type = jsonSample.mbardata.align;
 	if(jsonSample.mbardata.showLabels)
 		multiBarGraph.showLabels = jsonSample.mbardata.showLabels;
@@ -687,15 +731,18 @@ getmultiLineData = function(jsonSample){
 	multiLineGraph.yAxisName = jsonSample.chart.yAxisName;
 	multiLineGraph.palette = jsonSample.canvas.palette;
 	
-	if(multiBarGraph.grid.horizontal == "yes" && jsonSample.grid.vertical == "yes")
+	if(jsonSample.grid.horizontal == "yes" && jsonSample.grid.vertical == "yes")
 		multiLineGraph.grid = "b";
 	
-	if(multiBarGraph.grid.horizontal != "yes")
-	    multiLineGraph.grid = "v";
+	if(jsonSample.grid.horizontal != "yes" && jsonSample.grid.vertical == "yes")
+	    multiLinGraph.grid = "v";
 	
-	if(multiBarGraph.grid.vertical != "yes")
+	if(jsonSample.grid.vertical != "yes" && jsonSample.grid.horizontal == "yes")
 	    multiLineGraph.grid = "h";
-	    
+	 
+	if(jsonSample.mlinedata.lineStyle != null)
+		multiLineGraph.style = jsonSample.mlinedata.lineStyle;    
+		
 	var dataset = [];
 	for(var i=0; i < jsonSample.mlinedata.series.length; i++){
 		var tempContent = jsonSample.mlinedata.series[i].values;
@@ -735,22 +782,24 @@ ARV.drawGraph = function() {
 		jsonSample.canvas.palette = 1;
    
    // Grid Properties
-   if($("#" + ARV.con.commonParams[3]).val() == "on" && $("#" + ARV.con.commonParams[4]).val() == "on")
+   jsonSample.grid.horizontal = "yes";
+   jsonSample.grid.vertical = "yes";
+   if($("#" + ARV.con.commonParams[3]).checked == true && $("#" + ARV.con.commonParams[4]).checked == true)
    {
 		jsonSample.grid.horizontal = "yes";
 		jsonSample.grid.vertical = "yes";
    }
    
-   if($("#" + ARV.con.commonParams[3]).val() == "off")
+   if(document.getElementById(ARV.con.commonParams[3]).checked == false)
 			jsonSample.grid.horizontal = "no";
 
-	if($("#" + ARV.con.commonParams[4]).val() == "off")
+	if(document.getElementById(ARV.con.commonParams[4]).checked == false)
 			jsonSample.grid.vertical = "no";
 	
    // Chart Properties
    jsonSample.chart.xAxisName = $("#" + ARV.con.commonParams[7]).val();;
    jsonSample.chart.yAxisName = $("#" + ARV.con.commonParams[6]).val();;
-   if($("#" + ARV.con.commonParams[8]).val() == "on")
+   if(document.getElementById(ARV.con.commonParams[8]).checked == true)
 		jsonSample.chart.toolTip = 1;
    jsonSample.chart.caption = $("#" + ARV.con.commonParams[5]).val();;
    
@@ -779,13 +828,13 @@ ARV.drawGraph = function() {
 				jsonSample.mbardata.align = "v";
 			}			
 		}else if(graphType == "line"){
-			if($("#" + chartSpecificParams[0]).val() == "on"){
+			if(document.getElementById(chartSpecificParams[0]).checked == true){
 				jsonSample.linedata.lineStyle = "step";
 			}else{
 				jsonSample.linedata.lineStyle = "";
 			}
 		}else if(graphType == "multiline"){
-			if($("#" + chartSpecificParams[0]).val() == "on"){
+			if(document.getElementById(chartSpecificParams[0]).checked == true){
 				jsonSample.mlinedata.lineStyle = "step";
 			}else{
 				jsonSample.mlinedata.lineStyle = "";
@@ -796,20 +845,19 @@ ARV.drawGraph = function() {
 			jsonSample.piedata.angle = $("#" + chartSpecificParams[1]).val();
 			jsonSample.piedata.startAngle = $("#" + chartSpecificParams[2]).val();
 			jsonSample.piedata.endAngle = $("#" + chartSpecificParams[3]).val();
-		}else if(graphType == "donut"){
-			
+		}else if(graphType == "donut"){		
 			jsonSample.donutdata.innerRadius = $("#" + chartSpecificParams[0]).val();
 			jsonSample.donutdata.outerRadius = $("#" + chartSpecificParams[1]).val();
 			jsonSample.donutdata.angle = $("#" + chartSpecificParams[2]).val();
 		}else if(graphType == "scatter"){
 			
 		}else if(graphType == "area"){
-			if($("#" + chartSpecificParams[0]).val() == "on")
+			if(document.getElementById(chartSpecificParams[0]).checked == true)
 				jsonSample.areadata.areaSegemented = true;
 			else
 				jsonSample.areadata.areaSegemented = false;
 				
-			if($("#" + chartSpecificParams[1]).val() == "on")
+			if(document.getElementById(chartSpecificParams[1]).checked == true)
 				jsonSample.areadata.areaInterpolate = true;
 			else
 				jsonSample.areadata.areaInterpolate = false;
@@ -844,6 +892,10 @@ renderChart = function(graphType){
 		document.getElementById("editJSON").innerHTML = JSON.stringify(jsonSample.mlinedata);
 		var renderGraph = new AR.LineGraph(graphDef);
 		renderGraph.render("chart");
+	}else if(graphType == "tree"){
+		var renderGraph = AR.TreeGraph(treeGraph);
+	}else if(graphType == "sunburst"){
+		var renderGraph = AR.SunBurstGraph(treeGraph);
 	}else if(graphType == "area"){
 		var graphDef = getareaData(jsonSample);
 		document.getElementById("tabs-1").innerHTML = "<pre>"+JSON.stringify(graphDef)+"</pre>";
@@ -870,9 +922,6 @@ renderChart = function(graphType){
 		renderGraph.render("chart");
 	}
 };
-
-
-
 
 editJSONData = function(data, graphType){
 	var jsonData = JSON.parse(data);
@@ -906,3 +955,4 @@ editJSONData = function(data, graphType){
 	renderChart(graphType);
 		
 };
+
