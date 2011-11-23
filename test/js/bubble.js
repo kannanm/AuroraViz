@@ -67,8 +67,8 @@ AR.Bubble = function(parentDimension, panel, graphDef) {
 AR.BubbleGraph = function(graphDef){
 	var self = this;
 	AR.Graph.apply(self, [graphDef]);
-	AR.Graph.prototype.setHorRules(AR.Utility.getSingleDimensionData(graphDef.data, AR.Utility.Dimension.y).max(),AR.Utility.scale.linear);
-	AR.Graph.prototype.setVerticalRules(AR.Utility.getSingleDimensionData(graphDef.data, AR.Utility.Dimension.x).max(),AR.Utility.scale.linear);
+	self.setHorRules(AR.Utility.getSingleDimensionData(graphDef.data, AR.Utility.Dimension.y).max(),AR.Utility.scale.linear);
+	self.setVerticalRules(AR.Utility.getSingleDimensionData(graphDef.data, AR.Utility.Dimension.x).max(),AR.Utility.scale.linear);
 	var bubbles = new AR.Bubble(self._dimension, self._panel, graphDef);
 	//TODO: add other function such as changing the pallete etc  
 	self.setWidth = function (width) {
