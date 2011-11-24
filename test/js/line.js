@@ -155,25 +155,7 @@ AR.LineGraph = function (graphDef) {
 		var flag = true;
 	}
 	
-	if(graphDef.dataset){
-		var maxValue;
-		var dataArray = new Array();
-		for(i=0; i<graphDef.dataset.length; i++){
-			var max = AR.Utility.findMax(graphDef.dataset[i].data);
-			var maxMap = {	"label" : "data",
-							"value" : max};
-			dataArray.push(maxMap);
-		}
-		maxValue = AR.Utility.findMax(dataArray);
-		var dataset = graphDef.dataset;
-		for(i = 0; i< graphDef.dataset.length; i++){
-			 var noOfRecords = dataset.length* dataset[i].data.length;
-			 panel = self._panel.add(pv.Panel).left(i * (self._dimension.width - 30) / (noOfRecords) );
-			 line = new AR.MLine(self._dimension, panel, graphDef, dataset[i].data, maxValue,flag);
-		}
-	}else{
-		line = new AR.Line(self._dimension, self._panel, graphDef, flag);
-	}
+	
 	
 	var setRules = {
 	"h" : function () {
@@ -237,7 +219,25 @@ AR.LineGraph = function (graphDef) {
 
 	setRules[graphDef.grid || "y"]();
 	
-	
+	if(graphDef.dataset){
+		var maxValue;
+		var dataArray = new Array();
+		for(i=0; i<graphDef.dataset.length; i++){
+			var max = AR.Utility.findMax(graphDef.dataset[i].data);
+			var maxMap = {	"label" : "data",
+							"value" : max};
+			dataArray.push(maxMap);
+		}
+		maxValue = AR.Utility.findMax(dataArray);
+		var dataset = graphDef.dataset;
+		for(i = 0; i< graphDef.dataset.length; i++){
+			 var noOfRecords = dataset.length* dataset[i].data.length;
+			 panel = self._panel.add(pv.Panel).left(i * (self._dimension.width - 30) / (noOfRecords) );
+			 line = new AR.MLine(self._dimension, panel, graphDef, dataset[i].data, maxValue,flag);
+		}
+	}else{
+		line = new AR.Line(self._dimension, self._panel, graphDef, flag);
+	}
 	
 	
 	self.setWidth = function (width) {
