@@ -756,7 +756,7 @@ getmultiLineData = function(jsonSample){
 		multiLineGraph.grid = "b";
 	
 	if(jsonSample.grid.horizontal != "yes" && jsonSample.grid.vertical == "yes")
-	    multiLinGraph.grid = "v";
+	    multiLineGraph.grid = "v";
 	
 	if(jsonSample.grid.vertical != "yes" && jsonSample.grid.horizontal == "yes")
 	    multiLineGraph.grid = "h";
