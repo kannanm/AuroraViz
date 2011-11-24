@@ -760,6 +760,20 @@ getmultiLineData = function(jsonSample){
 	return multiLineGraph;
 };
 
+getTreeData = function(jsonSample){
+	treeGraph.height = jsonSample.canvas.height;
+	treeGraph.width = jsonSample.canvas.width;
+	treeGraph.caption = jsonSample.chart.caption;
+	return treeGraph;
+};
+
+getSunBurstData = function(jsonSample){
+	sunBurstGraph.height = jsonSample.canvas.height;
+	sunBurstGraph.width = jsonSample.canvas.width;
+	sunBurstGraph.caption = jsonSample.chart.caption;
+	return sunBurstGraph;
+};
+
 getLineSeriesData = function(tempContent, seriesLabel, seriesTooltip){
 			var content = [];
 				for(var j=0; j<tempContent.length; j++){
@@ -905,17 +919,18 @@ ARV.renderChartFuntionMap = {
 			};
 		},
 		"tree": function(){
-			var graphDef = treeGraph;
+			var graphDef = getTreeData(jsonSample);
+			document.getElementById("editJSON").innerHTML = JSON.stringify(graphDef.data,undefined,"\t");
 			return {
 				graph :	new AR.TreeGraph(graphDef),
 				graphDef: graphDef
 			};
 		},
 		"sunburst": function(){
-			
-			var graphDef = sunBurstGraph;
+			var graphDef = getSunBurstData(jsonSample);
+			document.getElementById("editJSON").innerHTML = JSON.stringify(graphDef.data,undefined,"\t");
 			return {
-				graph :	new AR.SunBurstGraph(treeGraph),
+				graph :	new AR.SunBurstGraph(graphDef),
 				graphDef: graphDef
 			};
 		},

@@ -94,8 +94,8 @@ AR.TreeGraph = function(graphDef){
 		self._panel.bottom(bottom);
 	};
 	
-	self.setWidth(500);
-	self.setHeight(500);
+	self.setWidth(graphDef.width);
+	self.setHeight(graphDef.height);
 	self.setLeft(50);
 	self.setRight(160);
 	self.setTop(10);
@@ -248,8 +248,8 @@ AR.SunBurstGraph = function(graphDef){
 		self._panel.bottom(bottom);
 	};
 	
-	self.setWidth(500);
-	self.setHeight(600);
+	self.setWidth(graphDef.width);
+	self.setHeight(graphDef.height);
 	self.setLeft(20);
 	self.setBottom(-40);
 };
