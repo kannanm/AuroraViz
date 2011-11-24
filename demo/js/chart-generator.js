@@ -121,6 +121,8 @@ var areaGraph = {
     "height": 500,
 	"palette": 1,
 	"grid" : "y",
+	"segmented" : "true",
+	"interpolate" : "true",
 	 "data": [{
 			"x": 3,
 			"y": 1.3
@@ -678,6 +680,17 @@ getareaData = function(jsonSample){
 	    areaGraph.grid = "h";
 	
 	var data = [];
+	
+	if(jsonSample.areadata.areaSegemented == true)
+		areaGraph.segmented = true;
+	else
+		areaGraph.segmented = false;
+		
+	if(jsonSample.areadata.areaInterpolate == true)
+		areaGraph.interpolate = true;
+	else
+		areaGraph.interpolate = false;
+		
 	for(var i=0; i < jsonSample.areadata.series.length; i++){
 		data.push({x : jsonSample.areadata.series[i].values[0], y : jsonSample.areadata.series[i].values[1]});
 	}
@@ -704,11 +717,12 @@ getmultiBarData = function(jsonSample){
 	if(jsonSample.grid.vertical != "yes" && jsonSample.grid.horizontal == "yes")
 	    multiBarGraph.grid = "h";
 	
-	
 	if(jsonSample.mbardata.align != null)
 		multiBarGraph.type = jsonSample.mbardata.align;
+	
 	if(jsonSample.mbardata.showLabels)
 		multiBarGraph.showLabels = jsonSample.mbardata.showLabels;
+	
 	var dataset = [];
 	for(var i=0; i < jsonSample.mbardata.series.length; i++){
 		var tempContent = [];
@@ -716,6 +730,7 @@ getmultiBarData = function(jsonSample){
 		dataset.push({seriesname : jsonSample.mbardata.series[i].label, color : "FEEEAA", data : getData(tempContent)
 		});
 	}
+	
 	multiBarGraph.dataset = dataset;
 	return multiBarGraph;
 };
