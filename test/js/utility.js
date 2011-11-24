@@ -121,3 +121,4 @@ AR.Utility.setPalette = function (element, paletteCode) {
 	
 	
 };
+
