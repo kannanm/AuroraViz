@@ -865,62 +865,89 @@ ARV.drawGraph = function() {
 		
 		renderChart(graphType);
 };
+ARV.renderChartFuntionMap = {
+		"bar":function(){
+			var graphDef = getBarData(jsonSample);
+			document.getElementById("editJSON").innerHTML = JSON.stringify(jsonSample.bardata,undefined,"\t");
+			return {
+			graph: new AR.BarGraph(graphDef),
+			graphDef: graphDef
+			};
+		},
+		"multibar":function(){
+			var graphDef = getmultiBarData(jsonSample);
+			document.getElementById("editJSON").innerHTML = JSON.stringify(jsonSample.mbardata,undefined,"\t");
+			return {
+				graph :	new AR.BarGraph(graphDef),
+				graphDef: graphDef
+			};
+		},
+		"line": function(){
+			var graphDef = getLineData(jsonSample);
+			document.getElementById("editJSON").innerHTML = JSON.stringify(jsonSample.linedata,undefined,"\t");
+			return{
+				graph :	 new AR.LineGraph(graphDef),
+				graphDef: graphDef
+			};
+		},
+		"multiline": function(){
+			var graphDef = getmultiLineData(jsonSample);
+			document.getElementById("editJSON").innerHTML = JSON.stringify(jsonSample.mlinedata,undefined,"\t");
+			return {
+				graph :	new AR.LineGraph(graphDef),
+				graphDef: graphDef
+			};
+		},
+		"tree": function(){
+			return {
+				graph :	new AR.TreeGraph(graphDef),
+				graphDef: graphDef
+			};
+		},
+		"sunburst": function(){
+			return {
+				graph :	new AR.SunBurstGraph(treeGraph),
+				graphDef: graphDef
+			};
+		},
+		"area": function(){
+			var graphDef = getareaData(jsonSample);
+			document.getElementById("editJSON").innerHTML = JSON.stringify(jsonSample.areadata,undefined,"\t");
+			return {
+				graph :	new AR.StackedAreaGraph(graphDef),
+				graphDef: graphDef
+			};
+		},
+		"pie": function(){
+			var graphDef = getPieDonutData(jsonSample);
+			document.getElementById("editJSON").innerHTML = JSON.stringify(jsonSample.piedata,undefined,"\t");
+			return {
+				graph :	new AR.WedgeGraph(graphDef),
+				graphDef: graphDef
+			};
+		},
+		"donut": function(){
+			var graphDef = getDonutData(jsonSample);
+			document.getElementById("editJSON").innerHTML = JSON.stringify(jsonSample.donutdata,undefined,"\t");
+			return {
+				graph :	new AR.WedgeGraph(graphDef),
+				graphDef: graphDef
+			};
+		},
+		"scatter": function(){
+			var graphDef = getScatterData(jsonSample);
+			document.getElementById("editJSON").innerHTML = JSON.stringify(jsonSample.scatterdata,undefined,"\t");
+			return {
+				graph :	new AR.BubbleGraph(graphDef),
+				graphDef: graphDef
+			};
+		}
+}
 
 renderChart = function(graphType){
-	if(graphType == "bar"){
-		var graphDef = getBarData(jsonSample);
-		document.getElementById("tabs-1").innerHTML = "<pre>"+JSON.stringify(graphDef)+"</pre>";
-		document.getElementById("editJSON").innerHTML = JSON.stringify(jsonSample.bardata);
-		var renderGraph = new AR.BarGraph(graphDef);
-		renderGraph.render("chart");
-	}
-	else if(graphType == "multibar"){
-		var graphDef = getmultiBarData(jsonSample);
-		document.getElementById("tabs-1").innerHTML = "<pre>"+JSON.stringify(graphDef)+"</pre>";
-		document.getElementById("editJSON").innerHTML = JSON.stringify(jsonSample.mbardata);
-		var renderGraph = new AR.BarGraph(graphDef);
-		renderGraph.render("chart");
-	}else if(graphType == "line"){
-		var graphDef = getLineData(jsonSample);
-		document.getElementById("tabs-1").innerHTML = "<pre>"+JSON.stringify(graphDef)+"</pre>";
-		document.getElementById("editJSON").innerHTML = JSON.stringify(jsonSample.linedata);
-		var renderGraph = new AR.LineGraph(graphDef);
-		renderGraph.render("chart");
-	}else if(graphType == "multiline"){
-		var graphDef = getmultiLineData(jsonSample);
-		document.getElementById("tabs-1").innerHTML = "<pre>"+JSON.stringify(graphDef)+"</pre>";
-		document.getElementById("editJSON").innerHTML = JSON.stringify(jsonSample.mlinedata);
-		var renderGraph = new AR.LineGraph(graphDef);
-		renderGraph.render("chart");
-	}else if(graphType == "tree"){
-		var renderGraph = AR.TreeGraph(treeGraph);
-	}else if(graphType == "sunburst"){
-		var renderGraph = AR.SunBurstGraph(treeGraph);
-	}else if(graphType == "area"){
-		var graphDef = getareaData(jsonSample);
-		document.getElementById("tabs-1").innerHTML = "<pre>"+JSON.stringify(graphDef)+"</pre>";
-		document.getElementById("editJSON").innerHTML = JSON.stringify(jsonSample.areadata);
-		var renderGraph = new AR.StackedAreaGraph(graphDef);
-		renderGraph.render("chart");
-	}else if(graphType == "pie"){
-		var graphDef = getPieDonutData(jsonSample);
-		document.getElementById("tabs-1").innerHTML = "<pre>"+JSON.stringify(graphDef)+"</pre>";
-		document.getElementById("editJSON").innerHTML = JSON.stringify(jsonSample.piedata);
-		var renderGraph = AR.WedgeGraph(graphDef);
-		renderGraph.render("chart");
-	}else if(graphType == "donut"){
-		var graphDef = getDonutData(jsonSample);
-		document.getElementById("tabs-1").innerHTML = "<pre>"+JSON.stringify(graphDef)+"</pre>";
-		document.getElementById("editJSON").innerHTML = JSON.stringify(jsonSample.donutdata);
-		var renderGraph = AR.WedgeGraph(graphDef);
-		renderGraph.render("chart");
-	}else if(graphType == "scatter"){
-		var graphDef = getScatterData(jsonSample);
-		document.getElementById("tabs-1").innerHTML = "<pre>"+JSON.stringify(graphDef)+"</pre>";
-		document.getElementById("editJSON").innerHTML = JSON.stringify(jsonSample.scatterdata);
-		var renderGraph = AR.BubbleGraph(graphDef);
-		renderGraph.render("chart");
-	}
+	var graphObject = ARV.renderChartFuntionMap[graphType]();
+	graphObject.graph.render("chart");
+	document.getElementById("tabs-1").innerHTML = "<pre>"+JSON.stringify(graphObject.graphDef,undefined,"\t")+"</pre>";
 };
 
 editJSONData = function(data, graphType){
