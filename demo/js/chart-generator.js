@@ -240,28 +240,32 @@ var treeGraph = {
 	"type": "b",
 	"root" : "Pramati",
 	"margin" : "n",
-	"data":{
-        "Pramati Technologies":{
-            "production department": "100",	
-            "research department": "100",
-            "quality engineering": "100",
+		"data":{
+       "Pramati":{
+            "production": "100",
+            "research": "100",
+            "quality": "100",
             "algorithms": "100",
-            "pramati labs": "100"
+            "labs": "100",
+            "tester" : {
+				"test1": "100",
+				"test2": "100"
+			}
         },
-        "Imaginea Technologies":{
-			"Platform Development": "100",
-            "Community Development": "100",
-            "Research on Tools": "100",
-            "Social Computing": "100"
+        "Imaginea":{
+			"Platform": "100",
+            "Community": "100",
+            "Research": "100",
+            "Social": "100"
         },
-        "Social Twist":{
-            "Social Computing":"100",
+        "SocialTwist":{
+            "Computing":"100",
             "Tell a Friend":"100",
-            "Social Research":"100"
+            "Research":"100"
         },
         "Qontext":{
-            "Community Building":"100",
-            "Knowledge Management":"100"
+            "Community":"100",
+            "Knowledge":"100"
         }
     }
 };
@@ -550,6 +554,7 @@ getBarData = function(jsonSample){
 		barLineGraph.type = jsonSample.bardata.align;
 	if(jsonSample.bardata.showLabels != null)
 		barLineGraph.showLabels = jsonSample.bardata.showLabels;
+
 	var data = [];
 	for(var i=0; i < jsonSample.bardata.series.length; i++){
 		data.push({label : jsonSample.bardata.series[i].label, value : jsonSample.bardata.series[i].values[0]});
@@ -598,7 +603,7 @@ getPieDonutData = function(jsonSample){
 	pieDonutGraph.palette = jsonSample.canvas.palette;
 	pieDonutGraph.outerRadius = jsonSample.piedata.Radius;
 	pieDonutGraph.angle = jsonSample.piedata.angle;
-	
+	pieDonutGraph.wedgeType = "pie";
 	var data = [];
 	for(var i=0; i < jsonSample.piedata.series.length; i++){
 		data.push({label : jsonSample.piedata.series[i].label, value : jsonSample.piedata.series[i].values});
@@ -617,6 +622,7 @@ getDonutData = function(jsonSample){
 	pieDonutGraph.palette = jsonSample.canvas.palette;
 	pieDonutGraph.outerRadius = jsonSample.donutdata.outerRadius;
 	pieDonutGraph.angle = jsonSample.donutdata.angle;
+	pieDonutGraph.wedgeType = "donut";
 	if(jsonSample.donutdata.innerRadius)
 		pieDonutGraph.innerRadius = jsonSample.donutdata.innerRadius;
 	var data = [];
@@ -899,12 +905,15 @@ ARV.renderChartFuntionMap = {
 			};
 		},
 		"tree": function(){
+			var graphDef = treeGraph;
 			return {
 				graph :	new AR.TreeGraph(graphDef),
 				graphDef: graphDef
 			};
 		},
 		"sunburst": function(){
+			
+			var graphDef = sunBurstGraph;
 			return {
 				graph :	new AR.SunBurstGraph(treeGraph),
 				graphDef: graphDef
