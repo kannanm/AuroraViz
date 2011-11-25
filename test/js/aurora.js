@@ -245,6 +245,37 @@ AR.Graph.prototype.setCustomHorRules = function(scaleMinimumOrData, scaleMaximum
 };
 
 
+AR.Graph.prototype.setBarHorRules = function(maxValue, scaleType) {
+    var self = this;
+    var y;
+    if (!self._horRules) {
+        y = pv.Scale[scaleType](0, maxValue).range(0, self._dimension.height - 40);
+        self._horRules = self._panel.add(pv.Rule);
+        self._horRules.data(y.ticks()).bottom(y).strokeStyle(function(d) {
+            return (d ? "#eee" : "#000");
+        });
+    } else {
+        y = pv.Scale.linear(0, maxValue).range(0, self._dimension.height - 40);
+        self._horRules.bottom(y);
+    }
+};
+
+AR.Graph.prototype.setBarVerticalRules = function(maxValue, scaleType) {
+    var self = this;
+    var x;
+    if (!self.__verticalRules) {
+        self._verticalRules = self._panel.add(pv.Rule);
+        x = pv.Scale[scaleType](0, maxValue).range(0, self._dimension.width - 40);
+        self._verticalRules.data(x.ticks()).left(x).strokeStyle(function(d) {
+            return (d ? "#eee" : "#000");
+        });
+    } else {
+        x = pv.Scale.linear(0, maxValue).range(0, self._dimension.width - 40);
+        self._verticalRules.left(x);
+    }
+};
+
+
 /**
  * Sets vertical rules in a graph.
  * Rules are nothing but lines that divide the graph to form a grid like structure
