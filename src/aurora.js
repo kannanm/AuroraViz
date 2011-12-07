@@ -96,34 +96,70 @@ AR.addCSS = function(cssPath, pos) {
  */
 AR.Graph = function(graphDef) {
     var self = this;
+    var upcasedProp;
     self.__graphDef = graphDef;
     self._pos = undefined;
     self._dimension = {
         height: 400,
         width: 400,
-        left: 40,
+        left: 60,
         right: 20,
         bottom: 60,
-        top: 20
+        top: 60
     };
-    self.__captionLabel = undefined;
-    self.__xAxisName = undefined;
-    self.__yAxisName = undefined;
+    self._captionLabel = undefined;
+    self._xAxisName = undefined;
+    self._yAxisName = undefined;
     self._horRules = undefined;
     self._verticalRules = undefined;
-    self._panel = new pv.Panel();
-    self._panel.left(self._dimension.left).right(self._dimension.right).bottom(self._dimension.bottom).top(self._dimension.top).strokeStyle("black");
+    self._outerPanel = new pv.Panel().left(20).right(20).bottom(20).top(20);
+    self._panel = self._outerPanel.add(pv.Panel);
+    self._panel.left(self._dimension.left).right(self._dimension.right).bottom(self._dimension.bottom).top(self._dimension.top);
     self._xAxis = self._panel.add(pv.Rule).bottom(0);
     self._yAxis = self._panel.add(pv.Rule).left(0);
     this.properties.forEach(function(property) {
-        var upcasedProp = property.substring(0, 1).toUpperCase() + property.substring(1);
+        upcasedProp = property.substring(0, 1).toUpperCase() + property.substring(1);
         if (graphDef[property]) {
             self["set" + upcasedProp](graphDef[property]);
         }
     });
-};
-AR.Graph.prototype.properties = ["width", "height", "caption", "xAxisName", "yAxisName", "borderColor", "fillColor"];
+    var styles = graphDef.style;
+    for(prop in styles){
+        upcasedProp = prop.substring(0, 1).toUpperCase() + prop.substring(1);
+        if (styles.hasOwnProperty(prop)) {
+            self["set" + upcasedProp](styles[prop]);
+        }
+    }
 
+};
+AR.Graph.prototype.properties = ["width", "height", "caption", "xAxisName", "yAxisName"];
+AR.Graph.labelProperties = [ "labelFontSize", "labelFontColor", "labelRotateAngle" ];
+
+//TODO write commong function for all
+AR.Graph.prototype.setHorAxisThickness = function(thickness) {
+    var self = this;
+    if (self._xAxis) {
+        self._xAxis.lineWidth(thickness);
+    }
+};
+AR.Graph.prototype.setVerAxisThickness = function(thickness) {
+    var self = this;
+    if (self._yAxis) {
+        self._yAxis.lineWidth(thickness);
+    }
+};
+AR.Graph.prototype.setVerGridThickness = function(thickness) {
+    var self = this;
+    if (self._verticalRules) {
+        self._verticalRules.lineWidth(thickness);
+    }
+};
+AR.Graph.prototype.setHorGridThickness = function(thickness) {
+    var self = this;
+    if (self._horRules) {
+        self._horRules.lineWidth(thickness);
+    }
+};
 /**
  * Sets a graph's caption.
  * Caption is one of the properties of any graph
@@ -137,10 +173,21 @@ AR.Graph.prototype.setCaption = function(newVal) {
     if (self.__captionLabel) {
         self.__captionLabel.text(newVal);
     } else {
-        self.__captionLabel = self._panel.add(pv.Label).text(newVal).left(self._dimension.width / 2).top(0).textAlign("center");
+        self.__captionLabel = self._panel.add(pv.Label).text(newVal).left(self._dimension.width / 2).top(-20).textAlign("center");
     }
 };
-
+AR.Graph.prototype.setCaptionSize = function(size) {
+    var self = this;
+    if (self.__captionLabel) {
+        self.__captionLabel.font(size + "px Arial");
+    }
+};
+AR.Graph.prototype.setCaptionColor = function(color) {
+    var self = this;
+    if (self.__captionLabel) {
+        self.__captionLabel.textStyle(color);
+    }
+};
 /**
  * Sets a graph's width.
  * Width is one of the properties of a graph
@@ -151,8 +198,8 @@ AR.Graph.prototype.setCaption = function(newVal) {
  */
 AR.Graph.prototype.setWidth = function(width) {
     var self = this;
-    self._dimension.width = width;
-    self._panel.width(self._dimension.width);
+    self._dimension.width = width - self._dimension.left - self._dimension.right;
+    self._outerPanel.width(width);
     if (self.__captionLabel) {
         self.__captionLabel.left(self._dimension.width / 2);
     }
@@ -168,8 +215,8 @@ AR.Graph.prototype.setWidth = function(width) {
  */
 AR.Graph.prototype.setHeight = function(height) {
     var self = this;
-    self._dimension.height = height;
-    self._panel.height(self._dimension.height);
+    self._dimension.height = height - self._dimension.top - self._dimension.bottom;
+    self._outerPanel.height(height);
 };
 
 /**
@@ -182,13 +229,12 @@ AR.Graph.prototype.setHeight = function(height) {
  */
 AR.Graph.prototype.setXAxisName = function(name) {
     var self = this;
-    if (self.__xAxisName) {
-        self.__xAxisName.text(name);
+    if (self._xAxisName) {
+        self._xAxisName.text(name);
     } else {
-        self.__xAxisName = self._panel.add(pv.Label).bottom(-40).text(name).textAlign("center");
+        self._xAxisName = self._panel.add(pv.Label).bottom(-50).text(name).textAlign("center");
     }
 };
-
 /**
  * Sets a graph's yAxisName.
  * yAxisName is one of the properties of a graph
@@ -199,13 +245,39 @@ AR.Graph.prototype.setXAxisName = function(name) {
  */
 AR.Graph.prototype.setYAxisName = function(name) {
     var self = this;
-    if (self.__yAxisName) {
-        self.__xAxisName.text(name);
+    if (self._yAxisName) {
+        self._yAxisName.text(name);
     } else {
-        self.__yAxisName = self._panel.add(pv.Label).left(-30).text(name).textAlign("center").textAngle(-Math.PI / 2);
+        self._yAxisName = self._panel.add(pv.Label).left(-30).text(name).textAlign("center").textAngle(-Math.PI / 2);
     }
 };
 
+
+AR.Graph.prototype.setHorAxisLabelSize = function(size) {
+    var self = this;
+    if (self._xAxisName) {
+        self._xAxisName.font(size + "px Arial");
+    }
+};
+AR.Graph.prototype.setVerAxisLabelSize = function(size) {
+    var self = this;
+    if (self._yAxisName) {
+        self._yAxisName.font(size + "px Arial");
+    }
+};
+
+AR.Graph.prototype.setHorAxisLabelColor = function(color) {
+    var self = this;
+    if (self._xAxisName) {
+        self._xAxisName.textStyle(color);
+    }
+};
+AR.Graph.prototype.setVerAxisLabelColor = function(color) {
+    var self = this;
+    if (self._yAxisName) {
+        self._yAxisName.textStyle(color);
+    }
+};
 /**
  * Sets horizontal rules in a graph.
  * Rules are nothing but lines that divide the graph to form a grid like structure
@@ -214,36 +286,29 @@ AR.Graph.prototype.setYAxisName = function(name) {
  * This method setHorRules permenantly sticks with the AR.Graph object as it is prototyped.
  * This can be used by any AR.Graph type object
  */
-AR.Graph.prototype.setHorRules = function(maxValue, scaleType) {
+
+AR.Graph.prototype.setHorGridShow = function(maxValue, scaleType) {
     var self = this;
     var y;
     if (!self._horRules) {
-        y = pv.Scale[scaleType](0, maxValue).range(0, self._dimension.height - 40);
+        self._y = pv.Scale[scaleType](0, maxValue).range(0, self._dimension.height - 40);
         self._horRules = self._panel.add(pv.Rule);
-        self._horRules.data(y.ticks()).bottom(y).strokeStyle(function(d) {
-            return (d ? "#eee" : "#000");
-        }).anchor("left").add(pv.Label).text(y.tickFormat);
+        self._horRules.data(self._y.ticks().splice(1, self._y.ticks().length)).bottom(self._y);
+/*.strokeStyle(function(d) {
+            return ("#cccccc");
+        }).anchor("left").add(pv.Label).text(y.tickFormat);*/
     } else {
-        y = pv.Scale.linear(0, maxValue).range(0, self._dimension.height - 40);
-        self._horRules.bottom(y);
+        self._y = pv.Scale.linear(0, maxValue).range(0, self._dimension.height - 40);
+        self._horRules.bottom(self._y);
     }
 };
 
-AR.Graph.prototype.setCustomHorRules = function(scaleMinimumOrData, scaleMaximum, scaleType) {
+AR.Graph.prototype.setHorGridLabelShow = function(status) {
     var self = this;
-    var y;
-    if (!self._horRules) {
-        y = pv.Scale[scaleType](scaleMinimumOrData, scaleMaximum).range(0, self._dimension.height);
-        self._horRules = self._panel.add(pv.Rule);
-        self._horRules.data(y.ticks()).bottom(y).strokeStyle(function(d) {
-            return (d ? "#eee" : "#000");
-        }).anchor("left").add(pv.Label).text(y.tickFormat);
-    } else {
-        y = pv.Scale.linear(0, maxValue).range(0, self._dimension.height - 40);
-        self._horRules.bottom(y);
+    if (self._horRules && status === true) {
+        self._horRules.anchor("left").add(pv.Label).text(self._y.tickFormat);
     }
 };
-
 
 /**
  * Sets vertical rules in a graph.
@@ -253,75 +318,106 @@ AR.Graph.prototype.setCustomHorRules = function(scaleMinimumOrData, scaleMaximum
  * This method setVerticalRules permenantly sticks with the AR.Graph object as it is prototyped.
  * This can be used by any AR.Graph type object
  */
-AR.Graph.prototype.setVerticalRules = function(maxValue, scaleType) {
+
+AR.Graph.prototype.setVerGridShow = function(maxValue, scaleType) {
     var self = this;
-    var x;
-    if (!self.__verticalRules) {
+    self._x = undefined;
+    if (!self._verticalRules) {
         self._verticalRules = self._panel.add(pv.Rule);
-        x = pv.Scale[scaleType](0, maxValue).range(0, self._dimension.width - 40);
-        self._verticalRules.data(x.ticks()).left(x).strokeStyle(function(d) {
-            return (d ? "#eee" : "#000");
-        }).anchor("bottom").add(pv.Label).text(x.tickFormat);
+        self._x = pv.Scale[scaleType](0, maxValue).range(0, self._dimension.width - 40);
+        self._verticalRules.data(self._x.ticks().splice(1, self._x.ticks().length)).left(self._x); /* }).anchor("bottom").add(pv.Label).text(x.tickFormat);*/
     } else {
-        x = pv.Scale.linear(0, maxValue).range(0, self._dimension.width - 40);
-        self._verticalRules.left(x);
+        self._x = pv.Scale.linear(0, maxValue).range(0, self._dimension.width - 40);
+        self._verticalRules.left(self._x);
     }
 };
 
-AR.Graph.prototype.setCustomVerticalRules = function(dataorScaleMinimum, maxValue, scaleType) {
+AR.Graph.prototype.setVerGridLabelShow = function(status) {
     var self = this;
-    var x;
-    if (!self.__verticalRules) {
-        self._verticalRules = self._panel.add(pv.Rule);
-        x = pv.Scale[scaleType](dataorScaleMinimum, maxValue).range(0, self._dimension.width);
-        self._verticalRules.data(x.ticks()).left(x).strokeStyle(function(d) {
-            return (d ? "#eee" : "#000");
-        }).anchor("bottom").add(pv.Label).text(x.tickFormat);
-    } else {
-        x = pv.Scale.linear(0, maxValue).range(0, self._dimension.width - 40);
-        self._verticalRules.left(x);
+    if (self._verticalRules && status === true) {
+        self._verticalRules.anchor("bottom").add(pv.Label).text(self._x.tickFormat);
     }
 };
 
 
 /**
- * Sets a graph's BorderColor
+ * Sets a canvas BorderColor
  * @params{colorcode}
  *             It takes the colorcode as input (Eg : 'red' etc or a hex form) and sets the border color to be that.
  * This method setBorderColor permenantly sticks with the AR.Graph object as it is prototyped.
  * This can be used by any AR.Graph type object
  */
-AR.Graph.prototype.setBorderColor = function(color) {
+AR.Graph.prototype.setCanvasBorderColor = function(color) {
     var self = this;
-    self._panel.strokeStyle(color);
+    self._outerPanel.strokeStyle(color);
 };
 
 /**
- * Sets a graph's FillColor
+ * Sets a canvas FillColor
  * @params{colorcode}
  *             It takes the colorcode as input (Eg : 'red' etc or a hex form) and fills the graph components using that color.
  * This method setFillColor permenantly sticks with the AR.Graph object as it is prototyped.
  * This can be used by any AR.Graph type object
  */
-AR.Graph.prototype.setFillColor = function(color) {
+AR.Graph.prototype.setChartFillColor = function(color) {
     var self = this;
     self._panel.fillStyle(color);
 };
 
+
+/**
+ * Sets a canvas FillColor
+ * @params{colorcode}
+ *             It takes the colorcode as input (Eg : 'red' etc or a hex form) and fills the graph components using that color.
+ * This method setFillColor permenantly sticks with the AR.Graph object as it is prototyped.
+ * This can be used by any AR.Graph type object
+ */
+AR.Graph.prototype.setCanvasFillColor = function(color) {
+    var self = this;
+    self._outerPanel.fillStyle(color);
+};
+
+AR.Graph.prototype.setCanvasBorderThickness = function(thickness) {
+    var self = this;
+    self._outerPanel.lineWidth(thickness);
+};
 /**
  * Renders the Component
  */
 AR.Graph.prototype.render = function render(div) {
     var self = this;
     if (div || self.__pos) {
-        self._panel.canvas(div || self.__pos);
-        self._panel.render();
+        self._outerPanel.canvas(div || self.__pos);
+        self._outerPanel.render();
         self.__pos = div || self.__pos;
     } else {
-        self._panel.render();
+        self._outerPanel.render();
     }
 };
 
+//TODO for setting color make a common function which takes in element and color
+AR.Graph.prototype.setHorAxisColor = function(color) {
+    var self = this;
+    self._xAxis.strokeStyle(color);
+};
+
+AR.Graph.prototype.setVerAxisColor = function(color) {
+    var self = this;
+    self._yAxis.strokeStyle(color);
+};
+
+AR.Graph.prototype.setVerGridColor = function(color) {
+    var self = this;
+    if (self._verticalRules) {
+        self._verticalRules.strokeStyle(color);
+    }
+};
+AR.Graph.prototype.setHorGridColor = function(color) {
+    var self = this;
+    if (self._horRules) {
+        self._horRules.strokeStyle(color);
+    }
+};
 /**
  * Register the file to protovis. By registering it means the pv.parse parses
  * the code.
@@ -336,7 +432,7 @@ AR.registerToProtovis = function() {
  * the required javascript files for protovis
  */
 (function() {
-    if (navigator.appName === "Microsoft Internet Explorer") {
+/* if (navigator.appName === "Microsoft Internet Explorer") {
         AR.addJavascript("../lib/svg/svg.js", "head", "../lib/svg/");
     }
     var scriptArray = ["../lib/protovis/protovis-d3.3.js", "../src/bar.js", "../src/wedge.js", "../src/utility.js", "../src/bubble.js", "../src/area.js", "../src/line.js", "../lib/js/jquery-1.5.1.js", "../lib/js/jquery.ui.core.js", "../lib/js/jquery.tablesorter.pager.js", "../lib/js/jquery.tablesorter.js", "../lib/js/jquery.validationEngine.js", "../src/tree.js"];
@@ -355,5 +451,5 @@ AR.registerToProtovis = function() {
             tipsy = AR.addJavascript("../lib/jQuery/tipsy/tipsy.js");
         };
     };
-    AR.addCSS("../lib/jQuery/tipsy/tipsy.css");
+    AR.addCSS("../lib/jQuery/tipsy/tipsy.css");*/
 }());

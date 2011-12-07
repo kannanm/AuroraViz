@@ -1,283 +1,204 @@
-/**@author : koushikr*/
-/**
- * The basefunction for the Stacked Area Graph initialization. Need x and y co-ordinates.  
- * Initializes the StackedAreaGraph. Sets the data
- * @params {Object}
- *             [graphDef] graphDef object supplied by the User for which the graph needs to be plotted. It contains graph properties and the data
- * @params {Object}
- *             [parentDimension] parentDimension object that will indicate the dimensions of AR.Graph
- * @params {Object}
- *             [panel] A panel object indicating the Graph Panel in which the current Area graph will be displayed.
- * This is a base class and is called by different Area implementations.
- */
-AR.stackedarea = function(parentDimension, panel, graphDef) {
-    var self = this;
-    // dataValues will contain the whole x,y,z values in form of an array.
-    var dataValues = AR.Utility.getTwoDimensionData(graphDef.data);
-    //self._stackedArea = panel.add(pv.Layout.Stack);
-    self._stackedArea = panel.add(pv.Area);
-    var datum = graphDef.data;
-    //self._stackedArea.layers(datum);
-    self._stackedArea.data(datum);
-
-    var setX = function(parentDimension) {
-        var maxVal = AR.Utility.getSingleDimensionData(graphDef.data, AR.Utility.Dimension.x).max();
-        var xScale = pv.Scale.linear(0, maxVal).range(0, parentDimension.width - 40);
-        //var xScale = pv.Scale.linear(graphDef.data, function(d) d.x).range(0, parentDimension.width);
-        self._stackedArea.left(function(d) {
-            return xScale(d.x);
-        });
-    };
-
-    var setY = function(parentDimension) {
-        var maxVal = AR.Utility.getSingleDimensionData(graphDef.data, AR.Utility.Dimension.y).max();
-        var yScale = pv.Scale.linear(0, maxVal).range(0, parentDimension.height - 40);
-        self._stackedArea.height(function(d) {
-            return yScale(d.y);
-        });
-    };
-
-    var setXandY = function(parentDimension) {
-        setX(parentDimension);
-        setY(parentDimension);
-    };
-
-    var setBottom = function() {
-        self._stackedArea.bottom(0);
-    };
-
-    var setFillStyle = function() {
-        self._stackedArea.fillStyle("rgb(121,173,210)");
-    };
-
-    var setAnchor = function() {
-        self._stackedArea.anchor("top").add(pv.Line).lineWidth(3);
-    };
-
-
-    self.setStackAttributes = function() {
-        var self = this;
-        setBottom();
-        setXandY(parentDimension);
-        setFillStyle();
-        setAnchor();
-        if (graphDef.segmented === true) {
-            self._stackedArea.segmented(true);
-        }
-        if (graphDef.interpolate === true) {
-            self._stackedArea.interpolate("step-after");
-        }
-    };
-
-
-    self.setStackAttributes();
-    //self._stackedArea.layer.add(pv.Area);        
-};
-
-/**
- * The basefunction for the Stacked Area Graph initialization. MultiGraph this is!
- * Initializes the StackedAreaGraph. Sets the data
- * @params {Object}
- *             [graphDef] graphDef object supplied by the User for which the graph needs to be plotted. It contains graph properties and the data
- * @params {Object}
- *             [parentDimension] parentDimension object that will indicate the dimensions of AR.Graph
- * @params {Object}
- *             [panel] A panel object indicating the Graph Panel in which the current Area graph will be displayed.
- * This is a base class and is called by different Area implementations.
- */
-AR.multistackedarea = function(parentDimension, panel, graphDef, data) {
-    // TODO  Multiple area graphs in the same canvas
-    var self = this;
-    self._panel = panel.add(pv.Layout.Stack);
-    self._panel.layers(data);
-    var max, maxMap;
-    var dataArray = [];
-    for (i = 0; i < graphDef.dataset.length; i++) {
-        max = AR.Utility.getSingleDimensionData(graphDef.dataset[i].data, AR.Utility.Dimension.y).max();
-        maxMap = {
-            "value": max
-        };
-        dataArray.push(maxMap);
-    }
-    var yMax = AR.Utility.findMax(dataArray);
-
-    var XdataArray = [];
-    for (i = 0; i < graphDef.dataset.length; i++) {
-        max = AR.Utility.getSingleDimensionData(graphDef.dataset[i].data, AR.Utility.Dimension.x).max();
-        maxMap = {
-            "label": "data",
-            "value": max
-        };
-        XdataArray.push(maxMap);
-    }
-    var xMax = AR.Utility.findMax(XdataArray);
-
-    var setXvalue = function(parentDimension) {
-        var xScale = pv.Scale.linear(0, xMax).range(0, parentDimension.width - 40);
-        self._panel.x(function(d) {
-            return xScale(d.x);
-        });
-    };
-
-    var setYvalue = function(parentDimension) {
-        var yScale = pv.Scale.linear(0, yMax).range(0, parentDimension.height - 40);
-        self._panel.y(function(d) {
-            return yScale(d.y);
-        });
-    };
-
-    var setBottom = function() {
-        self._panel.bottom(0);
-    };
-
-    var setFillStyle = function() {
-        self._panel.fillStyle("rgb(121,173,210)");
-    };
-
-    self.setDataValues = function() {
-        setXvalue(parentDimension);
-        setYvalue(parentDimension);
-        setBottom();
-        self._panel.layer.add(pv.Area);
-    };
-
-    self.setDataValues();
-};
+/**@author : aditya.g*/
 
 
 /**
  * API to construct a Stacked Area Graph
+ * 
  * @param {object}
  *            [graphDef] An object containing the graph properties and the data
  * @extends AR.Graph
  */
 AR.StackedAreaGraph = function(graphDef) {
 
-/*    var data = pv.range(4).map(function() {
-    return pv.range(0, 10, .1).map(function(x) {
-        return {x: x, y: Math.sin(x) + Math.random() * .5 + 2};
-      });
-  });
-*/
+	var self = this;
+	var stackedArea;
+	var dataset = graphDef.dataset;
+	var colors = AR.Utility.getPaletteColors(graphDef);
+	/**
+	 * Function to get the sum of maximum values from each categories because the scale will depend on it as it is a stacked graph
+	 */
+	var sumOfMaxValues = function (){
+		var sum = 0,
+			i;
+		for (i=0; i<dataset.length; i++){
+			sum += AR.Utility.findMax(dataset[i].data);
+		}
+		return sum;
+	}();
+	
+	var noOfRecords = function(){
+		var records = 0;
+		for(i=0;i<dataset.length;i++){
+			if(dataset[i].data.length > records){
+				records = dataset[i].data.length;
+			}
+		}
+		return records;
+	}();
+	
+	var dataArray = function(){
+		var arr = [],
+			innerArr, 
+			i,j,obj;
+		for(i=0;i<dataset.length;i++){
+			innerArr = [];
+			var data = dataset[i].data;
+			for(j=0;j<data.length;j++){
+				var obj = {};
+				obj.x = j;
+				obj.y = data[j].value;
+//				if(i===0){
+//					cumulativeData.push(parseInt(data[j].value));  
+//				}
+//				else{
+//					cumulativeData[j] = parseInt(cumulativeData[j]) + parseInt(data[j].value); 
+//				}
+//				obj.cumulativeVal = cumulativeData[j];
+				innerArr.push(obj);
+			}
+			arr.push(innerArr);
+		}
+		return arr;
+	}();
+	self.setVerGridShow = function(status) {
+		if (status === true) {
+			AR.Graph.prototype.setVerGridShow.apply(self, [ dataset.length, AR.Utility.scale.linear ]);
+		}
+	};
+	self.setHorGridShow = function(status) {
+		if (status === true) {
+			AR.Graph.prototype.setHorGridShow.apply(self, [ sumOfMaxValues, AR.Utility.scale.linear ]);
+		}
+	};
+	AR.Graph.apply(self, [ graphDef ]);
 
-
-    var self = this;
-    var stackedArea;
-    AR.Graph.apply(self, [graphDef]);
-
-    var setRules = {
-        "v": function() {
-            if (graphDef.data) {
-                var maxVal = AR.Utility.getSingleDimensionData(graphDef.data, AR.Utility.Dimension.y).max();
-                self.setHorRules(maxVal, AR.Utility.scale.linear);
-            } else {
-                var dataArray = [];
-                for (i = 0; i < graphDef.dataset.length; i++) {
-                    var max = AR.Utility.getSingleDimensionData(graphDef.dataset[i].data, AR.Utility.Dimension.y).max();
-                    var maxMap = {
-                        "value": max
-                    };
-                    dataArray.push(maxMap);
-                }
-                self.setHorRules(AR.Utility.findMax(dataArray), AR.Utility.scale.linear);
-            }
-        },
-
-        "h": function() {
-            if (graphDef.data) {
-                var maxVal = AR.Utility.getSingleDimensionData(graphDef.data, AR.Utility.Dimension.x).max();
-                self.setVerticalRules(maxVal, AR.Utility.scale.linear);
-            } else {
-                var dataArray = [];
-                for (i = 0; i < graphDef.dataset.length; i++) {
-                    var max = AR.Utility.getSingleDimensionData(graphDef.dataset[i].data, AR.Utility.Dimension.x).max();
-                    var maxMap = {
-                        "label": "data",
-                        "value": max
-                    };
-                    dataArray.push(maxMap);
-                }
-                self.setVerticalRules(AR.Utility.findMax(dataArray), AR.Utility.scale.linear);
-            }
-        },
-
-        "yes": function() {
-            var max, maxMap;
-            if (graphDef.data) {
-                var xmaxVal = AR.Utility.getSingleDimensionData(graphDef.data, AR.Utility.Dimension.y).max();
-                self.setHorRules(xmaxVal, AR.Utility.scale.linear);
-
-                var ymaxVal = AR.Utility.getSingleDimensionData(graphDef.data, AR.Utility.Dimension.x).max();
-                self.setVerticalRules(ymaxVal, AR.Utility.scale.linear);
-            } else {
-                var XdataArray = [];
-                for (i = 0; i < graphDef.dataset.length; i++) {
-                    max = AR.Utility.getSingleDimensionData(graphDef.dataset[i].data, AR.Utility.Dimension.x).max();
-                    maxMap = {
-                        "label": "data",
-                        "value": max
-                    };
-                    XdataArray.push(maxMap);
-                }
-                self.setVerticalRules(AR.Utility.findMax(XdataArray), AR.Utility.scale.linear);
-
-                var YdataArray = [];
-                for (i = 0; i < graphDef.dataset.length; i++) {
-                    max = AR.Utility.getSingleDimensionData(graphDef.dataset[i].data, AR.Utility.Dimension.y).max();
-                    maxMap = {
-                        "value": max
-                    };
-                    YdataArray.push(maxMap);
-                }
-                self.setHorRules(AR.Utility.findMax(YdataArray), AR.Utility.scale.linear);
-            }
-        }
-
-    };
-
-    setRules[graphDef.grid || "yes"]();
-
-    if (graphDef.dataset) {
-        var dataset = graphDef.dataset;
-        var dataArray = [];
-        for (i = 0; i < graphDef.dataset.length; i++) {
-            dataArray.push(dataset[i].data);
-        }
-        stackedArea = new AR.multistackedarea(self._dimension, self._panel, graphDef, dataArray);
-        //document.write(dataArray);
-    } else {
-        stackedArea = new AR.stackedarea(self._dimension, self._panel, graphDef);
-    }
-
-
-    // These are the constructor methods you can use to set/reset Graph panel.
-    self.setWidth = function(width) {
-        AR.Graph.prototype.setWidth.call(self, width);
-        stackedArea.adjustPosition(self._dimension);
-    };
-    self.setHeight = function(height) {
-        AR.Graph.prototype.setHeight.call(self, height);
-        stackedArea.adjustPosition(self._dimension);
-    };
-
-    self.setTop = function(top) {
-        AR.Graph.prototype.setTop.call(self, top);
-        stackedArea.adjustPosition(self._dimension);
-    };
-
-    self.setHeight = function(bottom) {
-        AR.Graph.prototype.setBottom.call(self, bottom);
-        stackedArea.adjustPosition(self._dimension);
-    };
-
-    self.setLeft = function(left) {
-        AR.Graph.prototype.setLeft.call(self, left);
-        stackedArea.adjustPosition(self._dimension);
-    };
-
-    self.setHeight = function(right) {
-        AR.Graph.prototype.setRight.call(self, right);
-        stackedArea.adjustPosition(self._dimension);
-    };
+	var  xScale = pv.Scale.linear(0, noOfRecords).range(0, self._dimension.width - 40),
+	     yScale = pv.Scale.linear(0, sumOfMaxValues).range(0, self._dimension.height -40);
+	
+	var createStackedAreaGraph = function(){
+		self._areaObj = self._panel.add(pv.Layout.Stack)
+	    .layers(dataArray)
+	    .x(function(d) xScale(d.x) + AR.AreaConstants.xOffset)
+	    .y(function(d) yScale(d.y))
+	    .layer.add(pv.Area);
+		self._areaObj.strokeStyle(function () colors[this.parent.index%colors.length]).fillStyle(function() this.strokeStyle().alpha(.2)).anchor("top");
+		self._areaObj.segmented(true);
+		
+	}
+	createStackedAreaGraph();
+	self._areaObj.title(function() {
+		return (graphDef.dataset[this.parent.index].seriesname);
+	});
+	if(graphDef.showValues){
+		self._areaObj.anchor("top").add(pv.Label).text(function(d){
+			var dataObj = dataArray[this.parent.index];
+			return (dataObj[this.index].y);
+		}).textBaseline("bottom");
+	}
+	if(graphDef.showLabels){
+		var labels = self._areaObj.add(pv.Label).text("qwerty").bottom(0).textBaseline("top");
+		AR.Utility.setLabelProperties(graphDef,labels,false);
+	}
+	if(graphDef.interpolated){
+		self._areaObj.interpolate("step-after");
+	}
+	AR.Utility.setToolTip(graphDef, self._areaObj, "s");
 };
 AR.StackedAreaGraph.prototype = AR.extend(AR.Graph);
+
+AR.Area = function(parentDimension, panel, graphDef, dataObj, color, seriesname) {
+	var self = this;
+	self._areaObj = panel.add(pv.Area);
+	var dataArr = AR.Utility.getDataArray(dataObj)
+	self._areaObj.data(dataArr);
+	var setHeight = function() {
+		var maxVal = AR.Utility.findArrayMax(dataArr);
+		var xScale = pv.Scale.linear(0, maxVal).range(0, parentDimension.height - 40);
+		self._areaObj.height(function(d) {
+			return xScale(d);
+		});
+	};
+	var setLeft = function() {
+		var noOfRecords = dataArr.length;
+		var xScale = pv.Scale.linear(0, noOfRecords).range(0, parentDimension.width - 40);
+		self._areaObj.left(function(d) {
+			return xScale(this.index)+AR.AreaConstants.xOffset;
+		});
+	};
+
+	var setBottom = function() {
+		self._areaObj.bottom(0);
+	};
+
+	var setFillStyle = function() {
+//		var line = self._areaObj.anchor("top").add(pv.Line).lineWidth(2).strokeStyle(color ||  graphDef.areaColor);
+//		self._areaObj.fillStyle(function(){ return line.strokeStyle().alpha(.2)});
+		self._areaObj.strokeStyle(color ||  graphDef.areaColor);
+		self._areaObj.fillStyle(function() this.strokeStyle().alpha(.2));
+	};
+
+
+	self.setAreaAttributes = function() {
+		var self = this;
+		setBottom();
+		setHeight();
+		setLeft();
+		setFillStyle();
+		self._areaObj.segmented(true);
+		if (graphDef.interpolated === true) {
+			self._areaObj.interpolate("step-after");
+		}
+	};
+	self._areaObj.title(function() {
+		return (seriesname ? seriesname : dataObj[this.index].toolTipText ? dataObj[this.index].toolTipText : dataObj[this.index].value);
+	});
+	if(graphDef.showLabels){
+		var label = self._areaObj.add(pv.Label).textBaseline("top").text(function(){
+			return seriesname ? graphDef.categories[0].category[this.index].label: dataObj[this.index].label;
+		});
+		AR.Utility.setLabelProperties(graphDef,label,false);
+	}
+	if(graphDef.showValues){
+		var values = self._areaObj.anchor("top").add(pv.Label).textBaseline("bottom").text(function(){
+			return dataObj[this.index].value;
+		});
+	}
+	AR.Utility.setToolTip(graphDef, self._areaObj, "s");
+	self.setAreaAttributes();
+};
+
+
+AR.AreaGraph = function(graphDef){
+	var self = this;
+	var area,colors;
+	var maxVal = AR.Utility.findMaxValue(graphDef);
+	var dataset = graphDef.dataset;
+	self.setVerGridShow = function(status) {
+		if (status === true) {
+			AR.Graph.prototype.setVerGridShow.apply(self, [ maxVal, AR.Utility.scale.linear ]);
+		}
+	};
+	self.setHorGridShow = function(status) {
+		if (status === true) {
+			AR.Graph.prototype.setHorGridShow.apply(self, [ maxVal, AR.Utility.scale.linear ]);
+		}
+	};
+	AR.Graph.apply(self, [ graphDef ]);
+	if(graphDef.presetPalette){
+		colors = AR.Utility.getPaletteColors(graphDef);
+	}
+	if (dataset) {
+		for (i = 0; i < dataset.length; i++) {
+			var panel = self._panel.add(pv.Panel);
+			bar = new AR.Area(self._dimension, panel, graphDef, dataset[i].data, colors[i % colors.length], graphDef.dataset[i].seriesname);
+		}
+	} 
+	else {
+		area = new AR.Area(self._dimension, self._panel, graphDef, graphDef.data);
+	}
+
+	
+};
+AR.AreaGraph.prototype = AR.extend(AR.Graph);
+AR.AreaConstants ={}
+AR.AreaConstants.xOffset = 60;

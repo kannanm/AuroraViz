@@ -20,8 +20,26 @@ AR.Line = function(parentDimension, panel, graphDef, step) {
     dots.title(function() {
         return AR.Utility.getToolTipText(graphDef.data, this.index);
     });
+    var properties = ["dotSize","lineWidth","lineColor"];
+    self.setDotSize = function(size){
+    	dots.shapeRadius(size);
+    };
+    self.setLineWidth = function(width){
+    	line.lineWidth(width);
+    };
+    self.setLineColor= function(color){
+    	line.strokeStyle(color);
+    }
+    var setProperties = function(){
+    	 properties.forEach(function(property) {
+    	        var upcasedProp = property.substring(0, 1).toUpperCase() + property.substring(1);
+    	        if (graphDef[property]) {
+    	            self["set" + upcasedProp](graphDef[property]);
+    	        }
+    	    });
+    };
     self.adjustLabel = function(parentDimension) {
-        dots.add(pv.Label).bottom(0).text(function() {
+        self._label = dots.add(pv.Label).bottom(0).text(function() {
             return graphDef.data[this.index].label;
         }).textAngle(-Math.PI / 4).textAlign("right").textBaseline("top");
     };
@@ -45,21 +63,19 @@ AR.Line = function(parentDimension, panel, graphDef, step) {
         self.adjustBottom(parentDimension);
         self.adjustLeft(parentDimension);
     };
-    if (graphDef.toolTip && graphDef.toolTip === 1) {
-        dots.event("mouseover", pv.Behavior.tipsy({
-            gravity: function() {
-                return ("s");
-            },
-            fade: true
-        }));
-    } else {
-        self.adjustValuePositions(parentDimension);
-    }
-    if (graphDef.palette) {
-        AR.Utility.setPalette(dots, graphDef.palette);
+	if (graphDef.showValues) {
+		self.adjustValuePositions(parentDimension);
+	}
+	AR.Utility.setToolTip(graphDef, dots, "s");
+    if (graphDef.presetPalette) {
+    	 AR.Utility.setPalette(dots, AR.Utility.getPaletteColors(graphDef));
+	}
+    if(graphDef.showLabels){
+    	 self.adjustLabel(parentDimension);
+    	 AR.Utility.setLabelProperties(graphDef,self._label,false);
     }
     self.adjustPositions(parentDimension);
-    self.adjustLabel(parentDimension);
+    setProperties();
     if (step === true) {
         line.interpolate("step-after");
     }
@@ -80,19 +96,37 @@ AR.Line = function(parentDimension, panel, graphDef, step) {
  *             [maxValue] The value for setting the scale
  * This is a base class and is called by different Line implementations.
  */
-AR.MLine = function(parentDimension, panel, graphDef, data, maxValue, step) {
+AR.MLine = function(parentDimension, panel, graphDef, data, maxValue, step, color) {
     var self = this;
     var noOfRecords = data.length;
     var line = panel.add(pv.Line);
     line.data(AR.Utility.getDataArray(data));
-    var dots = line.add(pv.Dot).lineWidth(1);
+    var dots = line.add(pv.Dot).lineWidth(4);
     dots.title(function() {
         return AR.Utility.getToolTipText(data, this.index);
     });
-    self.adjustLabel = function(parentDimension) {
-        dots.add(pv.Label).bottom(0).text(function() {
-            return data[this.index].label;
-        }).textAngle(-Math.PI / 4).textAlign("right").textBaseline("top");
+    var properties = ["dotSize","lineWidth","lineColor"];
+    self.setDotSize = function(size){
+    	dots.shapeRadius(size);
+    };
+    self.setLineWidth = function(width){
+    	line.lineWidth(width);
+    };
+    self.setLineColor= function(color){
+    	line.strokeStyle(color);
+    }
+    var setProperties = function(){
+    	 properties.forEach(function(property) {
+    	        var upcasedProp = property.substring(0, 1).toUpperCase() + property.substring(1);
+    	        if (graphDef[property]) {
+    	            self["set" + upcasedProp](graphDef[property]);
+    	        }
+    	    });
+    };
+    self.showLabels = function(parentDimension) {
+        self._label = dots.add(pv.Label).bottom(0).text(function() {
+            return graphDef.categories[0].category[this.index].label;
+        }).textBaseline("top");
     };
     self.adjustValuePositions = function(parentDimension) {
         dots.anchor("bottom").add(pv.Label).text(function() {
@@ -111,33 +145,25 @@ AR.MLine = function(parentDimension, panel, graphDef, data, maxValue, step) {
         });
     };
 
-    var setStrokeStyle = function() {
-        //line.strokeStyle(function(d) "hsl(" + (d * 180) + ",50%,50%)");
-    };
-
     self.adjustPositions = function(parentDimension) {
         self.adjustBottom(parentDimension);
         self.adjustLeft(parentDimension);
-        setStrokeStyle();
     };
-
-    if (graphDef.toolTip && graphDef.toolTip === 1) {
-        dots.event("mouseover", pv.Behavior.tipsy({
-            gravity: function() {
-                return ("s");
-            },
-            fade: true
-        }));
-    } else {
-        self.adjustValuePositions(parentDimension);
-    }
-    if (graphDef.palette) {
-        AR.Utility.setPalette(dots, graphDef.palette);
-    }
+    AR.Utility.setToolTip(graphDef, dots, "s");
+    if (graphDef.showValues) {
+		self.adjustValuePositions(parentDimension);
+	}
+    if(graphDef.showLabels){
+   	 self.showLabels(parentDimension);
+   	 AR.Utility.setLabelProperties(graphDef,self._label,false);
+   }
     self.adjustPositions(parentDimension);
-    self.adjustLabel(parentDimension);
+    setProperties();
     if (step === true) {
         line.interpolate("step-after");
+    }
+    if(color){
+    	line.strokeStyle(color);
     }
 };
 
@@ -150,33 +176,34 @@ AR.MLine = function(parentDimension, panel, graphDef, data, maxValue, step) {
 AR.LineGraph = function(graphDef) {
     var line;
     var self = this;
-    var flag;
+    var flag,palette;
+    var maxValue =  AR.Utility.findMaxValue(graphDef);
+    self.setVerGridShow = function(status) {
+		if (status === true) {
+			AR.Graph.prototype.setVerGridShow.apply(self, [ maxValue, AR.Utility.scale.linear ]);
+		}
+	};
+	self.setHorGridShow = function(status) {
+		if (status === true) {
+			AR.Graph.prototype.setHorGridShow.apply(self, [ maxValue, AR.Utility.scale.linear ]);
+		}
+	};
     AR.Graph.apply(self, [graphDef]);
-    if (graphDef.style === "step") {
+    if (graphDef.isLineStyleStep === true) {
         flag = true;
     }
-
+    if(graphDef.presetPalette){
+    	colors = AR.Utility.getPaletteColors(graphDef);
+    }
     if (graphDef.dataset) {
-        var maxValue;
-        var dataArray = [];
-        for (i = 0; i < graphDef.dataset.length; i++) {
-            var max = AR.Utility.findMax(graphDef.dataset[i].data);
-            var maxMap = {
-                "label": "data",
-                "value": max
-            };
-            dataArray.push(maxMap);
-        }
-        maxValue = AR.Utility.findMax(dataArray);
+    	
         var dataset = graphDef.dataset;
         for (i = 0; i < graphDef.dataset.length; i++) {
             var noOfRecords = dataset.length * dataset[i].data.length;
-            panel = self._panel.add(pv.Panel).left(i * (self._dimension.width - 30) / (noOfRecords));
-            line = new AR.MLine(self._dimension, panel, graphDef, dataset[i].data, maxValue, flag);
+            panel = self._panel.add(pv.Panel).left((self._dimension.width - 30) / (noOfRecords));
+            line = new AR.MLine(self._dimension, panel, graphDef, dataset[i].data, maxValue, flag,colors[i % colors.length]);
         }
-        self.setHorRules(maxValue, AR.Utility.scale.linear);
     } else {
-        self.setHorRules(AR.Utility.findMax(graphDef.data), AR.Utility.scale.linear);
         line = new AR.Line(self._dimension, self._panel, graphDef, flag);
     }
 

@@ -5,6 +5,18 @@
  The JSON might have to be modified, depending on the specs time and again and consequently the parser will also have to be modified.
 */
 var jsonData = {
+	styles:{
+		legend:{
+			
+		},
+		grid:{
+		
+		}
+		chart:{
+			
+		}
+		
+	}
 	"chartType" : "Bar", // chartType could be Bar/Pie/Line (data) mBar/mPie/mLine/(dataset)  Area/(areaData) Bubble/(scatterData)  nodeLink/SuBurst (treeData)
 	"barType"   : "v", // Vertical or Horizontal
     "caption": "Top 5 Sales Person", // Title of the Chart

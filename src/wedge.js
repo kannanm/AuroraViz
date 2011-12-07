@@ -18,30 +18,26 @@ AR.Wedge = function(parentDimension, panel, graphDef) {
     var dataValues = AR.Utility.getDataArray(graphDef.data);
     var self = this;
     var adjustRadius = function(parentDimension) {
-        if (graphDef.outerRadius != null) {
-            wedge.outerRadius(graphDef.outerRadius);
+        if (graphDef.pieRadius != null) {
+            wedge.outerRadius(graphDef.pieRadius);
         } else {
-            wedge.outerRadius(function() {
+            wedge.pieRadius(function() {
                 return (parentDimension.width < parentDimension.height ? (parentDimension.width - 30) / 2 : (parentDimension.height - 40) / 2);
             });
         }
     };
 
     var adjustAngle = function(parentDimension) {
-        if (graphDef.angle != null) {
-            wedge.angle(graphDef.angle);
-        } else {
             wedge.angle(function(d) {
                 return ((d) * 2 * Math.PI);
             });
-        }
     };
 
-    var adjustLabelPosition = function(parentDimension, isValueLabel) {
+    var adjustLabelPosition = function(parentDimension,labelFontSize, isValueLabel) {
         var labels, shift;
         if (isValueLabel) {
             labels = valueLabels;
-            shift = 10;
+            shift = labelFontSize;
         } else {
             labels = wedgeLabels;
             shift = 0;
@@ -57,13 +53,11 @@ AR.Wedge = function(parentDimension, panel, graphDef) {
 
     self.adjustPosition = function(parentDimension) {
         adjustRadius(parentDimension);
-        adjustLabelPosition(parentDimension);
-        adjustLabelPosition(parentDimension, 1);
         adjustAngle(parentDimension);
         wedge.def("o", -1).left(function() {
-            return (parentDimension.width / 2 + Math.cos(this.startAngle() + this.angle() / 2) * ((this.o() === this.index) ? 10 : 0));
+            return (parentDimension.width / 2 + Math.cos(this.startAngle() + this.angle() / 2) * ((this.o() === this.index) ? 10 : 1));
         }).bottom(function() {
-            return (parentDimension.height / 2 - Math.sin(this.startAngle() + this.angle() / 2) * ((this.o() === this.index) ? 10 : 0));
+            return (parentDimension.height / 2 - Math.sin(this.startAngle() + this.angle() / 2) * ((this.o() === this.index) ? 10 : 1));
         }).event("mouseover", function() {
             return this.o(this.index);
         }).event("mouseout", function() {
@@ -75,27 +69,32 @@ AR.Wedge = function(parentDimension, panel, graphDef) {
         wedgeLabels = wedge.add(pv.Label).textAlign("center").textBaseline("middle").text(function() {
             return graphDef.data[this.index].label;
         });
-        adjustLabelPosition(parentDimension);
+        adjustLabelPosition(parentDimension, graphDef.labelFontSize);
+        AR.Utility.setLabelProperties(graphDef,wedgeLabels,false);
     };
 
     self.showValues = function(parentDimension) {
         valueLabels = wedge.add(pv.Label).textAlign("center").textBaseline("middle").text(function() {
             return graphDef.data[this.index].value;
         });
-        adjustLabelPosition(parentDimension, 1);
+        adjustLabelPosition(parentDimension,graphDef.labelFontSize, 1);
+        AR.Utility.setLabelProperties(graphDef,valueLabels,false);
     };
     wedge.data(pv.normalize(dataValues));
     properties.forEach(function(property) {
         var upcasedProp = property.substring(0, 1).toUpperCase() + property.substring(1);
-        if (graphDef["show" + upcasedProp] && graphDef["show" + upcasedProp] === 1) {
+        if (graphDef["show" + upcasedProp]) {
             self["show" + upcasedProp](parentDimension);
         }
     });
     wedge.title(function() {
         return AR.Utility.getToolTipText(graphDef.data, this.index);
     });
+    if (graphDef.presetPalette) {
+      	 AR.Utility.setPalette(wedge,AR.Utility.getPaletteColors(graphDef));
+   	}
     //TODO: add tool tip at the right place
-    if (graphDef.toolTip && graphDef.toolTip === 1) {
+    if (graphDef.toolTip) {
         wedge.event("mouseover", pv.Behavior.tipsy({
             gravity: function() {
                 return ("s");
@@ -115,6 +114,17 @@ AR.Wedge = function(parentDimension, panel, graphDef) {
  */
 AR.PieGraph = function(graphDef) {
     var self = this;
+    var maxValue = AR.Utility.findMaxValue(graphDef);
+    self.setVerGridShow = function(status) {
+		if (status === true) {
+			AR.Graph.prototype.setVerGridShow.apply(self, [ maxValue, AR.Utility.scale.linear ]);
+		}
+	};
+	self.setHorGridShow = function(status) {
+		if (status === true) {
+			AR.Graph.prototype.setHorGridShow.apply(self, [ maxValue, AR.Utility.scale.linear ]);
+		}
+	};
     AR.Graph.apply(self, [graphDef]);
     var wedges = new AR.Wedge(self._dimension, self._panel, graphDef);
     //TODO: add other function such as changing the pallete etc  
@@ -147,6 +157,24 @@ AR.Donut = function(parentDimension, panel, graphDef) {
     var wedgeLabels, valueLabels;
     var dataValues = AR.Utility.getDataArray(graphDef.data);
     var self = this;
+    var adjustLabelPosition = function(parentDimension,labelFontSize, isValueLabel) {
+        var labels, shift;
+        if (isValueLabel) {
+            labels = valueLabels;
+            shift = labelFontSize;
+        } else {
+            labels = wedgeLabels;
+            shift = 0;
+        }
+        if (labels) {
+            labels.left(function() {
+                return ((wedge.outerRadius() + wedge.innerRadius()) / 2 * Math.cos(wedge.midAngle()) + (parentDimension.width) / 2);
+            }).bottom(function() {
+                return (-(wedge.outerRadius() + wedge.innerRadius()) / 2 * Math.sin(wedge.midAngle()) + (parentDimension.height) / 2 - shift);
+            });
+        }
+    };
+
     var adjustRadius = function(parentDimension) {
         if (graphDef.outerRadius !== null) {
             wedge.outerRadius(graphDef.outerRadius);
@@ -166,41 +194,28 @@ AR.Donut = function(parentDimension, panel, graphDef) {
     };
 
     var adjustAngle = function(parentDimension) {
-        if (graphDef.angle !== null) {
-            wedge.angle(graphDef.angle);
-        } else {
-            wedge.angle(function(d) {
-                return ((d) * 2 * Math.PI);
-            });
-        }
-    };
-
-
-    var setAnchor = function(datavals) {
-        var wedger = wedge.anchor("center").add(pv.Label).visible(function(d) {
-            return d;
-        });
-        wedger.textAngle(0).text(function(d) {
-            return (d.toFixed(2));
+        wedge.angle(function(d) {
+            return ((d) * 2 * Math.PI);
         });
     };
-
     self.showLabels = function(parentDimension) {
         wedgeLabels = wedge.add(pv.Label).textAlign("center").textBaseline("middle").text(function() {
             return graphDef.data[this.index].label;
         });
-        adjustLabelPosition(parentDimension);
+        adjustLabelPosition(parentDimension,graphDef.labelFontSize);
+        AR.Utility.setLabelProperties(graphDef,wedgeLabels,false);
     };
 
+    self.showValues = function(parentDimension) {
+        valueLabels = wedge.add(pv.Label).textAlign("center").textBaseline("middle").text(function() {
+            return graphDef.data[this.index].value;
+        });
+        adjustLabelPosition(parentDimension,graphDef.labelFontSize, 1);
+        AR.Utility.setLabelProperties(graphDef,valueLabels,false);
+    };
     self.adjustPosition = function(parentDimension) {
         adjustRadius(parentDimension);
         adjustAngle(parentDimension);
-        //self.showLabels(parentDimension);
-        /* Uncomment the below two if you want Donut + Pie */
-
-        //wedge.event("mouseover", function() this.innerRadius(0));
-        //wedge.event("mouseout", function() this.innerRadius(parentDimension.width/3));
-        setAnchor(dataValues);
     };
 
     wedge.data(pv.normalize(dataValues));
@@ -219,6 +234,15 @@ AR.Donut = function(parentDimension, panel, graphDef) {
         }));
     }
     self.adjustPosition(parentDimension);
+    properties.forEach(function(property) {
+        var upcasedProp = property.substring(0, 1).toUpperCase() + property.substring(1);
+        if (graphDef["show" + upcasedProp]) {
+            self["show" + upcasedProp](parentDimension);
+        }
+    });
+    if (graphDef.presetPalette) {
+     	 AR.Utility.setPalette(wedge, AR.Utility.getPaletteColors(graphDef));
+  	}
 };
 /**
  * Wedge API to construct a Donut Graph
@@ -229,6 +253,17 @@ AR.Donut = function(parentDimension, panel, graphDef) {
 
 AR.DonutGraph = function(graphDef) {
     var self = this;
+    var maxValue = AR.Utility.findMaxValue(graphDef);
+    self.setVerGridShow = function(status) {
+		if (status === true) {
+			AR.Graph.prototype.setVerGridShow.apply(self, [ maxValue, AR.Utility.scale.linear ]);
+		}
+	};
+	self.setHorGridShow = function(status) {
+		if (status === true) {
+			AR.Graph.prototype.setHorGridShow.apply(self, [ maxValue, AR.Utility.scale.linear ]);
+		}
+	};
     AR.Graph.apply(self, [graphDef]);
     var wedges = new AR.Donut(self._dimension, self._panel, graphDef);
     //TODO: add other function such as changing the pallete etc  
