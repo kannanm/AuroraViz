@@ -200,6 +200,7 @@
       <script type="text/javascript" src="../src/bullet.js"></script>
       <script type="text/javascript">
          $(function() {
+        	 ARV.paletteColorCounter = 0;
         	 for(palette in AR.Utility.palettes){
         		var option = $('<option />').val(palette).append(palette);
         		if(palette === "Water"){
@@ -224,8 +225,8 @@
          		ARV.paletteChanged = true;
          	});
          	$("#addColorBtn").live("click",function(){
-     			$(this).before('<input value="#ffffff" class="colorInput izzyColor" size="8" type="text" id="color'+i+'"/>');
-     			$(this).before('<button id="color'+ i++ +'"  class="delColorBtn ui-state-default ui-corner-all"><span class="ui-icon ui-icon-trash"></span></button>');
+     			$(this).before('<input value="#ffffff" class="colorInput izzyColor" size="8" type="text" id="color'+ARV.paletteColorCounter+'"/>');
+     			$(this).before('<button id="color'+ ARV.paletteColorCounter++ +'"  class="delColorBtn ui-state-default ui-corner-all"><span class="ui-icon ui-icon-trash"></span></button>');
      			izzyColor();
          	});
          	function addColorsDiv (){
@@ -234,10 +235,9 @@
          		var colors =  AR.Utility.palettes[selectedVal];
          		var colorsDiv = $("#colors");
          		colorsDiv.html("");
-         		var i;
-         		for( i = 0 ; i< colors.length;i++){
-         			colorsDiv.append('<input value="'+ colors[i] +'" class="colorInput izzyColor" size="8" type="text" id="color'+i+'"/>');
-         			colorsDiv.append('<button id="color'+ i +'"  class="delColorBtn ui-state-default ui-corner-all"><span class="ui-icon ui-icon-trash"></span></button>');
+         		for( ARV.paletteColorCounter = 0 ; ARV.paletteColorCounter< colors.length;ARV.paletteColorCounter++){
+         			colorsDiv.append('<input value="'+ colors[ARV.paletteColorCounter] +'" class="colorInput izzyColor" size="8" type="text" id="color'+ARV.paletteColorCounter+'"/>');
+         			colorsDiv.append('<button id="color'+ ARV.paletteColorCounter +'"  class="delColorBtn ui-state-default ui-corner-all"><span class="ui-icon ui-icon-trash"></span></button>');
          		}
          		colorsDiv.append('<button id="addColorBtn" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-plus"></span></button><br/>')
          		izzyColor();

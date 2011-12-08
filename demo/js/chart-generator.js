@@ -241,55 +241,6 @@ ARV.defaults = {
 	                }
 	            ]
 	},
-	AreaGraph : {
-		caption : "Profit (Yearly)",
-		yAxisName : "Amount (in billions)",
-		xAxisName : "Years",
-		width : 800,
-		height : 700,
-		type : "v",
-		toolTip: true,
-		showLabels: true,
-		showValues: true,
-		labelFontSize:"10",
-		labelFontColor:"#000000",
-		labelRotateAngle:"0",
-		palette : "presetPalette",
-		paletteColors:[],
-		presetPalette:"Plain",
-		isLineStyleStep: false,
-		pieRadius: "100",
-		dotSize:"2",
-		lineWidth:"2",
-		lineColor:"#000000",
-		outerRadius:"100",
-		innerRadius:"70",
-		segmented : true,
-		interpolated: true,
-		style : ARV.styles,
-		"data": [{
-			"x": 1,
-			"y": 1.3
-	},
-    {
-			"x": 2,
-			"y": 4
-	},
-    {
-			"x": 3,
-			"y": 1.0
-	},
-    {
-			"x": 4,
-			"y": 1.5
-	},
-
-    {
-			"x": 5,
-			"y": 1.3
-	}
-	]
-	},
 	BulletGraph:{
 		caption : "Profit (Yearly)",
 		yAxisName : "Amount (in billions)",
