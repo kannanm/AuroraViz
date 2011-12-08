@@ -111,7 +111,6 @@ AR.Utility.getToolTipText = function(data, index) {
 
 AR.Utility.getPaletteColors = function(graphDef){
 	if("custom" !== graphDef.presetPalette ){
-		console.log("here");
 		var colors =  AR.Utility.palettes[graphDef.presetPalette];
 		return colors;
 	}
@@ -137,7 +136,6 @@ AR.Utility.palettes = {
 };
 // TODO create your own palette
 AR.Utility.setPalette = function(element, colors) {
-	console.log(colors);
 	element.fillStyle(function() {
 		return colors[this.index % colors.length];
 	});

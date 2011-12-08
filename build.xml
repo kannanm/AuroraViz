@@ -8,7 +8,7 @@
 	<property name="lib.dir" value="${basedir}/lib" />
 	<property name="tools.dir" value="${basedir}/tools" />
 	<property name="staging.dir" value="${basedir}/staging" />
-	<property name="docs.dir" value="${staging.dir}/docs" />
+	<property name="docs.dir" value="${basedir}/docs" />
 	<property name="js.docs.dir" value="${docs.dir}/js" />
 	<property name="app.dir" value="${staging.dir}/${app.name}" />
 	<property file="${basedir}/aurora.properties" />
