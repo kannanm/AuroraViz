@@ -6,7 +6,7 @@ ARV.getChartOptionsHTML = function(chartType) {
             '<div class="inline"><label> Type: </label>',
             '<select id="type">',
             '<option value="h">Horizontal</option > ',
-            '<option value = "v" > Vertical </option>',
+            '<option value="v" selected> Vertical </option>',
             '</select></div>',
             '</div>'].join(" "),
         multibar: [
@@ -26,7 +26,7 @@ ARV.getChartOptionsHTML = function(chartType) {
             '<div class="slider" id="lineWidthSlider"></div>',
             '<input size="8" type="text" id="lineWidth" value="2" disabled="disabled" /> <br />',
             '<label>Line Color: </label>',
-            '<input value="#000000" class="izzyColor" size="8" type="text" id="lineColor" /><br/>',
+            '<input value="#2266bb" class="izzyColor" size="8" type="text" id="lineColor" /><br/>',
             '</div>'].join(" "),
        multiLine: [
              '<div 	class="inline"><label> Step Graph: </label>',

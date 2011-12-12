@@ -20,23 +20,23 @@ AR.Line = function(parentDimension, panel, graphDef, step) {
     dots.title(function() {
         return AR.Utility.getToolTipText(graphDef.data, this.index);
     });
-    var properties = ["dotSize","lineWidth","lineColor"];
-    self.setDotSize = function(size){
-    	dots.shapeRadius(size);
+    var properties = ["dotSize", "lineWidth", "lineColor"];
+    self.setDotSize = function(size) {
+        dots.shapeRadius(size);
     };
-    self.setLineWidth = function(width){
-    	line.lineWidth(width);
+    self.setLineWidth = function(width) {
+        line.lineWidth(width);
     };
-    self.setLineColor= function(color){
-    	line.strokeStyle(color);
-    }
-    var setProperties = function(){
-    	 properties.forEach(function(property) {
-    	        var upcasedProp = property.substring(0, 1).toUpperCase() + property.substring(1);
-    	        if (graphDef[property]) {
-    	            self["set" + upcasedProp](graphDef[property]);
-    	        }
-    	    });
+    self.setLineColor = function(color) {
+        line.strokeStyle(color);
+    };
+    var setProperties = function() {
+        properties.forEach(function(property) {
+            var upcasedProp = property.substring(0, 1).toUpperCase() + property.substring(1);
+            if (graphDef[property]) {
+                self["set" + upcasedProp](graphDef[property]);
+            }
+        });
     };
     self.adjustLabel = function(parentDimension) {
         self._label = dots.add(pv.Label).bottom(0).text(function() {
@@ -63,16 +63,16 @@ AR.Line = function(parentDimension, panel, graphDef, step) {
         self.adjustBottom(parentDimension);
         self.adjustLeft(parentDimension);
     };
-	if (graphDef.showValues) {
-		self.adjustValuePositions(parentDimension);
-	}
-	AR.Utility.setToolTip(graphDef, dots, "s");
+    if (graphDef.showValues) {
+        self.adjustValuePositions(parentDimension);
+    }
+    AR.Utility.setToolTip(graphDef, dots, "s");
     if (graphDef.presetPalette) {
-    	 AR.Utility.setPalette(dots, AR.Utility.getPaletteColors(graphDef));
-	}
-    if(graphDef.showLabels){
-    	 self.adjustLabel(parentDimension);
-    	 AR.Utility.setLabelProperties(graphDef,self._label,false);
+        AR.Utility.setPalette(dots, AR.Utility.getPaletteColors(graphDef));
+    }
+    if (graphDef.showLabels) {
+        self.adjustLabel(parentDimension);
+        AR.Utility.setLabelProperties(graphDef, self._label, false);
     }
     self.adjustPositions(parentDimension);
     setProperties();
@@ -105,23 +105,23 @@ AR.MLine = function(parentDimension, panel, graphDef, data, maxValue, step, colo
     dots.title(function() {
         return AR.Utility.getToolTipText(data, this.index);
     });
-    var properties = ["dotSize","lineWidth","lineColor"];
-    self.setDotSize = function(size){
-    	dots.shapeRadius(size);
+    var properties = ["dotSize", "lineWidth", "lineColor"];
+    self.setDotSize = function(size) {
+        dots.shapeRadius(size);
     };
-    self.setLineWidth = function(width){
-    	line.lineWidth(width);
+    self.setLineWidth = function(width) {
+        line.lineWidth(width);
     };
-    self.setLineColor= function(color){
-    	line.strokeStyle(color);
-    }
-    var setProperties = function(){
-    	 properties.forEach(function(property) {
-    	        var upcasedProp = property.substring(0, 1).toUpperCase() + property.substring(1);
-    	        if (graphDef[property]) {
-    	            self["set" + upcasedProp](graphDef[property]);
-    	        }
-    	    });
+    self.setLineColor = function(color) {
+        line.strokeStyle(color);
+    };
+    var setProperties = function() {
+        properties.forEach(function(property) {
+            var upcasedProp = property.substring(0, 1).toUpperCase() + property.substring(1);
+            if (graphDef[property]) {
+                self["set" + upcasedProp](graphDef[property]);
+            }
+        });
     };
     self.showLabels = function(parentDimension) {
         self._label = dots.add(pv.Label).bottom(0).text(function() {
@@ -151,19 +151,19 @@ AR.MLine = function(parentDimension, panel, graphDef, data, maxValue, step, colo
     };
     AR.Utility.setToolTip(graphDef, dots, "s");
     if (graphDef.showValues) {
-		self.adjustValuePositions(parentDimension);
-	}
-    if(graphDef.showLabels){
-   	 self.showLabels(parentDimension);
-   	 AR.Utility.setLabelProperties(graphDef,self._label,false);
-   }
+        self.adjustValuePositions(parentDimension);
+    }
+    if (graphDef.showLabels) {
+        self.showLabels(parentDimension);
+        AR.Utility.setLabelProperties(graphDef, self._label, false);
+    }
     self.adjustPositions(parentDimension);
     setProperties();
     if (step === true) {
         line.interpolate("step-after");
     }
-    if(color){
-    	line.strokeStyle(color);
+    if (color) {
+        line.strokeStyle(color);
     }
 };
 
@@ -176,32 +176,32 @@ AR.MLine = function(parentDimension, panel, graphDef, data, maxValue, step, colo
 AR.LineGraph = function(graphDef) {
     var line;
     var self = this;
-    var flag,palette;
-    var maxValue =  AR.Utility.findMaxValue(graphDef);
+    var flag, palette;
+    var maxValue = AR.Utility.findMaxValue(graphDef);
     self.setVerGridShow = function(status) {
-		if (status === true) {
-			AR.Graph.prototype.setVerGridShow.apply(self, [ maxValue, AR.Utility.scale.linear ]);
-		}
-	};
-	self.setHorGridShow = function(status) {
-		if (status === true) {
-			AR.Graph.prototype.setHorGridShow.apply(self, [ maxValue, AR.Utility.scale.linear ]);
-		}
-	};
+        if (status === true) {
+            AR.Graph.prototype.setVerGridShow.apply(self, [maxValue, AR.Utility.scale.linear]);
+        }
+    };
+    self.setHorGridShow = function(status) {
+        if (status === true) {
+            AR.Graph.prototype.setHorGridShow.apply(self, [maxValue, AR.Utility.scale.linear]);
+        }
+    };
     AR.Graph.apply(self, [graphDef]);
     if (graphDef.isLineStyleStep === true) {
         flag = true;
     }
-    if(graphDef.presetPalette){
-    	colors = AR.Utility.getPaletteColors(graphDef);
+    if (graphDef.presetPalette) {
+        colors = AR.Utility.getPaletteColors(graphDef);
     }
     if (graphDef.dataset) {
-    	
+
         var dataset = graphDef.dataset;
         for (i = 0; i < graphDef.dataset.length; i++) {
             var noOfRecords = dataset.length * dataset[i].data.length;
             panel = self._panel.add(pv.Panel).left((self._dimension.width - 30) / (noOfRecords));
-            line = new AR.MLine(self._dimension, panel, graphDef, dataset[i].data, maxValue, flag,colors[i % colors.length]);
+            line = new AR.MLine(self._dimension, panel, graphDef, dataset[i].data, maxValue, flag, colors[i % colors.length]);
         }
     } else {
         line = new AR.Line(self._dimension, self._panel, graphDef, flag);

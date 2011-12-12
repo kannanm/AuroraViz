@@ -15,6 +15,7 @@ AR.StackedAreaGraph = function(graphDef) {
     var dataset = graphDef.dataset;
     var colors = AR.Utility.getPaletteColors(graphDef);
     /**
+     * @private
      * It is sum of maximum values from each categories because the scale will depend on it as it is a stacked graph
      */
     var sumOfMaxValues = (function() {
@@ -27,6 +28,7 @@ AR.StackedAreaGraph = function(graphDef) {
     }());
 
 	/**
+	 * @private
      * Total number of records in the data set
      */
     var noOfRecords = (function() {
@@ -109,7 +111,9 @@ AR.StackedAreaGraph = function(graphDef) {
         }).textBaseline("bottom");
     }
     if (graphDef.showLabels) {
-        var labels = self._areaObj.add(pv.Label).text("qwerty").bottom(0).textBaseline("top");
+        var labels = self._areaObj.add(pv.Label).text(function(){
+        	return graphDef.categories[0].category[this.index].label;
+        }).bottom(0).textBaseline("top");
         AR.Utility.setLabelProperties(graphDef, labels, false);
     }
     if (graphDef.interpolated) {

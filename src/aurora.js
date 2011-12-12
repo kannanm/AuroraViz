@@ -14,7 +14,7 @@ function() {
 };
 
 /**
-  
+ 
  * @Description The top-level aurora namespace. All public methods and
  *  fields should be registered on this namespace object.
  * @namespace The top-level aurora namespace, <tt>AR</tt>.
@@ -22,7 +22,7 @@ function() {
 var AR = {};
 
 /**
-  
+ 
  * Returns a prototype object suitable for extending the
  *         given class <tt>f</tt>. For more details, see Douglas Crockford's
  *         essay on prototypal inheritance.
@@ -40,7 +40,7 @@ AR.extend = function(f) {
 };
 
 /**
-  
+ 
  * Adds the javascript file specified by the <tt>jsPath</tt>,
  *         at the position <tt>pos</tt>.
  * @param {string}
@@ -65,7 +65,7 @@ AR.addJavascript = function(jsPath, pos, dataPath, callback) {
 
 
 /**
-  
+ 
  * Adds the CSS file specified by the <tt>cssPath</tt>,
  *         at the position <tt>pos</tt>.
  * @param {string}
@@ -125,7 +125,8 @@ AR.Graph = function(graphDef) {
         }
     });
     var styles = graphDef.style;
-    for(prop in styles){
+    var prop;
+    for (prop in styles) {
         upcasedProp = prop.substring(0, 1).toUpperCase() + prop.substring(1);
         if (styles.hasOwnProperty(prop)) {
             self["set" + upcasedProp](styles[prop]);
@@ -133,28 +134,25 @@ AR.Graph = function(graphDef) {
     }
 };
 AR.Graph.prototype.properties = ["width", "height", "caption", "xAxisName", "yAxisName"];
-AR.Graph.labelProperties = [ "labelFontSize", "labelFontColor", "labelRotateAngle" ];
-AR.Graph.lineElements = ["horAxis","verAxis","verGrid","horGrid"];
-AR.Graph.labelElements = ["caption","horAxisLabel","verAxisLabel"];
+AR.Graph.labelProperties = ["labelFontSize", "labelFontColor", "labelRotateAngle"];
+AR.Graph.lineElements = ["horAxis", "verAxis", "verGrid", "horGrid"];
+AR.Graph.labelElements = ["caption", "horAxisLabel", "verAxisLabel"];
 
 //Following is a function generator for setting line thickness
-
 //(function(){
-//	for (i=0;i<AR.Graph.lineElements.length;i++){
-//		var prop = AR.Graph.lineElements[i];
-//		upcasedProp = prop.substring(0, 1).toUpperCase() + prop.substring(1);
-//		AR.Graph.prototype["set"+upcasedProp+"Thickness"] = function(thickness){
-//			var self = this;
-//			console.log("thickness"+thickness);
-//    		if (self["_"+prop]) {
-//        		self["_"+prop].lineWidth(thickness);
-//    		}		
-//		}
-//	}	
+//    for (i=0;i<AR.Graph.lineElements.length;i++){
+//        var prop = AR.Graph.lineElements[i];
+//        upcasedProp = prop.substring(0, 1).toUpperCase() + prop.substring(1);
+//        AR.Graph.prototype["set"+upcasedProp+"Thickness"] = function(thickness){
+//            var self = this;
+//            console.log("thickness"+thickness);
+//            if (self["_"+prop]) {
+//                self["_"+prop].lineWidth(thickness);
+//            }        
+//        }
+//    }    
 //}());
-
 //TODO write commong function for all
-
 AR.Graph.prototype.setHorAxisThickness = function(thickness) {
     var self = this;
     if (self._horAxis) {
@@ -189,23 +187,21 @@ AR.Graph.prototype.setCanvasBorderThickness = function(thickness) {
 };
 
 // Following is a function generator for creating setcolor functions
-
 //(function(){
-//	var i=0;
-//	for (i=0;i<AR.Graph.labelElements.length;i++){
-//		var prop = AR.Graph.labelElements[i];
-//		upcasedProp = prop.substring(0, 1).toUpperCase() + prop.substring(1);
-//		AR.Graph.prototype["set"+upcasedProp+"Color"] = function(color){
-//			var self = this;
-//    		if (self["_"+prop]) {
-//        		self["_"+prop].textStyle(color);
-//    		}		
-//		}
-//	}	
+//    var i=0;
+//    for (i=0;i<AR.Graph.labelElements.length;i++){
+//        var prop = AR.Graph.labelElements[i];
+//        upcasedProp = prop.substring(0, 1).toUpperCase() + prop.substring(1);
+//        AR.Graph.prototype["set"+upcasedProp+"Color"] = function(color){
+//            var self = this;
+//            if (self["_"+prop]) {
+//                self["_"+prop].textStyle(color);
+//            }        
+//        }
+//    }    
 //}());
-
 /**
- * Sets the caption color. Caption is the string that comes on the top of the graph 
+ * Sets the caption color. Caption is the string that comes on the top of the graph
  * @param {string}
  *            [color] The hexadecimal string for color.For example #cccccc. If undefined set to default value #000000
  */
@@ -242,51 +238,50 @@ AR.Graph.prototype.setVerAxisLabelColor = function(color) {
 
 
 // Following is a function generator for setting caption size
-
 //(function(){
-//	var i=0;
-//	for (i=0;i<AR.Graph.labelElements.length;i++){
-//		var prop = AR.Graph.labelElements[i];
-//		upcasedProp = prop.substring(0, 1).toUpperCase() + prop.substring(1);
-//		AR.Graph.prototype["set"+upcasedProp+"Color"] = function(size){
-//			var self = this;
-//    		if (self["_"+prop]) {
-//        		self["_"+prop].font(size + "px Arial");
-//    		}		
-//		}
-//	}	
+//    var i=0;
+//    for (i=0;i<AR.Graph.labelElements.length;i++){
+//        var prop = AR.Graph.labelElements[i];
+//        upcasedProp = prop.substring(0, 1).toUpperCase() + prop.substring(1);
+//        AR.Graph.prototype["set"+upcasedProp+"Color"] = function(size){
+//            var self = this;
+//            if (self["_"+prop]) {
+//                self["_"+prop].font(size + "pt Arial");
+//            }        
+//        }
+//    }    
 //}());
 /**
- * Sets the caption size. Caption is the string that comes on the top of the graph 
+ * Sets the caption size. Caption is the string that comes on the top of the graph
  * @param {string}
- *            [size] The size of the caption. If undefined set to default value 16px
+ *            [size] The size of the caption. If undefined set to default value 16pt
  */
 AR.Graph.prototype.setCaptionSize = function(size) {
     var self = this;
     if (self._caption) {
-        self._caption.font((size || "16") + "px Arial");
+        self._caption.font((size || "16") + "pt Arial");
     }
 };
 /**
  * Sets a horizontal axis label size
  * @param {string}
- *             [size] The size of the horizontal axis label. If undefined set to default value 12px
+ *             [size] The size of the horizontal axis label. If undefined set to default value 12pt
  */
 AR.Graph.prototype.setHorAxisLabelSize = function(size) {
     var self = this;
     if (self._horAxisLabel) {
-        self._horAxisLabel.font((size || "12") + "px Arial");
+        self._horAxisLabel.font((size || "12") + "pt Arial");
     }
 };
 /**
- * Sets the Vertical axis lavel size. 
+ * Sets the Vertical axis lavel size.
  * @param {string}
- *               [size] The size of the vertical axis label. If undefined set to default value 12px 
+ *               [size] The size of the vertical axis label. If undefined set to default value 12pt
  */
 AR.Graph.prototype.setVerAxisLabelSize = function(size) {
     var self = this;
     if (self._verAxisLabel) {
-        self._verAxisLabel.font((size || "12") + "px Arial");
+        self._verAxisLabel.font((size || "12") + "pt Arial");
     }
 };
 
@@ -323,7 +318,7 @@ AR.Graph.prototype.setWidth = function(width) {
 /**
  * Sets a graph's Height.
  * @param {string}
- * 			[height] Height of the graph
+ *             [height] Height of the graph
  */
 AR.Graph.prototype.setHeight = function(height) {
     var self = this;
@@ -346,7 +341,7 @@ AR.Graph.prototype.setXAxisName = function(name) {
 };
 /**
  * Sets a graph's yAxisName.
- * @param {string} 
+ * @param {string}
  *             [name] The string for the y Axis label
  */
 AR.Graph.prototype.setYAxisName = function(name) {
@@ -363,7 +358,7 @@ AR.Graph.prototype.setYAxisName = function(name) {
  * Sets horizontal rules in a graph.
  * Rules are nothing but lines that divide the graph to form a grid like structure
  * @param {integer}
- * 			  [maxValue] This is the maximimum value that the graph would have in horizontal direction. It is required to calculate the scale.
+ *               [maxValue] This is the maximimum value that the graph would have in horizontal direction. It is required to calculate the scale.
  * @param {object}
  *            [scaleType] It takes the scaleType (Linear/Ordinal etc)
  */
@@ -383,8 +378,8 @@ AR.Graph.prototype.setHorGridShow = function(maxValue, scaleType) {
 
 /**
  * It shows the Horizontal grid axis if the <b>status</b> is set to true
- * @param {boolean} 
- * 		[status]If set to true it show the labels for the Horizontal grid
+ * @param {boolean}
+ *         [status]If set to true it show the labels for the Horizontal grid
  */
 AR.Graph.prototype.setHorGridLabelShow = function(status) {
     var self = this;
@@ -397,10 +392,10 @@ AR.Graph.prototype.setHorGridLabelShow = function(status) {
  * Sets vertical rules in a graph.
  * Rules are nothing but lines that divide the graph to form a grid like structure
  * @param {integer}
- * 			  [maxValue] This is the maximimum value that the graph would have in vertical direction. It is required to calculate the scale.
+ *               [maxValue] This is the maximimum value that the graph would have in vertical direction. It is required to calculate the scale.
  * @param {object}
  *            [scaleType] It takes the scaleType (Linear/Ordinal etc)
- * 			
+ *             
  */
 
 AR.Graph.prototype.setVerGridShow = function(maxValue, scaleType) {
@@ -419,7 +414,7 @@ AR.Graph.prototype.setVerGridShow = function(maxValue, scaleType) {
 /**
  * It shows the Vertical grid axis if the <b>status</b> is set to true
  * @param {boolean}
- * 		[status] If set to true it show the labels for the vertical grid
+ *         [status] If set to true it show the labels for the vertical grid
  */
 AR.Graph.prototype.setVerGridLabelShow = function(status) {
     var self = this;
@@ -469,7 +464,7 @@ AR.Graph.prototype.setCanvasFillColor = function(color) {
 /**
  * Renders the Component
  * @param {html node}
- * 			[div]The node in which the graph has to be rendered. If undefined grpah is rendered whereever the function is called.
+ *             [div]The node in which the graph has to be rendered. If undefined grpah is rendered whereever the function is called.
  */
 AR.Graph.prototype.render = function render(div) {
     var self = this;
@@ -483,26 +478,24 @@ AR.Graph.prototype.render = function render(div) {
 };
 
 // Following is a function generator for setting line elemnt color
-
 //(function(){
-//	var i=0;
-//	for (i=0;i<AR.Graph.lineElements.length;i++){
-//		var prop = AR.Graph.lineElements[i];
-//		upcasedProp = prop.substring(0, 1).toUpperCase() + prop.substring(1);
-//		AR.Graph.prototype["set"+upcasedProp+"Color"] = function(color){
-//			var self = this;
-//    		if (self["_"+prop]) {
-//        		self["_"+prop].strokeStyle(color);
-//    		}		
-//		}
-//	}	
+//    var i=0;
+//    for (i=0;i<AR.Graph.lineElements.length;i++){
+//        var prop = AR.Graph.lineElements[i];
+//        upcasedProp = prop.substring(0, 1).toUpperCase() + prop.substring(1);
+//        AR.Graph.prototype["set"+upcasedProp+"Color"] = function(color){
+//            var self = this;
+//            if (self["_"+prop]) {
+//                self["_"+prop].strokeStyle(color);
+//            }        
+//        }
+//    }    
 //}());
-
 
 /**
  * Sets the horizontal axis color
  * @param {string}
- * 			[color] The hexadecimal representation of the color for e.g. #cccccc
+ *             [color] The hexadecimal representation of the color for e.g. #cccccc
  */
 AR.Graph.prototype.setHorAxisColor = function(color) {
     var self = this;
@@ -512,7 +505,7 @@ AR.Graph.prototype.setHorAxisColor = function(color) {
 /**
  * Sets the vertical axis color
  * @param {string}
- * 			[color] The hexadecimal representation of the color for e.g. #cccccc
+ *             [color] The hexadecimal representation of the color for e.g. #cccccc
  */
 AR.Graph.prototype.setVerAxisColor = function(color) {
     var self = this;
@@ -522,7 +515,7 @@ AR.Graph.prototype.setVerAxisColor = function(color) {
 /**
  * Sets the vertical grid color
  * @param {string}
- * 			[color] The hexadecimal representation of the color for e.g. #cccccc
+ *             [color] The hexadecimal representation of the color for e.g. #cccccc
  */
 AR.Graph.prototype.setVerGridColor = function(color) {
     var self = this;
@@ -534,7 +527,7 @@ AR.Graph.prototype.setVerGridColor = function(color) {
 /**
  * Sets the horizontal grid color
  * @param {string}
- * 			[color] The hexadecimal representation of the color for e.g. #cccccc
+ *             [color] The hexadecimal representation of the color for e.g. #cccccc
  */
 AR.Graph.prototype.setHorGridColor = function(color) {
     var self = this;

@@ -3,7 +3,7 @@
 /**
  * The basefunction for the Bubble initialization. Initializes the BubbleGraph.
  * Sets the data
- * 
+ *
  * @params {Object} [graphDef] graphDef object supplied by the User for which
  *         the graph needs to be plotted. It contains graph properties and the
  *         data
@@ -42,33 +42,33 @@ AR.Bubble = function(parentDimension, panel, graphDef) {
     bubble.title(function() {
         return AR.Utility.getToolTipText(graphDef.data, this.index);
     });
-    var showToolTip = function(){
-    	if(graphDef.toolTip){
-        bubble.event("mouseover", pv.Behavior.tipsy({
-            gravity: function() {
-                return ("s");
-            },
-            fade: true
-        }));
-    	}
+    var showToolTip = function() {
+        if (graphDef.toolTip) {
+            bubble.event("mouseover", pv.Behavior.tipsy({
+                gravity: function() {
+                    return ("s");
+                },
+                fade: true
+            }));
+        }
     };
-    var showLabel = function(){
-    	if(graphDef.showLabels){
-    		var labels= bubble.anchor("bottom").add(pv.Label).text(function(d){
-    			return graphDef.data[this.index].label;
-    		});
-    		AR.Utility.setLabelProperties(graphDef,labels,false);
-    		
-    	}
+    var showLabel = function() {
+        if (graphDef.showLabels) {
+            var labels = bubble.anchor("bottom").add(pv.Label).text(function(d) {
+                return graphDef.data[this.index].label;
+            });
+            AR.Utility.setLabelProperties(graphDef, labels, false);
+
+        }
     };
-    var showValues = function(){
-    	if(graphDef.showValues){
-    		var values = bubble.anchor("top").add(pv.Label).text(function(d){
-    			return (d[2]);
-    		});
-    		AR.Utility.setLabelProperties(graphDef,values,false);
-    		
-    	}
+    var showValues = function() {
+        if (graphDef.showValues) {
+            var values = bubble.anchor("top").add(pv.Label).text(function(d) {
+                return (d[2]);
+            });
+            AR.Utility.setLabelProperties(graphDef, values, false);
+
+        }
     };
     self.adjustPosition = function(parentDimension) {
         adjustBottom(parentDimension);
@@ -80,13 +80,13 @@ AR.Bubble = function(parentDimension, panel, graphDef) {
     };
     self.adjustPosition(parentDimension);
     if (graphDef.presetPalette) {
-      	 AR.Utility.setPalette(bubble, AR.Utility.getPaletteColors(graphDef));
-   	}
+        AR.Utility.setPalette(bubble, AR.Utility.getPaletteColors(graphDef));
+    }
 };
 
 /**
  * API to construct a Bubble Graph
- * 
+ *
  * @param {object}
  *            [graphDef] An object containing the graph properties and the data
  * @extends AR.Graph
@@ -94,15 +94,15 @@ AR.Bubble = function(parentDimension, panel, graphDef) {
 AR.BubbleGraph = function(graphDef) {
     var self = this;
     self.setVerGridShow = function(status) {
-		if (status === true) {
-			AR.Graph.prototype.setVerGridShow.apply(self, [ AR.Utility.getSingleDimensionData(graphDef.data, AR.Utility.Dimension.y).max(), AR.Utility.scale.linear ]);
-		}
-	};
-	self.setHorGridShow = function(status) {
-		if (status === true) {
-			AR.Graph.prototype.setHorGridShow.apply(self, [ AR.Utility.getSingleDimensionData(graphDef.data, AR.Utility.Dimension.x).max(), AR.Utility.scale.linear ]);
-		}
-	};
+        if (status === true) {
+            AR.Graph.prototype.setVerGridShow.apply(self, [AR.Utility.getSingleDimensionData(graphDef.data, AR.Utility.Dimension.y).max(), AR.Utility.scale.linear]);
+        }
+    };
+    self.setHorGridShow = function(status) {
+        if (status === true) {
+            AR.Graph.prototype.setHorGridShow.apply(self, [AR.Utility.getSingleDimensionData(graphDef.data, AR.Utility.Dimension.x).max(), AR.Utility.scale.linear]);
+        }
+    };
     AR.Graph.apply(self, [graphDef]);
     var bubbles = new AR.Bubble(self._dimension, self._panel, graphDef);
     self.setWidth = function(width) {

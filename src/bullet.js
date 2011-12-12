@@ -13,11 +13,10 @@
 
 AR.BulletGraph = function(graphDef) {
     var self = this;
-    self._bullet =undefined;
+    self._bullet = undefined;
     self._bulletPanel = undefined;
-    self._graphDef= graphDef;
+    self._graphDef = graphDef;
     //TODO: Create the following using function generator as there is a minor difference between the two
-    
     AR.Graph.apply(self, [graphDef]);
 
     /**
@@ -25,7 +24,7 @@ AR.BulletGraph = function(graphDef) {
      * Creates a bullet panel and adds to the parent panel
      */
     var addBulletPanel = function() {
-    	 self._bulletPanel = self._panel.add(pv.Panel).margin(20);
+        self._bulletPanel = self._panel.add(pv.Panel).margin(20);
 
     };
 
@@ -34,7 +33,7 @@ AR.BulletGraph = function(graphDef) {
      * Sets the top property of the bullet panel as it should not be placed one on the other
      */
     var setBulletPanelTop = function() {
-    	self._bulletPanel.top(function() {
+        self._bulletPanel.top(function() {
             return this.index * 2 * (self._dimension.height) / (2 * self._graphDef.data.length) + 40;
         });
     };
@@ -109,7 +108,7 @@ AR.BulletGraph = function(graphDef) {
 
     /**
      * @private
-	 *  Adds the marker element
+     *  Adds the marker element
      */
     var addMarkerElement = function(elem) {
         self._bullet.marker.add(pv[elem] || pv.Dot);
@@ -137,7 +136,7 @@ AR.BulletGraph = function(graphDef) {
         }
     };
 
- 	/**
+    /**
      * @private
      *  Sets the value
      */
@@ -191,13 +190,13 @@ AR.BulletGraph = function(graphDef) {
 AR.BulletGraph.prototype = AR.extend(AR.Graph);
 
 AR.BulletGraph.prototype.setVerGridShow = function(status) {
-	var self= this;
+    var self = this;
     if (status === true) {
         AR.Graph.prototype.setVerGridShow.apply(self, [self._dimension.width, AR.Utility.scale.linear]);
     }
 };
 AR.BulletGraph.prototype.setHorGridShow = function(status) {
-	var self= this;
+    var self = this;
     if (status === true) {
         AR.Graph.prototype.setHorGridShow.apply(self, [self._dimension.height, AR.Utility.scale.linear]);
     }
@@ -209,7 +208,7 @@ AR.BulletGraph.prototype.setHorGridShow = function(status) {
  *           [data] Data to be added to bullet Panel
  */
 AR.BulletGraph.prototype.addData = function(data) {
-	var self= this;
+    var self = this;
     self._bulletPanel.data(data);
 };
 
@@ -219,7 +218,7 @@ AR.BulletGraph.prototype.addData = function(data) {
  *           [width] The width of the bullet panel
  */
 AR.BulletGraph.prototype.setBulletPanelWidth = function(width) {
-	var self= this;
+    var self = this;
     self._bulletPanel.width(width || (self._dimension.width - 40) / 2);
 };
 
@@ -229,7 +228,7 @@ AR.BulletGraph.prototype.setBulletPanelWidth = function(width) {
  *           [height] The height of the bullet panel
  */
 AR.BulletGraph.prototype.setBulletPanelHeight = function(height) {
-	var self= this;
+    var self = this;
     self._bulletPanel.height(height || (self._dimension.height - 40) / (2 * self._graphDef.data.length));
 };
 
@@ -239,7 +238,7 @@ AR.BulletGraph.prototype.setBulletPanelHeight = function(height) {
  *           [left] The left of the bullet panel
  */
 AR.BulletGraph.prototype.setBulletPanelLeft = function(left) {
-	var self= this;
+    var self = this;
     self._bulletPanel.left(left || 100);
 };
 
@@ -249,7 +248,7 @@ AR.BulletGraph.prototype.setBulletPanelLeft = function(left) {
  *           [orientation] The orientation of the bullet
  */
 AR.BulletGraph.prototype.setOrientation = function(orientation) {
-	var self= this;
+    var self = this;
     self._bullet.orient(orientation || "left");
 };
 
@@ -259,7 +258,7 @@ AR.BulletGraph.prototype.setOrientation = function(orientation) {
  *           [shape] The marker shape  
  */
 AR.BulletGraph.prototype.setMarkerShape = function(shape) {
-	var self= this;
+    var self = this;
     self._bullet.marker.shape(shape || "triangle");
 };
 
@@ -269,7 +268,7 @@ AR.BulletGraph.prototype.setMarkerShape = function(shape) {
  *           [color] The marker fillcolor  
  */
 AR.BulletGraph.prototype.setMarkerFillStyle = function(color) {
-	var self= this;
+    var self = this;
     self._bullet.marker.fillStyle(color || "white");
 };
 
@@ -279,7 +278,7 @@ AR.BulletGraph.prototype.setMarkerFillStyle = function(color) {
  *           [color] The marker fillcolor  
  */
 AR.BulletGraph.prototype.setMeasuresFillStyle = function(color) {
-	var self= this;
+    var self = this;
     self._bullet.measure.fillStyle(color || "#1F77B4");
 };
 
@@ -289,7 +288,7 @@ AR.BulletGraph.prototype.setMeasuresFillStyle = function(color) {
  */
 
 AR.BulletGraph.prototype.setRangeFillStyle = function() {
-	var self= this;
+    var self = this;
     var colors = AR.Utility.getPaletteColors(self._graphDef);
     self._bullet.range.fillStyle(function() {
         return colors[this.index % colors.length];

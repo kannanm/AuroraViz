@@ -18,7 +18,7 @@ AR.Wedge = function(parentDimension, panel, graphDef) {
     var dataValues = AR.Utility.getDataArray(graphDef.data);
     var self = this;
     var adjustRadius = function(parentDimension) {
-        if (graphDef.pieRadius != null) {
+        if (graphDef.pieRadius !== null) {
             wedge.outerRadius(graphDef.pieRadius);
         } else {
             wedge.pieRadius(function() {
@@ -28,12 +28,12 @@ AR.Wedge = function(parentDimension, panel, graphDef) {
     };
 
     var adjustAngle = function(parentDimension) {
-            wedge.angle(function(d) {
-                return ((d) * 2 * Math.PI);
-            });
+        wedge.angle(function(d) {
+            return ((d) * 2 * Math.PI);
+        });
     };
 
-    var adjustLabelPosition = function(parentDimension,labelFontSize, isValueLabel) {
+    var adjustLabelPosition = function(parentDimension, labelFontSize, isValueLabel) {
         var labels, shift;
         if (isValueLabel) {
             labels = valueLabels;
@@ -70,15 +70,15 @@ AR.Wedge = function(parentDimension, panel, graphDef) {
             return graphDef.data[this.index].label;
         });
         adjustLabelPosition(parentDimension, graphDef.labelFontSize);
-        AR.Utility.setLabelProperties(graphDef,wedgeLabels,false);
+        AR.Utility.setLabelProperties(graphDef, wedgeLabels, false);
     };
 
     self.showValues = function(parentDimension) {
         valueLabels = wedge.add(pv.Label).textAlign("center").textBaseline("middle").text(function() {
             return graphDef.data[this.index].value;
         });
-        adjustLabelPosition(parentDimension,graphDef.labelFontSize, 1);
-        AR.Utility.setLabelProperties(graphDef,valueLabels,false);
+        adjustLabelPosition(parentDimension, graphDef.labelFontSize, 1);
+        AR.Utility.setLabelProperties(graphDef, valueLabels, false);
     };
     wedge.data(pv.normalize(dataValues));
     properties.forEach(function(property) {
@@ -91,8 +91,8 @@ AR.Wedge = function(parentDimension, panel, graphDef) {
         return AR.Utility.getToolTipText(graphDef.data, this.index);
     });
     if (graphDef.presetPalette) {
-      	 AR.Utility.setPalette(wedge,AR.Utility.getPaletteColors(graphDef));
-   	}
+        AR.Utility.setPalette(wedge, AR.Utility.getPaletteColors(graphDef));
+    }
     //TODO: add tool tip at the right place
     if (graphDef.toolTip) {
         wedge.event("mouseover", pv.Behavior.tipsy({
@@ -116,15 +116,15 @@ AR.PieGraph = function(graphDef) {
     var self = this;
     var maxValue = AR.Utility.findMaxValue(graphDef);
     self.setVerGridShow = function(status) {
-		if (status === true) {
-			AR.Graph.prototype.setVerGridShow.apply(self, [ maxValue, AR.Utility.scale.linear ]);
-		}
-	};
-	self.setHorGridShow = function(status) {
-		if (status === true) {
-			AR.Graph.prototype.setHorGridShow.apply(self, [ maxValue, AR.Utility.scale.linear ]);
-		}
-	};
+        if (status === true) {
+            AR.Graph.prototype.setVerGridShow.apply(self, [maxValue, AR.Utility.scale.linear]);
+        }
+    };
+    self.setHorGridShow = function(status) {
+        if (status === true) {
+            AR.Graph.prototype.setHorGridShow.apply(self, [maxValue, AR.Utility.scale.linear]);
+        }
+    };
     AR.Graph.apply(self, [graphDef]);
     var wedges = new AR.Wedge(self._dimension, self._panel, graphDef);
     //TODO: add other function such as changing the pallete etc  
@@ -157,7 +157,7 @@ AR.Donut = function(parentDimension, panel, graphDef) {
     var wedgeLabels, valueLabels;
     var dataValues = AR.Utility.getDataArray(graphDef.data);
     var self = this;
-    var adjustLabelPosition = function(parentDimension,labelFontSize, isValueLabel) {
+    var adjustLabelPosition = function(parentDimension, labelFontSize, isValueLabel) {
         var labels, shift;
         if (isValueLabel) {
             labels = valueLabels;
@@ -202,16 +202,16 @@ AR.Donut = function(parentDimension, panel, graphDef) {
         wedgeLabels = wedge.add(pv.Label).textAlign("center").textBaseline("middle").text(function() {
             return graphDef.data[this.index].label;
         });
-        adjustLabelPosition(parentDimension,graphDef.labelFontSize);
-        AR.Utility.setLabelProperties(graphDef,wedgeLabels,false);
+        adjustLabelPosition(parentDimension, graphDef.labelFontSize);
+        AR.Utility.setLabelProperties(graphDef, wedgeLabels, false);
     };
 
     self.showValues = function(parentDimension) {
         valueLabels = wedge.add(pv.Label).textAlign("center").textBaseline("middle").text(function() {
             return graphDef.data[this.index].value;
         });
-        adjustLabelPosition(parentDimension,graphDef.labelFontSize, 1);
-        AR.Utility.setLabelProperties(graphDef,valueLabels,false);
+        adjustLabelPosition(parentDimension, graphDef.labelFontSize, 1);
+        AR.Utility.setLabelProperties(graphDef, valueLabels, false);
     };
     self.adjustPosition = function(parentDimension) {
         adjustRadius(parentDimension);
@@ -241,8 +241,8 @@ AR.Donut = function(parentDimension, panel, graphDef) {
         }
     });
     if (graphDef.presetPalette) {
-     	 AR.Utility.setPalette(wedge, AR.Utility.getPaletteColors(graphDef));
-  	}
+        AR.Utility.setPalette(wedge, AR.Utility.getPaletteColors(graphDef));
+    }
 };
 /**
  * Wedge API to construct a Donut Graph
@@ -255,15 +255,15 @@ AR.DonutGraph = function(graphDef) {
     var self = this;
     var maxValue = AR.Utility.findMaxValue(graphDef);
     self.setVerGridShow = function(status) {
-		if (status === true) {
-			AR.Graph.prototype.setVerGridShow.apply(self, [ maxValue, AR.Utility.scale.linear ]);
-		}
-	};
-	self.setHorGridShow = function(status) {
-		if (status === true) {
-			AR.Graph.prototype.setHorGridShow.apply(self, [ maxValue, AR.Utility.scale.linear ]);
-		}
-	};
+        if (status === true) {
+            AR.Graph.prototype.setVerGridShow.apply(self, [maxValue, AR.Utility.scale.linear]);
+        }
+    };
+    self.setHorGridShow = function(status) {
+        if (status === true) {
+            AR.Graph.prototype.setHorGridShow.apply(self, [maxValue, AR.Utility.scale.linear]);
+        }
+    };
     AR.Graph.apply(self, [graphDef]);
     var wedges = new AR.Donut(self._dimension, self._panel, graphDef);
     //TODO: add other function such as changing the pallete etc  

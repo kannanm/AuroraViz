@@ -177,13 +177,14 @@ AR.Utility.setLabelFontColor = function(color, labelObj) {
 	}
 };
 AR.Utility.setLabelRotateAngle = function(angle, labelObj, isHorizontal) {
+	angle = parseInt(angle,10);
 	if (labelObj) {
 		labelObj.textAngle(angle / 180 * Math.PI);
 		if (isHorizontal) {
-			angle < 0 ? labelObj.textBaseline("right") : angle == 0 ? labelObj.textBaseline("center") : labelObj.textBaseline("top");
-			(angle == 90 || angle == -90) ? labelObj.textAlign("center") : labelObj.textAlign("right");
+			angle < 0 ? labelObj.textBaseline("right") : angle === 0 ? labelObj.textBaseline("center") : labelObj.textBaseline("top");
+			(angle === 90 || angle === -90) ? labelObj.textAlign("center") : labelObj.textAlign("right");
 		} else {
-			angle < 0 ? labelObj.textAlign("right") : angle == 0 ? labelObj.textAlign("center") : labelObj.textAlign("left");
+			angle < 0 ? labelObj.textAlign("right") : angle === 0 ? labelObj.textAlign("center") : labelObj.textAlign("left");
 		}
 
 	}
@@ -197,27 +198,4 @@ AR.Utility.setToolTip = function(graphDef, element, direction) {
 			fade : true
 		}));
 	}
-};
-//Assuming color is of format #cccccc
-AR.Utility.getRGB= function(color){
-	return {
-		red:  parseInt(color.substring(1,3),16),
-		green: parseInt(color.substring(3,5),16),
-		blue : parseInt(color.substring(5,7),16),
-	};
-};
-AR.Utility.addRGB = function(rgb,shift){
-	rgb.red += shift;
-	rgb.green += shift;
-	rgb.blue += shift;
-	return rgb;
-};
-AR.Utility.getHex = function(rgb){
-	  var hexColor = rgb.blue | (rgb.green << 8) | (rgb.red << 16);
-	  return "#" + hexColor.toString(16);
-};
-AR.Utility.getDarkerColor = function(color,shift){
-	var rgb = AR.Utility.getRGB(color); 
-	rgb = AR.Utility.addRGB(rgb,-shift);
-	return AR.Utility.getHex(rgb); 
 };
