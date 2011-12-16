@@ -294,7 +294,7 @@ ARV.getGraphType = function(){
     return graphName;
 };
 
-ARV.modifyJSON = function() {
+ARV.modifyJSON = function(div) {
     var index, param, value;
     $("#chart").html("");
     var graphName = ARV.getGraphType();
@@ -302,12 +302,12 @@ ARV.modifyJSON = function() {
     ARV.updateStyleProperties();
     ARV.updateGraphProperties();
     ARV.checkPaletteChanged();
-    ARV.showGraph(graphName);
+    ARV.showGraph(graphName,div);
 };
 
-ARV.showGraph = function(graphName) {
-    graph = new AR[ARV.ChartTypeMap[graphName]](ARV.graphDef);
-    graph.render("chart");
+ARV.showGraph = function(graphName,div, graphDef) {
+    graph = new AR[ARV.ChartTypeMap[graphName]](graphDef || ARV.graphDef);
+    graph.render(div || "chart");
 };
 
 ARV.addColorsDiv = function() {

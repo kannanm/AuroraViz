@@ -1,0 +1,76 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	height: 100%;
+	width: 100%;
+	background: #fbfbfb none repeat scroll 0 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bolder;
+	color: #0e2137;
+	font-size: 12px;
+}
+
+.float-left-nav {
+	float: left;
+}
+
+.float-right-nav {
+	float: right;
+}
+
+#dashboardEditor {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: 1px solid #E3EAEE;
+	height: 800px;
+	width: 100%;
+}
+
+.component {
+	padding: 10px;
+	cursor: move;
+}
+
+.element-container {
+	background: none repeat scroll 0 0 #fbfbfb;
+	border: 1px solid #E3EAEE;
+	border-style: dashed;
+	display: inline-block;
+}
+
+.horizontal-rule {
+	background-color: gray;
+}
+
+.vertical-rule {
+	background-color: gray;
+}
+
+.delComponentBtn {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+.heading {
+	font-size: 30pt;
+	font-weight: bold;
+}
+
+.description {
+	width : 100px;
+	font-style: italic;
+	word-wrap:break-word;
+}
+
+.draggable {
+	cursor: move;
+}
+
+.clear-both {
+	clear: both;
+}
+#addReports{
+	 -webkit-border-radius: 6px;
+	 -moz-border-radius: 6px;
+	 border-radius: 6px;
+}
