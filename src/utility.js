@@ -120,6 +120,7 @@ AR.Utility.getPaletteColors = function(graphDef){
 };
 AR.Utility.palettes = {
 	"Plain" : [ "#1F77B4" ],
+	"Simple": ["#d42f3c","#85b1e6","#FD6D16","#dfe617"],
 	"RGB" : [ "#bb2211","#2222bb", "#22aa22",  "#9999aa", "#223322", ],
 	"Olive" : [ "#B4AF91", "#787746", "#40411E", "#32331D" ],
 	"Soil and Sky" : [ "#928174", "#AA9788", "#BDE4E9", "#A8E1E9", "#90D1DA" ],
