@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <title> Data Visual </title>
+        <!-- CSS -->
+		<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Terminal+Dosis' rel='stylesheet' type='text/css'>
+
+		<link type="text/css" href="css/Aristo/Aristo.css" rel="stylesheet" />	
+        <link rel="stylesheet" href="css/structure.css" type="text/css" />
+		<script type="text/javascript" src="lib/jquery-1.6.2.min.js"></script>
+		<script type="text/javascript" src="lib/jquery-ui-1.8.16.custom.min.js"></script>
+		<script type="text/javascript" src="lib/jquery.quicksand.js"></script>
+		<script type="text/javascript" src="lib/jquery.masonry.min.js"></script>
+		<script type="text/javascript" src="js/dash.js"></script>
+    </head>
+        
+    <body id="public">
+
+		    <div class="contentContainer">
+				<div id="fixed-menu-top">
+					<div id="goback" style="display:none">
+						<a href="dash.html"><img src="css/images/back.png" alt="Back" /></a>
+					</div>	
+
+					<div id="fixed-menu-top-content">
+				    	<div class="logo">
+				        	<span class="logotxt">Data Visual</span>
+				        </div>
+					</div>
+				</div>
+			    <div class="leftContent">
+			    	<div id="actionOptions">
+						<span class="callForActionLeft">new</span>	
+					    <span id="newchart" class="chart newoption">Chart</span>
+					    <span id="newfile" class="file newoption">File</span>
+						<span id="newdash" class="dashboard newoption">Dashboard</span>
+					</div>
+			    </div>
+		    	<div class="rightContent">
+		    	
+		    		<div id="actionbar">
+						<div id="filterOptions" class="options" style="display:block">
+							<span class="callForAction">select to view/edit</span>
+							<ul class="actions">
+								<li class="search">
+									<input type="text" id="searchtext" onkeypress="return runScript(event)" />
+									<span class="search">SEARCH</span>	
+								</li>
+								<li class="all"><span class="all filter">ALL</span></li>
+								<li class="chart"><span class="chart filter">CHARTS</span></li>
+								<li class="file"><span class="file filter">FILES</span></li>
+								<li class="dashboard"><span class="dashboard filter">DASHBOARDS</span></li>
+							</ul>
+						</div>
+
+						<div id="newChartOptions" class="options" style="display:none">
+						
+							<span class="callForAction">choose a file</span>
+							<ul class="actions">
+								<li class="search">
+									<input type="text" id="searchtext" onkeypress="return runScript(event)" />
+									<span class="search">SEARCH</span>	
+								</li>
+								<li class="file"><span class="file">FILES</span></li>
+							</ul>
+						</div>
+						<div id="newDashboardOptions" class="options" style="display:none">
+							<span class="callForAction">Enter dashboard name..</span>
+							<ul class="actions">
+								<li class="search">
+									<input type="text" id="searchtext" />
+									<span class="search">Search</span>	
+								</li>
+								<li class="chart"><span class="chart">Charts</span></li>
+							</ul>
+						</div>
+						<div id="newChartOptions" class="options" style="display:none">
+							<ul class="actions">
+								<li>
+									<span class="filenamelabel">Name</span>	
+								</li>
+								<li>
+									<input type="text" id="filename" />
+								</li>
+								<li>
+									<span class="filenamelabel">File</span>	
+								</li>
+								<li class="upload">
+									<input type="file" id="thefile" />
+								</li>
+								<li class="Create">
+									<span class="create">Add</span>	
+								</li>
+
+							</ul>
+						</div>
+		    		
+		    		</div>
+					<div class="ourHolder">
+						<span class="item" data-id="id-1" data-type="dashboard">
+							<img src="css/images/dash.png" alt="Dashboard" />
+							<h4 class="objectname">Dashboard</h4>
+						</span>
+						<span class="item" data-id="id-2" data-type="chart">
+							<img src="css/images/chart.png" alt="Chart" />
+							<h4 class="objectname">Chart</h4>
+						</span>
+						<span class="item" data-id="id-1" data-type="dashboard">
+							<img src="css/images/dash.png" alt="Dashboard" />
+							<h4 class="objectname">Dashboard</h4>
+						</span>
+						<span class="item" data-id="id-3" data-type="file">
+							<img src="css/images/file.png" alt="File" />
+							<h4 class="objectname">File</h4>
+						</span>
+						<span class="item" data-id="id-3" data-type="file">
+							<img src="css/images/file.png" alt="File" />
+							<h4 class="objectname">File</h4>
+						</span>
+						<span class="item" data-id="id-1" data-type="dashboard">
+							<img src="css/images/dash.png" alt="Dashboard" />
+							<h4 class="objectname">Dashboard</h4>
+						</span>
+						<span class="item" data-id="id-2" data-type="chart">
+							<img src="css/images/chart.png" alt="Chart" />
+							<h4 class="objectname">Chart</h4>
+						</span>
+						<span class="item" data-id="id-2" data-type="chart">
+							<img src="css/images/chart.png" alt="Chart" />
+							<h4 class="objectname">Chart</h4>
+						</span>
+						<span class="item" data-id="id-1" data-type="dashboard">
+							<img src="css/images/dash.png" alt="Dashboard" />
+							<h4 class="objectname">Dashboard</h4>
+						</span>
+						<span class="item" data-id="id-3" data-type="file">
+							<img src="css/images/file.png" alt="File" />
+							<h4 class="objectname">File</h4>
+						</span>
+						<span class="item" data-id="id-2" data-type="chart">
+							<img src="css/images/chart.png" alt="Chart" />
+							<h4 class="objectname">Chart</h4>
+						</span>
+						<span class="item" data-id="id-3" data-type="file">
+							<img src="css/images/file.png" alt="File" />
+							<h4 class="objectname">File</h4>
+						</span>
+						<span class="item" data-id="id-2" data-type="chart">
+							<img src="css/images/chart.png" alt="Chart" />
+							<h4 class="objectname">Chart</h4>
+						</span>
+						<span class="item" data-id="id-3" data-type="file">
+							<img src="css/images/file.png" alt="File" />
+							<h4 class="objectname">File</h4>
+						</span>
+						<span class="item" data-id="id-1" data-type="dashboard">
+							<img src="css/images/dash.png" alt="Dashboard" />
+							<h4 class="objectname">Dashboard</h4>
+						</span>
+						<span class="item" data-id="id-2" data-type="chart">
+							<img src="css/images/chart.png" alt="Chart" />
+							<h4 class="objectname">Chart</h4>
+						</span>
+						<span class="item" data-id="id-1" data-type="dashboard">
+							<img src="css/images/dash.png" alt="Dashboard" />
+							<h4 class="objectname">Dashboard</h4>
+						</span>
+						<span class="item" data-id="id-3" data-type="file">
+							<img src="css/images/file.png" alt="File" />
+							<h4 class="objectname">File</h4>
+						</span>
+						<span class="item" data-id="id-1" data-type="dashboard">
+							<img src="css/images/dash.png" alt="Dashboard" />
+							<h4 class="objectname">Dashboard</h4>
+						</span>
+						<span class="item" data-id="id-2" data-type="chart">
+							<img src="css/images/chart.png" alt="Chart" />
+							<h4 class="objectname">Chart</h4>
+						</span>
+						<span class="item" data-id="id-3" data-type="file">
+							<img src="css/images/file.png" alt="File" />
+							<h4 class="objectname">File</h4>
+						</span>
+						<span class="item" data-id="id-1" data-type="dashboard">
+							<img src="css/images/dash.png" alt="Dashboard" />
+							<h4 class="objectname">Dashboard</h4>
+						</span>
+						<span class="item" data-id="id-2" data-type="chart">
+							<img src="css/images/chart.png" alt="Chart" />
+							<h4 class="objectname">Chart</h4>
+						</span>
+						<span class="item" data-id="id-3" data-type="file">
+							<img src="css/images/file.png" alt="File" />
+							<h4 class="objectname">File</h4>
+						</span>
+						<span class="item" data-id="id-1" data-type="dashboard">
+							<img src="css/images/dash.png" alt="Dashboard" />
+							<h4 class="objectname">Dashboard</h4>
+						</span>
+						<span class="item" data-id="id-2" data-type="chart">
+							<img src="css/images/chart.png" alt="Chart" />
+							<h4 class="objectname">Chart</h4>
+						</span>
+						<span class="item" data-id="id-3" data-type="file">
+							<img src="css/images/file.png" alt="File" />
+							<h4 class="objectname">File</h4>
+						</span>
+						<span class="item" data-id="id-1" data-type="dashboard">
+							<img src="css/images/dash.png" alt="Dashboard" />
+							<h4 class="objectname">Dashboard</h4>
+						</span>
+						<span class="item" data-id="id-2" data-type="chart">
+							<img src="css/images/chart.png" alt="Chart" />
+							<h4 class="objectname">Chart</h4>
+						</span>
+						<span class="item" data-id="id-3" data-type="file">
+							<img src="css/images/file.png" alt="File" />
+							<h4 class="objectname">File</h4>
+						</span>
+						<span class="item" data-id="id-1" data-type="dashboard">
+							<img src="css/images/dash.png" alt="Dashboard" />
+							<h4 class="objectname">Dashboard</h4>
+						</span>
+						<span class="item" data-id="id-2" data-type="chart">
+							<img src="css/images/chart.png" alt="Chart" />
+							<h4 class="objectname">Chart</h4>
+						</span>
+						<span class="item" data-id="id-3" data-type="file">
+							<img src="css/images/file.png" alt="File" />
+							<h4 class="objectname">File</h4>
+						</span>
+						<span class="item" data-id="id-1" data-type="dashboard">
+							<img src="css/images/dash.png" alt="Dashboard" />
+							<h4 class="objectname">Dashboard</h4>
+						</span>
+						<span class="item" data-id="id-2" data-type="chart">
+							<img src="css/images/chart.png" alt="Chart" />
+							<h4 class="objectname">Chart</h4>
+						</span>
+						<span class="item" data-id="id-3" data-type="file">
+							<img src="css/images/file.png" alt="File" />
+							<h4 class="objectname">File</h4>
+						</span>
+
+					</div>					
+
+				</div>                
+			</div>
+        
+	</body>
+</html>
