@@ -14,10 +14,10 @@
 		<link rel="stylesheet" type="text/css" href="css/Aristo/Aristo.css"/>	
         <link rel="stylesheet" type="text/css" href="css/structure.css"/>
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
-
+        <link rel="stylesheet" type="text/css" href="../lib/jQuery/tooltip/jquery.ui.tooltip.css"/>
 		<script type="text/javascript" src="lib/jquery-1.6.2.min.js"></script>
 		<script type="text/javascript" src="lib/jquery-ui-1.8.16.custom.min.js"></script>
-		
+		<script type="text/javascript" src="../lib/jQuery/tooltip/jquery.ui.tooltip.js"></script>
 
     </head>
         
@@ -77,19 +77,19 @@
                             
 					<ul class="ribbon">
 						<li>
-							<a href="#charttab">Chart</a>
+							<a href="#charttab" title="Edit Chart Properties">Chart</a>
 						</li>							
 						<li>
-							<a href="#canvastab">Canvas</a>
+							<a href="#canvastab" title="Edit Canvas Properties">Canvas</a>
 						</li>	
 						<li>
-							<a href="#gridstab">Grids</a>
+							<a href="#gridstab" title="Edit Grid Properties">Grids</a>
 						</li>							
 						<li>
-							<a href="#axestab">Axes</a>
+							<a href="#axestab" title="Edit Axis Properties">Axes</a>
 						</li>							
 						<li>
-							<a href="#palettetab">Palette</a>
+							<a href="#palettetab" title="Change Palettes">Palette</a>
 						</li>
 					</ul>
 					<div id="canvastab">
@@ -295,6 +295,12 @@
 	        	$('#accordion').tabs();
 	        	$('#middleTabs').tabs();
 			});
+	/* 		$("#goback").tooltip({
+				content:"Go back to Dashboard Page"
+			});
+			$("#dataUpdater").tooltip({
+				content:"Update the data"
+			}); */
 		</script>        
 	</body>
 </html>
