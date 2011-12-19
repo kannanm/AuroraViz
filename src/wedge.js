@@ -11,6 +11,9 @@
  *             [panel] A panel object indicating the Graph Panel in which the current Wedge graph will be displayed
  * This is a base class and is called by different Wedge implementations (Eg : Donut or Pie)
  */
+
+//TODO : Merge the piegraph and the donut graph because the only difference is having an inner radius
+
 AR.Wedge = function(parentDimension, panel, graphDef) {
     var properties = ["values", "labels", "legends"];
     var wedge = panel.add(pv.Wedge);
@@ -80,6 +83,10 @@ AR.Wedge = function(parentDimension, panel, graphDef) {
         adjustLabelPosition(parentDimension, graphDef.labelFontSize, 1);
         AR.Utility.setLabelProperties(graphDef, valueLabels, false);
     };
+    
+    self.showLegends = function(){
+    	AR.Utility.addLegendToObject(wedge,graphDef.data);
+    };
     wedge.data(pv.normalize(dataValues));
     properties.forEach(function(property) {
         var upcasedProp = property.substring(0, 1).toUpperCase() + property.substring(1);
@@ -95,12 +102,7 @@ AR.Wedge = function(parentDimension, panel, graphDef) {
     }
     //TODO: add tool tip at the right place
     if (graphDef.toolTip) {
-        wedge.event("mouseover", pv.Behavior.tipsy({
-            gravity: function() {
-                return ("s");
-            },
-            fade: true
-        }));
+    	AR.Utility.setToolTip(graphDef,wedge,"s");
     }
     self.adjustPosition(parentDimension);
 };
@@ -226,13 +228,11 @@ AR.Donut = function(parentDimension, panel, graphDef) {
 
     //TODO: add tool tip at the right place
     if (graphDef.toolTip && graphDef.toolTip === 1) {
-        wedge.event("mouseover", pv.Behavior.tipsy({
-            gravity: function() {
-                return ("s");
-            },
-            fade: true
-        }));
+    	AR.Utility.setToolTip(graphDef,wedge,"s");
     }
+    self.showLegends = function(){
+    	AR.Utility.addLegendToObject(wedge,graphDef.data);
+    };
     self.adjustPosition(parentDimension);
     properties.forEach(function(property) {
         var upcasedProp = property.substring(0, 1).toUpperCase() + property.substring(1);

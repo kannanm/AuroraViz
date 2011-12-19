@@ -15,7 +15,9 @@
  *         Multivalued etc) Adds Bar graph container to the panel, assigns data,
  *         sets anchor and tooltip with the given data
  */
-AR.Bar = function(graphDef, data, parentDimension, panel, color) {
+
+//Note when color variableis defined it means the graph is multiseries. and the color of the series is "color"
+AR.Bar = function(graphDef, data, parentDimension, panel, color, seriesname, seriesNumber) {
 	var self = this;
 	this._bar = panel.add(pv.Bar);
 	this._parentDimension = parentDimension;
@@ -43,6 +45,12 @@ AR.Bar = function(graphDef, data, parentDimension, panel, color) {
 	if (color) {
 		self._bar.fillStyle(color);
 	}
+	if(graphDef.showLegends){
+			if(!seriesname){
+				AR.Utility.addLegendToObject(self._bar,data);
+			}
+			AR.Utility.createLegends(panel,seriesNumber,seriesname,color);
+	}
 };
 // TODO - Some kind of a factory that sets the following properties has to be
 // made.
@@ -58,10 +66,10 @@ AR.Bar.prototype.properties = [ "fillStyle", "strokeStyle" ];
  *            displayed
  * @extends AR.Bar
  */
-AR.HBar = function(graphDef, data, parentDimension, panel, maxValue, color, seriesname) {
+AR.HBar = function(graphDef, data, parentDimension, panel, maxValue, color, seriesname, seriesNumber) {
 	var self = this;
 	self._label = undefined;
-	AR.Bar.apply(self, [ graphDef, data, parentDimension, panel, color ]);
+	AR.Bar.apply(self, [ graphDef, data, parentDimension, panel, color,seriesname, seriesNumber ]);
 	var adjustWidth = function(parentDimension) {
 		var barWidth = pv.Scale.linear(0, maxValue).range(0, parentDimension.width - 40);
 		self._bar.width(function(d) {
@@ -86,7 +94,7 @@ AR.HBar = function(graphDef, data, parentDimension, panel, maxValue, color, seri
 	self.adjustLabel = function(parentDimension) {
 		if (graphDef.showLabels) {
 			self._label = self._bar.anchor("left").add(pv.Label).textBaseline("right").text(function() {
-				return seriesname ? seriesname : data[this.index].label;
+				return seriesname ? graphDef.categories[0].category[this.index].label : data[this.index].label;
 			}).textAlign("right"); 
 			 AR.Utility.setLabelProperties(graphDef,self._label,true);
 		}
@@ -114,9 +122,9 @@ AR.HBar.prototype = AR.extend(AR.Bar);
  *            displayed
  * @extends AR.Bar
  */
-AR.VBar = function(graphDef, data, parentDimension, panel, maxValue, color, seriesname) {
+AR.VBar = function(graphDef, data, parentDimension, panel, maxValue, color, seriesname, seriesNumber) {
 	var self = this;
-	AR.Bar.apply(self, [ graphDef, data, parentDimension, panel, color ]);
+	AR.Bar.apply(self, [ graphDef, data, parentDimension, panel, color,seriesname, seriesNumber ]);
 
 	var adjustHeight = function(parentDimension) {
 		var barHeight = pv.Scale.linear(0, maxValue).range(0, parentDimension.height - 40);
@@ -143,7 +151,7 @@ AR.VBar = function(graphDef, data, parentDimension, panel, maxValue, color, seri
 	self.adjustLabel = function(parentDimension) {
 		if (graphDef.showLabels) {
 			self._label = self._bar.anchor("bottom").add(pv.Label).textBaseline("top").text(function() {
-				return seriesname ? seriesname : data[this.index].label;
+				return seriesname ? graphDef.categories[0].category[this.index].label : data[this.index].label;
 			}).textAlign("center");
 			AR.Utility.setLabelProperties(graphDef,self._label,false);
 		}
@@ -195,7 +203,7 @@ AR.BarGraph = function(graphDef) {
 				for (i = 0; i < graphDef.dataset.length; i++) {
 					var noOfRecords = dataset.length * dataset[i].data.length;
 					panel = self._panel.add(pv.Panel).left(i * (self._dimension.width - 30) / (noOfRecords));
-					bar = new AR.VBar(graphDef, dataset[i].data, self._dimension, panel, maxValue, colors[i % colors.length], dataset[i].seriesname);
+					bar = new AR.VBar(graphDef, dataset[i].data, self._dimension, panel, maxValue, colors[i % colors.length], dataset[i].seriesname, i);
 				}
 			} else {
 				bar = new AR.VBar(graphDef, graphDef.data, self._dimension, self._panel, maxValue);
@@ -207,7 +215,7 @@ AR.BarGraph = function(graphDef) {
 				for (i = 0; i < graphDef.dataset.length; i++) {
 					var noOfRecords = dataset.length * dataset[i].data.length;
 					panel = self._panel.add(pv.Panel).bottom(i * (self._dimension.height - 30) / (noOfRecords));
-					bar = new AR.HBar(graphDef, dataset[i].data, self._dimension, panel, maxValue, colors[i % colors.length], dataset[i].seriesname);
+					bar = new AR.HBar(graphDef, dataset[i].data, self._dimension, panel, maxValue, colors[i % colors.length], dataset[i].seriesname, i);
 				}
 			} else {
 				bar = new AR.HBar(graphDef, graphDef.data, self._dimension, self._panel, maxValue);

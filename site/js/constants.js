@@ -21,7 +21,7 @@ ARV.getChartOptionsHTML = function(chartType) {
             '<input type="checkbox" id="isLineStyleStep"></input ></div> <br/>',
             '<label>Dot Size: </label>',
             '<div class="slider" id="dotSizeSlider"></div>',
-            '<input size="8" type="text" id="dotSize" value="2" disabled="disabled" /> <br />',
+            '<input size="8" type="text" id="dotSize" value="5" disabled="disabled" /> <br />',
             '<label>Line Width: </label>',
             '<div class="slider" id="lineWidthSlider"></div>',
             '<input size="8" type="text" id="lineWidth" value="2" disabled="disabled" /> <br />',

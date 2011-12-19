@@ -42,14 +42,15 @@ ARV.commonProperties = {
     presetPalette: "Plain",
     isLineStyleStep: false,
     pieRadius: "100",
-    dotSize: "2",
+    dotSize: "5",
     lineWidth: "2",
     lineColor: "#000000",
     outerRadius: "100",
     innerRadius: "50",
     interpolated: false,
     segmented: true,
-    areaColor: "#1F77B4"
+    areaColor: "#1F77B4",
+    showLegends : true
 
 };
 ARV.defaultData = {
@@ -253,7 +254,7 @@ ARV.updateGraphProperties = function() {
     for (prop in ARV.graphDef) {
         var elem = $("#" + prop);
         var value = elem.val();
-        if (prop === "toolTip" || prop === "showLabels" || prop === "showValues" || prop === "isLineStyleStep" || prop === "interpolated" || prop === "segmented") {
+        if (prop === "toolTip" || prop === "showLabels" || prop === "showValues" || prop === "isLineStyleStep" || prop === "interpolated" || prop === "segmented"|| prop === "showLegends") {
             value = elem.attr("checked")?true:false;
         }
         if (ARV.graphDef.hasOwnProperty(prop) && value !== undefined) {

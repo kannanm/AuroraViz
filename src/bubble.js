@@ -77,6 +77,15 @@ AR.Bubble = function(parentDimension, panel, graphDef) {
     if (graphDef.presetPalette) {
         AR.Utility.setPalette(bubble, AR.Utility.getPaletteColors(graphDef));
     }
+    if(graphDef.showLegends){
+    	var i=0;
+    	var data = graphDef.data;
+    	var colors = AR.Utility.getPaletteColors(graphDef);
+    	for(i=0;i<data.length;i++){
+    		AR.Utility.createLegends(panel,i,data[i].label,colors[i%data.length]);
+    	}
+    	
+    }
 };
 
 /**

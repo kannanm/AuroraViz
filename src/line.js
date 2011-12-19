@@ -79,6 +79,9 @@ AR.Line = function(parentDimension, panel, graphDef, step) {
     if (step === true) {
         line.interpolate("step-after");
     }
+    if(graphDef.showLegends){
+    	AR.Utility.addLegendToObject(dots,graphDef.data);
+    }
 };
 
 /**
@@ -96,12 +99,12 @@ AR.Line = function(parentDimension, panel, graphDef, step) {
  *             [maxValue] The value for setting the scale
  * This is a base class and is called by different Line implementations.
  */
-AR.MLine = function(parentDimension, panel, graphDef, data, maxValue, step, color) {
+AR.MLine = function(parentDimension, panel, graphDef, data, maxValue, step, color, seriesname, seriesNumber) {
     var self = this;
     var noOfRecords = data.length;
     var line = panel.add(pv.Line);
     line.data(AR.Utility.getDataArray(data));
-    var dots = line.add(pv.Dot).lineWidth(4);
+    var dots = line.add(pv.Dot).lineWidth(4).fillStyle(color);
     dots.title(function() {
         return AR.Utility.getToolTipText(data, this.index);
     });
@@ -165,6 +168,9 @@ AR.MLine = function(parentDimension, panel, graphDef, data, maxValue, step, colo
     if (color) {
         line.strokeStyle(color);
     }
+    if(graphDef.showLegends){
+    	AR.Utility.createLegends(panel,seriesNumber,seriesname,color);
+    }
 };
 
 /**
@@ -201,7 +207,7 @@ AR.LineGraph = function(graphDef) {
         for (i = 0; i < graphDef.dataset.length; i++) {
             var noOfRecords = dataset.length * dataset[i].data.length;
             panel = self._panel.add(pv.Panel).left((self._dimension.width - 30) / (noOfRecords));
-            line = new AR.MLine(self._dimension, panel, graphDef, dataset[i].data, maxValue, flag, colors[i % colors.length]);
+            line = new AR.MLine(self._dimension, panel, graphDef, dataset[i].data, maxValue, flag, colors[i % colors.length],dataset[i].seriesname,i);
         }
     } else {
         line = new AR.Line(self._dimension, self._panel, graphDef, flag);

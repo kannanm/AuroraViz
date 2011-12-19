@@ -54,13 +54,6 @@ AR.StackedAreaGraph = function(graphDef) {
                 obj = {};
                 obj.x = j;
                 obj.y = data[j].value;
-                //                if(i===0){
-                //                    cumulativeData.push(parseInt(data[j].value));  
-                //                }
-                //                else{
-                //                    cumulativeData[j] = parseInt(cumulativeData[j]) + parseInt(data[j].value);
-                //                }
-                //                obj.cumulativeVal = cumulativeData[j];
                 innerArr.push(obj);
             }
             arr.push(innerArr);
@@ -116,6 +109,12 @@ AR.StackedAreaGraph = function(graphDef) {
         }).bottom(0).textBaseline("top");
         AR.Utility.setLabelProperties(graphDef, labels, false);
     }
+    if(graphDef.showLegends){
+    	var i = 0;
+    	for(i=0;i<dataset.length;i++){
+    		AR.Utility.createLegends(self._panel,i,dataset[i].seriesname,colors[i%dataset.length]);	
+    	}
+    }
     if (graphDef.interpolated) {
         self._areaObj.interpolate("step-after");
     }
@@ -143,7 +142,7 @@ AR.StackedAreaGraph.prototype = AR.extend(AR.Graph);
  * @author Aditya Gaur
  */
  
-AR.Area = function(parentDimension, panel, graphDef, dataObj, color, seriesname) {
+AR.Area = function(parentDimension, panel, graphDef, dataObj, color, seriesname, seriesNumber) {
     var self = this;
     self._areaObj = panel.add(pv.Area);
     var dataArr = AR.Utility.getDataArray(dataObj);
@@ -216,6 +215,11 @@ AR.Area = function(parentDimension, panel, graphDef, dataObj, color, seriesname)
     }
     AR.Utility.setToolTip(graphDef, self._areaObj, "s");
     self.setAreaAttributes();
+    
+    //Note: Legends for a single series area graph does no make sense. Thus not implemented
+    if(graphDef.showLegends){
+    	AR.Utility.createLegends(panel,seriesNumber,seriesname,color);
+    }
 };
 
 
@@ -241,7 +245,7 @@ AR.AreaGraph = function(graphDef) {
     if (dataset) {
         for (i = 0; i < dataset.length; i++) {
             var panel = self._panel.add(pv.Panel);
-            bar = new AR.Area(self._dimension, panel, graphDef, dataset[i].data, colors[i % colors.length], graphDef.dataset[i].seriesname);
+            bar = new AR.Area(self._dimension, panel, graphDef, dataset[i].data, colors[i % colors.length], graphDef.dataset[i].seriesname, i);
         }
     }
     else {

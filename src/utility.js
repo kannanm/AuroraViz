@@ -200,3 +200,22 @@ AR.Utility.setToolTip = function(graphDef, element, direction) {
 		}));
 	}
 };
+AR.Utility.createLegends = function(panel,index,text,color){
+	if(text){
+		panel.add(pv.Dot).shape("square").top(-20).left(function(){
+					return index*100;
+				}).fillStyle(color)
+				.anchor("right").add(pv.Label)
+				.text(function(){
+					return text;
+				});
+				}
+};
+AR.Utility.addLegendToObject = function(object,data){
+	object.add(pv.Dot).shape("square").top(-20).left(function(){
+		return this.index*100;
+	}).anchor("right").add(pv.Label)
+	.text(function(){
+		return data[this.index].label;
+	});
+}

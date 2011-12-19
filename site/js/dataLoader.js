@@ -68,7 +68,7 @@ for(i=0;i<columns.length;i++){
 $("#measureAxisList").chosen();
 for(i=0;i<columns.length;i++){
 	option = $('<option />').val(columns[i].field).append(columns[i].name);
-	if(i === 1)	{
+	if(i === 0)	{
 		option.attr("selected","selected");
 	}
 	$("#categoryAxisList").append(option);	
