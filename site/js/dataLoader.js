@@ -74,26 +74,38 @@ for(i=0;i<columns.length;i++){
 	$("#categoryAxisList").append(option);	
 }
 $("#categoryAxisList").chosen();
-
-
+ARV.initializeDialog = function(){
+	$( "#dialog-illegal-data" ).dialog({
+		modal:true,
+		autoOpen: false,
+		buttons: {
+			Ok: function() {
+				$( this ).dialog( "close" );
+			}
+		}
+	});
+};
+ARV.initializeDialog();
 ARV.modifyDataForSingleSeries = function(){
-	ARV.defaultData.BarGraph = [];
+	var dataArr = [];
 	var selected = $("#measureAxisList option:selected");
 		var field = $(selected[0]).val();
 		labelField = $("#categoryAxisList option:selected").val();
 		for (i=0;i<data.length;i++){
 			var dataElement = data[i];
 			var value = parseInt(dataElement[field],10);
-			if(value == NaN){
-				alert("The measure fields should have a number");
+			if(isNaN(value)){
+				$( "#dialog-illegal-data" ).dialog( "open" );
+				return;
 			}
 			label = dataElement[labelField];
 			obj = {
 					value:value,
 					label:label
 				}
-			ARV.defaultData.BarGraph.push(obj);
+			dataArr.push(obj);
 		}
+		ARV.defaultData.BarGraph = dataArr;
 };
 ARV.updateCategoryArray =function(){
 	ARV.defaultCategories[0].category = [];
@@ -115,27 +127,36 @@ ARV.getDataArrayForSeries = function(seriesname){
 	var index = 0; 
 	for(index=0;index<ARV.dataJSON.data.length;index++){
 		var dataElement = ARV.dataJSON.data[index]; 
+		var value = parseInt(dataElement[seriesname]);
+		if(isNaN(value)){
+			$( "#dialog-illegal-data" ).dialog( "open" );
+			return undefined;
+		}
 		obj = {
-			value:dataElement[seriesname]
+			value:value
 		};
 		dataArr.push(obj);
 	}
 	return dataArr;
 };
 ARV.updateDatasetArray = function(){
-	ARV.defaultDataSet = [];
+	var dataSet = [];
 	var obj = {},seriesname;
 	var selected = $("#measureAxisList option:selected");
 	var index = 0; 
 	for(index=0;index<selected.length;index++){
 		seriesname = $(selected[index]).val();
 		var data = ARV.getDataArrayForSeries(seriesname);
+		if(!data){
+			return;
+		}
 		obj ={
 			seriesname : seriesname,
 			data : data
 		}
-		ARV.defaultDataSet.push(obj);
+		dataSet.push(obj);
 	}
+	ARV.defaultDataSet = dataSet;
 };
 ARV.modifyDataForMultiSeries = function(){
 	ARV.updateCategoryArray();

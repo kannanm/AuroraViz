@@ -41,12 +41,12 @@ ARV.commonProperties = {
     paletteColors: [],
     presetPalette: "Plain",
     isLineStyleStep: false,
-    pieRadius: "200",
+    pieRadius: "100",
     dotSize: "2",
     lineWidth: "2",
     lineColor: "#000000",
-    outerRadius: "200",
-    innerRadius: "100",
+    outerRadius: "100",
+    innerRadius: "50",
     interpolated: false,
     segmented: true,
     areaColor: "#1F77B4"
@@ -241,7 +241,7 @@ ARV.updateStyleProperties = function() {
         var elem = $("#" + prop);
         var value = elem.val();
         if (prop === "verGridShow" || prop === "horGridShow" || prop === "verGridLabelShow" || prop === "horGridLabelShow") {
-            value = elem.attr("checked");
+            value = elem.attr("checked")?true:false;
         }
         if (styles.hasOwnProperty(prop)) {
             ARV.graphDef.style[prop] = value;
@@ -254,7 +254,7 @@ ARV.updateGraphProperties = function() {
         var elem = $("#" + prop);
         var value = elem.val();
         if (prop === "toolTip" || prop === "showLabels" || prop === "showValues" || prop === "isLineStyleStep" || prop === "interpolated" || prop === "segmented") {
-            value = elem.attr("checked");
+            value = elem.attr("checked")?true:false;
         }
         if (ARV.graphDef.hasOwnProperty(prop) && value !== undefined) {
             ARV.graphDef[prop] = value;
@@ -415,9 +415,9 @@ ARV.init = function() {
         $('#presetPalette').append(option);
     }
     ARV.createSliders();
-    ARV.modifyJSON();
     ARV.addColorsDiv();
     ARV.addEventListeners();
+    $('#dataUpdater').trigger('click');
 };
 
 ARV.init();

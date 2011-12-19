@@ -39,17 +39,12 @@ AR.Bubble = function(parentDimension, panel, graphDef) {
             return (bubbleRadius(d[2]));
         });
     };
-    bubble.title(function() {
-        return AR.Utility.getToolTipText(graphDef.data, this.index);
+    bubble.title(function(d) {
+        return AR.Utility.getToolTipText(graphDef.data, this.index) || (graphDef.data[this.index].label + ", " +d[0] +", " +d[1] +", "+d[2]);
     });
     var showToolTip = function() {
         if (graphDef.toolTip) {
-            bubble.event("mouseover", pv.Behavior.tipsy({
-                gravity: function() {
-                    return ("s");
-                },
-                fade: true
-            }));
+        	AR.Utility.setToolTip(graphDef, bubble, "s");
         }
     };
     var showLabel = function() {

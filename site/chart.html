@@ -47,7 +47,7 @@
 				 	<select class="chzn-select" id="categoryAxisList"></select>
 
 					<label>Measure Axis</label> 
-				 	<select class="chzn-select" id="measureAxisList" multiple="true"></select>
+				 	<select class="chzn-select" id="measureAxisList" multiple="multiple"></select>
 				 	
 					<button id="dataUpdater">Apply</button>
 				</fieldset>
@@ -158,8 +158,8 @@
 							<legend>Options</legend>
 							<label>Type</label>
 							<select id="type">
-							  <option selected="selected" value="h">Horizontal</option >
-							  <option value="v"> Vertical </option>
+							  <option value="h">Horizontal</option >
+							  <option selected="selected" value="v"> Vertical </option>
 							</select>
 						</fieldset>
 
@@ -205,7 +205,7 @@
 
 							<label>Thickness</label>
 							<div class="slider" id="horAxisThicknessSlider"></div>
-							<input size="2" type="text" id="horAxisThickness" disabled="disabled" value="0" /> 
+							<input size="2" type="text" id="horAxisThickness" disabled="disabled" value="2" /> 
 
 							<label>Label X Axis</label> 
 							<input type="text" id="xAxisName" size="15" />
@@ -225,7 +225,7 @@
 
 							<label>Thickness</label>
 							<div class="slider" id="verAxisThicknessSlider"></div>
-							<input size="1" type="text" id="verAxisThickness" disabled="disabled" value="0" /> 
+							<input size="1" type="text" id="verAxisThickness" disabled="disabled" value="2" /> 
 				
 							<label>Label Y Axis</label> 
 							<input type="text" id="yAxisName" size="15" />
@@ -252,12 +252,10 @@
 						</fieldset>
 					</div>   
 				</div>
-			
-			
 			</div>
-
-		</div>
-		
+			<div id="dialog-illegal-data" title="Error" class="dialog">
+			<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>The measure axis can only have numbers. String values not allowed</p>
+			</div> 		
 		<script type="text/javascript" src="../lib/protovis/protovis-d3.3.js"></script>
 		<script type="text/javascript" src="../lib/jQuery/tipsy/jquery.tipsy.js"></script>
 		<script type="text/javascript" src="../lib/jQuery/tipsy/tipsy.js"></script>

@@ -26,7 +26,7 @@ ARV.getChartOptionsHTML = function(chartType) {
             '<div class="slider" id="lineWidthSlider"></div>',
             '<input size="8" type="text" id="lineWidth" value="2" disabled="disabled" /> <br />',
             '<label>Line Color: </label>',
-            '<input value="#2266bb" class="izzyColor" size="8" type="text" id="lineColor" /><br/>',
+            '<input value="#2266bb" class="colorPicker" size="8" type="text" id="lineColor" /><br/>',
             '</div>'].join(" "),
        multiLine: [
              '<div 	class="inline"><label> Step Graph: </label>',
@@ -41,21 +41,21 @@ ARV.getChartOptionsHTML = function(chartType) {
         
         pie: [
             '<label>Radius </label>',
-            '<input type="text" id="pieRadius" value="200"   size="5"></input>',
+            '<input type="text" id="pieRadius" value="100"   size="5"></input>',
             '</div>'].join(" "),
         bubble: [
             '</div>'].join(" "),
         donut: [
             '<div class="inline"><label>Inner Radius </label>',
-            '<input type="text" id="innerRadius" value="200" size="5"></input></div>',
+            '<input type="text" id="innerRadius" value="100" size="5"></input></div>',
             '<div class="inline"><label>Outer Radius </label>',
-            '<input type="text" id="outerRadius" value="100" size="5"></input></div>',
+            '<input type="text" id="outerRadius" value="50" size="5"></input></div>',
             '</div>'].join(" "),
         area: [
             '<div class="inline"><label> Interpolated </label>',
             '<input type="checkbox" id="interpolated"></input ></div> <br/>',
             '<label>Area Color: </label>',
-            '<input value="#1F77B4" class="izzyColor" size="8" type="text" id="areaColor" /><br/>',
+            '<input value="#1F77B4" class="colorPicker" size="8" type="text" id="areaColor" /><br/>',
             '</div>'].join(" "),
         multiArea: [
               '<div class="inline"><label> Interpolated </label>',
@@ -79,9 +79,9 @@ ARV.getChartOptionsHTML = function(chartType) {
                  '<option value="square">Square</option>',
                  '</select></div> <br/>',
                  '<label>Marker Color: </label>',
-                 '<input value="#cccccc" class="izzyColor" size="8" type="text" id="markerFillColor" /><br/>',
+                 '<input value="#cccccc" class="colorPicker" size="8" type="text" id="markerFillColor" /><br/>',
                  '<label>Measure Color: </label>',
-                 '<input value="#cfcfcf" class="izzyColor" size="8" type="text" id="measureFillColor" /><br/>',
+                 '<input value="#cfcfcf" class="colorPicker" size="8" type="text" id="measureFillColor" /><br/>',
                  ].join(" ")
     }[chartType];
     return chartOptionsHTML;
