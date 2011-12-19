@@ -106,7 +106,9 @@ AR.HBar = function(graphDef, data, parentDimension, panel, maxValue, color, seri
 		adjustLeft(parentDimension);
 		adjustBottom(parentDimension);
 	};
-
+	self.getHeight = function(){
+		return (parentDimension.height - 30) / (4 * self._noOfRecords);
+	}
 	self.adjustPosition(self._parentDimension);
 	self.adjustLabel(self._parentDimension);
 };
@@ -165,6 +167,9 @@ AR.VBar = function(graphDef, data, parentDimension, panel, maxValue, color, seri
 	};
 	self.adjustPosition(self._parentDimension);
 	self.adjustLabel(self._parentDimension);
+	self.getWidth = function(){
+		return (parentDimension.width - 30) / (4 * self._noOfRecords);
+	}
 };
 AR.VBar.prototype = AR.extend(AR.Bar);
 
@@ -202,7 +207,7 @@ AR.BarGraph = function(graphDef) {
 			if (dataset) {
 				for (i = 0; i < graphDef.dataset.length; i++) {
 					var noOfRecords = dataset.length * dataset[i].data.length;
-					panel = self._panel.add(pv.Panel).left(i * (self._dimension.width - 30) / (noOfRecords));
+					panel = self._panel.add(pv.Panel).left(i * (i!==0?bar.getWidth():0));
 					bar = new AR.VBar(graphDef, dataset[i].data, self._dimension, panel, maxValue, colors[i % colors.length], dataset[i].seriesname, i);
 				}
 			} else {
@@ -214,7 +219,7 @@ AR.BarGraph = function(graphDef) {
 			if (dataset) {
 				for (i = 0; i < graphDef.dataset.length; i++) {
 					var noOfRecords = dataset.length * dataset[i].data.length;
-					panel = self._panel.add(pv.Panel).bottom(i * (self._dimension.height - 30) / (noOfRecords));
+					panel = self._panel.add(pv.Panel).bottom(i * (i!==0?bar.getHeight():0));
 					bar = new AR.HBar(graphDef, dataset[i].data, self._dimension, panel, maxValue, colors[i % colors.length], dataset[i].seriesname, i);
 				}
 			} else {
