@@ -85,7 +85,6 @@ AR.addCSS = function(cssPath, pos) {
     posElem.appendChild(cssTag);
 };
 
-
 /**
  * @class
  * The basefunction for the graph initilization.
@@ -113,7 +112,7 @@ AR.Graph = function(graphDef) {
     self._verAxisLabel = undefined;
     self._horGrid = undefined;
     self._verGrid = undefined;
-    self._outerPanel = new pv.Panel().left(20).right(20).bottom(20).top(20);
+    self._outerPanel = new pv.Panel().left(50).right(50).bottom(50).top(50);
     self._panel = self._outerPanel.add(pv.Panel);
     self._panel.left(self._dimension.left).right(self._dimension.right).bottom(self._dimension.bottom).top(self._dimension.top);
     self._horAxis = self._panel.add(pv.Rule).bottom(0);
@@ -259,7 +258,8 @@ AR.Graph.prototype.setVerAxisLabelColor = function(color) {
 AR.Graph.prototype.setCaptionSize = function(size) {
     var self = this;
     if (self._caption) {
-        self._caption.font((size || "16") + "pt Arial");
+    	//Note: here we are scaling the size of the caption according to the size of the graph. The size is relative
+        self._caption.font(AR.Utility.getSize(self.__graphDef,"caption",size) + "px Arial");
     }
 };
 /**
@@ -270,7 +270,7 @@ AR.Graph.prototype.setCaptionSize = function(size) {
 AR.Graph.prototype.setHorAxisLabelSize = function(size) {
     var self = this;
     if (self._horAxisLabel) {
-        self._horAxisLabel.font((size || "12") + "pt Arial");
+        self._horAxisLabel.font(AR.Utility.getSize(self.__graphDef,"caption",size)  + "px Arial");
     }
 };
 /**
@@ -281,7 +281,7 @@ AR.Graph.prototype.setHorAxisLabelSize = function(size) {
 AR.Graph.prototype.setVerAxisLabelSize = function(size) {
     var self = this;
     if (self._verAxisLabel) {
-        self._verAxisLabel.font((size || "12") + "pt Arial");
+        self._verAxisLabel.font(AR.Utility.getSize(self.__graphDef,"caption",size)  + "px Arial");
     }
 };
 
@@ -336,7 +336,7 @@ AR.Graph.prototype.setXAxisName = function(name) {
     if (self._horAxisLabel) {
         self._horAxisLabel.text(name);
     } else {
-        self._horAxisLabel = self._panel.add(pv.Label).bottom(-50).text(name).textAlign("center");
+        self._horAxisLabel = self._outerPanel.add(pv.Label).bottom(0).text(name).textAlign("center");
     }
 };
 /**
@@ -349,7 +349,7 @@ AR.Graph.prototype.setYAxisName = function(name) {
     if (self._verAxisLabel) {
         self._verAxisLabel.text(name);
     } else {
-        self._verAxisLabel = self._panel.add(pv.Label).left(-30).text(name).textAlign("center").textAngle(-Math.PI / 2);
+        self._verAxisLabel = self._panel.add(pv.Label).left(-50).text(name).textAlign("center").textAngle(-Math.PI / 2);
     }
 };
 
@@ -384,7 +384,7 @@ AR.Graph.prototype.setHorGridShow = function(maxValue, scaleType) {
 AR.Graph.prototype.setHorGridLabelShow = function(status) {
     var self = this;
     if (self._horGrid && status === true) {
-        self._horGrid.anchor("left").add(pv.Label).text(self._y.tickFormat);
+        self._horGrid.anchor("left").add(pv.Label).text(self._y.tickFormat).font(AR.Utility.getSize(self.__graphDef,"gridLabels",15)  + "px Arial");
     }
 };
 
@@ -419,7 +419,7 @@ AR.Graph.prototype.setVerGridShow = function(maxValue, scaleType) {
 AR.Graph.prototype.setVerGridLabelShow = function(status) {
     var self = this;
     if (self._verGrid && status === true) {
-        self._verGrid.anchor("bottom").add(pv.Label).text(self._x.tickFormat);
+        self._verGrid.anchor("bottom").add(pv.Label).text(self._x.tickFormat).font(AR.Utility.getSize(self.__graphDef,"gridLabels",15)  + "px Arial");
     }
 };
 

@@ -35,9 +35,12 @@ AR.Bar = function(graphDef, data, parentDimension, panel, color, seriesname, ser
         }));
     }
     if (graphDef.showValues) {
-        this._bar.anchor(self instanceof AR.HBar ? "right" : "top").add(pv.Label).text(function() {
-            return data[this.index].value;
-        }).textBaseline(self instanceof AR.HBar ? "left" : "bottom");
+        this._bar.anchor(self instanceof AR.HBar ? "right" : "top").add(pv.Label)
+        		 .text(function() {
+        			 		return data[this.index].value;
+        		 		})
+        		 .textBaseline(self instanceof AR.HBar ? "left" : "bottom")
+        		 .font(AR.Utility.getSize(graphDef,"gridLabels",AR.constants.values.smallLabels.size) + "px Arial");
     }
     if (graphDef.presetPalette) {
         AR.Utility.setPalette(self._bar, AR.Utility.getPaletteColors(graphDef));
@@ -47,9 +50,9 @@ AR.Bar = function(graphDef, data, parentDimension, panel, color, seriesname, ser
     }
     if (graphDef.showLegends) {
         if (!seriesname) {
-            AR.Utility.addLegendToObject(self._bar, data);
+            AR.Utility.addLegendToObject(self._bar, data, graphDef);
         }
-        AR.Utility.createLegends(panel, seriesNumber, seriesname, color);
+        AR.Utility.createLegends(panel, seriesNumber, seriesname, color, graphDef);
     }
 };
 // TODO - Some kind of a factory that sets the following properties has to be

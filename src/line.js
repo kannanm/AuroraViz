@@ -46,7 +46,7 @@ AR.Line = function(parentDimension, panel, graphDef, step) {
     self.adjustValuePositions = function(parentDimension) {
         dots.anchor("bottom").add(pv.Label).text(function() {
             return graphDef.data[this.index].value;
-        });
+        }).font(AR.Utility.getSize(graphDef,"gridLabels",AR.constants.values.smallLabels.size) + "px Arial");;
     };
     self.adjustBottom = function(parentDimension) {
         var pointHeight = pv.Scale.linear(0, AR.Utility.findMax(graphDef.data)).range(0, parentDimension.height - 40);
@@ -80,7 +80,7 @@ AR.Line = function(parentDimension, panel, graphDef, step) {
         line.interpolate("step-after");
     }
     if (graphDef.showLegends) {
-        AR.Utility.addLegendToObject(dots, graphDef.data);
+        AR.Utility.addLegendToObject(dots, graphDef.data, graphDef);
     }
 };
 
@@ -134,7 +134,7 @@ AR.MLine = function(parentDimension, panel, graphDef, data, maxValue, step, colo
     self.adjustValuePositions = function(parentDimension) {
         dots.anchor("bottom").add(pv.Label).text(function() {
             return data[this.index].value;
-        });
+        }).font(AR.Utility.getSize(graphDef,"gridLabels",AR.constants.values.smallLabels.size) + "px Arial");
     };
     self.adjustBottom = function(parentDimension) {
         var pointHeight = pv.Scale.linear(0, maxValue).range(0, parentDimension.height - 40);
@@ -169,7 +169,7 @@ AR.MLine = function(parentDimension, panel, graphDef, data, maxValue, step, colo
         line.strokeStyle(color);
     }
     if (graphDef.showLegends) {
-        AR.Utility.createLegends(panel, seriesNumber, seriesname, color);
+        AR.Utility.createLegends(panel, seriesNumber, seriesname, color, graphDef);
     }
 };
 

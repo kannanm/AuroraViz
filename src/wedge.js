@@ -21,7 +21,7 @@ AR.Wedge = function(parentDimension, panel, graphDef) {
     var self = this;
     var adjustRadius = function(parentDimension) {
         if (graphDef.pieRadius !== null) {
-            wedge.outerRadius(graphDef.pieRadius);
+            wedge.outerRadius(AR.Utility.getSize(graphDef,"wedge",graphDef.pieRadius));
         } else {
             wedge.pieRadius(function() {
                 return (parentDimension.width < parentDimension.height ? (parentDimension.width - 30) / 2 : (parentDimension.height - 40) / 2);
@@ -84,7 +84,7 @@ AR.Wedge = function(parentDimension, panel, graphDef) {
     };
 
     self.showLegends = function() {
-        AR.Utility.addLegendToObject(wedge, graphDef.data);
+        AR.Utility.addLegendToObject(wedge, graphDef.data, graphDef);
     };
     wedge.data(pv.normalize(dataValues));
     properties.forEach(function(property) {
@@ -178,7 +178,7 @@ AR.Donut = function(parentDimension, panel, graphDef) {
 
     var adjustRadius = function(parentDimension) {
         if (graphDef.outerRadius !== null) {
-            wedge.outerRadius(graphDef.outerRadius);
+            wedge.outerRadius(AR.Utility.getSize(graphDef,"wedge",graphDef.outerRadius));
         } else {
             wedge.outerRadius(function() {
                 return (parentDimension.width < parentDimension.height ? (parentDimension.width - 30) / 2 : (parentDimension.height - 40) / 2);
@@ -186,7 +186,7 @@ AR.Donut = function(parentDimension, panel, graphDef) {
         }
 
         if (graphDef.innerRadius !== null) {
-            wedge.innerRadius(graphDef.innerRadius);
+            wedge.innerRadius(AR.Utility.getSize(graphDef,"wedge",graphDef.innerRadius));
         } else {
             wedge.innerRadius(function() {
                 return (parentDimension.width < parentDimension.height ? ((parentDimension.width - 30) / 2) - 40 : ((parentDimension.height - 40) / 2)) - 40;
@@ -230,7 +230,7 @@ AR.Donut = function(parentDimension, panel, graphDef) {
         AR.Utility.setToolTip(graphDef, wedge, "s");
     }
     self.showLegends = function() {
-        AR.Utility.addLegendToObject(wedge, graphDef.data);
+        AR.Utility.addLegendToObject(wedge, graphDef.data, graphDef);
     };
     self.adjustPosition(parentDimension);
     properties.forEach(function(property) {

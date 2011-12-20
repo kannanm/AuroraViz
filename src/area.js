@@ -101,7 +101,8 @@ AR.StackedAreaGraph = function(graphDef) {
         self._areaObj.anchor("top").add(pv.Label).text(function(d) {
             var dataObj = dataArray[this.parent.index];
             return (dataObj[this.index].y);
-        }).textBaseline("bottom");
+        }).textBaseline("bottom")
+        .font(AR.Utility.getSize(graphDef,"gridLabels",AR.constants.values.smallLabels.size) + "px Arial");
     }
     if (graphDef.showLabels) {
         var labels = self._areaObj.add(pv.Label).text(function() {
@@ -112,7 +113,7 @@ AR.StackedAreaGraph = function(graphDef) {
     if (graphDef.showLegends) {
         var i = 0;
         for (i = 0; i < dataset.length; i++) {
-            AR.Utility.createLegends(self._panel, i, dataset[i].seriesname, colors[i % dataset.length]);
+            AR.Utility.createLegends(self._panel, i, dataset[i].seriesname, colors[i % dataset.length],graphDef);
         }
     }
     if (graphDef.interpolated) {
@@ -211,14 +212,14 @@ AR.Area = function(parentDimension, panel, graphDef, dataObj, color, seriesname,
     if (graphDef.showValues) {
         var values = self._areaObj.anchor("top").add(pv.Label).textBaseline("bottom").text(function() {
             return dataObj[this.index].value;
-        });
+        }).font(AR.Utility.getSize(graphDef,"gridLabels",AR.constants.values.smallLabels.size) + "px Arial");;
     }
     AR.Utility.setToolTip(graphDef, self._areaObj, "s");
     self.setAreaAttributes();
 
     //Note: Legends for a single series area graph does no make sense. Thus not implemented
     if (graphDef.showLegends) {
-        AR.Utility.createLegends(panel, seriesNumber, seriesname, color);
+        AR.Utility.createLegends(panel, seriesNumber, seriesname, color, graphDef);
     }
 };
 

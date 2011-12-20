@@ -62,7 +62,6 @@ AR.Bubble = function(parentDimension, panel, graphDef) {
                 return (d[2]);
             });
             AR.Utility.setLabelProperties(graphDef, values, false);
-
         }
     };
     self.adjustPosition = function(parentDimension) {
@@ -82,7 +81,7 @@ AR.Bubble = function(parentDimension, panel, graphDef) {
         var data = graphDef.data;
         var colors = AR.Utility.getPaletteColors(graphDef);
         for (i = 0; i < data.length; i++) {
-            AR.Utility.createLegends(panel, i, data[i].label, colors[i % data.length]);
+            AR.Utility.createLegends(panel, i, data[i].label, colors[i % data.length], graphDef);
         }
 
     }

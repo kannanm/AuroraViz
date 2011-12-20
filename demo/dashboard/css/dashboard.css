@@ -26,15 +26,16 @@ body {
 }
 
 .component {
-	padding: 10px;
 	cursor: move;
+	position:relative;
 }
 
 .element-container {
 	background: none repeat scroll 0 0 #fbfbfb;
-	border: 1px solid #E3EAEE;
+	border: 3px solid #E3EAEE;
 	border-style: dashed;
 	display: inline-block;
+	position:absolute;
 }
 
 .horizontal-rule {
@@ -52,7 +53,7 @@ body {
 }
 
 .heading {
-	font-size: 30pt;
+	font-size:x-large;
 	font-weight: bold;
 }
 
@@ -68,9 +69,4 @@ body {
 
 .clear-both {
 	clear: both;
-}
-#addReports{
-	 -webkit-border-radius: 6px;
-	 -moz-border-radius: 6px;
-	 border-radius: 6px;
 }

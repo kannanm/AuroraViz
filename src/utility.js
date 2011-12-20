@@ -168,21 +168,21 @@ AR.Utility.setLabelProperties = function(graphDef, labelObj, isHorizontal) {
     var properties = AR.Graph.labelProperties;
     properties.forEach(function(prop) {
         var upcasedProp = prop.substring(0, 1).toUpperCase() + prop.substring(1);
-        AR.Utility["set" + upcasedProp](graphDef[prop], labelObj, isHorizontal);
+        AR.Utility["set" + upcasedProp](graphDef[prop], labelObj, graphDef, isHorizontal);
     });
 };
 
-AR.Utility.setLabelFontSize = function(size, labelObj) {
+AR.Utility.setLabelFontSize = function(size, labelObj, graphDef) {
     if (labelObj) {
-        labelObj.font(size + "px Arial");
+        labelObj.font(AR.Utility.getSize(graphDef,"gridLabels",size) + "px Arial");
     }
 };
-AR.Utility.setLabelFontColor = function(color, labelObj) {
+AR.Utility.setLabelFontColor = function(color, labelObj, graphDef) {
     if (labelObj) {
         labelObj.textStyle(color);
     }
 };
-AR.Utility.setLabelRotateAngle = function(angle, labelObj, isHorizontal) {
+AR.Utility.setLabelRotateAngle = function(angle, labelObj,graphDef, isHorizontal) {
     angle = parseInt(angle, 10);
     if (labelObj) {
         labelObj.textAngle(angle / 180 * Math.PI);
@@ -206,26 +206,60 @@ AR.Utility.setToolTip = function(graphDef, element, direction) {
     }
 };
 
-AR.Utility.createLegends = function(panel, index, text, color) {
+AR.Utility.createLegends = function(panel, index, text, color,graphDef) {
     if (text) {
-        var dots = panel.add(pv.Dot).shape("square").top(-20).left(function() {
-            return index * 100;
-        }).fillStyle(color);
+        var dots = panel.add(pv.Dot).shape("square").top(AR.constants.values.legend.top)
+        				.fillStyle(color)
+        				.shapeRadius(AR.Utility.getSize(graphDef,"legend",AR.constants.values.legend.size));
+        AR.Utility.setLeftOfLegends(dots,graphDef,index);
         dots.anchor("right").add(pv.Label).text(function() {
             return text;
-        });
+        }).font(AR.Utility.getSize(graphDef,"gridLabels",AR.constants.values.smallLabels.size) + "px Arial");
     }
 };
 
 // TODO the legends are being added to the object. This if any operation is
 // performed on the object it will effect the
 // legend also. Thus separate out legends.
-AR.Utility.addLegendToObject = function(object, data) {
-    var dots = object.add(pv.Dot).shape("square").top(-20).left(function() {
-        return this.index * 100;
-    });
-    dots.anchor("right").add(pv.Label).text(function() {
+AR.Utility.addLegendToObject = function(object, data, graphDef) {
+    var dots = object.add(pv.Dot).shape("square").top(AR.constants.values.legend.top)
+    				 .shapeRadius(AR.Utility.getSize(graphDef,"legend",AR.constants.values.legend.size));
+   AR.Utility.setLeftOfLegends(dots,graphDef);
+   dots.anchor("right").add(pv.Label).text(function() {
         return data[this.index].label;
-    });
+    }).font(AR.Utility.getSize(graphDef,"gridLabels",AR.constants.values.smallLabels.size) + "px Arial");
 
+};
+AR.Utility.setLeftOfLegends = function(dots, graphDef,index){
+	var width = graphDef.width;
+	// value is kept assuming that maximum no. of legends is numberOfLegends
+	var n = width/AR.constants.values.legend.numberOfLegends;  
+	dots.left(function(){
+		var l = (index || this.index) * n;
+//	TODO: write the condition if the left of legend is more than the width move it to next line. Not working when tried to implement
+//		if(l>=width-40){
+//			this.top(this.top()-10);
+//		}
+		return l;
+	});
+}
+AR.constants = {};
+AR.constants.values = {
+		legend:{
+			top:-20,
+			size:15,
+			numberOfLegends: 6
+		},
+		smallLabels :{
+			size:15
+		}
+}
+AR.constants.scale ={
+	caption:1/(240000),
+	gridLabels:1/(400000),
+	wedge:1/240000,
+	legend:1/1000000
+};
+AR.Utility.getSize = function(graphDef,element,value){
+	return AR.constants.scale[element]*value*graphDef.height*graphDef.width;
 };
