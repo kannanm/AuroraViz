@@ -50,16 +50,11 @@ ARV.setReportResizable = function(){
 			var graphDef = ARV.originalGraphData[containerID].graphDef;
 			graphDef.width =  ui.size.width-75;
 			graphDef.height = ui.size.height-75;
+			$(this).html("");
 			ARV.showGraph(graphDef.graphType , containerID, graphDef);
-			ARV.setReportResizable();
-/////////////THe following code applies transform to scale but since we are rendering the graph again and again so no need of transformation just set width and height///////////////////////
-//			var ratio =ui.size.width/ARV.originalReportSize[containerID].width;
-//			var svg = $(this).children("svg");
-//			var g = $(svg[0]).children();
-//			var i=0;
-//			for(i=0;i<g.length;i++){
-//				g[i].setAttribute("transform","scale("+ratio+")");
-//				}
+		//TODO: Following is a cheap hach to make the report resizable again. Change it
+		$('#saveBtn').trigger('click');
+		$('#editBtn').trigger('click');
 		}
 		
 	});

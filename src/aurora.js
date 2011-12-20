@@ -296,7 +296,7 @@ AR.Graph.prototype.setCaption = function(newVal) {
     if (self._caption) {
         self._caption.text(newVal);
     } else {
-        self._caption = self._panel.add(pv.Label).text(newVal).left(self._dimension.width / 2).top(-50).textAlign("center");
+        self._caption = self._outerPanel.add(pv.Label).text(newVal).left(self._dimension.width / 2 + 40).top(0).textAlign("center").textBaseline("top");
     }
 };
 
