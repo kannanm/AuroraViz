@@ -13,7 +13,6 @@
  */
 
 //TODO : Merge the piegraph and the donut graph because the only difference is having an inner radius
-
 AR.Wedge = function(parentDimension, panel, graphDef) {
     var properties = ["values", "labels", "legends"];
     var wedge = panel.add(pv.Wedge);
@@ -83,9 +82,9 @@ AR.Wedge = function(parentDimension, panel, graphDef) {
         adjustLabelPosition(parentDimension, graphDef.labelFontSize, 1);
         AR.Utility.setLabelProperties(graphDef, valueLabels, false);
     };
-    
-    self.showLegends = function(){
-    	AR.Utility.addLegendToObject(wedge,graphDef.data);
+
+    self.showLegends = function() {
+        AR.Utility.addLegendToObject(wedge, graphDef.data);
     };
     wedge.data(pv.normalize(dataValues));
     properties.forEach(function(property) {
@@ -102,7 +101,7 @@ AR.Wedge = function(parentDimension, panel, graphDef) {
     }
     //TODO: add tool tip at the right place
     if (graphDef.toolTip) {
-    	AR.Utility.setToolTip(graphDef,wedge,"s");
+        AR.Utility.setToolTip(graphDef, wedge, "s");
     }
     self.adjustPosition(parentDimension);
 };
@@ -228,10 +227,10 @@ AR.Donut = function(parentDimension, panel, graphDef) {
 
     //TODO: add tool tip at the right place
     if (graphDef.toolTip && graphDef.toolTip === 1) {
-    	AR.Utility.setToolTip(graphDef,wedge,"s");
+        AR.Utility.setToolTip(graphDef, wedge, "s");
     }
-    self.showLegends = function(){
-    	AR.Utility.addLegendToObject(wedge,graphDef.data);
+    self.showLegends = function() {
+        AR.Utility.addLegendToObject(wedge, graphDef.data);
     };
     self.adjustPosition(parentDimension);
     properties.forEach(function(property) {

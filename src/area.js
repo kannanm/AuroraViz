@@ -27,8 +27,8 @@ AR.StackedAreaGraph = function(graphDef) {
         return sum;
     }());
 
-	/**
-	 * @private
+    /**
+     * @private
      * Total number of records in the data set
      */
     var noOfRecords = (function() {
@@ -41,9 +41,9 @@ AR.StackedAreaGraph = function(graphDef) {
         return records;
     }());
 
-	/**
-	 * It is an array of arrays. The inner array representing the data in each category. 
-	 */
+    /**
+     * It is an array of arrays. The inner array representing the data in each category.
+     */
     var dataArray = (function() {
         var arr = [],
             innerArr, i, j, obj;
@@ -60,7 +60,7 @@ AR.StackedAreaGraph = function(graphDef) {
         }
         return arr;
     }());
-	
+
     self.setVerGridShow = function(status) {
         if (status === true) {
             AR.Graph.prototype.setVerGridShow.apply(self, [dataset.length, AR.Utility.scale.linear]);
@@ -76,9 +76,9 @@ AR.StackedAreaGraph = function(graphDef) {
     var xScale = pv.Scale.linear(0, noOfRecords).range(0, self._dimension.width - 40),
         yScale = pv.Scale.linear(0, sumOfMaxValues).range(0, self._dimension.height - 40);
 
-	/*
-	 * The function creates the stack area Object
-	 */
+/*
+     * The function creates the stack area Object
+     */
     var createStackedAreaGraph = function() {
         self._areaObj = self._panel.add(pv.Layout.Stack).layers(dataArray).x(function(d) {
             return xScale(d.x) + AR.AreaConstants.xOffset;
@@ -104,16 +104,16 @@ AR.StackedAreaGraph = function(graphDef) {
         }).textBaseline("bottom");
     }
     if (graphDef.showLabels) {
-        var labels = self._areaObj.add(pv.Label).text(function(){
-        	return graphDef.categories[0].category[this.index].label;
+        var labels = self._areaObj.add(pv.Label).text(function() {
+            return graphDef.categories[0].category[this.index].label;
         }).bottom(0).textBaseline("top");
         AR.Utility.setLabelProperties(graphDef, labels, false);
     }
-    if(graphDef.showLegends){
-    	var i = 0;
-    	for(i=0;i<dataset.length;i++){
-    		AR.Utility.createLegends(self._panel,i,dataset[i].seriesname,colors[i%dataset.length]);	
-    	}
+    if (graphDef.showLegends) {
+        var i = 0;
+        for (i = 0; i < dataset.length; i++) {
+            AR.Utility.createLegends(self._panel, i, dataset[i].seriesname, colors[i % dataset.length]);
+        }
     }
     if (graphDef.interpolated) {
         self._areaObj.interpolate("step-after");
@@ -134,20 +134,20 @@ AR.StackedAreaGraph.prototype = AR.extend(AR.Graph);
  *            [graphDef] An object containing the graph properties and the data
  * @param {object}
  *            [dataObj] An object containing the graph data
- * @param {object} 
+ * @param {object}
  *            [color] If defined then the fill color of area object will be set to color
- * @param {object} 
+ * @param {object}
  *            [seriesname] If given defined then this area object is a part for multi series area graph and series name is <b>seriesname</b>
- * 
+ *
  * @author Aditya Gaur
  */
- 
+
 AR.Area = function(parentDimension, panel, graphDef, dataObj, color, seriesname, seriesNumber) {
     var self = this;
     self._areaObj = panel.add(pv.Area);
     var dataArr = AR.Utility.getDataArray(dataObj);
     self._areaObj.data(dataArr);
-    /*
+/*
      * Sets the height of the area object
      */
     var setHeight = function() {
@@ -157,9 +157,9 @@ AR.Area = function(parentDimension, panel, graphDef, dataObj, color, seriesname,
             return xScale(d);
         });
     };
-   
-    /*
-     * 
+
+/*
+     *
      * Sets the left property of the area object
      */
     var setLeft = function() {
@@ -170,16 +170,16 @@ AR.Area = function(parentDimension, panel, graphDef, dataObj, color, seriesname,
         });
     };
 
-	/*
+/*
      * Sets the bottom property of the area object
      */
     var setBottom = function() {
         self._areaObj.bottom(0);
     };
 
-	/*
-	 * Sets the fill color of the area object if <b>color</b> is defined then set to <b>color</b>
-	 */
+/*
+     * Sets the fill color of the area object if <b>color</b> is defined then set to <b>color</b>
+     */
     var setFillStyle = function() {
         self._areaObj.strokeStyle(color || graphDef.areaColor);
         self._areaObj.fillStyle(function() {
@@ -215,10 +215,10 @@ AR.Area = function(parentDimension, panel, graphDef, dataObj, color, seriesname,
     }
     AR.Utility.setToolTip(graphDef, self._areaObj, "s");
     self.setAreaAttributes();
-    
+
     //Note: Legends for a single series area graph does no make sense. Thus not implemented
-    if(graphDef.showLegends){
-    	AR.Utility.createLegends(panel,seriesNumber,seriesname,color);
+    if (graphDef.showLegends) {
+        AR.Utility.createLegends(panel, seriesNumber, seriesname, color);
     }
 };
 

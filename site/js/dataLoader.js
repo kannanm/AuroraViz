@@ -17,20 +17,20 @@ ARV.dataJSON = {
 		      {
 			    company:"Samsung",
 			    sales:24,
-			    revenue:21,
+			    revenue:12,
 			    profit:20
 			   },
 			   {
 			    company:"Philips",
-			    sales:42,
-			    revenue:22,
-			    profit:10
+			    sales:20,
+			    revenue:15,
+			    profit:7
 			   },
 			   {
 			    company:"GE",
-			    sales:12,
-			    revenue:2,
-			    profit:1
+			    sales:55,
+			    revenue:34,
+			    profit:25
 			   },
 			 ]
 };

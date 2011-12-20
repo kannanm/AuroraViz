@@ -40,11 +40,11 @@ AR.Bubble = function(parentDimension, panel, graphDef) {
         });
     };
     bubble.title(function(d) {
-        return AR.Utility.getToolTipText(graphDef.data, this.index) || (graphDef.data[this.index].label + ", " +d[0] +", " +d[1] +", "+d[2]);
+        return AR.Utility.getToolTipText(graphDef.data, this.index) || (graphDef.data[this.index].label + ", " + d[0] + ", " + d[1] + ", " + d[2]);
     });
     var showToolTip = function() {
         if (graphDef.toolTip) {
-        	AR.Utility.setToolTip(graphDef, bubble, "s");
+            AR.Utility.setToolTip(graphDef, bubble, "s");
         }
     };
     var showLabel = function() {
@@ -77,14 +77,14 @@ AR.Bubble = function(parentDimension, panel, graphDef) {
     if (graphDef.presetPalette) {
         AR.Utility.setPalette(bubble, AR.Utility.getPaletteColors(graphDef));
     }
-    if(graphDef.showLegends){
-    	var i=0;
-    	var data = graphDef.data;
-    	var colors = AR.Utility.getPaletteColors(graphDef);
-    	for(i=0;i<data.length;i++){
-    		AR.Utility.createLegends(panel,i,data[i].label,colors[i%data.length]);
-    	}
-    	
+    if (graphDef.showLegends) {
+        var i = 0;
+        var data = graphDef.data;
+        var colors = AR.Utility.getPaletteColors(graphDef);
+        for (i = 0; i < data.length; i++) {
+            AR.Utility.createLegends(panel, i, data[i].label, colors[i % data.length]);
+        }
+
     }
 };
 

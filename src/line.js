@@ -79,8 +79,8 @@ AR.Line = function(parentDimension, panel, graphDef, step) {
     if (step === true) {
         line.interpolate("step-after");
     }
-    if(graphDef.showLegends){
-    	AR.Utility.addLegendToObject(dots,graphDef.data);
+    if (graphDef.showLegends) {
+        AR.Utility.addLegendToObject(dots, graphDef.data);
     }
 };
 
@@ -168,8 +168,8 @@ AR.MLine = function(parentDimension, panel, graphDef, data, maxValue, step, colo
     if (color) {
         line.strokeStyle(color);
     }
-    if(graphDef.showLegends){
-    	AR.Utility.createLegends(panel,seriesNumber,seriesname,color);
+    if (graphDef.showLegends) {
+        AR.Utility.createLegends(panel, seriesNumber, seriesname, color);
     }
 };
 
@@ -207,7 +207,7 @@ AR.LineGraph = function(graphDef) {
         for (i = 0; i < graphDef.dataset.length; i++) {
             var noOfRecords = dataset.length * dataset[i].data.length;
             panel = self._panel.add(pv.Panel).left((self._dimension.width - 30) / (noOfRecords));
-            line = new AR.MLine(self._dimension, panel, graphDef, dataset[i].data, maxValue, flag, colors[i % colors.length],dataset[i].seriesname,i);
+            line = new AR.MLine(self._dimension, panel, graphDef, dataset[i].data, maxValue, flag, colors[i % colors.length], dataset[i].seriesname, i);
         }
     } else {
         line = new AR.Line(self._dimension, self._panel, graphDef, flag);

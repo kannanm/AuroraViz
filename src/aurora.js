@@ -491,7 +491,6 @@ AR.Graph.prototype.render = function render(div) {
 //        }
 //    }    
 //}());
-
 /**
  * Sets the horizontal axis color
  * @param {string}
