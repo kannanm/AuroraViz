@@ -234,3 +234,6 @@ fieldset {
     padding:5px;
 }
 
+#tableDisplay{
+	overflow:scroll;
+}
