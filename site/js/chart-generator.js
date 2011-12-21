@@ -306,7 +306,7 @@ ARV.showGraph = function(graphName) {
     graph.render("chart");
 };
 
-izzyColor = function(){
+ARV.initializeColorPicker = function(){
 	$(".colorPicker").miniColors({
 				change:function(hex,rgb){
 					ARV.modifyJSON();
@@ -326,7 +326,7 @@ ARV.addColorsDiv = function() {
     }
     colorsDiv.append('<button id="addColorBtn" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-plus"></span></button>');
 
-    izzyColor();
+    ARV.initializeColorPicker();
 };
 
 ARV.createSliders = function() {
@@ -367,7 +367,7 @@ ARV.addEventListeners = function() {
     $("#addColorBtn").live("click", function() {
         $(this).before('<input value="#ffffff" class="colorInput colorPicker" size="8" type="text" id="color' + ARV.paletteColorCounter + '"/>');
         $(this).before('<button id="color' + ARV.paletteColorCounter+++'"  class="delColorBtn">x</button><br/>');
-        izzyColor();
+        ARV.initializeColorPicker();
     });
 
     $("#presetPalette option").click(function() {
@@ -383,26 +383,26 @@ ARV.addEventListeners = function() {
         var selectedVal = $("#chartTypes option:selected").attr("value");
         $("dataDiv").html("");
         $(".tipsy").remove();
-        if (selectedVal !== "select") {
+        if (selectedVal === "table"){
+        	ARV.refreshTable();
+        }else if (selectedVal !== "select" ) {
             $("#dataDiv").html(ARV.con[selectedVal + "ChartOptions"])
-        } else {
+        }else {
             $("#dataDiv").html("Please select a chart");
         }
         ARV.createSliders();
-        izzyColor();
+        ARV.initializeColorPicker();
 
     });
 
     $("#accordion").change(function() {
-        ARV.modifyJSON();
+    	ARV.refreshGraph();
     });
     $("#accordion input").keyup(function() {
-        console.log("changed");
-        ARV.modifyJSON();
+    	ARV.refreshGraph();
     });
     $("#colors").live("click", function() {
-        console.log("changed");
-        ARV.modifyJSON();
+    	ARV.refreshGraph();
     });
 
 };
@@ -421,5 +421,22 @@ ARV.init = function() {
     $('#dataUpdater').trigger('click');
 };
 
+ARV.refreshTable = function(){
+	var table = $("<div/>").attr("id","tableDiv");
+	var title = $("<label/>").html($("#caption").val()).addClass("tableHeading");
+	var div = $("<div/>").attr("id","tableCont");
+	$("#chart").html("");
+	table.append(title);
+	table.append(div);
+	$("#chart").append(table);
+	ARV.grid = new Slick.Grid("#tableCont", ARV.TableData, ARV.TableColumns, ARV.gridOptions);
+}
+ARV.refreshGraph = function(){
+	var selectedVal = $("#chartTypes option:selected").attr("value");
+	if(selectedVal !== "table"){
+		ARV.modifyJSON();
+	}
+
+};
 ARV.init();
 

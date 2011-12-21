@@ -136,7 +136,7 @@
 							<div class="slider" id="labelRotateAngleSlider"></div>
 							<input size="8" type="text" id="labelRotateAngle" disabled="disabled" value="0" />
 						</fieldset>
-
+	
 						<fieldset>
 							<legend>Other</legend>
 							
@@ -159,6 +159,7 @@
 							<legend>Chart type</legend>
 							<select name="chartTypes" id="chartTypes">
 							<option value="select">Select a Chart</option>
+							<option value="table">Table</option>
 							<option value="Bar" selected="selected">Bar Chart</option>
 							<option value="Line">Line Chart</option>
 							<option value="Pie">Pie Chart</option>
@@ -295,13 +296,17 @@
 		<script src="lib/slickgrid/plugins/slick.rowselectionmodel.js"></script>
 		<script src="lib/slickgrid/slick.editors.js"></script>
 		<script src="lib/slickgrid/slick.grid.js"></script>
+		
 		<script src="lib/chosen/chosen.jquery.js" type="text/javascript"></script>
 
 		<script type="text/javascript" src="lib/minicolors/jquery.miniColors.min.js"></script>
+		<script type="text/javascript" src="lib/jlinq/jlinq.js"></script>
+		
 		<script type="text/javascript" src="js/constants.js"></script>
 		<script type="text/javascript" src="js/dataLoader.js"></script>
 		<script type="text/javascript" src="js/chart-generator.js"></script>
       
+		
 		
 		<script type="text/javascript">
 			$(function(){

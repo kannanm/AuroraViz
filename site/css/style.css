@@ -20,4 +20,19 @@ input.editor-text {
 	outline: 0;
 	padding: 0;
 }
-
+#tableDiv{
+	margin : 4em 4em 4em 4em;
+}
+#tableCont{
+	width:500px; 
+}
+.slick-header-columns{
+	border : 1px solid #cccccc;
+}
+.slick-column-name{
+	font-weight:bold;
+}
+.tableHeading{
+	text-align: center;
+	color:black;
+}

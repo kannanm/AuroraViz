@@ -2,10 +2,10 @@
 ARV.dataJSON = {
 		id: "4ed630d8ed9be9723687620d",
 		columns:[
-					{id:"company", name:"Company", field:"company", width:120, editor:TextCellEditor},
-		            {id:"sales", name:"Sales", field:"sales", width:80, editor:TextCellEditor},
-					{id:"revenue", name:"Revenue", field:"revenue", width:80,editor:TextCellEditor},
-					{id:"profit", name:"Profit", field:"profit", width:80,editor:TextCellEditor},
+					{id:"company", name:"Company", field:"company",   editor:TextCellEditor},
+		            {id:"sales", name:"Sales", field:"sales",   editor:TextCellEditor},
+					{id:"revenue", name:"Revenue", field:"revenue",  editor:TextCellEditor},
+					{id:"profit", name:"Profit", field:"profit",  editor:TextCellEditor},
 				],
 		data:[
 		      {
@@ -34,20 +34,47 @@ ARV.dataJSON = {
 			   },
 			 ]
 };
-var options = {
+ARV.editableGridOptions = {
 		editable: true,
 		enableAddRow: true,
 		enableCellNavigation: true,
 		enableColumnReorder:true,
 		asyncEditorLoading: false,
         autoEdit: false,
+        autoHeight:true
 	};
-	
+ARV.gridOptions = {
+	enableCellNavigation: true,
+	enableColumnReorder:true,
+	autoHeight:true,
+	forceFitColumns:true
+};
+
+ARV.createDataForTable = function() {
+	var i,label;
+	var categoryLabel = $("#categoryAxisList option:selected").val();
+	var measureLabels = $("#measureAxisList option:selected");
+	var columns = ARV.dataJSON.columns;
+	ARV.TableColumns = [];
+	ARV.TableData = [];
+//	for(i=0; i<ARV.dataJSON.columns.length; i++){
+//		ARV.TableColumns.push(ARV.dataJSON.columns[i]);
+//	}
+	for(i=0; i<ARV.dataJSON.data.length; i++){
+		ARV.TableData.push(ARV.dataJSON.data[i]);
+	}
+	ARV.TableColumns.push(jlinq.from(columns).equals("field",categoryLabel).select()[0]);
+	for(i = 0 ;i< measureLabels.length ;i++){
+		label = $(measureLabels[i]).val();
+		ARV.TableColumns.push(jlinq.from(columns).equals("field",label).select()[0]);
+	}
+};
+
 var data = ARV.dataJSON.data;
 var columns = ARV.dataJSON.columns;
 var i = 0;
 var option;
-ARV.grid = new Slick.Grid("#dataGrid", data, columns, options);
+ARV.grid = new Slick.Grid("#dataGrid", data, columns, ARV.editableGridOptions);
 ARV.grid.setSelectionModel(new Slick.CellSelectionModel());
 ARV.grid.onAddNewRow.subscribe(function(e, args) {
     var item = args.item;
@@ -199,5 +226,7 @@ $("#dataUpdater").click(function(){
 	catch(e){
 		alert(e);
 	}
-	ARV.modifyJSON();
+	ARV.createDataForTable();
+	ARV.refreshTable();
+	ARV.refreshGraph();
 });
