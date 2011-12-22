@@ -12,6 +12,15 @@ AR.Utility.scale = {
     "ordinal": "ordinal",
     "log": "log"
 };
+
+AR.Utility.isArray= function(a){
+	return (Object.prototype.toString.apply(a) === '[object Array]');
+};
+
+AR.Utility.isNumber = function(value) { 
+	return value.toFixed && value.toExponential; 
+};
+
 AR.Utility.findMax = function(data) {
     var max = data[0].value;
     data.forEach(function(data) {
