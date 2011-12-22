@@ -254,7 +254,7 @@ AR.BarGraph = function(graphDef) {
     };
     createBars[graphDef.type || "v"]();
 
-    this.setWidth = function(width) {
+  this.setWidth = function(width) {
         AR.Graph.prototype.setWidth.call(self, width);
         bar.adjustPosition(self._dimension);
         setRules();

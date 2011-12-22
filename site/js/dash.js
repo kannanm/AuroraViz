@@ -45,12 +45,19 @@ $(function(){
     
     self.setClick = function(type){
 		$('.item[data-type='+type+']').click(function(){
-			window.location.href = "chart.html";
+			window.location.href = {
+					dashboard : "dashboard/create-dashboard.html",
+					file : "chart.html",
+					chart : "chart.html"
+			}[type];
 		});
 
     }
     self.setDefaultClick = function(){
     	self.setClick('chart');
+    	self.setClick('dashboard');
+    	self.setClick('file');
+    	
     }
     self.chooseFile = function(){
     

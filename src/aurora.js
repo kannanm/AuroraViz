@@ -365,13 +365,11 @@ AR.Graph.prototype.setYAxisName = function(name) {
 
 AR.Graph.prototype.setHorGridShow = function(maxValue, scaleType) {
     var self = this;
-    var y;
+    self._y = pv.Scale[scaleType](0, maxValue).range(0, self._dimension.height - 40);
     if (!self._horGrid) {
-        self._y = pv.Scale[scaleType](0, maxValue).range(0, self._dimension.height - 40);
         self._horGrid = self._panel.add(pv.Rule);
         self._horGrid.data(self._y.ticks().splice(1, self._y.ticks().length)).bottom(self._y);
     } else {
-        self._y = pv.Scale.linear(0, maxValue).range(0, self._dimension.height - 40);
         self._horGrid.bottom(self._y);
     }
 };
@@ -400,13 +398,11 @@ AR.Graph.prototype.setHorGridLabelShow = function(status) {
 
 AR.Graph.prototype.setVerGridShow = function(maxValue, scaleType) {
     var self = this;
-    self._x = undefined;
+     self._x = pv.Scale[scaleType](0, maxValue).range(0, self._dimension.width - 40);
     if (!self._verGrid) {
         self._verGrid = self._panel.add(pv.Rule);
-        self._x = pv.Scale[scaleType](0, maxValue).range(0, self._dimension.width - 40);
         self._verGrid.data(self._x.ticks().splice(1, self._x.ticks().length)).left(self._x); /* }).anchor("bottom").add(pv.Label).text(x.tickFormat);*/
     } else {
-        self._x = pv.Scale.linear(0, maxValue).range(0, self._dimension.width - 40);
         self._verGrid.left(self._x);
     }
 };
