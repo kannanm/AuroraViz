@@ -75,7 +75,7 @@ ARV.setReportResizable = function(){
 	});
 };
 
-ARV.removeComponent = function(component){
+ARV.removeComponentParent = function(component){
 	$(component).parent().remove();
 };
 
@@ -127,10 +127,16 @@ ARV.options = {
             '<label>Color: </label>',
             '<input value="#000000" class="colorPicker" size="8" type="text" id="textColor" /><br/>',
             ].join(" "),
+   report: [
+   			'<button id="deleteReport">Delete</button>',
+   		   ].join(" "),
 };
 
 ARV.populateOptions = function(){
-	$("#options").html(ARV.options.text);
+	var isReport = $(ARV.selectedElement).is(".report");
+	var html = isReport ? ARV.options.report : ARV.options.text;
+	$("#options").html(html);
+	$("button").button();
 	ARV.initializeColorPicker(ARV.colorPickerCB.dashboard);
 	ARV.createSliders(ARV.createSlidersCB.dashboard);
 };
@@ -299,10 +305,13 @@ ARV.initDashboard = function() {
         });
         ARV.removeSelectedElemStyling();
     });
+    $("#deleteReport").live("click",function(){
+    	ARV.removeComponentParent(ARV.selectedElement);
+    });
     $(document).keydown(function(event){
     	if (event.keyCode === 46) {
     		 event.preventDefault();
-    		 ARV.removeComponent(ARV.selectedElement);
+    		 ARV.removeComponentParent(ARV.selectedElement);
    		}
    		//TODO implement it using dragabble somehow as the containment is not being set i.e. it is moving out of the dashboardEditor
 //   		else if (event.keyCode >= 37 && event.keyCode <= 41) {
