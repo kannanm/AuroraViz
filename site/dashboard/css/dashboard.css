@@ -32,8 +32,6 @@ body {
 
 .element-container {
 	background: none repeat scroll 0 0 #fbfbfb;
-	border: 3px solid #E3EAEE;
-	border-style: dashed;
 	display: inline-block;
 	position:absolute;
 }
@@ -69,4 +67,13 @@ body {
 
 .clear-both {
 	clear: both;
+}
+.selected{
+	border: 3px solid #92BDD6;
+	border-style: dashed;
+
+	}
+}
+#options{
+	display: inline;
 }

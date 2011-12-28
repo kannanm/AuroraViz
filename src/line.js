@@ -46,7 +46,7 @@ AR.Line = function(parentDimension, panel, graphDef, step) {
     self.adjustValuePositions = function(parentDimension) {
         dots.anchor("bottom").add(pv.Label).text(function() {
             return graphDef.data[this.index].value;
-        }).font(AR.Utility.getSize(graphDef,"gridLabels",AR.constants.values.smallLabels.size) + "px Arial");;
+        }).font(AR.Utility.getSize(graphDef,"gridLabels",AR.constants.values.smallLabels.size) + "px Arial");
     };
     self.adjustBottom = function(parentDimension) {
         var pointHeight = pv.Scale.linear(0, AR.Utility.findMax(graphDef.data)).range(0, parentDimension.height - 40);

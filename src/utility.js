@@ -251,7 +251,7 @@ AR.Utility.setLeftOfLegends = function(dots, graphDef,index){
 //		}
 		return l;
 	});
-}
+};
 AR.constants = {};
 AR.constants.values = {
 		legend:{
@@ -262,7 +262,7 @@ AR.constants.values = {
 		smallLabels :{
 			size:15
 		}
-}
+};
 AR.constants.scale ={
 	caption:1/(240000),
 	gridLabels:1/(400000),
