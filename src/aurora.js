@@ -112,7 +112,7 @@ AR.Graph = function(graphDef) {
     self._verAxisLabel = undefined;
     self._horGrid = undefined;
     self._verGrid = undefined;
-    self._outerPanel = new pv.Panel().left(50).right(50).bottom(50).top(50);
+    self._outerPanel = new pv.Panel().left(0).right(0).bottom(0).top(0);
     self._panel = self._outerPanel.add(pv.Panel);
     self._panel.left(self._dimension.left).right(self._dimension.right).bottom(self._dimension.bottom).top(self._dimension.top);
     self._horAxis = self._panel.add(pv.Rule).bottom(0);

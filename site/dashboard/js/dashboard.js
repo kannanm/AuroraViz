@@ -46,6 +46,8 @@ ARV.components = {
 		description:"description",
 		label:"label"
 };
+
+//TODO the description field on changing does not remain resizable. Correct This
 ARV.setDescriptionResizable = function(){
 	$(".description").resizable({
 		stop:function(event,ui){
@@ -61,8 +63,8 @@ ARV.setReportResizable = function(){
 		stop:function(event, ui){
 			var containerID = $(this).attr("id");
 			var graphDef = ARV.originalGraphData[containerID].graphDef;
-			graphDef.width =  ui.size.width-75;
-			graphDef.height = ui.size.height-75;
+			graphDef.width =  ui.size.width;
+			graphDef.height = ui.size.height;
 			$(this).html("");
 			ARV.showGraph(graphDef.graphType , containerID, graphDef);
 		//TODO: Following is a cheap hack to make the report resizable again. Change it
@@ -209,7 +211,7 @@ ARV.initDashboard = function() {
     //Click handle if the add Description button is clicked
     $("#addDesciption").click(function() {
         ARV.addTextComponents(ARV.components.description, "textArea");
-        ARV.setDescriptionResizable();
+//        ARV.setDescriptionResizable();
     });
     
     //Click handle if the add Report button is clicked
@@ -263,7 +265,7 @@ ARV.initDashboard = function() {
                 containment: "parent"
             });
             ARV.setReportResizable();
-            ARV.setDescriptionResizable();
+//            ARV.setDescriptionResizable();
         });
         //TODO stylize disabled button
         $(this).attr("disabled", "disabled");
