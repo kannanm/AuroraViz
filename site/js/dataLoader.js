@@ -97,6 +97,28 @@ ARV.grid.onAddNewRow.subscribe(function(e, args) {
     ARV.grid.updateRowCount();
     ARV.grid.render();
 });
+ARV.populateSingleSelectForMap = function(div){
+	if($("#"+div).is(".select-deselect")){
+		 option = $('<option />').val("");
+		 $("#"+div).append(option);
+	}
+	for (i = 0; i < columns.length; i++) {
+	    option = $('<option />').val(columns[i].field).append(columns[i].name);
+	    $("#"+div).append(option);
+	}
+	if($("#"+div).is(".select-deselect")){
+		 $("#"+div).chosen({allow_single_deselect: true});
+	}else{
+		$("#"+div).chosen();
+	}
+	
+};
+
+ARV.populateSingleSelectForMap("categoryListForMap");
+ARV.populateSingleSelectForMap("latitudeForMap");
+ARV.populateSingleSelectForMap("longitudeForMap");
+ARV.populateSingleSelectForMap("sizeForMap");
+
 for (i = 0; i < columns.length; i++) {
     option = $('<option />').val(columns[i].field).append(columns[i].name);
     if (i === 1) {
@@ -105,6 +127,7 @@ for (i = 0; i < columns.length; i++) {
     $("#measureAxisList").append(option);
 }
 $("#measureAxisList").chosen();
+
 for (i = 0; i < columns.length; i++) {
     option = $('<option />').val(columns[i].field).append(columns[i].name);
     if (i === 0) {
@@ -113,6 +136,7 @@ for (i = 0; i < columns.length; i++) {
     $("#categoryAxisList").append(option);
 }
 $("#categoryAxisList").chosen();
+
 ARV.initializeDialog = function() {
     $("#dialog-illegal-data").dialog({
         modal: true,
@@ -125,6 +149,7 @@ ARV.initializeDialog = function() {
     });
 };
 ARV.initializeDialog();
+
 ARV.modifyDataForSingleSeries = function() {
     var dataArr = [];
     var selected = $("#measureAxisList option:selected");
@@ -202,27 +227,68 @@ ARV.modifyDataForMultiSeries = function() {
     ARV.updateCategoryArray();
     ARV.updateDatasetArray();
 };
+
 ARV.modifyDataForBubbleChart = function() {
-    ARV.defaultData.BubbleGraph = [];
-    var obj = {};
-    var index = 0;
-    var selected = $("#measureAxisList option:selected");
-    var x = $(selected[0]).val();
-    var y = $(selected[1]).val();
-    var z = $(selected[2]).val();
-    var labelField = $("#categoryAxisList option:selected").val();
+    var dataArr = [],
+    	obj ={},
+    	index = 0,
+    	xValue,	yValue, zValue,
+    	dataItem,
+    	selected = $("#measureAxisList option:selected"),
+    	x = $(selected[0]).val(),
+    	y = $(selected[1]).val(),
+    	z = $(selected[2]).val(),
+        labelField = $("#categoryAxisList option:selected").val();
+    
     for (index = 0; index < ARV.dataJSON.data.length; index++) {
-        var dataItem = ARV.dataJSON.data[index];
+        dataItem = ARV.dataJSON.data[index];
+        xValue = parseInt(dataItem[x],10);
+        yValue = parseInt(dataItem[y],10);
+        zValue = parseInt(dataItem[z],10);
+        if (isNaN(xValue) || isNaN(yValue) || isNaN(zValue)) {
+            $("#dialog-illegal-data").dialog("open");
+            return undefined;
+        }
         obj = {
-            x: dataItem[x],
-            y: dataItem[y],
-            z: dataItem[z],
+            x: xValue,
+            y: yValue,
+            z: zValue,
             label: dataItem[labelField]
         };
-        ARV.defaultData.BubbleGraph.push(obj);
+       dataArr.push(obj);
     }
+    ARV.defaultData.BubbleGraph = dataArr;
 };
-$("#dataUpdater").click(function() {
+ARV.modifyDataForMap = function(){
+	var dataArr = [],
+ 		obj ={},
+ 		index = 0,
+ 		xValue,	yValue, zValue,
+ 		dataItem,
+ 		lat = $("#latitudeForMap option:selected").val(),
+ 		long = $("#longitudeForMap option:selected").val(),
+ 		size = $("#sizeForMap option:selected").val(),
+ 		category = $("#categoryListForMap option:selected").val() ;
+	for (index = 0; index < ARV.dataJSON.data.length; index++) {
+		dataItem = ARV.dataJSON.data[index];
+		latValue = parseInt(dataItem[lat],10);
+		longValue = parseInt(dataItem[long],10);
+		sizeValue = parseInt(dataItem[size] || 10 ,10);
+		if (isNaN(latValue) || isNaN(longValue) || isNaN(sizeValue)) {
+			$("#dialog-illegal-data").dialog("open");
+			return undefined;
+		}
+		obj = {
+			lat: latValue,
+			lon: longValue,
+			size: sizeValue,
+			category: dataItem[category] || " "
+		};
+		dataArr.push(obj);
+	}
+	ARV.defaultData.MapGraph = dataArr;
+};
+$("#dataUpdater").live("click",function() {
     var noOfSelected = ARV.getNumberOfSelectedMeasureAxis();
     try {
         if (noOfSelected === 1) {
@@ -238,6 +304,9 @@ $("#dataUpdater").click(function() {
     }
     catch (e) {
         alert(e);
+    }
+    if("Map" === $("#chartTypes option:selected").attr("value")){
+    	ARV.modifyDataForMap();
     }
     ARV.createDataForTable();
     ARV.refreshTable();

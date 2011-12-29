@@ -152,6 +152,7 @@ AR.Graph.labelElements = ["caption", "horAxisLabel", "verAxisLabel"];
 //    }    
 //}());
 //TODO write commong function for all
+
 AR.Graph.prototype.setHorAxisThickness = function(thickness) {
     var self = this;
     if (self._horAxis) {

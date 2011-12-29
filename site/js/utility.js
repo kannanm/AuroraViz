@@ -46,6 +46,7 @@ ARV.createSliders = function(cb) {
         $(this).slider("value", $("#" + textID).val()); /* $( "#"+textID).val($(this).slider( "value" ) ); */
     });
 };
+
 ARV.rgb2hex=  function(rgb) {
     rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
     function hex(x) {

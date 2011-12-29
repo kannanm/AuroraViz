@@ -20,19 +20,37 @@ input.editor-text {
 	outline: 0;
 	padding: 0;
 }
-#tableDiv{
-	margin : 4em 4em 4em 4em;
+
+#tableDiv {
+	margin: 4em 4em 4em 4em;
 }
-#tableCont{
-	width:500px; 
+
+#tableCont {
+	width: 500px;
 }
-.slick-header-columns{
-	border : 1px solid #cccccc;
+
+.slick-header-columns {
+	border: 1px solid #cccccc;
 }
-.slick-column-name{
-	font-weight:bold;
+
+.slick-column-name {
+	font-weight: bold;
 }
-.tableHeading{
+
+.tableHeading {
 	text-align: center;
-	color:black;
+	color: black;
+}
+
+#chart {
+	height: 450px;
+	width: 100%;
+}
+
+#chart .canvas {
+	position: absolute;
+}
+
+#MapAxisSelector {
+	display:none;
 }

@@ -1,5 +1,4 @@
 var ARV = {};
-
 ARV.getChartOptionsHTML = function(chartType) {
     var chartOptionsHTML = {
         bar: [
@@ -15,9 +14,9 @@ ARV.getChartOptionsHTML = function(chartType) {
             '<option value="hor">Horizontal</option > ',
             '<option value = "ver" > Vertical </option>',
             '</select></div>',
-            '</div>'].join(" "),    
+            '</div>'].join(" "),
         line: [
-            '<div 	class="inline"><label> Step Graph: </label>',
+            '<div     class="inline"><label> Step Graph: </label>',
             '<input type="checkbox" id="isLineStyleStep"></input ></div> <br/>',
             '<label>Dot Size: </label>',
             '<div class="slider" id="dotSizeSlider"></div>',
@@ -28,17 +27,17 @@ ARV.getChartOptionsHTML = function(chartType) {
             '<label>Line Color: </label>',
             '<input value="#2266bb" class="colorPicker" size="8" type="text" id="lineColor" /><br/>',
             '</div>'].join(" "),
-       multiLine: [
-             '<div 	class="inline"><label> Step Graph: </label>',
-             '<input type="checkbox" id="isLineStyleStep"></input ></div> <br/>',
-             '<label>Dot Size: </label>',
-             '<div class="slider" id="dotSizeSlider"></div>',
-             '<input size="8" type="text" id="dotSize" value="2" disabled="disabled" /> <br />',
-             '<label>Line Width: </label>',
-             '<div class="slider" id="lineWidthSlider"></div>',
-             '<input size="8" type="text" id="lineWidth" value="2" disabled="disabled" /> <br />',
-             '</div>'].join(" "),
-        
+        multiLine: [
+            '<div     class="inline"><label> Step Graph: </label>',
+            '<input type="checkbox" id="isLineStyleStep"></input ></div> <br/>',
+            '<label>Dot Size: </label>',
+            '<div class="slider" id="dotSizeSlider"></div>',
+            '<input size="8" type="text" id="dotSize" value="2" disabled="disabled" /> <br />',
+            '<label>Line Width: </label>',
+            '<div class="slider" id="lineWidthSlider"></div>',
+            '<input size="8" type="text" id="lineWidth" value="2" disabled="disabled" /> <br />',
+            '</div>'].join(" "),
+
         pie: [
             '<label>Radius </label>',
             '<input type="text" id="pieRadius" value="100"   size="5"></input>',
@@ -58,31 +57,44 @@ ARV.getChartOptionsHTML = function(chartType) {
             '<input value="#1F77B4" class="colorPicker" size="8" type="text" id="areaColor" /><br/>',
             '</div>'].join(" "),
         multiArea: [
-              '<div class="inline"><label> Interpolated </label>',
-              '<input type="checkbox" id="interpolated"></input ></div> <br/>',
-              '</div>'].join(" "),
-                   
+            '<div class="inline"><label> Interpolated </label>',
+            '<input type="checkbox" id="interpolated"></input ></div> <br/>',
+            '</div>'].join(" "),
+
         tree: [
             '</div>'].join(" "),
         sunburst: [
             '</div>'].join(" "),
         bullet: [
-                 '<div class="inline"><label> Bullet Orientation </label>',
-                 '<select id="bulletOrientation">',
-                 '<option value="left" selected="selected">Left</option>',
-                 '<option value="right">Right</option>',
-                 '</select></div> <br/>',
-                 '<div class="inline"><label> Bullet Orientation </label>',
-                 '<select id="markerShape">',
-                 '<option value="triangle" selected="selected">Triangle</option>',
-                 '<option value="circle">Circle</option>',
-                 '<option value="square">Square</option>',
-                 '</select></div> <br/>',
-                 '<label>Marker Color: </label>',
-                 '<input value="#cccccc" class="colorPicker" size="8" type="text" id="markerFillColor" /><br/>',
-                 '<label>Measure Color: </label>',
-                 '<input value="#cfcfcf" class="colorPicker" size="8" type="text" id="measureFillColor" /><br/>',
-                 ].join(" ")
+            '<div class="inline"><label> Bullet Orientation </label>',
+            '<select id="bulletOrientation">',
+            '<option value="left" selected="selected">Left</option>',
+            '<option value="right">Right</option>',
+            '</select></div> <br/>',
+            '<div class="inline"><label> Bullet Shape </label>',
+            '<select id="markerShape">',
+            '<option value="triangle" selected="selected">Triangle</option>',
+            '<option value="circle">Circle</option>',
+            '<option value="square">Square</option>',
+            '</select></div> <br/>',
+            '<label>Marker Color: </label>',
+            '<input value="#cccccc" class="colorPicker" size="8" type="text" id="markerFillColor" /><br/>',
+            '<label>Measure Color: </label>',
+            '<input value="#cfcfcf" class="colorPicker" size="8" type="text" id="measureFillColor" /><br/>',
+            ].join(" "),
+            
+        map: [
+            '<div class="inline">',
+            '<label>Dot Size: </label>',
+            '<div class="slider" id="mapMarkerSizeSlider"></div>',
+            '<input size="8" type="text" id="mapMarkerSize" value="2" disabled="disabled" /> <br />',
+            '<label> Marker Shape </label>',
+            '<select id="mapMarkerShape">',
+            '<option value="triangle">Triangle</option>',
+            '<option value="circle" selected="selected">Circle</option>',
+            '<option value="square">Square</option>',
+            '</select>',
+            '</div>'].join(" ")
     }[chartType];
     return chartOptionsHTML;
 };
@@ -107,6 +119,7 @@ ARV.con = {
     MultiAreaChartOptions: ARV.getChartOptionsHTML("multiArea"),
     StackedAreaChartOptions: ARV.getChartOptionsHTML("multiArea"),
     BulletChartOptions: ARV.getChartOptionsHTML("bullet"),
+    MapChartOptions: ARV.getChartOptionsHTML("map"),
     //treeChartOptions: ARV.getChartOptionsHTML("tree"),
     //sunburstChartOptions: ARV.getChartOptionsHTML("sunburst"),
     BarChartParams: ["barChartTypes"],
@@ -145,7 +158,7 @@ ARV.styles = {
 	    horGridShow: "checked",
 	    horGridColor: "#cccccc",
 	    horGridLabelShow: "checked",
-	    horGridThickness: "1"
+	    horGridThickness: "1",
 	};
 	ARV.commonProperties = {
 	    caption: "Profit (Yearly)",
@@ -173,7 +186,9 @@ ARV.styles = {
 	    interpolated: false,
 	    segmented: true,
 	    areaColor: "#1F77B4",
-	    showLegends : true
+	    showLegends : true,
+	    mapMarkerSize:"2",
+	    mapMarkerShape: "circle"
 
 	};
 	ARV.defaultData = {
@@ -312,7 +327,8 @@ ARV.styles = {
 	    AreaGraph: "BarGraph",
 	    MultiAreaGraph: "MultiBarGraph",
 	    StackedAreaGraph: "MultiBarGraph",
-	    BulletGraph: "BulletGraph"
+	    BulletGraph: "BulletGraph",
+	    MapGraph: "MapGraph"
 	};
 	ARV.ChartTypeMap = {
 	    BarGraph: "BarGraph",
@@ -325,7 +341,8 @@ ARV.styles = {
 	    AreaGraph: "AreaGraph",
 	    MultiAreaGraph: "AreaGraph",
 	    StackedAreaGraph: "StackedAreaGraph",
-	    BulletGraph: "BulletGraph"
+	    BulletGraph: "BulletGraph",
+	    MapGraph: "Map"
 	};
 	ARV.singleToMultiMap = {
 		BarGraph: "MultibarGraph",
@@ -335,5 +352,6 @@ ARV.styles = {
 		DonutGraph:"DonutGraph",
 		StackedAreaGraph:"StackedAreaGraph",
 		BubbleGraph:"BubbleGraph",
-		BulletGraph: "BulletGraph"
+		BulletGraph: "BulletGraph",
+		MapGraph:"MapGraph"
 	};

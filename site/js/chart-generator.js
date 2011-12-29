@@ -104,7 +104,41 @@ ARV.addColorsDiv = function() {
     ARV.initializeColorPicker(ARV.colorPickerCB.chartGenerator);
 };
 
-
+ARV.reset = function(){
+   GUnload();
+    $("#chart").css("background-color","#ffffff");
+    $("#dataDiv").html("");
+    $(".tipsy").remove();
+};
+ARV.toggleParameters = function(isMap){
+	if(isMap){
+		$("#MapAxisSelector").css("display","inline");
+		$("#defaultAxisSelector").css("display","none");
+	}
+	else{
+		$("#MapAxisSelector").css("display","none");
+		$("#defaultAxisSelector").css("display","inline");
+	}
+}
+ARV.performActionsBasedOnChart = function(chartType){
+	switch(chartType){
+		case "table":
+			ARV.refreshTable();
+			ARV.toggleParameters(false);
+			break;
+		case "select":
+			 $("#dataDiv").html("Please select a chart");
+			 ARV.toggleParameters(false);
+			 break;
+		case "Map":
+			ARV.toggleParameters(true);
+			 $("#dataDiv").html(ARV.con[chartType + "ChartOptions"])
+			break
+		default:
+			 $("#dataDiv").html(ARV.con[chartType + "ChartOptions"])
+			 ARV.toggleParameters(false);
+	}
+};
 ARV.addEventListeners = function() {
     $(".delColorBtn").live("click", function() {
         var izzy = $(this).prev();
@@ -131,16 +165,9 @@ ARV.addEventListeners = function() {
         ARV.modifyJSON();
     });
     $("#chartTypes option").click(function() {
+    	ARV.reset();
         var selectedVal = $("#chartTypes option:selected").attr("value");
-        $("dataDiv").html("");
-        $(".tipsy").remove();
-        if (selectedVal === "table"){
-        	ARV.refreshTable();
-        }else if (selectedVal !== "select" ) {
-            $("#dataDiv").html(ARV.con[selectedVal + "ChartOptions"])
-        }else {
-            $("#dataDiv").html("Please select a chart");
-        }
+        ARV.performActionsBasedOnChart(selectedVal);
         ARV.createSliders(ARV.createSlidersCB.chartGenerator);
         ARV.initializeColorPicker(ARV.colorPickerCB.chartGenerator);
 
