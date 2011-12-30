@@ -1,8 +1,6 @@
-AR.FieldType={measure:"measure",category:"category"};
-
 AR.TableDisplay = function(json,container){
 	var field;
-	var type;
+	var numeric;
 	var val;
 	var datatype;
 	var i = 0;
@@ -11,15 +9,16 @@ AR.TableDisplay = function(json,container){
 	this._container = container;
 	this._firstRow = this._db.first();
 	this._fields = AR.Utility.getKeys(this._firstRow);
-	this._fieldsMeta = [];
+	this._numericFields = [];
 	
 	for(i =0;i < this._fields.length;i++){
 		field = this._fields[i];
 		val = this._firstRow[field];
-		type = AR.Utility.isNumber(val)?AR.FieldType.measure:AR.FieldType.category;
-		this._fieldsMeta[field] = {"type":type};
+		if(AR.Utility.isNumber(val)){
+			this._numericFields.push(field);
+		}
 	}
-	this._tableConfig = new AR.TableConfig(this._fieldsMeta,this._db);
+	this._tableConfig = new AR.TableConfig(this._db);
 
 };
 
@@ -28,13 +27,17 @@ AR.TableDisplay.prototype.getFields = function(){
 	return this._fields;
 };
 
+AR.TableDisplay.prototype.getNumericFields = function(){
+	return this._numericFields;
+};
+
+
 AR.TableDisplay.prototype.update = function(spec){
 	var tableModel = this._tableConfig.build(spec);
 	console.log(tableModel);
 };
 
-AR.TableConfig = function(fieldsMeta,db){
-	this._fieldsMeta = fieldsMeta;
+AR.TableConfig = function(db){
 	this._db = db;
 };
 
@@ -49,41 +52,29 @@ AR.TableConfig.prototype.build = function(spec){
 
 AR.TableConfig.prototype._normalizedSetForm = function(axisSpec){
 	var i = 0;
-	var measures = [];
-	var categories = [];
 	var field,category;
+	var categories =axisSpec["categories"];
+	var measures = axisSpec["measures"];
 	var algebra = new AR.TableAlgebra();
 	
-	for(i=0;i < axisSpec.length; i++){
-		field = axisSpec[i];
-		if(this._fieldsMeta[field].type ==AR.FieldType.measure){
-			algebra.measure(field);
-		} else{
+	for(i=0;i < categories.length; i++){
+			field = categories[i];
 			category = this._db.distinct(field);
-			algebra.category(category); 
-		}
+			algebra.operand(category); 
 	}
-	return algebra.nst();
+	var fullModel = {"categories":categories,"measures":measures,"nst": algebra.nst()};
+	return fullModel;
 };
 
 AR.TableAlgebra = function(){
-	this._measures = [];
-	this._categories = [];
+	this.operands = [];
 };
-
-AR.TableAlgebra.prototype.category = function(field){
-	this._categories.push(field); 
-};
-
-AR.TableAlgebra.prototype.measure = function(field){
-	this._measures.push({"field":field}); 
+AR.TableAlgebra.prototype.operand = function(operand){
+	this.operands.push(operand);
 };
 
 AR.TableAlgebra.prototype.nst = function(){
-	var operands = this._categories.compact();
-	var measureOperands = this._measures.compact();
-	operands = measureOperands.length>0 ?	operands.push(measureOperands):operands;
-	return this._cross.apply(this,operands);
+	return this._cross.apply(this,this.operands.compact());
 }
 
 

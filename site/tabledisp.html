@@ -73,23 +73,30 @@
 	            
 				<fieldset id="AxisSelector" >
 
-					<label>Columns</label>
-				 	<select class="chzn-select" id="selcolumns" multiple="true"></select>
+					<legend>Columns</legend>
+					<label>-Categories</label>
+				 	<select class="chzn-select fields" id="catcolumns" multiple="true"></select>
+					<label>-Measures</label>
+				 	<select class="chzn-select numfields" id="meacolumns" multiple="true"></select>
 
-					<label>Rows</label> 
-				 	<select class="chzn-select" id="selrows" multiple="true"></select>
+
+					<legend>Rows</legend> 
+					<label>-Categories</label>
+				 	<select class="chzn-select fields" id="catrows" multiple="true"></select>
+					<label>-Measures</label>
+				 	<select class="chzn-select numfields" id="mearows" multiple="true"></select>
 				 	
 					<label>Group by</label>
-				 	<select class="chzn-select" id="groups" multiple="true"></select>
+				 	<select class="chzn-select fields" id="groups" multiple="true"></select>
 
 					<label>Sort by</label> 
-				 	<select class="chzn-select" id="orders" multiple="true"></select>
+				 	<select class="chzn-select fields" id="orders" multiple="true"></select>
 				 	
 					<label>Color</label>
-				 	<select class="chzn-select" id="colorMark"></select>
+				 	<select class="chzn-select fields auto" id="colorMark"></select>
 
 					<label>Size</label> 
-				 	<select class="chzn-select" id="sizeMark"></select>
+				 	<select class="chzn-select fields auto" id="sizeMark"></select>
 				 	
 				</fieldset>
 	            
@@ -105,7 +112,7 @@
 
 		</div>
 		
-		<script type="text/javascript" src="js/sales.js"></script>		
+		<script type="text/javascript" src="js/carsdata.js"></script>		
 		<script type="text/javascript" src="js/tableDisplayGen.js"></script>		
 
 		<script type="text/javascript">

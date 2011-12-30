@@ -236,4 +236,5 @@ fieldset {
 
 #tableDisplay{
 	overflow:scroll;
+	min-height:500px;
 }
