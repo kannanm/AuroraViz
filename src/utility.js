@@ -281,7 +281,7 @@ AR.Utility.setLeftOfLegends = function(dots, graphDef,index){
 //		}
 		return l;
 	});
-}
+};
 AR.constants = {};
 AR.constants.values = {
 		legend:{
@@ -292,12 +292,13 @@ AR.constants.values = {
 		smallLabels :{
 			size:15
 		}
-}
+};
 AR.constants.scale ={
 	caption:1/(240000),
 	gridLabels:1/(400000),
 	wedge:1/240000,
-	legend:1/1000000
+	legend:1/1000000,
+	mapDot:1/10
 };
 AR.Utility.getSize = function(graphDef,element,value){
 	return AR.constants.scale[element]*value*graphDef.height*graphDef.width;

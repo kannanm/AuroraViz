@@ -212,7 +212,7 @@ AR.Area = function(parentDimension, panel, graphDef, dataObj, color, seriesname,
     if (graphDef.showValues) {
         var values = self._areaObj.anchor("top").add(pv.Label).textBaseline("bottom").text(function() {
             return dataObj[this.index].value;
-        }).font(AR.Utility.getSize(graphDef,"gridLabels",AR.constants.values.smallLabels.size) + "px Arial");;
+        }).font(AR.Utility.getSize(graphDef,"gridLabels",AR.constants.values.smallLabels.size) + "px Arial");
     }
     AR.Utility.setToolTip(graphDef, self._areaObj, "s");
     self.setAreaAttributes();

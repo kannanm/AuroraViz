@@ -78,13 +78,15 @@
 	</target>
 
 
-
+	<!-- jslint -->
 	<target name="jslint">
 		<jsl:jslint haltOnFailure="false" options="es5,evil,fragment,forin,continue">
 			<formatter type="plain" />
 			<fileset dir="${src.dir}" includes="*.js">
 				<exclude name="**/*-min.js" />
 				<exclude name="**/jQuery*.js" />
+			</fileset>
+			<fileset dir="${basedir}/site/js" includes="*.js">
 			</fileset>
 		</jsl:jslint>
 	</target>
