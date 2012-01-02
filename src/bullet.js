@@ -17,7 +17,7 @@ AR.BulletGraph = function(graphDef) {
     self._bulletPanel = undefined;
     self._graphDef = graphDef;
     //TODO: Create the following using function generator as there is a minor difference between the two
-    AR.Graph.apply(self, [graphDef]);
+    self.initialize(graphDef);
 
     /**
      * @private
@@ -187,7 +187,7 @@ AR.BulletGraph = function(graphDef) {
     createBulletChart();
 };
 
-AR.BulletGraph.prototype = AR.extend(AR.Graph);
+AR.BulletGraph.prototype = new AR.Graph();;
 
 AR.BulletGraph.prototype.setVerGridShow = function(status) {
     var self = this;

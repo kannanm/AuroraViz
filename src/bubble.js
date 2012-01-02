@@ -106,7 +106,7 @@ AR.BubbleGraph = function(graphDef) {
             AR.Graph.prototype.setHorGridShow.apply(self, [AR.Utility.getSingleDimensionData(graphDef.data, AR.Utility.Dimension.x).max(), AR.Utility.scale.linear]);
         }
     };
-    AR.Graph.apply(self, [graphDef]);
+    self.initialize(graphDef);
     var bubbles = new AR.Bubble(self._dimension, self._panel, graphDef);
     self.setWidth = function(width) {
         AR.Graph.prototype.setWidth.call(self, width);
@@ -117,4 +117,4 @@ AR.BubbleGraph = function(graphDef) {
         bubbles.adjustPosition(self._dimension);
     };
 };
-AR.BubbleGraph.prototype = AR.extend(AR.Graph);
+AR.BubbleGraph.prototype = new AR.Graph();;

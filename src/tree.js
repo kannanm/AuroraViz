@@ -62,7 +62,7 @@ AR.NodeLinkGraphDefault = function(parentDimension, panel, graphDef) {
  */
 AR.TreeGraph = function(graphDef) {
     var self = this;
-    AR.Graph.apply(self, [graphDef]);
+    self.initialize(graphDef);
 
     // Here I'm gonna have to call the Tree API or the Node Link API
     // Before I do so I am gonna adjust the panel dimensions a bit..
@@ -103,7 +103,7 @@ AR.TreeGraph = function(graphDef) {
     self.setTop(10);
     self.setBottom(10);
 };
-AR.TreeGraph.prototype = AR.extend(AR.Graph);
+AR.TreeGraph.prototype = new AR.Graph();;
 
 
 
@@ -216,7 +216,7 @@ AR.SunBurstGraphDefault = function(parentDimension, panel, graphDef) {
  */
 AR.SunBurstGraph = function(graphDef) {
     var self = this;
-    AR.Graph.apply(self, [graphDef]);
+    self.initialize(graphDef);
 
     // Here I'm gonna have to call the Tree API or the Node Link API
     // Before I do so I am gonna adjust the panel dimensions a bit..
@@ -255,4 +255,4 @@ AR.SunBurstGraph = function(graphDef) {
     self.setLeft(20);
     self.setBottom(-40);
 };
-AR.SunBurstGraph.prototype = AR.extend(AR.Graph);
+AR.SunBurstGraph.prototype = new AR.Graph();;
