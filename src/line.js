@@ -194,7 +194,7 @@ AR.LineGraph = function(graphDef) {
             AR.Graph.prototype.setHorGridShow.apply(self, [maxValue, AR.Utility.scale.linear]);
         }
     };
-    AR.Graph.apply(self, [graphDef]);
+    self.initialize(graphDef);
     if (graphDef.isLineStyleStep === true) {
         flag = true;
     }
@@ -223,4 +223,4 @@ AR.LineGraph = function(graphDef) {
         self.setHorRules(AR.Utility.findMax(graphDef.data), AR.Utility.scale.linear);
     };
 };
-AR.LineGraph.prototype = AR.extend(AR.Graph);
+AR.LineGraph.prototype = new AR.Graph();;

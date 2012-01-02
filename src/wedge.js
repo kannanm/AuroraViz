@@ -126,7 +126,7 @@ AR.PieGraph = function(graphDef) {
             AR.Graph.prototype.setHorGridShow.apply(self, [maxValue, AR.Utility.scale.linear]);
         }
     };
-    AR.Graph.apply(self, [graphDef]);
+    self.initialize(graphDef);
     var wedges = new AR.Wedge(self._dimension, self._panel, graphDef);
     //TODO: add other function such as changing the pallete etc  
     // Would kinda serve as APIs for a new user who's come in..
@@ -139,7 +139,7 @@ AR.PieGraph = function(graphDef) {
         wedges.adjustPosition(self._dimension);
     };
 };
-AR.PieGraph.prototype = AR.extend(AR.Graph);
+AR.PieGraph.prototype = new AR.Graph();;
 
 /**
  * The basefunction for the Donut initialization.
@@ -263,7 +263,7 @@ AR.DonutGraph = function(graphDef) {
             AR.Graph.prototype.setHorGridShow.apply(self, [maxValue, AR.Utility.scale.linear]);
         }
     };
-    AR.Graph.apply(self, [graphDef]);
+    self.initialize(graphDef);
     var wedges = new AR.Donut(self._dimension, self._panel, graphDef);
     //TODO: add other function such as changing the pallete etc  
     // Would kinda serve as APIs for a new user who's come in..
@@ -276,4 +276,4 @@ AR.DonutGraph = function(graphDef) {
         wedges.adjustPosition(self._dimension);
     };
 };
-AR.DonutGraph.prototype = AR.extend(AR.Graph);
+AR.DonutGraph.prototype = new AR.Graph();;

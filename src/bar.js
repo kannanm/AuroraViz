@@ -201,7 +201,7 @@ AR.BarGraph = function(graphDef) {
             AR.Graph.prototype.setHorGridShow.apply(self, [maxVal, AR.Utility.scale.linear]);
         }
     };
-    AR.Graph.apply(self, [graphDef]);
+    self.initialize(graphDef);
     var maxValue = AR.Utility.findMaxValue(graphDef);
     var dataset = graphDef.dataset;
     var colors = AR.Utility.getPaletteColors(graphDef);
@@ -269,4 +269,4 @@ AR.BarGraph = function(graphDef) {
     };
 };
 AR.Graph.labelProperties = ["labelFontSize", "labelFontColor", "labelRotateAngle"];
-AR.BarGraph.prototype = AR.extend(AR.Graph);
+AR.BarGraph.prototype = new AR.Graph();

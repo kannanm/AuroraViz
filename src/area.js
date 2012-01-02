@@ -71,7 +71,7 @@ AR.StackedAreaGraph = function(graphDef) {
             AR.Graph.prototype.setHorGridShow.apply(self, [sumOfMaxValues, AR.Utility.scale.linear]);
         }
     };
-    AR.Graph.apply(self, [graphDef]);
+    self.initialize(graphDef);
 
     var xScale = pv.Scale.linear(0, noOfRecords).range(0, self._dimension.width - 40),
         yScale = pv.Scale.linear(0, sumOfMaxValues).range(0, self._dimension.height - 40);
@@ -121,7 +121,7 @@ AR.StackedAreaGraph = function(graphDef) {
     }
     AR.Utility.setToolTip(graphDef, self._areaObj, "s");
 };
-AR.StackedAreaGraph.prototype = AR.extend(AR.Graph);
+AR.StackedAreaGraph.prototype = new AR.Graph();
 
 /**
  * A constructor function to create a Area Object.
@@ -239,7 +239,7 @@ AR.AreaGraph = function(graphDef) {
             AR.Graph.prototype.setHorGridShow.apply(self, [maxVal, AR.Utility.scale.linear]);
         }
     };
-    AR.Graph.apply(self, [graphDef]);
+    self.initialize(graphDef);
     if (graphDef.presetPalette) {
         colors = AR.Utility.getPaletteColors(graphDef);
     }
@@ -255,6 +255,6 @@ AR.AreaGraph = function(graphDef) {
 
 
 };
-AR.AreaGraph.prototype = AR.extend(AR.Graph);
+AR.AreaGraph.prototype = new AR.Graph();
 AR.AreaConstants = {};
 AR.AreaConstants.xOffset = 60;
