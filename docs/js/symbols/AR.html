@@ -320,7 +320,7 @@ ul.inheritsList {
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.Bar">Bar</a></b>(graphDef, data, parentDimension, panel, color)
+								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.Bar">Bar</a></b>(graphDef, data, parentDimension, panel, color, seriesname, seriesNumber)
 								</div>
 								<div class="description">The basefunction for the bar initialization.</div>
 							</td>
@@ -356,6 +356,15 @@ ul.inheritsList {
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.Canvas">Canvas</a></b>(graphDef, data, div)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.Donut">Donut</a></b>(parentDimension, panel, graphDef)
 								</div>
 								<div class="description">The basefunction for the Donut initialization.</div>
@@ -383,7 +392,7 @@ ul.inheritsList {
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.HBar">HBar</a></b>(graphDef, panel, parentDimension, panel, maxValue, color, seriesname)
+								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.HBar">HBar</a></b>(graphDef, panel, parentDimension, panel, maxValue, color, seriesname, seriesNumber, showCategory)
 								</div>
 								<div class="description">Constructing Horizontal Bars For a Graph</div>
 							</td>
@@ -410,7 +419,16 @@ ul.inheritsList {
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.MLine">MLine</a></b>(parentDimension, panel, graphDef, data, maxValue, step, color)
+								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.Map">Map</a></b>(graphDef)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.MLine">MLine</a></b>(parentDimension, panel, graphDef, data, maxValue, step, color, seriesname, seriesNumber)
 								</div>
 								<div class="description">The basefunction for the Multi LineGraph initialization.</div>
 							</td>
@@ -491,6 +509,33 @@ ul.inheritsList {
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
+								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.TableAlgebra">TableAlgebra</a></b>()
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.TableConfig">TableConfig</a></b>(fieldsMeta, db)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.TableDisplay">TableDisplay</a></b>(json, container)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
 								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.TreeGraph">TreeGraph</a></b>(graphDef)
 								</div>
 								<div class="description">Tree API to construct a Tree Graph or otherwise called the Node-Link graph</div>
@@ -500,7 +545,7 @@ ul.inheritsList {
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.VBar">VBar</a></b>(graphDef, panel, parentDimension, panel, maxValue, color, seriesname)
+								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.VBar">VBar</a></b>(graphDef, panel, parentDimension, panel, maxValue, color, seriesname, seriesNumber, showCategory)
 								</div>
 								<div class="description">Constructing Vertical Bars For a Graph</div>
 							</td>
@@ -732,7 +777,7 @@ ul.inheritsList {
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">AR.</span><b>Bar</b>(graphDef, data, parentDimension, panel, color)
+					<span class="light">AR.</span><b>Bar</b>(graphDef, data, parentDimension, panel, color, seriesname, seriesNumber)
 					
 					</div>
 					<div class="description">
@@ -777,6 +822,18 @@ the data
 							
 								<dt>
 									<b>color</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>seriesname</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>seriesNumber</b>
 									
 								</dt>
 								<dd></dd>
@@ -911,6 +968,57 @@ Sets the data
 									<i>Optional</i>
 								</dt>
 								<dd>An object containing the graph properties and the data</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".Canvas"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">AR.</span><b>Canvas</b>(graphDef, data, div)
+					
+					</div>
+					<div class="description">
+						
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_src_map.js.html">map.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>graphDef</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>data</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>div</b>
+									
+								</dt>
+								<dd></dd>
 							
 							</dl>
 						
@@ -1068,7 +1176,7 @@ Initializes the WedgeGraph. Sets the data
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">AR.</span><b>HBar</b>(graphDef, panel, parentDimension, panel, maxValue, color, seriesname)
+					<span class="light">AR.</span><b>HBar</b>(graphDef, panel, parentDimension, panel, maxValue, color, seriesname, seriesNumber, showCategory)
 					
 					</div>
 					<div class="description">
@@ -1125,6 +1233,18 @@ Initializes the WedgeGraph. Sets the data
 							
 								<dt>
 									<b>seriesname</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>seriesNumber</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>showCategory</b>
 									
 								</dt>
 								<dd></dd>
@@ -1237,11 +1357,50 @@ Initializes the LineGraph. Sets the data
 
 					<hr />
 				
+					<a name=".Map"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">AR.</span><b>Map</b>(graphDef)
+					
+					</div>
+					<div class="description">
+						
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_src_map.js.html">map.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>graphDef</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
 					<a name=".MLine"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">AR.</span><b>MLine</b>(parentDimension, panel, graphDef, data, maxValue, step, color)
+					<span class="light">AR.</span><b>MLine</b>(parentDimension, panel, graphDef, data, maxValue, step, color, seriesname, seriesNumber)
 					
 					</div>
 					<div class="description">
@@ -1298,6 +1457,18 @@ Initializes the LineGraph. Sets the data
 							
 								<dt>
 									<b>color</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>seriesname</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>seriesNumber</b>
 									
 								</dt>
 								<dd></dd>
@@ -1637,6 +1808,124 @@ Initializes the Node Link. Sets the data
 
 					<hr />
 				
+					<a name=".TableAlgebra"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">AR.</span><b>TableAlgebra</b>()
+					
+					</div>
+					<div class="description">
+						
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_src_tableDisplay.js.html">tableDisplay.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".TableConfig"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">AR.</span><b>TableConfig</b>(fieldsMeta, db)
+					
+					</div>
+					<div class="description">
+						
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_src_tableDisplay.js.html">tableDisplay.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>fieldsMeta</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>db</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".TableDisplay"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">AR.</span><b>TableDisplay</b>(json, container)
+					
+					</div>
+					<div class="description">
+						
+						
+							<br />
+							<i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_src_tableDisplay.js.html">tableDisplay.js</a>.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>json</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>container</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
 					<a name=".TreeGraph"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
@@ -1680,7 +1969,7 @@ Initializes the Node Link. Sets the data
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">AR.</span><b>VBar</b>(graphDef, panel, parentDimension, panel, maxValue, color, seriesname)
+					<span class="light">AR.</span><b>VBar</b>(graphDef, panel, parentDimension, panel, maxValue, color, seriesname, seriesNumber, showCategory)
 					
 					</div>
 					<div class="description">
@@ -1737,6 +2026,18 @@ Initializes the Node Link. Sets the data
 							
 								<dt>
 									<b>seriesname</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>seriesNumber</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>showCategory</b>
 									
 								</dt>
 								<dd></dd>
@@ -1816,7 +2117,7 @@ Initializes the WedgeGraph. Sets the data
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Dec 08 2011 16:59:36 GMT+0530 (IST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon Jan 02 2012 18:48:08 GMT+0530 (IST)
 		</div>
 	</body>
 </html>
