@@ -197,8 +197,7 @@ ARV.initChartGenerator = function() {
     ARV.createSliders(ARV.createSlidersCB.chartGenerator);
     ARV.addColorsDiv();
     ARV.addEventListeners();
-//    $("#chartTypes").chosen();
-    $('#dataUpdater').trigger('click');
+    $("#measureAxisList").chosen().trigger("change");
 };
 
 ARV.refreshTable = function(){

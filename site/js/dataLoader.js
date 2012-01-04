@@ -321,6 +321,8 @@ ARV.updateDataForVisualizations = function(){
     ARV.refreshTable();
     ARV.refreshGraph();
 };
+$("#categoryAxisList").chosen().change(ARV.updateDataForVisualizations);
+$("#measureAxisList").chosen().change(ARV.updateDataForVisualizations);
 $("#dataUpdater").live("click",function() {
 	ARV.updateDataForVisualizations();
 });

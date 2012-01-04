@@ -1,4 +1,7 @@
 var ARV = {};
+ARV.ChartNameMap = {
+		Map :"Map"
+}
 ARV.getChartOptionsHTML = function(chartType) {
     var chartOptionsHTML = {
         bar: [

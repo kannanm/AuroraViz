@@ -64,3 +64,10 @@ ARV.matrixToDegree = function(matrix){
 	var degree = Math.acos(matrix[1])*180/Math.PI
 	return (sign*degree).toFixed(0);
 };
+ARV.getSelectedChartType = function(){
+	return $("#chartTypes option:selected").attr("value");
+};
+
+ARV.getSelectedValue = function(id){
+	return $("#"+id+" option:selected").val();
+}

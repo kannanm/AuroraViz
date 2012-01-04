@@ -1,5 +1,7 @@
-ARV.addAllCategories = function(){
-	var selected = $("#categoryAxisList option:selected");
+ARV.selectedMeasureAxis = [];
+
+ARV.addAllCategories = function(id){
+	var selected = $("#"+id+ " option:selected");
 	var selectedVal = $(selected).val();
 	var categories = $("#categoryValues");
 	$(categories).empty();
@@ -23,7 +25,7 @@ ARV.setAllDeselected = function(elem){
 		$(this).removeAttr("selected");
 	});
 };
-ARV.addAllCategories();
+ARV.addAllCategories("categoryAxisList");
 
 ARV.getMeasureFilteredData = function(originalData){
 	var filteredData = originalData;
@@ -90,12 +92,13 @@ ARV.getMaxOfMeasureField = function(measureField){
 	var minValObj = jlinq.from(ARV.filteredData.data).max(measureField);
 	return minValObj[measureField];
 };
+
 ARV.addMeasureFilters = function(){
 	$("#measureFilter").html("");
-	var selected = $("#measureAxisList option:selected");
+	var selected = ARV.selectedMeasureAxis;
 	var i = 0;
 	for(i=0;i<selected.length;i++){
-		var measureFeild = $(selected[i]).val();
+		var measureFeild = selected[i];
 		var id = "measure"+i;
 		var label = $("<label/>").html(measureFeild);
 		var slider = $("<div/>").addClass("range-slider").attr("id",id+"Slider").addClass("measure-slider").attr("data-measureField",measureFeild);
@@ -107,7 +110,48 @@ ARV.addMeasureFilters = function(){
 		max = ARV.getMaxOfMeasureField(measureFeild);
 		ARV.createRangeSlider(id,min,max,measureFeild);
 	}
+	
 };
+
+$("#categoryAxisList").chosen().change(function(){
+	ARV.addAllCategories($(this).attr("id"));
+});
+
+ARV.updateSeletectedMeasureAxisForCharts = function(){
+	var selected = $("#measureAxisList option:selected");
+	ARV.selectedMeasureAxis = [];
+	var i =0;
+	for(i = 0;i<selected.length;i++){
+		ARV.selectedMeasureAxis.push($(selected[i]).val());
+	}
+};
+$("#measureAxisList").chosen().change(function(){
+	ARV.updateSeletectedMeasureAxisForCharts();
+	ARV.addMeasureFilters();
+});
+
+$("#categoryListForMap").chosen().change(function(){
+	ARV.addAllCategories($(this).attr("id"));
+});
+
+ARV.checkThenPush = function(arr,val){
+	if(val){
+		arr.push(val);
+	}
+}
+
+ARV.updateSelectedMeasureAxisForMap = function(){
+	ARV.selectedMeasureAxis = [];
+	ARV.checkThenPush(ARV.selectedMeasureAxis,ARV.getSelectedValue("latitudeForMap"));
+	ARV.checkThenPush(ARV.selectedMeasureAxis,ARV.getSelectedValue("longitudeForMap"));
+	ARV.checkThenPush(ARV.selectedMeasureAxis,ARV.getSelectedValue("sizeForMap"));
+};
+ARV.updateMeasureFiltersForMap = function(){
+	ARV.updateSelectedMeasureAxisForMap();
+	ARV.addMeasureFilters();
+};
+$("#latitudeForMap").chosen().change(ARV.updateMeasureFiltersForMap);
+$("#longitudeForMap").chosen().change(ARV.updateMeasureFiltersForMap);
+$("#sizeForMap").chosen().change(ARV.updateMeasureFiltersForMap);
+ARV.updateSeletectedMeasureAxisForCharts();
 ARV.addMeasureFilters();
-$("#categoryAxisList").chosen().change(ARV.addAllCategories);
-$("#measureAxisList").chosen().change(ARV.addMeasureFilters);
