@@ -73,6 +73,8 @@ ARV.createRangeSlider = function(id,min,max,measureFeild){
 		max: max,
 		values: [ min, max ],
 		stop: function( event, ui ) {
+			var minVal = ui.values[ 0 ];
+			var maxVal = ui.values[ 1 ];
 			$( "#"+id ).val(minVal + " - " + maxVal );
 			ARV.filterData();
 		}
