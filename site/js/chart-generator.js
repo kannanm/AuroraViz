@@ -97,7 +97,7 @@ ARV.addColorsDiv = function() {
     colorsDiv.html("");
     for (ARV.paletteColorCounter = 0; ARV.paletteColorCounter < colors.length; ARV.paletteColorCounter++) {
         colorsDiv.append('<input value="' + colors[ARV.paletteColorCounter] + '" class="colorInput colorPicker" size="8" type="text" id="color' + ARV.paletteColorCounter + '"/>');
-        colorsDiv.append('<button id="color' + ARV.paletteColorCounter + '"  class="delColorBtn">x</button><br/>');
+        colorsDiv.append('<button id="color' + ARV.paletteColorCounter + '"  class="delColorBtn">x</button>');
     }
     colorsDiv.append('<button id="addColorBtn" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-plus"></span></button>');
 
@@ -151,7 +151,9 @@ ARV.addEventListeners = function() {
     });
     $("#addColorBtn").live("click", function() {
         $(this).before('<input value="#ffffff" class="colorInput colorPicker" size="8" type="text" id="color' + ARV.paletteColorCounter + '"/>');
-        $(this).before('<button id="color' + (ARV.paletteColorCounter++) +'"  class="delColorBtn">x</button><br/>');
+        $(this).before('<button id="delColor' + (ARV.paletteColorCounter) +'"  class="delColorBtn">x</button>');
+        $("#delColor"+ (ARV.paletteColorCounter)).button();
+        ARV.paletteColorCounter++;
         ARV.initializeColorPicker(ARV.colorPickerCB.chartGenerator);
     });
 
@@ -182,7 +184,6 @@ ARV.addEventListeners = function() {
     $("#colors").live("click", function() {
     	ARV.refreshGraph();
     });
-
 };
 
 ARV.initChartGenerator = function() {
@@ -196,6 +197,7 @@ ARV.initChartGenerator = function() {
     ARV.createSliders(ARV.createSlidersCB.chartGenerator);
     ARV.addColorsDiv();
     ARV.addEventListeners();
+//    $("#chartTypes").chosen();
     $('#dataUpdater').trigger('click');
 };
 

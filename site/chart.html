@@ -67,29 +67,11 @@
 				
 				<button id="dataUpdater">Apply</button>
 				</fieldset>
-				
-				</div>
+				<div class="callForActionLeft">
+	                options
+	            </div>
 	            
-            </div>
-            <div class="middleContent1">
-            	<div id="middleTabs">
-					<ul>
-						<li style="display:none">
-							<a href="#chart">Chart</a>
-						</li>							
-						<li style="display:none">
-							<a href="#dataGrid">Data</a>
-						</li>	
-					</ul>					
-					<div id="chart">
-					</div>
-					<div id="dataGrid" style="display:none">
-					</div>
-				</div>	  				                
-            </div>
-			<div class="rightContent1">
-
-                <div id="accordion">
+				<div id="accordion" class="tab-view">
                             
 					<ul class="ribbon">
 						<li>
@@ -286,7 +268,51 @@
 						</fieldset>
 					</div>   
 				</div>
-			</div>
+				</div>
+	            <div class="middleContent1">
+            	<div id="middleTabs">
+					<ul>
+						<li style="display:none">
+							<a href="#chart">Chart</a>
+						</li>							
+						<li style="display:none">
+							<a href="#dataGrid">Data</a>
+						</li>	
+					</ul>					
+					<div id="chart">
+					</div>
+					<div id="dataGrid" style="display:none">
+					</div>
+				</div>	  				                
+            </div>
+			<div class="rightContent1">
+				<div class="callForActionLeft">
+	                filters
+	            </div>
+	            <div id="filter"  class="tab-view">
+					<ul class="ribbon">
+						<li>
+							<a href="#catFilter" title="Edit Measure Filters">Category</a>
+						</li>	
+						<li>
+							<a href="#measureFilter" title="Edit Measure Filters">Measure</a>
+						</li>							
+						
+					</ul>
+					
+					<div id="catFilter">
+						<label style="padding: 0 40px 0 0;">Select All</label>
+						<input type="checkbox" checked="checked" id="allCategories" />	
+						<select id="categoryValues" multiple="multiple"></select>
+					</div>
+					<div id="measureFilter">
+					
+					</div>
+					
+				</div>
+			</div>  
+            </div>
+  
 			<div id="dialog-illegal-data" title="Error" class="dialog">
 			<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>The measure axis can only have numbers. String values not allowed</p>
 			</div> 		
@@ -325,13 +351,15 @@
 		<script type="text/javascript" src="js/utility.js"></script>
 		<script type="text/javascript" src="js/dataLoader.js"></script>
 		<script type="text/javascript" src="js/chart-generator.js"></script>
-      
+      	<script type="text/javascript" src="js/filter.js"></script>
 		
 		
 		<script type="text/javascript">
 			$(function(){
 	        	$('#accordion').tabs();
 	        	$('#middleTabs').tabs();
+	        	$("#filter").tabs();
+	        	$("#categoryValues").chosen();
 			});
 			ARV.initChartGenerator();
 	/* 		$("#goback").tooltip({

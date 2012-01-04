@@ -61,12 +61,12 @@ fieldset {
 .leftContent1{
 	margin-left:.5em;
 	background:#fff;
-	width:13%; float:left; text-align:left;
+	width:17.5%; float:left; text-align:left;
 }
 .middleContent1{
 	border-left:1px solid  #EEE;
 	background:#fff;
-	width:60.5%; 
+	width:55%; 
 	margin:1% 1% 0 1%; 
 	padding:0 0 0 2em; 
 	float:left; 
@@ -194,23 +194,27 @@ fieldset {
 	height:35px;
 }
 
-#accordion {
+.tab-view {
     margin: auto;
     font-size: 10pt;
 }
-#accordion div{
+.tab-view div{
     font-size: 9pt;
     color:#555;
 }
-#accordion input{
+.tab-view input{
     width: 40%;
     padding:5px;
 }
-#accordion label {
+.tab-view label {
 	background:none no-repeat left 50%;
 	line-height: 20px;
-	padding: 0 70px 0 0;
+	display: block;
 	width: auto;
+}
+.tab-view select{
+	  width: 90%;
+    padding:5px 30px;
 }
 .oneColorDiv{
 	width:100px;
@@ -225,16 +229,20 @@ fieldset {
 }
 .AxisSelector label{
 	background:none no-repeat left 50%;
-	padding: 10px 30px 0 0;
+	display: block;
 	width: auto;
 }
 
 .AxisSelector select{
     width: 90%;
-    padding:5px;
+    padding:5px 30px;
 }
 
 #tableDisplay{
 	overflow:scroll;
 	min-height:500px;
+}
+.range-val{
+	text-align: right;
+	 float: right;
 }

@@ -1,3 +1,4 @@
+//TODO create data that is original and create filtered data
 ARV.dataJSON = {
     id: "4ed630d8ed9be9723687620d",
     columns: [
@@ -65,14 +66,14 @@ ARV.createDataForTable = function() {
     var i, label;
     var categoryLabel = $("#categoryAxisList option:selected").val();
     var measureLabels = $("#measureAxisList option:selected");
-    var columns = ARV.dataJSON.columns;
+    var columns = ARV.filteredData.columns;
     ARV.TableColumns = [];
     ARV.TableData = [];
-    //    for(i=0; i<ARV.dataJSON.columns.length; i++){
-    //        ARV.TableColumns.push(ARV.dataJSON.columns[i]);
+    //    for(i=0; i<ARV.filteredData.columns.length; i++){
+    //        ARV.TableColumns.push(ARV.filteredData.columns[i]);
     //    }
-    for (i = 0; i < ARV.dataJSON.data.length; i++) {
-        ARV.TableData.push(ARV.dataJSON.data[i]);
+    for (i = 0; i < ARV.filteredData.data.length; i++) {
+        ARV.TableData.push(ARV.filteredData.data[i]);
     }
     ARV.TableColumns.push(jlinq.from(columns).equals("field", categoryLabel).select()[0]);
     for (i = 0; i < measureLabels.length; i++) {
@@ -81,23 +82,9 @@ ARV.createDataForTable = function() {
     }
 };
 
-//TODO : Remove the following global variables
-var data = ARV.dataJSON.data;
-var columns = ARV.dataJSON.columns;
-var i = 0;
-var option;
 
-ARV.grid = new Slick.Grid("#dataGrid", data, columns, ARV.editableGridOptions);
-ARV.grid.setSelectionModel(new Slick.CellSelectionModel());
-ARV.grid.onAddNewRow.subscribe(function(e, args) {
-    var item = args.item;
-    var column = args.column;
-    ARV.grid.invalidateRow(data.length);
-    data.push(item);
-    ARV.grid.updateRowCount();
-    ARV.grid.render();
-});
 ARV.populateSingleSelectForMap = function(div){
+	var columns = ARV.dataJSON.columns;
 	if($("#"+div).is(".select-deselect")){
 		 option = $('<option />').val("");
 		 $("#"+div).append(option);
@@ -118,25 +105,42 @@ ARV.populateSingleSelectForMap("categoryListForMap");
 ARV.populateSingleSelectForMap("latitudeForMap");
 ARV.populateSingleSelectForMap("longitudeForMap");
 ARV.populateSingleSelectForMap("sizeForMap");
+(function(){
+	var data = ARV.dataJSON.data;
+	var columns = ARV.dataJSON.columns;
+	var i = 0;
+	var option;
+	
+	ARV.grid = new Slick.Grid("#dataGrid", data, columns, ARV.editableGridOptions);
+	ARV.grid.setSelectionModel(new Slick.CellSelectionModel());
+	ARV.grid.onAddNewRow.subscribe(function(e, args) {
+	    var item = args.item;
+	    var column = args.column;
+	    ARV.grid.invalidateRow(data.length);
+	    data.push(item);
+	    ARV.grid.updateRowCount();
+	    ARV.grid.render();
+	});
+	for (i = 0; i < columns.length; i++) {
+	    option = $('<option />').val(columns[i].field).append(columns[i].name);
+	    if (i === 1) {
+	        option.attr("selected", "selected");
+	    }
+	    $("#measureAxisList").append(option);
+	}
+	$("#measureAxisList").chosen();
 
-for (i = 0; i < columns.length; i++) {
-    option = $('<option />').val(columns[i].field).append(columns[i].name);
-    if (i === 1) {
-        option.attr("selected", "selected");
-    }
-    $("#measureAxisList").append(option);
-}
-$("#measureAxisList").chosen();
+	for (i = 0; i < columns.length; i++) {
+	    option = $('<option />').val(columns[i].field).append(columns[i].name);
+	    if (i === 0) {
+	        option.attr("selected", "selected");
+	    }
+	    $("#categoryAxisList").append(option);
+	}
+	$("#categoryAxisList").chosen();
 
-for (i = 0; i < columns.length; i++) {
-    option = $('<option />').val(columns[i].field).append(columns[i].name);
-    if (i === 0) {
-        option.attr("selected", "selected");
-    }
-    $("#categoryAxisList").append(option);
-}
-$("#categoryAxisList").chosen();
-
+	
+})();
 ARV.initializeDialog = function() {
     $("#dialog-illegal-data").dialog({
         modal: true,
@@ -155,6 +159,7 @@ ARV.modifyDataForSingleSeries = function() {
     var selected = $("#measureAxisList option:selected");
     var field = $(selected[0]).val();
     labelField = $("#categoryAxisList option:selected").val();
+    var data = ARV.filteredData.data;
     for (i = 0; i < data.length; i++) {
         var dataElement = data[i];
         var value = parseInt(dataElement[field], 10);
@@ -176,8 +181,8 @@ ARV.updateCategoryArray = function() {
     var labelField = $("#categoryAxisList option:selected").val();
     var obj = {};
     var i = 0;
-    for (i = 0; i < ARV.dataJSON.data.length; i++) {
-        var dataElement = ARV.dataJSON.data[i];
+    for (i = 0; i < ARV.filteredData.data.length; i++) {
+        var dataElement = ARV.filteredData.data[i];
         category = dataElement[labelField];
         obj = {
             label: category
@@ -189,8 +194,8 @@ ARV.getDataArrayForSeries = function(seriesname) {
     var dataArr = [];
     var obj = {};
     var index = 0;
-    for (index = 0; index < ARV.dataJSON.data.length; index++) {
-        var dataElement = ARV.dataJSON.data[index];
+    for (index = 0; index < ARV.filteredData.data.length; index++) {
+        var dataElement = ARV.filteredData.data[index];
         var value = parseInt(dataElement[seriesname], 10);
         if (isNaN(value)) {
             $("#dialog-illegal-data").dialog("open");
@@ -240,8 +245,8 @@ ARV.modifyDataForBubbleChart = function() {
     	z = $(selected[2]).val(),
         labelField = $("#categoryAxisList option:selected").val();
     
-    for (index = 0; index < ARV.dataJSON.data.length; index++) {
-        dataItem = ARV.dataJSON.data[index];
+    for (index = 0; index < ARV.filteredData.data.length; index++) {
+        dataItem = ARV.filteredData.data[index];
         xValue = parseInt(dataItem[x],10);
         yValue = parseInt(dataItem[y],10);
         zValue = parseInt(dataItem[z],10);
@@ -269,8 +274,8 @@ ARV.modifyDataForMap = function(){
  		long = $("#longitudeForMap option:selected").val(),
  		size = $("#sizeForMap option:selected").val(),
  		category = $("#categoryListForMap option:selected").val() ;
-	for (index = 0; index < ARV.dataJSON.data.length; index++) {
-		dataItem = ARV.dataJSON.data[index];
+	for (index = 0; index < ARV.filteredData.data.length; index++) {
+		dataItem = ARV.filteredData.data[index];
 		latValue = parseInt(dataItem[lat],10);
 		longValue = parseInt(dataItem[long],10);
 		sizeValue = parseInt(dataItem[size] || 10 ,10);
@@ -288,7 +293,11 @@ ARV.modifyDataForMap = function(){
 	}
 	ARV.defaultData.MapGraph = dataArr;
 };
-$("#dataUpdater").live("click",function() {
+ARV.updateDataForVisualizations = function(){
+	if(ARV.filteredData.data.length === 0){
+		$("#chart").html("Select some fields to view data");
+		return;
+	}
     var noOfSelected = ARV.getNumberOfSelectedMeasureAxis();
     try {
         if (noOfSelected === 1) {
@@ -311,4 +320,9 @@ $("#dataUpdater").live("click",function() {
     ARV.createDataForTable();
     ARV.refreshTable();
     ARV.refreshGraph();
+};
+$("#dataUpdater").live("click",function() {
+	ARV.updateDataForVisualizations();
 });
+ARV.filteredData = {};
+jQuery.extend(ARV.filteredData,ARV.dataJSON);
