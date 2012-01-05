@@ -3,7 +3,7 @@
 	<property name="basedir" location="." />
 	<property name="app.name" value="aurora" />
 	<property name="app.war" value="${app.name}.war" />
-	<property name="src.dir" value="${basedir}/src" />
+	<property name="src.dir" value="${basedir}/redesign-src" />
 	<property name="css.dir" value="${basedir}/css" />
 	<property name="lib.dir" value="${basedir}/lib" />
 	<property name="tools.dir" value="${basedir}/tools" />

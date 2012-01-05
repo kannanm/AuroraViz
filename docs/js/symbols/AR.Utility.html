@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - AR</title>
+		<title>JsDoc Reference - AR.Utility</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -202,7 +202,7 @@ ul.inheritsList {
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace AR
+				Namespace AR.Utility
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -210,16 +210,16 @@ ul.inheritsList {
 				
 				
 			
-				The top-level aurora namespace, <tt>AR</tt>.
+				The top-level utility namespace, <tt>AR.Utility</tt>.
 				
 				
-					<br /><i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_redesign-src_aurora.js.html">aurora.js</a>.
+					<br /><i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_redesign-src_utility.js.html">utility.js</a>.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class AR.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class AR.Utility.">
 				<caption>Namespace Summary</caption>
 				<thead>
 					<tr>
@@ -232,9 +232,9 @@ ul.inheritsList {
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/AR.html#constructor">AR</a></b>
+								<b><a href="../symbols/AR.Utility.html#constructor">AR.Utility</a></b>
 							</div>
-							<div class="description">The top-level aurora namespace.</div>
+							<div class="description">The top level namespace for all the utility functions in Aurora.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -243,25 +243,45 @@ ul.inheritsList {
 
 <!-- ============================== properties summary ===================== -->
 			
+
+<!-- ============================== methods summary ======================== -->
+			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class AR.">
-					<caption>Field Summary</caption>
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class AR.Utility.">
+					<caption>Method Summary</caption>
 					<thead>
 						<tr>
-							<th scope="col">Field Attributes</th>
-							<th scope="col">Field Name and Description</th>
+							<th scope="col">Method Attributes</th>
+							<th scope="col">Method Name and Description</th>
 						</tr>
 					</thead>
 					<tbody>
 					
 						<tr>
-							<td class="attributes">&lt;static&gt; &lt;constant&gt; &nbsp;</td>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">
-								AR.<b><a href="../symbols/AR.html#.ChartType">ChartType</a></b>
+								<div class="fixedFont">AR.Utility.<b><a href="../symbols/AR.Utility.html#.checkChartType">checkChartType</a></b>(chartType)
 								</div>
-								<div class="description">This is a an object containing the list of ChartTypes Supported By Aurora</div>
+								<div class="description">Checks if the <tt>chartType</tt> exists.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">AR.Utility.<b><a href="../symbols/AR.Utility.html#.checkGraphData">checkGraphData</a></b>(graphData)
+								</div>
+								<div class="description">Checks if the <tt>graphData</tt> contains both the data and the series.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">AR.Utility.<b><a href="../symbols/AR.Utility.html#.checkParams">checkParams</a></b>(chartType, graphData)
+								</div>
+								<div class="description">Checks if <tt>chartType</tt> exists and the data and the series name are present and their length is equal as with every series a data is associated</div>
 							</td>
 						</tr>
 					
@@ -270,9 +290,6 @@ ul.inheritsList {
 				
 				
 				
-			
-
-<!-- ============================== methods summary ======================== -->
 			
 <!-- ============================== events summary ======================== -->
 			
@@ -285,11 +302,11 @@ ul.inheritsList {
 				</div>
 				
 				<div class="fixedFont">
-						<b>AR</b>
+						<b>AR.Utility</b>
 				</div>
 				
 				<div class="description">
-					The top-level aurora namespace. All public methods and fields should be registered on this namespace object.
+					The top level namespace for all the utility functions in Aurora.
 					
 				</div>
 				
@@ -309,25 +326,134 @@ ul.inheritsList {
 
 <!-- ============================== field details ========================== -->		
 			
+
+<!-- ============================== method details ========================= -->		
+			
 				<div class="sectionTitle">
-					Field Detail
+					Method Detail
 				</div>
 				
-					<a name=".ChartType"> </a>
-					<div class="fixedFont">&lt;static&gt; &lt;constant&gt; 
+					<a name=".checkChartType"> </a>
+					<div class="fixedFont">&lt;static&gt; 
 					
-					
-					<span class="light">AR.</span><b>ChartType</b>
+					<span class="light">{boolean}</span>
+					<span class="light">AR.Utility.</span><b>checkChartType</b>(chartType)
 					
 					</div>
 					<div class="description">
-						This is a an object containing the list of ChartTypes Supported By Aurora
+						Checks if the <tt>chartType</tt> exists.
 						
 						
 					</div>
 					
 					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{string}</span> <b>chartType</b>
+									
+								</dt>
+								<dd>It is the type of the Chart that the user wants to initialize</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{boolean}</span> true if the <tt>chartType</tt> exists, otherwise false</dd>
+							
+							</dl>
+						
+						
+						
 
+					<hr />
+				
+					<a name=".checkGraphData"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{boolean}</span>
+					<span class="light">AR.Utility.</span><b>checkGraphData</b>(graphData)
+					
+					</div>
+					<div class="description">
+						Checks if the <tt>graphData</tt> contains both the data and the series.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{json}</span> <b>graphData</b>
+									
+								</dt>
+								<dd>The data for the graph</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{boolean}</span> true if the <tt>graphData</tt> is valid, otherwise false</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".checkParams"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">AR.Utility.</span><b>checkParams</b>(chartType, graphData)
+					
+					</div>
+					<div class="description">
+						Checks if <tt>chartType</tt> exists and the data and the series name are present and their length is equal as with every series a data is associated
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{string}</span> <b>chartType</b>
+									
+								</dt>
+								<dd>It is the type of the Chart that the user wants to initialize</dd>
+							
+								<dt>
+									<span class="light fixedFont">{json}</span> <b>graphData</b>
+									
+								</dt>
+								<dd>It is an object containing the data and the series name for the graph</dd>
+							
+							</dl>
+						
+						
+						
 						
 						
 						
@@ -335,9 +461,6 @@ ul.inheritsList {
 
 					
 				
-			
-
-<!-- ============================== method details ========================= -->		
 			
 			
 <!-- ============================== event details ========================= -->		
