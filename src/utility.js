@@ -303,3 +303,37 @@ AR.constants.scale ={
 AR.Utility.getSize = function(graphDef,element,value){
 	return AR.constants.scale[element]*value*graphDef.height*graphDef.width;
 };
+
+
+AR.Utility.Table = function (columnNames, data, isJson) {
+ this.columnNames = columnNames;
+ this._data = data;
+ this._isAA = ! isJson;
+};
+
+AR.Utility.Table.prototype.dataValue = function (rowIndex, columnName) {
+ var row = this._data[rowIndex];
+ if(this._isAA){
+  var colIndex = this.columnNames.indexOf(columnName);
+  return row[colIndex];
+ }else{
+  return row[columnName];
+ }
+};
+
+AR.Utility.Table.prototype.dataValueByRowAndColIndex = function (rowIndex, colIndex) {
+ if(this._isAA){
+  return this._data[rowIndex][colIndex];
+ }else{
+  return this._data[rowIndex][this.columnNames[colIndex]];
+ }
+
+};
+
+AR.Utility.Table.prototype.row = function (rowIndex) {
+ return this._data[rowIndex];
+};
+
+AR.Utility.Table.prototype.getLength = function () {
+ return this._data.length;
+};

@@ -1,4 +1,61 @@
-var cars = [
+ARV.dataJSON = {};
+ARV.dataJSON.columns = [
+{
+ id: "name",
+ name: "name",
+ field: "name",
+ editor: TextCellEditor},
+
+{
+ id: "mpg",
+ name: "mpg",
+ field: "mpg",
+ editor: TextCellEditor},
+
+{
+ id: "cyl",
+ name: "cyl",
+ field: "cyl",
+ editor: TextCellEditor},
+
+{
+ id: "dsp",
+ name: "dsp",
+ field: "dsp",
+ editor: TextCellEditor},
+
+{
+ id: "hp",
+ name: "hp",
+ field: "hp",
+ editor: TextCellEditor},
+
+{
+ id: "lbs",
+ name: "lbs",
+ field: "lbs",
+ editor: TextCellEditor},
+
+{
+ id: "acc",
+ name: "acc",
+ field: "acc",
+ editor: TextCellEditor},
+
+{
+ id: "year",
+ name: "year",
+ field: "year",
+ editor: TextCellEditor},
+
+{
+ id: "origin",
+ name: "origin",
+ field: "origin",
+ editor: TextCellEditor},
+
+];
+ARV.dataJSON.data = [
 {name:"chevrolet chevelle malibu", mpg:18, cyl:8, dsp:307, hp:130, lbs:3504, acc:12, year:70, origin:1},
 {name:"buick skylark 320", mpg:15, cyl:8, dsp:350, hp:165, lbs:3693, acc:11.5, year:70, origin:1},
 {name:"plymouth satellite", mpg:18, cyl:8, dsp:318, hp:150, lbs:3436, acc:11, year:70, origin:1},
