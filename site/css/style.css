@@ -54,3 +54,6 @@ input.editor-text {
 #MapAxisSelector {
 	display:none;
 }
+.loading{
+	margin: 10em 10em 10em 20em;
+}
