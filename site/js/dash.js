@@ -46,7 +46,7 @@ $(function(){
     self.setClick = function(type){
 		$('.item[data-type='+type+']').click(function(){
 			window.location.href = {
-					dashboard : "dashboard/create-dashboard.html",
+					dashboard : "create-dashboard.html",
 					file : "chart.html",
 					chart : "chart.html"
 			}[type];

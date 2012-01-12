@@ -293,24 +293,6 @@ ul.inheritsList {
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.addCSS">addCSS</a></b>(cssPath, pos)
-								</div>
-								<div class="description">Adds the CSS file specified by the <tt>cssPath</tt>,        at the position <tt>pos</tt>.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.addJavascript">addJavascript</a></b>(jsPath, pos, dataPath, callback)
-								</div>
-								<div class="description">Adds the javascript file specified by the <tt>jsPath</tt>,        at the position <tt>pos</tt>.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
 								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.AreaGraph">AreaGraph</a></b>(graphDef)
 								</div>
 								<div class="description"></div>
@@ -455,15 +437,6 @@ ul.inheritsList {
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.registerToProtovis">registerToProtovis</a></b>()
-								</div>
-								<div class="description">Register the file to protovis.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
 								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.setHeight">setHeight</a></b>(height)
 								</div>
 								<div class="description"></div>
@@ -518,7 +491,7 @@ ul.inheritsList {
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.TableConfig">TableConfig</a></b>(fieldsMeta, db)
+								<div class="fixedFont">AR.<b><a href="../symbols/AR.html#.TableConfig">TableConfig</a></b>(db)
 								</div>
 								<div class="description"></div>
 							</td>
@@ -637,102 +610,6 @@ ul.inheritsList {
 				<div class="sectionTitle">
 					Method Detail
 				</div>
-				
-					<a name=".addCSS"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">AR.</span><b>addCSS</b>(cssPath, pos)
-					
-					</div>
-					<div class="description">
-						Adds the CSS file specified by the <tt>cssPath</tt>,        at the position <tt>pos</tt>.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{string}</span> <b>cssPath</b>
-									<i>Optional</i>
-								</dt>
-								<dd>the path of the CSS file to be included.</dd>
-							
-								<dt>
-									<span class="light fixedFont">{string}</span> <b>pos</b>
-									<i>Optional</i>
-								</dt>
-								<dd>(optional)the dom element in which the link tag to include           css file will appear. If unspecified the css file will be included           in head.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".addJavascript"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">AR.</span><b>addJavascript</b>(jsPath, pos, dataPath, callback)
-					
-					</div>
-					<div class="description">
-						Adds the javascript file specified by the <tt>jsPath</tt>,        at the position <tt>pos</tt>.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{string}</span> <b>jsPath</b>
-									<i>Optional</i>
-								</dt>
-								<dd>the path of the JS file to be included.</dd>
-							
-								<dt>
-									<span class="light fixedFont">{string}</span> <b>pos</b>
-									<i>Optional</i>
-								</dt>
-								<dd>(optional)the dom element in which the script tag to include           js file will appear. If unspecified the js file will be included           in head.</dd>
-							
-								<dt>
-									<b>dataPath</b>
-									
-								</dt>
-								<dd></dd>
-							
-								<dt>
-									<b>callback</b>
-									
-								</dt>
-								<dd></dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
 				
 					<a name=".AreaGraph"> </a>
 					<div class="fixedFont">&lt;static&gt; 
@@ -1575,31 +1452,6 @@ Initializes the Node Link. Sets the data
 
 					<hr />
 				
-					<a name=".registerToProtovis"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">AR.</span><b>registerToProtovis</b>()
-					
-					</div>
-					<div class="description">
-						Register the file to protovis. By registering it means the pv.parse parsesthe code.
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
 					<a name=".setHeight"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
@@ -1840,7 +1692,7 @@ Initializes the Node Link. Sets the data
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">AR.</span><b>TableConfig</b>(fieldsMeta, db)
+					<span class="light">AR.</span><b>TableConfig</b>(db)
 					
 					</div>
 					<div class="description">
@@ -1857,12 +1709,6 @@ Initializes the Node Link. Sets the data
 						
 							<dl class="detailList">
 							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>fieldsMeta</b>
-									
-								</dt>
-								<dd></dd>
 							
 								<dt>
 									<b>db</b>
@@ -2117,7 +1963,7 @@ Initializes the WedgeGraph. Sets the data
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon Jan 02 2012 18:48:08 GMT+0530 (IST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Thu Jan 12 2012 11:51:16 GMT+0530 (IST)
 		</div>
 	</body>
 </html>

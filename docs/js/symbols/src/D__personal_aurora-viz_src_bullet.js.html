@@ -24,7 +24,7 @@
 <span class='line'> 17</span> </span><span class="WHIT">    </span><span class="NAME">self._bulletPanel</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">undefined</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 18</span> </span><span class="WHIT">    </span><span class="NAME">self._graphDef</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">graphDef</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 19</span> </span><span class="WHIT">    </span><span class="COMM">//TODO: Create the following using function generator as there is a minor difference between the two</span><span class="WHIT">
-<span class='line'> 20</span> </span><span class="WHIT">    </span><span class="NAME">AR.Graph.apply</span><span class="PUNC">(</span><span class="NAME">self</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">graphDef</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 20</span> </span><span class="WHIT">    </span><span class="NAME">self.initialize</span><span class="PUNC">(</span><span class="NAME">graphDef</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 21</span> 
 <span class='line'> 22</span> </span><span class="WHIT">    </span><span class="COMM">/**
 <span class='line'> 23</span>      * @private
@@ -194,7 +194,7 @@
 <span class='line'>187</span> </span><span class="WHIT">    </span><span class="NAME">createBulletChart</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'>188</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'>189</span> 
-<span class='line'>190</span> </span><span class="NAME">AR.BulletGraph.prototype</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">AR.extend</span><span class="PUNC">(</span><span class="NAME">AR.Graph</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>190</span> </span><span class="NAME">AR.BulletGraph.prototype</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">AR.Graph</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'>191</span> 
 <span class='line'>192</span> </span><span class="NAME">AR.BulletGraph.prototype.setVerGridShow</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">status</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'>193</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">self</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">this</span><span class="PUNC">;</span><span class="WHIT">

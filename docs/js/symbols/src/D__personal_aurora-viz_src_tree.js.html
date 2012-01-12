@@ -69,7 +69,7 @@
 <span class='line'> 62</span>  */</span><span class="WHIT">
 <span class='line'> 63</span> </span><span class="NAME">AR.TreeGraph</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">graphDef</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'> 64</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">self</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">this</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 65</span> </span><span class="WHIT">    </span><span class="NAME">AR.Graph.apply</span><span class="PUNC">(</span><span class="NAME">self</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">graphDef</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 65</span> </span><span class="WHIT">    </span><span class="NAME">self.initialize</span><span class="PUNC">(</span><span class="NAME">graphDef</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 66</span> 
 <span class='line'> 67</span> </span><span class="WHIT">    </span><span class="COMM">// Here I'm gonna have to call the Tree API or the Node Link API</span><span class="WHIT">
 <span class='line'> 68</span> </span><span class="WHIT">    </span><span class="COMM">// Before I do so I am gonna adjust the panel dimensions a bit..</span><span class="WHIT">
@@ -110,7 +110,7 @@
 <span class='line'>103</span> </span><span class="WHIT">    </span><span class="NAME">self.setTop</span><span class="PUNC">(</span><span class="NUMB">10</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'>104</span> </span><span class="WHIT">    </span><span class="NAME">self.setBottom</span><span class="PUNC">(</span><span class="NUMB">10</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'>105</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>106</span> </span><span class="NAME">AR.TreeGraph.prototype</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">AR.extend</span><span class="PUNC">(</span><span class="NAME">AR.Graph</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>106</span> </span><span class="NAME">AR.TreeGraph.prototype</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">AR.Graph</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'>107</span> 
 <span class='line'>108</span> 
 <span class='line'>109</span> 
@@ -223,7 +223,7 @@
 <span class='line'>216</span>  */</span><span class="WHIT">
 <span class='line'>217</span> </span><span class="NAME">AR.SunBurstGraph</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">graphDef</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'>218</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">self</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">this</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>219</span> </span><span class="WHIT">    </span><span class="NAME">AR.Graph.apply</span><span class="PUNC">(</span><span class="NAME">self</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="NAME">graphDef</span><span class="PUNC">]</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>219</span> </span><span class="WHIT">    </span><span class="NAME">self.initialize</span><span class="PUNC">(</span><span class="NAME">graphDef</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'>220</span> 
 <span class='line'>221</span> </span><span class="WHIT">    </span><span class="COMM">// Here I'm gonna have to call the Tree API or the Node Link API</span><span class="WHIT">
 <span class='line'>222</span> </span><span class="WHIT">    </span><span class="COMM">// Before I do so I am gonna adjust the panel dimensions a bit..</span><span class="WHIT">
@@ -262,4 +262,4 @@
 <span class='line'>255</span> </span><span class="WHIT">    </span><span class="NAME">self.setLeft</span><span class="PUNC">(</span><span class="NUMB">20</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'>256</span> </span><span class="WHIT">    </span><span class="NAME">self.setBottom</span><span class="PUNC">(</span><span class="PUNC">-</span><span class="NUMB">40</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'>257</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>258</span> </span><span class="NAME">AR.SunBurstGraph.prototype</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">AR.extend</span><span class="PUNC">(</span><span class="NAME">AR.Graph</span><span class="PUNC">)</span><span class="PUNC">;</span></pre></body></html>
+<span class='line'>258</span> </span><span class="NAME">AR.SunBurstGraph.prototype</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">AR.Graph</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="PUNC">;</span></pre></body></html>
