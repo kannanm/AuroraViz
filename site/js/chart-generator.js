@@ -74,6 +74,7 @@ ARV.getGraphType = function(){
 };
 
 ARV.modifyJSON = function(div) {
+	$("#chart").html("<img src='css/images/loading.gif' class='loading'/>");
     var index, param, value;
     var graphName = ARV.getGraphType();
     ARV.graphDef = ARV.getData(ARV.JsonMap[graphName]);
@@ -84,9 +85,7 @@ ARV.modifyJSON = function(div) {
 };
 
 ARV.showGraph = function(graphName,div, graphDef) {
-	$("#chart").html("<img src='css/images/loading.gif' class='loading'/>");
     graph = new AR[ARV.ChartTypeMap[graphName]](graphDef || ARV.graphDef);
-    $("#chart").html("");
     graph.render(div || "chart");
 };
 
