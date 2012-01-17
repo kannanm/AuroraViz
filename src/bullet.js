@@ -6,8 +6,8 @@
  *
  * @class
  *
- * @param {object}
- *            [graphDef] An object containing the graph properties and the data
+ * @param graphDef{object}
+ *             An object containing the graph properties and the data
  * @extends AR.Graph
  */
 

@@ -76,7 +76,7 @@ AR.StackedAreaGraph = function(graphDef) {
     var xScale = pv.Scale.linear(0, noOfRecords).range(0, self._dimension.width - 40),
         yScale = pv.Scale.linear(0, sumOfMaxValues).range(0, self._dimension.height - 40);
 
-/*
+	/*
      * The function creates the stack area Object
      */
     var createStackedAreaGraph = function() {

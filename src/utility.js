@@ -1,6 +1,22 @@
 /** @authors : Aditya Gaur, koushikr */
 
 /**
+ * Finds the maximum value in the array
+ */
+Array.prototype.max = Array.prototype.max ||
+function () {
+  var max = this[0];
+  var len = this.length;
+  var i;
+  for (i = 1; i < len; i++) {
+    if (this[i] > max) {
+      max = this[i];
+    }
+  }
+  return max;
+};
+
+/**
  * @Description The top-level aurora utility namespace. All utility functions 
  * are within this namespace
  * @namespace The top-level aurora utility namespace, <tt>AR.Utility</tt>.

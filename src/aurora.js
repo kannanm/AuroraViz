@@ -1,19 +1,6 @@
 /**@author : Aditya Gaur*/
-Array.prototype.max = Array.prototype.max ||
-function () {
-  var max = this[0];
-  var len = this.length;
-  var i;
-  for (i = 1; i < len; i++) {
-    if (this[i] > max) {
-      max = this[i];
-    }
-  }
-  return max;
-};
 
 /**
- 
  * @Description The top-level aurora namespace. All public methods and
  *  fields should be registered on this namespace object.
  * @namespace The top-level aurora namespace, <tt>AR</tt>.
@@ -40,12 +27,8 @@ AR.extend = function (f) {
 
 /**
  * @class
- * The basefunction for the graph initilization.
+ * The base class for the graph initilization.
  * Initializes the panel and sets parentDimensions and property values
- * @param {json}
- *             graphDef is the current graph Dimension
- * This method should be the first method that should be called when creating any kind of graph.
- * Creates the panel, sets its dimensions, labels and property values and returns.
  */
 AR.Graph = function () {
   var self = this;
@@ -70,6 +53,10 @@ AR.Graph = function () {
   self._verAxis = undefined;
 };
 
+/**
+ * The function initializes the panel and sets the properties which are common to all graphs
+ * @param {Object} graphDef The graph definition containing styling, data and chart speficig properties  
+ */
 AR.Graph.prototype.initialize = function (graphDef) {
   var self = this;
   self._outerPanel = new pv.Panel().left(0).right(0).bottom(0).top(0);
@@ -114,8 +101,8 @@ AR.Graph.prototype.setCaption = function (newVal) {
 /**
  * Sets a graph's width.
  * Width is one of the properties of a graph
- * @param {string}
- *             [width] Sets the width for the given graph as the supplied parameter value
+ * @param width Width for the given graph as the supplied parameter value
+ *            
  */
 AR.Graph.prototype.setWidth = function (width) {
   var self = this;
@@ -128,8 +115,7 @@ AR.Graph.prototype.setWidth = function (width) {
 
 /**
  * Sets a graph's Height.
- * @param {string}
- *             [height] Height of the graph
+ * @param height Height of the graph
  */
 AR.Graph.prototype.setHeight = function (height) {
   var self = this;
@@ -139,8 +125,8 @@ AR.Graph.prototype.setHeight = function (height) {
 
 /**
  * Sets a graph's xAxisName.
- * @param {string}
- *             [name] The string for the x Axis Label
+ * @param name {string}
+ *             The string for the x Axis Label
  */
 AR.Graph.prototype.setXAxisName = function (name) {
   var self = this;
@@ -152,8 +138,8 @@ AR.Graph.prototype.setXAxisName = function (name) {
 };
 /**
  * Sets a graph's yAxisName.
- * @param {string}
- *             [name] The string for the y Axis label
+ * @param name {string}
+ *             The string for the y Axis label
  */
 AR.Graph.prototype.setYAxisName = function (name) {
   var self = this;
@@ -168,10 +154,10 @@ AR.Graph.prototype.setYAxisName = function (name) {
 /**
  * Sets horizontal rules in a graph.
  * Rules are nothing but lines that divide the graph to form a grid like structure
- * @param {integer}
- *               [maxValue] This is the maximimum value that the graph would have in horizontal direction. It is required to calculate the scale.
- * @param {object}
- *            [scaleType] It takes the scaleType (Linear/Ordinal etc)
+ * @param maxValue {integer}
+ *                This is the maximimum value that the graph would have in horizontal direction. It is required to calculate the scale.
+ * @param scaleType {object}
+ *             It takes the scaleType (Linear/Ordinal etc)
  */
 
 AR.Graph.prototype.setHorGridShow = function (maxValue, scaleType) {
@@ -187,8 +173,8 @@ AR.Graph.prototype.setHorGridShow = function (maxValue, scaleType) {
 
 /**
  * It shows the Horizontal grid axis if the <b>status</b> is set to true
- * @param {boolean}
- *         [status]If set to true it show the labels for the Horizontal grid
+ * @param status {boolean}
+ *          If set to true it show the labels for the Horizontal grid
  */
 AR.Graph.prototype.setHorGridLabelShow = function (status) {
   var self = this;
@@ -200,10 +186,10 @@ AR.Graph.prototype.setHorGridLabelShow = function (status) {
 /**
  * Sets vertical rules in a graph.
  * Rules are nothing but lines that divide the graph to form a grid like structure
- * @param {integer}
- *               [maxValue] This is the maximimum value that the graph would have in vertical direction. It is required to calculate the scale.
- * @param {object}
- *            [scaleType] It takes the scaleType (Linear/Ordinal etc)
+ * @param maxValue{integer}
+ *              This is the maximimum value that the graph would have in vertical direction. It is required to calculate the scale.
+ * @param scaleType {object}
+ *           It takes the scaleType (Linear/Ordinal etc)
  *             
  */
 
@@ -220,8 +206,8 @@ AR.Graph.prototype.setVerGridShow = function (maxValue, scaleType) {
 
 /**
  * It shows the Vertical grid axis if the <b>status</b> is set to true
- * @param {boolean}
- *         [status] If set to true it show the labels for the vertical grid
+ * @param status {boolean}
+ *         If set to true it show the labels for the vertical grid
  */
 AR.Graph.prototype.setVerGridLabelShow = function (status) {
   var self = this;
@@ -232,8 +218,8 @@ AR.Graph.prototype.setVerGridLabelShow = function (status) {
 
 /**
  * Renders the Component
- * @param {html node}
- *             [div]The node in which the graph has to be rendered. If undefined grpah is rendered whereever the function is called.
+ * @param div {html node}
+ *             The node in which the graph has to be rendered. If undefined grpah is rendered whereever the function is called.
  */
 AR.Graph.prototype.render = function render(div) {
   var self = this;
@@ -245,6 +231,10 @@ AR.Graph.prototype.render = function render(div) {
     self._outerPanel.render();
   }
 };
+
+/**
+ * The line element and the corresponding object of the chart
+ */
 AR.Graph.lineElements = [
   {
   name: "horAxis",
@@ -267,6 +257,10 @@ AR.Graph.lineElements = [
   obj: "_outerPanel"
 }
 ];
+
+/**
+ * The label elements and their corresponding object
+ */
 AR.Graph.labelElements = [
   {
   name: "caption",
@@ -281,6 +275,10 @@ AR.Graph.labelElements = [
   obj: "_verAxisLabel"
 }
 ];
+
+/**
+ * The area elements and their corresponding objects
+ */
 AR.Graph.areaElements = [
   {
   name: "canvas",
@@ -291,6 +289,14 @@ AR.Graph.areaElements = [
   obj: "_panel"
 }
 ];
+
+/**
+ * The function creates functions which set the <tt>property</tt> of the elements in the <tt>elementsArr</tt>
+ * @param elementsArr {Array} The array of elements whos <tt>property</tt> is to be set
+ * @param property {String} The property which is to be set 
+ * @param protovisProp {String} The corresponding protovis property
+ * @param additionalData {String} Some additional data to set the property. 
+ */
 AR.Graph.createFunctions = function (elementsArr, property, protovisProp, additionalData) {
   var i = 0;
   for (i = 0; i < elementsArr.length; i++) {
@@ -307,6 +313,8 @@ AR.Graph.createFunctions = function (elementsArr, property, protovisProp, additi
     })(prop, obj);
   }
 };
+
+//here we create the functions
 (function () {
   AR.Graph.createFunctions(AR.Graph.areaElements, "FillColor", "fillStyle");
   AR.Graph.createFunctions(AR.Graph.lineElements, "Thickness", "lineWidth");

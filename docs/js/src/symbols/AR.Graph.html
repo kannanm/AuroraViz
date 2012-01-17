@@ -189,6 +189,8 @@ ul.inheritsList {
 	
 	<li><a href="../symbols/AR.Area.html">AR.Area</a></li>
 	
+	<li><a href="../symbols/AR.BubbleGraph.html">AR.BubbleGraph</a></li>
+	
 	<li><a href="../symbols/AR.BulletGraph.html">AR.BulletGraph</a></li>
 	
 	<li><a href="../symbols/AR.constants.html">AR.constants</a></li>
@@ -218,7 +220,7 @@ ul.inheritsList {
 				
 				
 			
-				The basefunction for the graph initilization.Initializes the panel and sets parentDimensions and property values
+				The base class for the graph initilization.Initializes the panel and sets parentDimensions and property values
 				
 				
 					<br /><i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_src_aurora.js.html">aurora.js</a>.
@@ -240,7 +242,7 @@ ul.inheritsList {
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/AR.Graph.html#constructor">AR.Graph</a></b>(graphDef)
+								<b><a href="../symbols/AR.Graph.html#constructor">AR.Graph</a></b>()
 							</div>
 							<div class="description"></div>
 						</td>
@@ -250,6 +252,54 @@ ul.inheritsList {
 			
 
 <!-- ============================== properties summary ===================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class AR.Graph.">
+					<caption>Field Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Field Attributes</th>
+							<th scope="col">Field Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								AR.Graph.<b><a href="../symbols/AR.Graph.html#.areaElements">areaElements</a></b>
+								</div>
+								<div class="description">The area elements and their corresponding objects</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								AR.Graph.<b><a href="../symbols/AR.Graph.html#.labelElements">labelElements</a></b>
+								</div>
+								<div class="description">The label elements and their corresponding object</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								AR.Graph.<b><a href="../symbols/AR.Graph.html#.lineElements">lineElements</a></b>
+								</div>
+								<div class="description">The line element and the corresponding object of the chart</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
 			
 
 <!-- ============================== methods summary ======================== -->
@@ -271,7 +321,7 @@ ul.inheritsList {
 							<td class="nameDescription">
 								<div class="fixedFont">AR.Graph.<b><a href="../symbols/AR.Graph.html#.createFunctions">createFunctions</a></b>(elementsArr, property, protovisProp, additionalData)
 								</div>
-								<div class="description"></div>
+								<div class="description">The function creates functions which set the <tt>property</tt> of the elements in the <tt>elementsArr</tt></div>
 							</td>
 						</tr>
 					
@@ -280,7 +330,7 @@ ul.inheritsList {
 							<td class="nameDescription">
 								<div class="fixedFont"><b><a href="../symbols/AR.Graph.html#initialize">initialize</a></b>(graphDef)
 								</div>
-								<div class="description"></div>
+								<div class="description">The function initializes the panel and sets the properties which are common to all graphs</div>
 							</td>
 						</tr>
 					
@@ -341,7 +391,7 @@ ul.inheritsList {
 						<tr>
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/AR.Graph.html#setVerGridShow">setVerGridShow</a></b>(maxValue, scaleType)
+								<div class="fixedFont"><b><a href="../symbols/AR.Graph.html#setVerGridShow">setVerGridShow</a></b>(maxValue{integer}, scaleType)
 								</div>
 								<div class="description">Sets vertical rules in a graph.</div>
 							</td>
@@ -391,7 +441,7 @@ ul.inheritsList {
 				</div>
 				
 				<div class="fixedFont">
-						<b>AR.Graph</b>(graphDef)
+						<b>AR.Graph</b>()
 				</div>
 				
 				<div class="description">
@@ -402,17 +452,6 @@ ul.inheritsList {
 				
 				
 				
-					
-						<dl class="detailList">
-						<dt class="heading">Parameters:</dt>
-						
-							<dt>
-								<span class="light fixedFont">{json}</span>  <b>graphDef</b>
-								
-							</dt>
-								<dd>is the current graph DimensionThis method should be the first method that should be called when creating any kind of graph.Creates the panel, sets its dimensions, labels and property values and returns.</dd>
-						
-						</dl>
 					
 					
 					
@@ -425,6 +464,77 @@ ul.inheritsList {
 			
 
 <!-- ============================== field details ========================== -->		
+			
+				<div class="sectionTitle">
+					Field Detail
+				</div>
+				
+					<a name=".areaElements"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">AR.Graph.</span><b>areaElements</b>
+					
+					</div>
+					<div class="description">
+						The area elements and their corresponding objects
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".labelElements"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">AR.Graph.</span><b>labelElements</b>
+					
+					</div>
+					<div class="description">
+						The label elements and their corresponding object
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".lineElements"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">AR.Graph.</span><b>lineElements</b>
+					
+					</div>
+					<div class="description">
+						The line element and the corresponding object of the chart
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					
+				
 			
 
 <!-- ============================== method details ========================= -->		
@@ -441,7 +551,7 @@ ul.inheritsList {
 					
 					</div>
 					<div class="description">
-						
+						The function creates functions which set the <tt>property</tt> of the elements in the <tt>elementsArr</tt>
 						
 						
 					</div>
@@ -456,25 +566,25 @@ ul.inheritsList {
 									<b>elementsArr</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>{Array} The array of elements whos <tt>property</tt> is to be set</dd>
 							
 								<dt>
 									<b>property</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>{String} The property which is to be set</dd>
 							
 								<dt>
 									<b>protovisProp</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>{String} The corresponding protovis property</dd>
 							
 								<dt>
 									<b>additionalData</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>{String} Some additional data to set the property.</dd>
 							
 							</dl>
 						
@@ -495,7 +605,7 @@ ul.inheritsList {
 					
 					</div>
 					<div class="description">
-						
+						The function initializes the panel and sets the properties which are common to all graphs
 						
 						
 					</div>
@@ -507,10 +617,10 @@ ul.inheritsList {
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>graphDef</b>
+									<span class="light fixedFont">{Object}</span> <b>graphDef</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>The graph definition containing styling, data and chart speficig properties</dd>
 							
 							</dl>
 						
@@ -543,10 +653,10 @@ ul.inheritsList {
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{html node}</span> <b>div</b>
-									<i>Optional</i>
+									<b>div</b>
+									
 								</dt>
-								<dd>The node in which the graph has to be rendered. If undefined grpah is rendered whereever the function is called.</dd>
+								<dd>{html node}            The node in which the graph has to be rendered. If undefined grpah is rendered whereever the function is called.</dd>
 							
 							</dl>
 						
@@ -615,8 +725,8 @@ ul.inheritsList {
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{string}</span> <b>height</b>
-									<i>Optional</i>
+									<b>height</b>
+									
 								</dt>
 								<dd>Height of the graph</dd>
 							
@@ -651,10 +761,10 @@ ul.inheritsList {
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{boolean}</span> <b>status</b>
-									<i>Optional</i>
+									<b>status</b>
+									
 								</dt>
-								<dd>If set to true it show the labels for the Horizontal grid</dd>
+								<dd>{boolean}         If set to true it show the labels for the Horizontal grid</dd>
 							
 							</dl>
 						
@@ -687,16 +797,16 @@ ul.inheritsList {
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{integer}</span> <b>maxValue</b>
-									<i>Optional</i>
+									<b>maxValue</b>
+									
 								</dt>
-								<dd>This is the maximimum value that the graph would have in horizontal direction. It is required to calculate the scale.</dd>
+								<dd>{integer}               This is the maximimum value that the graph would have in horizontal direction. It is required to calculate the scale.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{object}</span> <b>scaleType</b>
-									<i>Optional</i>
+									<b>scaleType</b>
+									
 								</dt>
-								<dd>It takes the scaleType (Linear/Ordinal etc)</dd>
+								<dd>{object}            It takes the scaleType (Linear/Ordinal etc)</dd>
 							
 							</dl>
 						
@@ -729,10 +839,10 @@ ul.inheritsList {
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{boolean}</span> <b>status</b>
-									<i>Optional</i>
+									<b>status</b>
+									
 								</dt>
-								<dd>If set to true it show the labels for the vertical grid</dd>
+								<dd>{boolean}        If set to true it show the labels for the vertical grid</dd>
 							
 							</dl>
 						
@@ -749,7 +859,7 @@ ul.inheritsList {
 					<div class="fixedFont">
 					
 					
-					<b>setVerGridShow</b>(maxValue, scaleType)
+					<b>setVerGridShow</b>(maxValue{integer}, scaleType)
 					
 					</div>
 					<div class="description">
@@ -765,16 +875,16 @@ ul.inheritsList {
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{integer}</span> <b>maxValue</b>
-									<i>Optional</i>
+									<b>maxValue{integer}</b>
+									
 								</dt>
 								<dd>This is the maximimum value that the graph would have in vertical direction. It is required to calculate the scale.</dd>
 							
 								<dt>
-									<span class="light fixedFont">{object}</span> <b>scaleType</b>
-									<i>Optional</i>
+									<b>scaleType</b>
+									
 								</dt>
-								<dd>It takes the scaleType (Linear/Ordinal etc)</dd>
+								<dd>{object}          It takes the scaleType (Linear/Ordinal etc)</dd>
 							
 							</dl>
 						
@@ -807,10 +917,10 @@ ul.inheritsList {
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{string}</span> <b>width</b>
-									<i>Optional</i>
+									<b>width</b>
+									
 								</dt>
-								<dd>Sets the width for the given graph as the supplied parameter value</dd>
+								<dd>Width for the given graph as the supplied parameter value</dd>
 							
 							</dl>
 						
@@ -843,10 +953,10 @@ ul.inheritsList {
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{string}</span> <b>name</b>
-									<i>Optional</i>
+									<b>name</b>
+									
 								</dt>
-								<dd>The string for the x Axis Label</dd>
+								<dd>{string}            The string for the x Axis Label</dd>
 							
 							</dl>
 						
@@ -879,10 +989,10 @@ ul.inheritsList {
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{string}</span> <b>name</b>
-									<i>Optional</i>
+									<b>name</b>
+									
 								</dt>
-								<dd>The string for the y Axis label</dd>
+								<dd>{string}            The string for the y Axis label</dd>
 							
 							</dl>
 						
@@ -907,7 +1017,7 @@ ul.inheritsList {
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Tue Jan 17 2012 17:31:47 GMT+0530 (IST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Tue Jan 17 2012 18:46:02 GMT+0530 (IST)
 		</div>
 	</body>
 </html>
