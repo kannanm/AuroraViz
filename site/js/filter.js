@@ -3,10 +3,9 @@
  */
 ARV.selectedMeasureAxis = [];
 
-//TODO
 /**
- * Populates the 
- * @param id
+ * Populates the category filter with all the category values of the selected category axis
+ * @param {String} id the id of the category dom element from where the selected category axis is to be taken 
  */
 ARV.addAllCategories = function(id){
 	var selected = $("#"+id+ " option:selected");
@@ -23,11 +22,21 @@ ARV.addAllCategories = function(id){
 	}
 	$(categories).trigger("liszt:updated");
 };
+
+/**
+ * Set the value attribute "selected" equal to "selected" for the input element <tt>elem</tt> 
+ * @param elem The element for which all the options have to be set to selected
+ */
 ARV.setAllSelected = function(elem){
 	$(elem).children("option").each(function(){
 		$(this).attr("selected","selected");
 	});
 };
+
+/**
+ * Remove the attribute "selected" for the select input element <tt>elem</tt> i.e deselect all the options
+ * @param elem The element for which all the options have to be set to deselected
+ */
 ARV.setAllDeselected = function(elem){
 	$(elem).children("option").each(function(){
 		$(this).removeAttr("selected");
@@ -35,6 +44,11 @@ ARV.setAllDeselected = function(elem){
 };
 ARV.addAllCategories("categoryAxisList");
 
+/**
+ * Calculate and return the data filtered after applying filters based selected measure filter values 
+ * @param originalData {Object} The data to be filtered
+ * @returns {Object} The filtered data 
+ */
 ARV.getMeasureFilteredData = function(originalData){
 	var filteredData = originalData;
 	$(".measure-slider").each(function(){
@@ -45,6 +59,12 @@ ARV.getMeasureFilteredData = function(originalData){
 	});
 	return filteredData;
 };
+
+/**
+ * Calculate and return the data filtered after applying filters based selected category filter values 
+ * @param originalData {Object} The data to be filtered
+ * @returns {Object} The filtered data 
+ */
 ARV.getCategoryFilteredData = function(originalData){
 	var selected = $("#categoryValues option:selected");
 	var category = $("#categoryAxisList option:selected").val();
@@ -61,12 +81,19 @@ ARV.getCategoryFilteredData = function(originalData){
 	}
 	return filteredData;
 };
+
+/**
+ * Filter the data and update the data to show the visualization
+ */
 ARV.filterData = function(){
 	var categoryFilteredData = ARV.getCategoryFilteredData(ARV.dataJSON.data);
 	ARV.filteredData.data = ARV.getMeasureFilteredData(categoryFilteredData);
 	ARV.updateDataForVisualizations();
 };
+
 $("#categoryValues").chosen().change(ARV.filterData);
+
+//toggle if all categories check box is clicked
 $("#allCategories").change(function(){
 	if($(this).attr("checked")){
 		ARV.setAllSelected($("#categoryValues"));
@@ -76,6 +103,15 @@ $("#allCategories").change(function(){
 	$("#categoryValues").trigger("liszt:updated");
 	ARV.filterData();
 });
+
+/**
+ * Create range slider for the measure fields
+ * @param id  {Number} random id is created to append to the slider dom element id. Thus the id of 
+ * the slider would be <tt>id</tt>+"Slider" 
+ * @param min {Number} The min value of the measure field
+ * @param max {Number} The max value of the measure field
+ * @param measureFeild {String} The measure field
+ */
 ARV.createRangeSlider = function(id,min,max,measureFeild){
 	$( "#"+id +"Slider").slider({
 		range: true,
@@ -92,15 +128,29 @@ ARV.createRangeSlider = function(id,min,max,measureFeild){
 	$(  "#"+id ).val( $( "#"+id +"Slider" ).slider( "values", 0 ) +
 			" - " + $( "#"+id +"Slider" ).slider( "values", 1 ) );
 };
+
+/**
+ * Finds the minimum value of the <tt>measureField</tt> from <tt>ARV.filteredData.data</tt>
+ * @param measureField {String} The measure field
+ * @returns {Number} The minimum value of the <tt>measureField</tt>
+ */
 ARV.getMinOfMeasureField = function(measureField){
 	var minValObj = jlinq.from(ARV.filteredData.data).min(measureField);
 	return minValObj[measureField];
 };
+/**
+ * Finds the maximum value of the <tt>measureField</tt> from <tt>ARV.filteredData.data</tt>
+ * @param measureField {String} The measure field
+ * @returns {Number} The maximum value of the <tt>measureField</tt>
+ */
 ARV.getMaxOfMeasureField = function(measureField){
 	var minValObj = jlinq.from(ARV.filteredData.data).max(measureField);
 	return minValObj[measureField];
 };
 
+/**
+ * Creates the measure filteres according to the measure axis selected
+ */
 ARV.addMeasureFilters = function(){
 	$("#measureFilter").html("");
 	var selected = ARV.selectedMeasureAxis;
@@ -121,11 +171,15 @@ ARV.addMeasureFilters = function(){
 	
 };
 
+// When the category axis is changed populate the category filter
 $("#categoryAxisList").chosen().change(function(){
 	ARV.addAllCategories($(this).attr("id"));
 });
 
-ARV.updateSeletectedMeasureAxisForCharts = function(){
+/**
+ * The function is called when measure axis is changed.It changes <tt>ARV.selectedMeasureAxis</tt> 
+ */
+ARV.updateSeletectedMeasureAxis = function(){
 	var selected = $("#measureAxisList option:selected");
 	ARV.selectedMeasureAxis = [];
 	var i =0;
@@ -133,27 +187,41 @@ ARV.updateSeletectedMeasureAxisForCharts = function(){
 		ARV.selectedMeasureAxis.push($(selected[i]).val());
 	}
 };
+//When measure axis is changed update the ARV.selectedMeasureAxis and add measure filters
 $("#measureAxisList").chosen().change(function(){
-	ARV.updateSeletectedMeasureAxisForCharts();
+	ARV.updateSeletectedMeasureAxis();
 	ARV.addMeasureFilters();
 });
 
+//if category list for map is changed update the category filters 
 $("#categoryListForMap").chosen().change(function(){
 	ARV.addAllCategories($(this).attr("id"));
 });
 
+/**
+ * Check if the <tt>val</tt> is defined and push in <tt>arr</tt>
+ * @param arr {Array} The array in which the <tt>val</tt> is to be pushed
+ * @param val {Number} The value to be pushed
+ */
 ARV.checkThenPush = function(arr,val){
 	if(val){
 		arr.push(val);
 	}
 }
 
+/**
+ * Update the selected measure axis 
+ */
 ARV.updateSelectedMeasureAxisForMap = function(){
 	ARV.selectedMeasureAxis = [];
 	ARV.checkThenPush(ARV.selectedMeasureAxis,ARV.getSelectedValue("latitudeForMap"));
 	ARV.checkThenPush(ARV.selectedMeasureAxis,ARV.getSelectedValue("longitudeForMap"));
 	ARV.checkThenPush(ARV.selectedMeasureAxis,ARV.getSelectedValue("sizeForMap"));
 };
+
+/**
+ * Update the measure filters for map
+ */
 ARV.updateMeasureFiltersForMap = function(){
 	ARV.updateSelectedMeasureAxisForMap();
 	ARV.addMeasureFilters();
@@ -161,5 +229,5 @@ ARV.updateMeasureFiltersForMap = function(){
 $("#latitudeForMap").chosen().change(ARV.updateMeasureFiltersForMap);
 $("#longitudeForMap").chosen().change(ARV.updateMeasureFiltersForMap);
 $("#sizeForMap").chosen().change(ARV.updateMeasureFiltersForMap);
-ARV.updateSeletectedMeasureAxisForCharts();
+ARV.updateSeletectedMeasureAxis();
 ARV.addMeasureFilters();

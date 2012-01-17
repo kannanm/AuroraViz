@@ -73,6 +73,7 @@
 
 	<!-- docs -->
 	<target name="jsdoc">
+		<jsdoctoolkit jsdochome="${tools.dir}/jsdoc/jsdoc-toolkit/" includeundocumented="true" template="jsdoc" outputdir="${js.docs.dir}/src" inputdir="${src.dir}" />
 		<jsdoctoolkit jsdochome="${tools.dir}/jsdoc/jsdoc-toolkit/" includeundocumented="true" template="jsdoc" outputdir="${js.docs.dir}/site" inputdir="${basedir}/site/js" />
 		<echo> JS Docs generated at ${js.docs.dir} </echo>
 	</target>

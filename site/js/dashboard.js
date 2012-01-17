@@ -47,15 +47,6 @@ ARV.components = {
 		label:"label"
 };
 
-//TODO the description field on changing does not remain resizable. Correct This
-ARV.setDescriptionResizable = function(){
-	$(".description").resizable({
-		stop:function(event,ui){
-			var width = ui.size.width;
-			$(this).css("width",width);
-		}
-	});
-}
 ARV.setReportResizable = function(){
 		$(".report").resizable({
 		aspectRatio:true,
@@ -217,7 +208,6 @@ ARV.initDashboard = function() {
     //Click handle if the add Description button is clicked
     $("#addDesciption").click(function() {
         ARV.addTextComponents(ARV.components.description, "textArea");
-//        ARV.setDescriptionResizable();
     });
     
     //Click handle if the add Report button is clicked
@@ -271,7 +261,6 @@ ARV.initDashboard = function() {
                 containment: "parent"
             });
             ARV.setReportResizable();
-//            ARV.setDescriptionResizable();
         });
         //TODO stylize disabled button
         $(this).attr("disabled", "disabled");

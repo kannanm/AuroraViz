@@ -1,3 +1,6 @@
+/**
+ * A map color picker call back functions 
+ */
 ARV.colorPickerCB = {
 		chartGenerator : function(hex,rgb){
 			ARV.modifyJSON();
@@ -6,6 +9,9 @@ ARV.colorPickerCB = {
 			ARV.updateSelectedElement();
 		}
 };
+/**
+ * A map for create slider callback functions 
+ */
 ARV.createSlidersCB = {
 		chartGenerator :function(event, ui) {
 			var sliderID = $(this).attr("id");
@@ -20,12 +26,20 @@ ARV.createSlidersCB = {
         	ARV.updateSelectedElement();
         }
 };
+/**
+ * Initialize the color picker
+ * @param cb {function} The call back function for the change event
+ */
 ARV.initializeColorPicker = function(cb){
 	$(".colorPicker").miniColors({
 				change:cb
 	});    
 };
 
+/**
+ * Create sliders
+ * @param cb {function} The call back function for the slide event
+ */
 ARV.createSliders = function(cb) {
     $(".slider").each(function() {
         var sliderID = $(this).attr("id");
@@ -47,6 +61,12 @@ ARV.createSliders = function(cb) {
     });
 };
 
+/**
+ * Convert the rgb color value to hexadecimal value
+ * @param rgb {String} The rgb color value e.g. rgb(0,0,0) 
+ * @returns {String} Returns the hexadecimal notation of the color e.g. #000000
+ */
+
 ARV.rgb2hex=  function(rgb) {
     rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
     function hex(x) {
@@ -54,7 +74,14 @@ ARV.rgb2hex=  function(rgb) {
     }
     return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
 };
+
+/**
+ * Convert the matrix angle notation to the degree notation
+ * @param matrix {String} The matrix angle notation e.g. matrix(0, 1, -1, 0, 0px, 0px)
+ * @returns The angle for the <tt>matrix</tt> notation e.g. 90
+ */
 ARV.matrixToDegree = function(matrix){
+	console.log(matrix);
 	var pat = /^matrix\((-*\d*.\d*),\s*(-*\d*.\d*),\s*(-*\d*.\d*),\s*(-*\d*.\d*),\s*(-*\d*.\d*)px,\s*(-*\d*.\d*)px\)/;
 	matrix = matrix.match(pat);
 	if(matrix === null ){
@@ -62,12 +89,23 @@ ARV.matrixToDegree = function(matrix){
 	}
 	var sign = matrix[2]!=0 ? matrix[2]/Math.abs(matrix[2]) : 0;
 	var degree = Math.acos(matrix[1])*180/Math.PI
+	console.log((sign*degree).toFixed(0));
 	return (sign*degree).toFixed(0);
 };
+
+/**
+ * Return the selected chart type
+ * @returns {String}  the selected chart type
+ */
 ARV.getSelectedChartType = function(){
 	return $("#chartTypes option:selected").attr("value");
 };
 
+/**
+ * Get the selected option for the select dom element with id attribute equal to <tt>id</tt> 
+ * @param id The id of the dom element
+ * @returns the selected option
+ */
 ARV.getSelectedValue = function(id){
 	return $("#"+id+" option:selected").val();
 }

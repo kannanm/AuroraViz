@@ -1,0 +1,909 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<meta name="generator" content="JsDoc Toolkit" />
+		
+		<title>JsDoc Reference - AR.Graph</title>
+
+		<style type="text/css">
+			/* default.css */
+body {
+	font: 12px "Lucida Grande", Tahoma, Arial, Helvetica, sans-serif;
+	width: 800px;
+}
+
+.header {
+	clear: both;
+	background-color: #ccc;
+	padding: 8px;
+}
+
+h1 {
+	font-size: 150%;
+	font-weight: bold;
+	padding: 0;
+	margin: 1em 0 0 .3em;
+}
+
+hr {
+	border: none 0;
+	border-top: 1px solid #7F8FB1;
+	height: 1px;
+}
+
+pre.code {
+	display: block;
+	padding: 8px;
+	border: 1px dashed #ccc;
+}
+
+#index {
+	margin-top: 24px;
+	float: left;
+	width: 160px;
+	position: absolute;
+	left: 8px;
+	background-color: #F3F3F3;
+	padding: 8px;
+}
+
+#content {
+	margin-left: 190px;
+	width: 600px;
+}
+
+.classList {
+	list-style-type: none;
+	padding: 0;
+	margin: 0 0 0 8px;
+	font-family: arial, sans-serif;
+	font-size: 1em;
+	overflow: auto;
+}
+
+.classList li {
+	padding: 0;
+	margin: 0 0 8px 0;
+}
+
+.summaryTable {
+	width: 100%;
+}
+
+h1.classTitle {
+	font-size: 170%;
+	line-height: 130%;
+}
+
+h2 {
+	font-size: 110%;
+}
+
+caption,div.sectionTitle {
+	background-color: #7F8FB1;
+	color: #fff;
+	font-size: 130%;
+	text-align: left;
+	padding: 2px 6px 2px 6px;
+	border: 1px #7F8FB1 solid;
+}
+
+div.sectionTitle {
+	margin-bottom: 8px;
+}
+
+.summaryTable thead {
+	display: none;
+}
+
+.summaryTable td {
+	vertical-align: top;
+	padding: 4px;
+	border-bottom: 1px #7F8FB1 solid;
+	border-right: 1px #7F8FB1 solid;
+}
+
+/*col#summaryAttributes {}*/
+.summaryTable td.attributes {
+	border-left: 1px #7F8FB1 solid;
+	width: 140px;
+	text-align: right;
+}
+
+td.attributes,.fixedFont {
+	line-height: 15px;
+	color: #002EBE;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 13px;
+}
+
+.summaryTable td.nameDescription {
+	text-align: left;
+	font-size: 13px;
+	line-height: 15px;
+}
+
+.summaryTable td.nameDescription,.description {
+	line-height: 15px;
+	padding: 4px;
+	padding-left: 4px;
+}
+
+.summaryTable {
+	margin-bottom: 8px;
+}
+
+ul.inheritsList {
+	list-style: square;
+	margin-left: 20px;
+	padding-left: 0;
+}
+
+.detailList {
+	margin-left: 20px;
+	line-height: 15px;
+}
+
+.detailList dt {
+	margin-left: 20px;
+}
+
+.detailList .heading {
+	font-weight: bold;
+	padding-bottom: 6px;
+	margin-left: 0;
+}
+
+.light,td.attributes,.light a:link,.light a:visited {
+	color: #777;
+	font-style: italic;
+}
+
+.fineprint {
+	text-align: right;
+	font-size: 10px;
+}
+		</style>
+	</head>
+
+	<body>
+<!-- ============================== header ================================= -->	
+		<!-- begin static/header.html -->
+		<div id="header"></div>
+		<!-- end static/header.html -->
+
+<!-- ============================== classes index ============================ -->
+		<div id="index">
+			<!-- begin publish.classesIndex -->
+			<div align="center"><a href="../index.html">Class Index</a>
+| <a href="../files.html">File Index</a></div>
+<hr />
+<h2>Classes</h2>
+<ul class="classList">
+	
+	<li><i><a href="../symbols/_global_.html">_global_</a></i></li>
+	
+	<li><a href="../symbols/AR.html">AR</a></li>
+	
+	<li><a href="../symbols/AR.Area.html">AR.Area</a></li>
+	
+	<li><a href="../symbols/AR.BulletGraph.html">AR.BulletGraph</a></li>
+	
+	<li><a href="../symbols/AR.Graph.html">AR.Graph</a></li>
+	
+	<li><a href="../symbols/AR.StackedAreaGraph.html">AR.StackedAreaGraph</a></li>
+	
+	<li><a href="../symbols/Array.html">Array</a></li>
+	
+</ul>
+<hr />
+			<!-- end publish.classesIndex -->
+		</div>
+		
+		<div id="content">
+<!-- ============================== class title ============================ -->
+			<h1 class="classTitle">
+				
+				Class AR.Graph
+			</h1>
+
+<!-- ============================== class summary ========================== -->			
+			<p class="description">
+				
+				
+			
+				The basefunction for the graph initilization.Initializes the panel and sets parentDimensions and property values
+				
+				
+					<br /><i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_src_aurora.js.html">aurora.js</a>.
+				
+			</p>
+
+<!-- ============================== constructor summary ==================== -->			
+			
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class AR.Graph.">
+				<caption>Class Summary</caption>
+				<thead>
+					<tr>
+						<th scope="col">Constructor Attributes</th>
+						<th scope="col">Constructor Name and Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="attributes">&nbsp;</td>
+						<td class="nameDescription" >
+							<div class="fixedFont">
+								<b><a href="../symbols/AR.Graph.html#constructor">AR.Graph</a></b>(graphDef)
+							</div>
+							<div class="description"></div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+
+<!-- ============================== properties summary ===================== -->
+			
+
+<!-- ============================== methods summary ======================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class AR.Graph.">
+					<caption>Method Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Method Attributes</th>
+							<th scope="col">Method Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">AR.Graph.<b><a href="../symbols/AR.Graph.html#.createFunctions">createFunctions</a></b>(elementsArr, property, protovisProp, additionalData)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AR.Graph.html#initialize">initialize</a></b>(graphDef)
+								</div>
+								<div class="description"></div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AR.Graph.html#render">render</a></b>(div)
+								</div>
+								<div class="description">Renders the Component</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AR.Graph.html#setCaption">setCaption</a></b>(Sets)
+								</div>
+								<div class="description">Sets a graph's caption.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AR.Graph.html#setHeight">setHeight</a></b>(height)
+								</div>
+								<div class="description">Sets a graph's Height.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AR.Graph.html#setHorGridLabelShow">setHorGridLabelShow</a></b>(status)
+								</div>
+								<div class="description">It shows the Horizontal grid axis if the <b>status</b> is set to true</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AR.Graph.html#setHorGridShow">setHorGridShow</a></b>(maxValue, scaleType)
+								</div>
+								<div class="description">Sets horizontal rules in a graph.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AR.Graph.html#setVerGridLabelShow">setVerGridLabelShow</a></b>(status)
+								</div>
+								<div class="description">It shows the Vertical grid axis if the <b>status</b> is set to true</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AR.Graph.html#setVerGridShow">setVerGridShow</a></b>(maxValue, scaleType)
+								</div>
+								<div class="description">Sets vertical rules in a graph.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AR.Graph.html#setWidth">setWidth</a></b>(width)
+								</div>
+								<div class="description">Sets a graph's width.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AR.Graph.html#setXAxisName">setXAxisName</a></b>(name)
+								</div>
+								<div class="description">Sets a graph's xAxisName.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont"><b><a href="../symbols/AR.Graph.html#setYAxisName">setYAxisName</a></b>(name)
+								</div>
+								<div class="description">Sets a graph's yAxisName.</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+			
+<!-- ============================== events summary ======================== -->
+			
+
+<!-- ============================== constructor details ==================== -->		
+			
+			<div class="details"><a name="constructor"> </a>
+				<div class="sectionTitle">
+					Class Detail
+				</div>
+				
+				<div class="fixedFont">
+						<b>AR.Graph</b>(graphDef)
+				</div>
+				
+				<div class="description">
+					
+					
+				</div>
+				
+				
+				
+				
+					
+						<dl class="detailList">
+						<dt class="heading">Parameters:</dt>
+						
+							<dt>
+								<span class="light fixedFont">{json}</span>  <b>graphDef</b>
+								
+							</dt>
+								<dd>is the current graph DimensionThis method should be the first method that should be called when creating any kind of graph.Creates the panel, sets its dimensions, labels and property values and returns.</dd>
+						
+						</dl>
+					
+					
+					
+					
+					
+					
+					
+
+			</div>
+			
+
+<!-- ============================== field details ========================== -->		
+			
+
+<!-- ============================== method details ========================= -->		
+			
+				<div class="sectionTitle">
+					Method Detail
+				</div>
+				
+					<a name=".createFunctions"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">AR.Graph.</span><b>createFunctions</b>(elementsArr, property, protovisProp, additionalData)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>elementsArr</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>property</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>protovisProp</b>
+									
+								</dt>
+								<dd></dd>
+							
+								<dt>
+									<b>additionalData</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="initialize"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>initialize</b>(graphDef)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>graphDef</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="render"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>render</b>(div)
+					
+					</div>
+					<div class="description">
+						Renders the Component
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{html node}</span> <b>div</b>
+									<i>Optional</i>
+								</dt>
+								<dd>The node in which the graph has to be rendered. If undefined grpah is rendered whereever the function is called.</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="setCaption"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setCaption</b>(Sets)
+					
+					</div>
+					<div class="description">
+						Sets a graph's caption.Caption is one of the properties of any graph
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{string}</span> <b>Sets</b>
+									
+								</dt>
+								<dd>the caption for the given graph as the supplied parameter value</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="setHeight"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setHeight</b>(height)
+					
+					</div>
+					<div class="description">
+						Sets a graph's Height.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{string}</span> <b>height</b>
+									<i>Optional</i>
+								</dt>
+								<dd>Height of the graph</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="setHorGridLabelShow"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setHorGridLabelShow</b>(status)
+					
+					</div>
+					<div class="description">
+						It shows the Horizontal grid axis if the <b>status</b> is set to true
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{boolean}</span> <b>status</b>
+									<i>Optional</i>
+								</dt>
+								<dd>If set to true it show the labels for the Horizontal grid</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="setHorGridShow"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setHorGridShow</b>(maxValue, scaleType)
+					
+					</div>
+					<div class="description">
+						Sets horizontal rules in a graph.Rules are nothing but lines that divide the graph to form a grid like structure
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{integer}</span> <b>maxValue</b>
+									<i>Optional</i>
+								</dt>
+								<dd>This is the maximimum value that the graph would have in horizontal direction. It is required to calculate the scale.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{object}</span> <b>scaleType</b>
+									<i>Optional</i>
+								</dt>
+								<dd>It takes the scaleType (Linear/Ordinal etc)</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="setVerGridLabelShow"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setVerGridLabelShow</b>(status)
+					
+					</div>
+					<div class="description">
+						It shows the Vertical grid axis if the <b>status</b> is set to true
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{boolean}</span> <b>status</b>
+									<i>Optional</i>
+								</dt>
+								<dd>If set to true it show the labels for the vertical grid</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="setVerGridShow"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setVerGridShow</b>(maxValue, scaleType)
+					
+					</div>
+					<div class="description">
+						Sets vertical rules in a graph.Rules are nothing but lines that divide the graph to form a grid like structure
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{integer}</span> <b>maxValue</b>
+									<i>Optional</i>
+								</dt>
+								<dd>This is the maximimum value that the graph would have in vertical direction. It is required to calculate the scale.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{object}</span> <b>scaleType</b>
+									<i>Optional</i>
+								</dt>
+								<dd>It takes the scaleType (Linear/Ordinal etc)</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="setWidth"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setWidth</b>(width)
+					
+					</div>
+					<div class="description">
+						Sets a graph's width.Width is one of the properties of a graph
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{string}</span> <b>width</b>
+									<i>Optional</i>
+								</dt>
+								<dd>Sets the width for the given graph as the supplied parameter value</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="setXAxisName"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setXAxisName</b>(name)
+					
+					</div>
+					<div class="description">
+						Sets a graph's xAxisName.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{string}</span> <b>name</b>
+									<i>Optional</i>
+								</dt>
+								<dd>The string for the x Axis Label</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="setYAxisName"> </a>
+					<div class="fixedFont">
+					
+					
+					<b>setYAxisName</b>(name)
+					
+					</div>
+					<div class="description">
+						Sets a graph's yAxisName.
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{string}</span> <b>name</b>
+									<i>Optional</i>
+								</dt>
+								<dd>The string for the y Axis label</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+					
+				
+			
+			
+<!-- ============================== event details ========================= -->		
+			
+			
+			<hr />
+		</div>
+
+		
+<!-- ============================== footer ================================= -->
+		<div class="fineprint" style="clear:both">
+			
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Tue Jan 17 2012 16:04:02 GMT+0530 (IST)
+		</div>
+	</body>
+</html>
