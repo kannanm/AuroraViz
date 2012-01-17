@@ -11,6 +11,8 @@
  *             [panel] A panel object indicating the Graph Panel in which the current Line graph will be displayed
  * This is a base class and is called by different Line implementations.
  */
+
+//TODO make multiseries line graph using a multiple single series line graph. As in case of bar graph
 AR.Line = function(parentDimension, panel, graphDef, step) {
     var self = this;
     var noOfRecords = graphDef.data.length;

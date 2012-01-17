@@ -1,11 +1,14 @@
 /** @authors : Aditya Gaur, koushikr */
 
-AR.Utility = {};
 /**
- * Finds the maximum value in the data sent for the graph creation.
- *
- * @param {object}
- *            [graphDef] An object containing the graph properties and the data
+ * @Description The top-level aurora utility namespace. All utility functions 
+ * are within this namespace
+ * @namespace The top-level aurora utility namespace, <tt>AR.Utility</tt>.
+ */
+AR.Utility = {};
+
+/**
+ * Scale map. Maps the scale name to the type of scale
  */
 AR.Utility.scale = {
     "linear": "linear",
@@ -13,6 +16,10 @@ AR.Utility.scale = {
     "log": "log"
 };
 
+/**
+ * Function returns the keys for an object. Check if the the function already exist if not then create the function.
+ * The implementation has been taken from <a href="http://stackoverflow.com/questions/208016/how-to-list-the-properties-of-a-javascript-object#answer-3937321">here</a>.
+ */
 AR.Utility.getKeys = Object.keys || function () {
     var hasOwnProperty = Object.prototype.hasOwnProperty,
         hasDontEnumBug = !{toString:null}.propertyIsEnumerable("toString"),
@@ -21,7 +28,6 @@ AR.Utility.getKeys = Object.keys || function () {
             'isPrototypeOf', 'propertyIsEnumerable', 'constructor'
         ],
         DontEnumsLength = DontEnums.length;
-
     return function (o) {
         if (typeof o != "object" && typeof o != "function" || o === null)
             throw new TypeError("Object.keys called on a non-object");
@@ -38,19 +44,33 @@ AR.Utility.getKeys = Object.keys || function () {
                     result.push(DontEnums[i]);
             }   
         }
-
         return result;
     };
 };
 
-AR.Utility.isArray= function(a){
-	return (Object.prototype.toString.apply(a) === '[object Array]');
+/**
+ * Checks if <tt>obj</tt> is an array or not
+ * @param obj The object to be checked if its an array or not 
+ * @returns {Boolean} True if <tt>obj</tt> is an array. False otherwise
+ */
+AR.Utility.isArray= function(obj){
+	return (Object.prototype.toString.apply(obj) === '[object Array]');
 };
 
+/**
+ * Checks if <tt>value</tt> is a number or not
+ * @param value
+ * @returns {Boolean}  True if <tt>value</tt> is a number. False otherwise
+ */
 AR.Utility.isNumber = function(value) { 
 	return value.toFixed && value.toExponential; 
 };
 
+/**
+ * Finds the maximum value in data Object
+ * @param data It is an array of Objects  
+ * @returns the maximum value
+ */
 AR.Utility.findMax = function(data) {
     var max = data[0].value;
     data.forEach(function(data) {
@@ -60,6 +80,7 @@ AR.Utility.findMax = function(data) {
     });
     return max;
 };
+
 
 AR.Utility.findArrayMax = function(data) {
     var max = parseInt(data[0], 10);
@@ -73,6 +94,7 @@ AR.Utility.findArrayMax = function(data) {
     return max;
 };
 
+
 AR.Utility.getDataArray = function(data) {
     var noOfRecords = data.length;
     var arr = [],
@@ -83,6 +105,7 @@ AR.Utility.getDataArray = function(data) {
     return arr;
 };
 
+//TODO check if the function is being used . Remove otherwise
 AR.Utility.getImageContentChart = function(data, type) {
     var noOfRecords = data.length;
     var arr, i;
@@ -94,6 +117,7 @@ AR.Utility.getImageContentChart = function(data, type) {
     return arr;
 };
 
+//TODO check if the function is being used . Remove otherwise
 AR.Utility.getJSONContentChart = function(data, type) {
     var noOfRecords = data.length;
     var arr, i;
@@ -150,10 +174,24 @@ AR.Utility.getMultiDimensionData = function(data) {
     }
     return arr;
 };
+
+/**
+ * Returns the tooltip text. If the JSON sends in the Tooltip text, then it is returned other wise 
+ * the value becomes the tooltiptext 
+ * @param data 
+ * @param index index of the current data obj
+ * @returns the tooltip text
+ */
 AR.Utility.getToolTipText = function(data, index) {
     return (data[index].toolTipText ? data[index].toolTipText : data[index].value);
 };
 
+/**
+ * The function returns an array of colors in the palette. If the user has changed the palette then
+ * It returns the color in the graphDef. Otherwise returns the colors in the preset palette
+ * @param graphDef The graph definition JSON
+ * @returns {Array} The colors in the palette
+ */
 AR.Utility.getPaletteColors = function(graphDef) {
     if ("custom" !== graphDef.presetPalette) {
         var colors = AR.Utility.palettes[graphDef.presetPalette];
@@ -162,6 +200,10 @@ AR.Utility.getPaletteColors = function(graphDef) {
         return graphDef.paletteColors;
     }
 };
+
+/**
+ * The map for palette name vs colors in the palette
+ */
 AR.Utility.palettes = {
     "Plain": ["#1F77B4"],
     "Simple": ["#d42f3c", "#85b1e6", "#FD6D16", "#dfe617"],
@@ -179,7 +221,13 @@ AR.Utility.palettes = {
     "Grass": ["#00AF64", "#36D729", "#61D7A4", "#007241"]
 
 };
-// TODO create your own palette
+
+/**
+ * Sets the colors for the <tt>element</tt> with the <tt>colors</tt>
+ * @param element the element whose color is to be set
+ * @param colors An array of colors of the palette
+ */
+
 AR.Utility.setPalette = function(element, colors) {
     element.fillStyle(function() {
         return colors[this.index % colors.length];
@@ -187,6 +235,11 @@ AR.Utility.setPalette = function(element, colors) {
 
 };
 
+/**
+ * Finds the maximum value from the measure axis
+ * @param graphDef the graph defination
+ * @returns the maximum value
+ */
 AR.Utility.findMaxValue = function(graphDef) {
     if (graphDef.dataset) {
         var dataArray = [];
@@ -202,6 +255,13 @@ AR.Utility.findMaxValue = function(graphDef) {
         return AR.Utility.findMax(graphDef.data);
     }
 };
+
+/**
+ * Sets the properties of the text/label object . It sets properties such as font size, font color, rotation angle
+ * @param graphDef The graph definition 
+ * @param labelObj The object whose properties have to be set
+ * @param isHorizontal true if the graph is horizontal, false otherwise
+ */
 AR.Utility.setLabelProperties = function(graphDef, labelObj, isHorizontal) {
     var self = this;
     var properties = AR.Graph.labelProperties;
@@ -211,16 +271,36 @@ AR.Utility.setLabelProperties = function(graphDef, labelObj, isHorizontal) {
     });
 };
 
+/**
+ * Sets the size of the <tt>labelObj</tt>.
+ * @param size Size in px
+ * @param labelObj The label object whose size is to be set 
+ * @param graphDef The graph Definition
+ */
 AR.Utility.setLabelFontSize = function(size, labelObj, graphDef) {
     if (labelObj) {
         labelObj.font(AR.Utility.getSize(graphDef,"gridLabels",size) + "px Arial");
     }
 };
-AR.Utility.setLabelFontColor = function(color, labelObj, graphDef) {
+
+/**
+ * Sets the color of the <tt>labelObj</tt>.
+ * @param color The color in hex format
+ * @param labelObj The label object whose color is to be set 
+ */
+AR.Utility.setLabelFontColor = function(color, labelObj) {
     if (labelObj) {
         labelObj.textStyle(color);
     }
 };
+
+/**
+ *  Sets the rotation angle of the <tt>labelObj</tt>.
+ * @param angle The angle in degrees
+ * @param labelObj The label object whose rotation angle is to be set 
+ * @param graphDef The graph Definition
+ * @param isHorizontal true if the graph is horizontal, false otherwise
+ */
 AR.Utility.setLabelRotateAngle = function(angle, labelObj,graphDef, isHorizontal) {
     angle = parseInt(angle, 10);
     if (labelObj) {
@@ -234,6 +314,12 @@ AR.Utility.setLabelRotateAngle = function(angle, labelObj,graphDef, isHorizontal
 
     }
 };
+/**
+ * Sets the tooltip for the <tt>element</tt> with anchor direction in <tt>direction</tt>
+ * @param graphDef the graph definition
+ * @param element The object on which the tool tip is to be set
+ * @param direction The anchor direction e.g. "s","n", etc.
+ */
 AR.Utility.setToolTip = function(graphDef, element, direction) {
     if (graphDef.toolTip) {
         element.event("mouseover", pv.Behavior.tipsy({
@@ -245,6 +331,14 @@ AR.Utility.setToolTip = function(graphDef, element, direction) {
     }
 };
 
+/**
+ * Create legend and add it to the panel
+ * @param panel the panel to which the legends will be added
+ * @param index the index of the legend
+ * @param text the text for the legend
+ * @param color the color of the legend
+ * @param graphDef the graph definition
+ */
 AR.Utility.createLegends = function(panel, index, text, color,graphDef) {
     if (text) {
         var dots = panel.add(pv.Dot).shape("square").top(AR.constants.values.legend.top)
@@ -269,6 +363,13 @@ AR.Utility.addLegendToObject = function(object, data, graphDef) {
     }).font(AR.Utility.getSize(graphDef,"gridLabels",AR.constants.values.smallLabels.size) + "px Arial");
 
 };
+
+/**
+ * Sets the left property of the legent object
+ * @param dots the legend object 
+ * @param graphDef the graph definition
+ * @param index the index of the legend
+ */
 AR.Utility.setLeftOfLegends = function(dots, graphDef,index){
 	var width = graphDef.width;
 	// value is kept assuming that maximum no. of legends is numberOfLegends
@@ -282,7 +383,17 @@ AR.Utility.setLeftOfLegends = function(dots, graphDef,index){
 		return l;
 	});
 };
+
+/**
+ * @Description The top-level aurora constants namespace. All constants 
+ * are within this namespace
+ * @namespace The top-level aurora constants namespace, <tt>AR.constants</tt>.
+ */
 AR.constants = {};
+
+/**
+ * Some constant values
+ */
 AR.constants.values = {
 		legend:{
 			top:-20,
@@ -293,6 +404,11 @@ AR.constants.values = {
 			size:15
 		}
 };
+
+/**
+ *	The scale for the different objects in the chart. This is useful whene the chart is resized. So the 
+ * elements on the chart are resized according to it 
+ */
 AR.constants.scale ={
 	caption:1/(240000),
 	gridLabels:1/(400000),
@@ -300,6 +416,13 @@ AR.constants.scale ={
 	legend:1/1000000,
 	mapDot:1/10
 };
+/**
+ * Calculates the size of the <tt>element</tt> with respect to the height and width of the graph and the actual <tt>value</tt>
+ * @param graphDef the graph definition
+ * @param element the element whose height is required
+ * @param value The value set by the user
+ * @returns {Number} The size of the <tt>element</tt>
+ */
 AR.Utility.getSize = function(graphDef,element,value){
 	return AR.constants.scale[element]*value*graphDef.height*graphDef.width;
 };
