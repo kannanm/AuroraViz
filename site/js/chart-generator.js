@@ -7,15 +7,9 @@ ARV.getData = function(chartType) {
     for (prop in ARV.commonProperties) {
         graphDef[prop] = ARV.commonProperties[prop];
     }
-    if (ARV.userDataDefined) {
-
-    } else {
-        graphDef.data = ARV.defaultData[chartType];
-        if (chartType === "MultiBarGraph") {
-            graphDef.categories = ARV.defaultCategories;
-            graphDef.dataset = ARV.defaultDataSet;
-        }
-    }
+    graphDef.data = ARV.defaultData[chartType];
+    graphDef.measureAxis = ARV.selectedMeasureAxis;
+    graphDef.categoryAxis = ARV.selectedCategoryAxis;
     return graphDef;
 };
 ARV.updateStyleProperties = function() {

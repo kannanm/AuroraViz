@@ -112,22 +112,25 @@ ARV.addMeasureFilters = function(){
 	}
 	
 };
-
-$("#categoryAxisList").chosen().change(function(){
-	ARV.addAllCategories($(this).attr("id"));
-});
-
-ARV.updateSeletectedMeasureAxisForCharts = function(){
-	var selected = $("#measureAxisList option:selected");
-	ARV.selectedMeasureAxis = [];
+ARV.updateSelectedAxis = function(id,arrName){
+	var selected = $("#"+id+" option:selected");
+	ARV[arrName] = [];
 	var i =0;
 	for(i = 0;i<selected.length;i++){
-		ARV.selectedMeasureAxis.push($(selected[i]).val());
+		ARV[arrName].push($(selected[i]).val());
 	}
 };
+
+$("#categoryAxisList").chosen().change(function(){
+	ARV.updateSelectedAxis("categoryAxisList","selectedCategoryAxis");
+	ARV.addAllCategories($(this).attr("id"));
+	ARV.updateDataForVisualizations();
+});
+
 $("#measureAxisList").chosen().change(function(){
-	ARV.updateSeletectedMeasureAxisForCharts();
+	ARV.updateSelectedAxis("measureAxisList","selectedMeasureAxis");
 	ARV.addMeasureFilters();
+	ARV.filterData();
 });
 
 $("#categoryListForMap").chosen().change(function(){
@@ -153,5 +156,6 @@ ARV.updateMeasureFiltersForMap = function(){
 $("#latitudeForMap").chosen().change(ARV.updateMeasureFiltersForMap);
 $("#longitudeForMap").chosen().change(ARV.updateMeasureFiltersForMap);
 $("#sizeForMap").chosen().change(ARV.updateMeasureFiltersForMap);
-ARV.updateSeletectedMeasureAxisForCharts();
+ARV.updateSelectedAxis("measureAxisList","selectedMeasureAxis");
+ARV.updateSelectedAxis("categoryAxisList","selectedCategoryAxis");
 ARV.addMeasureFilters();

@@ -20,9 +20,9 @@
 AR.Bar = function(graphDef, data, parentDimension, panel, color, seriesname, seriesNumber) {
     var self = this;
     this._bar = panel.add(pv.Bar);
+    this._bar.data(data);
     this._parentDimension = parentDimension;
     this._noOfRecords = data.length;
-    this._bar.data(AR.Utility.getDataArray(data));
     this._bar.title(function() {
         return AR.Utility.getToolTipText(data, this.index);
     });
@@ -36,8 +36,9 @@ AR.Bar = function(graphDef, data, parentDimension, panel, color, seriesname, ser
     }
     if (graphDef.showValues) {
         this._bar.anchor(self instanceof AR.HBar ? "right" : "top").add(pv.Label)
-        		 .text(function() {
-        			 		return data[this.index].value;
+        		 .text(function(d) {
+        			 		var m = graphDef.measureAxis[seriesNumber];
+        			 		return d[m];
         		 		})
         		 .textBaseline(self instanceof AR.HBar ? "left" : "bottom")
         		 .font(AR.Utility.getSize(graphDef,"gridLabels",AR.constants.values.smallLabels.size) + "px Arial");
@@ -49,10 +50,10 @@ AR.Bar = function(graphDef, data, parentDimension, panel, color, seriesname, ser
         self._bar.fillStyle(color);
     }
     if (graphDef.showLegends) {
-        if (!seriesname) {
+        if (!seriesNumber) {
             AR.Utility.addLegendToObject(self._bar, data, graphDef);
         }
-        AR.Utility.createLegends(panel, seriesNumber, seriesname, color, graphDef);
+//        AR.Utility.createLegends(panel, seriesNumber, seriesname, color, graphDef);
     }
 };
 // TODO - Some kind of a factory that sets the following properties has to be
@@ -127,19 +128,20 @@ AR.HBar.prototype = AR.extend(AR.Bar);
  *            displayed
  * @extends AR.Bar
  */
-AR.VBar = function(graphDef, data, parentDimension, panel, maxValue, color, seriesname, seriesNumber, showCategory) {
+AR.VBar = function(isMultiSeries, graphDef, data, parentDimension, panel, maxValue, color, seriesname, seriesNumber, showCategory) {
     var self = this;
     AR.Bar.apply(self, [graphDef, data, parentDimension, panel, color, seriesname, seriesNumber]);
-
+    
     var adjustHeight = function(parentDimension) {
         var barHeight = pv.Scale.linear(0, maxValue).range(0, parentDimension.height - 40);
         self._bar.height(function(d) {
-            var ret = barHeight(d);
+        	var measureAxis = graphDef.measureAxis[seriesNumber]
+            var ret = barHeight(d[measureAxis]);
             return ret;
         });
     };
     var adjustWidth = function(parentDimension) {
-        if (graphDef.dataset) {
+        if (isMultiSeries) {
             self._bar.width((parentDimension.width - 30) / (4 * self._noOfRecords));
         } else {
             self._bar.width((parentDimension.width - 30) / (2 * self._noOfRecords));
@@ -155,8 +157,8 @@ AR.VBar = function(graphDef, data, parentDimension, panel, maxValue, color, seri
     };
     self.adjustLabel = function(parentDimension) {
         if (graphDef.showLabels) {
-            self._label = self._bar.anchor("bottom").add(pv.Label).textBaseline("top").text(function() {
-                return seriesname ? showCategory ? graphDef.categories[0].category[this.index].label:" " : data[this.index].label;
+            self._label = self._bar.anchor("bottom").add(pv.Label).textBaseline("top").text(function(d) {
+                return showCategory ? d[seriesname]: "";
             }).textAlign("center");
             AR.Utility.setLabelProperties(graphDef, self._label, false);
         }
@@ -187,23 +189,7 @@ AR.VBar.prototype = AR.extend(AR.Bar);
 AR.BarGraph = function(graphDef) {
     var bar, i, panel;
     var self = this;
-    self.setVerGridShow = function(status) {
-        var maxVal;
-        if (status === true) {
-            maxVal = AR.Utility.findMaxValue(graphDef);
-            AR.Graph.prototype.setVerGridShow.apply(self, [maxVal, AR.Utility.scale.linear]);
-        }
-    };
-    self.setHorGridShow = function(status) {
-        var maxVal;
-        if (status === true) {
-            maxVal = AR.Utility.findMaxValue(graphDef);
-            AR.Graph.prototype.setHorGridShow.apply(self, [maxVal, AR.Utility.scale.linear]);
-        }
-    };
     self.initialize(graphDef);
-    var maxValue = AR.Utility.findMaxValue(graphDef);
-    var dataset = graphDef.dataset;
     var colors = AR.Utility.getPaletteColors(graphDef);
     var GraphTypeMap = {
     		v:{
@@ -217,37 +203,48 @@ AR.BarGraph = function(graphDef) {
     			barPos : "bottom"
     		}
     };
+    var checkIfMultiSeries = function(){
+    	var noOfMeasureAxis = graphDef.measureAxis.length;
+    	if(noOfMeasureAxis > 1){
+    		return true;
+    	}
+    	return false;
+    };
+    var isMultiSeries = checkIfMultiSeries();
+    
     var createMultiSeriesBar = function(type){
-    	var dataSetSize = graphDef.dataset.length;
+    	var measureAxis = graphDef.measureAxis;
+    	var noOfSeries = measureAxis.length;
+    	var categoryAxis = graphDef.categoryAxis;
     	var showCategory = false;
-    	var noOfRecords;
     	var barWidthFuncName = GraphTypeMap[type].getBarWidth;
     	var constructorFuncName = GraphTypeMap[type].constructor;
     	var barPos = GraphTypeMap[type].barPos;
-    	for (i = 0; i < dataSetSize; i++) {
+    	for (i = 0; i < noOfSeries; i++) {
     		showCategory = false;
-    		if(i === Math.floor((dataSetSize-1)/2)){
+    		if(i === Math.floor((noOfSeries-1)/2)){
         		showCategory = true;
         	}
-    		noOfRecords = dataset.length * dataset[i].data.length;
 			panel = self._panel.add(pv.Panel)[barPos](i * (i !== 0 ? bar[barWidthFuncName]() : 0));
-			bar = new AR[constructorFuncName](graphDef, dataset[i].data, self._dimension, panel, maxValue, colors[i % colors.length], dataset[i].seriesname, i, showCategory);
+			bar = new AR[constructorFuncName](isMultiSeries, graphDef, graphDef.data, self._dimension, panel, self._maxValue, colors[i % colors.length], categoryAxis[i], i, showCategory);
     	}
     };
     var createBars = {
         "v": function() {
-            if (dataset) {
+            if (isMultiSeries) {
             	createMultiSeriesBar("v");
             } else {
-                bar = new AR.VBar(graphDef, graphDef.data, self._dimension, self._panel, maxValue);
+            	var seriesName = graphDef.categoryAxis[0];
+                bar = new AR.VBar(isMultiSeries, graphDef, graphDef.data, self._dimension, self._panel, self._maxValue, undefined, seriesName, 0, true);
             }
         },
 
         "h": function() {
-            if (dataset) {
+            if (isMultiSeries) {
             	createMultiSeriesBar("h");
             } else {
-                bar = new AR.HBar(graphDef, graphDef.data, self._dimension, self._panel, maxValue);
+            	var seriesName = graphDef.categoryAxis[0];
+                bar = new AR.HBar(isMultiSeries, graphDef, graphDef.data, self._dimension, self._panel, self._maxValue, undefined, seriesName, 0, true );
             }
         }
 

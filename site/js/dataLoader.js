@@ -1,51 +1,51 @@
 //TODO create data that is original and create filtered data
-//ARV.dataJSON = {
-//    id: "4ed630d8ed9be9723687620d",
-//    columns: [
-//        {
-//        id: "company",
-//        name: "Company",
-//        field: "company",
-//        editor: TextCellEditor},
-//    {
-//        id: "sales",
-//        name: "Sales",
-//        field: "sales",
-//        editor: TextCellEditor},
-//    {
-//        id: "revenue",
-//        name: "Revenue",
-//        field: "revenue",
-//        editor: TextCellEditor},
-//    {
-//        id: "profit",
-//        name: "Profit",
-//        field: "profit",
-//        editor: TextCellEditor}
-//    ],
-//    data: [
-//        {
-//        company: "LG",
-//        sales: 41,
-//        revenue: 22,
-//        profit: 10},
-//    {
-//        company: "Samsung",
-//        sales: 24,
-//        revenue: 12,
-//        profit: 20},
-//    {
-//        company: "Philips",
-//        sales: 20,
-//        revenue: 15,
-//        profit: 7},
-//    {
-//        company: "GE",
-//        sales: 55,
-//        revenue: 34,
-//        profit: 25}
-//    ]
-//};
+ARV.dataJSON = {
+    id: "4ed630d8ed9be9723687620d",
+    columns: [
+        {
+        id: "company",
+        name: "Company",
+        field: "company",
+        editor: TextCellEditor},
+    {
+        id: "sales",
+        name: "Sales",
+        field: "sales",
+        editor: TextCellEditor},
+    {
+        id: "revenue",
+        name: "Revenue",
+        field: "revenue",
+        editor: TextCellEditor},
+    {
+        id: "profit",
+        name: "Profit",
+        field: "profit",
+        editor: TextCellEditor}
+    ],
+    data: [
+        {
+        company: "LG",
+        sales: 41,
+        revenue: 22,
+        profit: 10},
+    {
+        company: "Samsung",
+        sales: 24,
+        revenue: 12,
+        profit: 20},
+    {
+        company: "Philips",
+        sales: 20,
+        revenue: 15,
+        profit: 7},
+    {
+        company: "GE",
+        sales: 55,
+        revenue: 34,
+        profit: 25}
+    ]
+};
 ARV.editableGridOptions = {
     editable: true,
     enableAddRow: true,
@@ -123,7 +123,7 @@ ARV.populateSingleSelectForMap("sizeForMap");
 	});
 	for (i = 0; i < columns.length; i++) {
 	    option = $('<option />').val(columns[i].field).append(columns[i].name);
-	    if (i === 1) {
+	    if (i === 2) {
 	        option.attr("selected", "selected");
 	    }
 	    $("#measureAxisList").append(option);
@@ -155,27 +155,29 @@ ARV.initializeDialog = function() {
 ARV.initializeDialog();
 
 ARV.modifyDataForSingleSeries = function() {
-    var dataArr = [];
-    var selected = $("#measureAxisList option:selected");
-    var field = $(selected[0]).val();
-    labelField = $("#categoryAxisList option:selected").val();
-    var data = ARV.filteredData.data;
-    for (i = 0; i < data.length; i++) {
-        var dataElement = data[i];
-        var value = parseInt(dataElement[field], 10);
-        if (isNaN(value)) {
-            $("#dialog-illegal-data").dialog("open");
-            return;
-        }
-        label = dataElement[labelField];
-        obj = {
-            value: value,
-            label: label
-        };
-        dataArr.push(obj);
-    }
-    ARV.defaultData.BarGraph = dataArr;
+	ARV.defaultData.BarGraph = ARV.filteredData.data;
+//    var dataArr = [];
+//    var selected = $("#measureAxisList option:selected");
+//    var field = $(selected[0]).val();
+//    labelField = $("#categoryAxisList option:selected").val();
+//    var data = ARV.filteredData.data;
+//    for (i = 0; i < data.length; i++) {
+//        var dataElement = data[i];
+//        var value = parseInt(dataElement[field], 10);
+//        if (isNaN(value)) {
+//            $("#dialog-illegal-data").dialog("open");
+//            return;
+//        }
+//        label = dataElement[labelField];
+//        obj = {
+//            value: value,
+//            label: label
+//        };
+//        dataArr.push(obj);
+//    }
+//    ARV.defaultData.BarGraph = dataArr;
 };
+
 ARV.updateCategoryArray = function() {
     ARV.defaultCategories[0].category = [];
     var labelField = $("#categoryAxisList option:selected").val();
@@ -229,8 +231,9 @@ ARV.updateDatasetArray = function() {
     ARV.defaultDataSet = dataSet;
 };
 ARV.modifyDataForMultiSeries = function() {
-    ARV.updateCategoryArray();
-    ARV.updateDatasetArray();
+	ARV.defaultData.MultiBarGraph = ARV.filteredData.data;
+//    ARV.updateCategoryArray();
+//    ARV.updateDatasetArray();
 };
 
 ARV.modifyDataForBubbleChart = function() {
@@ -321,8 +324,8 @@ ARV.updateDataForVisualizations = function(){
     ARV.refreshTable();
     ARV.refreshGraph();
 };
-$("#categoryAxisList").chosen().change(ARV.updateDataForVisualizations);
-$("#measureAxisList").chosen().change(ARV.updateDataForVisualizations);
+//$("#categoryAxisList").chosen().change(ARV.updateDataForVisualizations);
+//$("#measureAxisList").chosen().change(ARV.updateDataForVisualizations);
 $("#dataUpdater").live("click",function() {
 	ARV.updateDataForVisualizations();
 });

@@ -64,7 +64,8 @@ AR.Utility.findMax = function(data) {
 AR.Utility.findArrayMax = function(data) {
     var max = parseInt(data[0], 10);
     var i = 0;
-    for (i = 0; i < data.length; i++) {
+    var len = data.length;
+    for (i = 0; i < len; i++) {
         var cur = parseInt(data[i], 10);
         if (cur > max) {
             max = cur;
@@ -184,7 +185,6 @@ AR.Utility.setPalette = function(element, colors) {
     element.fillStyle(function() {
         return colors[this.index % colors.length];
     });
-
 };
 
 AR.Utility.findMaxValue = function(graphDef) {
@@ -264,8 +264,9 @@ AR.Utility.addLegendToObject = function(object, data, graphDef) {
     var dots = object.add(pv.Dot).shape("square").top(AR.constants.values.legend.top)
     				 .shapeRadius(AR.Utility.getSize(graphDef,"legend",AR.constants.values.legend.size));
    AR.Utility.setLeftOfLegends(dots,graphDef);
-   dots.anchor("right").add(pv.Label).text(function() {
-        return data[this.index].label;
+   dots.anchor("right").add(pv.Label).text(function(d) {
+   		var categoryAxis = graphDef.categoryAxis[0];
+        return d[categoryAxis];
     }).font(AR.Utility.getSize(graphDef,"gridLabels",AR.constants.values.smallLabels.size) + "px Arial");
 
 };
@@ -303,3 +304,137 @@ AR.constants.scale ={
 AR.Utility.getSize = function(graphDef,element,value){
 	return AR.constants.scale[element]*value*graphDef.height*graphDef.width;
 };
+
+/**
+* @class It is a Utilty Class used to look the data as a table with columns and rows.
+* It also provides functions to access data.
+*
+* @param {Array}
+* columnNames It is an array consisting of the names of the columns
+* @param {Array}
+* data It is an array containing the data for the table. It can either be an array of arrays or array of objects
+* @param {boolean}
+* isJson a boolean field representing if the data is array of arrays or array of Objects
+*/
+
+AR.Utility.Table = function (columnNames, data, isJson) {
+ this.columnNames = columnNames;
+ this._data = data;
+ this._isAA = ! isJson;
+};
+
+/**
+* Returns the data value based on the rowIndex and the column name
+* @param {Number} rowIndex
+* This is the index of the row from where the data is to be accessed
+* @param {String} columnName
+* This is the name of the column from where the data is to be accessed
+* @returns {Number} The data value
+*/
+
+AR.Utility.Table.prototype.dataValue = function (rowIndex, columnName) {
+ var row = this._data[rowIndex];
+ if(this._isAA){
+  var colIndex = this.columnNames.indexOf(columnName);
+  return row[colIndex];
+ }else{
+  return row[columnName];
+ }
+};
+
+/**
+* Returns the data value based on the rowIndex and the column index
+* @param {Number} rowIndex
+* This is the index of the row from where the data is to be accessed
+* @param {Number} colIndex
+* This is the index of the column from where the data is to be accessed
+* @returns {Number} The data value
+*/
+
+AR.Utility.Table.prototype.dataValueByRowAndColIndex = function (rowIndex, colIndex) {
+ if(this._isAA){
+  return this._data[rowIndex][colIndex];
+ }else{
+  return this._data[rowIndex][this.columnNames[colIndex]];
+ }
+
+};
+
+/**
+* Returns the row based on the row index
+* @param {Number} rowIndex
+* This is the index of the row
+* @returns {Array} The row
+*/
+AR.Utility.Table.prototype.row = function (rowIndex) {
+ return this._data[rowIndex];
+};
+
+/**
+* Returns size of the data
+* @returns {Number} The size of the data
+*
+*/
+AR.Utility.Table.prototype.getLength = function () {
+ return this._data.length;
+};
+
+/**
+* Checks if <tt>dataObj</tt> is an array of arrays or array of Objects.
+* @param {Array} dataObj
+* Data for the chart
+* @returns {boolean} true if the its an array of objects, false otherwise
+*/
+AR.Utility.checkIfJSON = function(dataObj){
+	if(dataObj.length>0){
+		return ("object" === typeof dataObj[0]);	
+	}
+	
+};
+
+/**
+ * Returns the column names if <tt>dataObj</tt> is array of Objects
+ * @param {Array} dataObj
+ * 		 	data for the chart
+ * @return {Array} 
+ * 			Array of column names
+ */
+AR.Utility.getColNames = function(dataObj){
+	var colNames = [],
+		prop,
+		row = dataObj[0];
+	for(prop in row){
+		if(row.hasOwnProperty(prop)){
+			colNames.push(prop);
+		}
+	}
+	return colNames; 	
+};
+AR.Utility.removeCommaFromNumber = function(num){
+	if(typeof num === "string"){
+		return num.replace(/\,/g,'');	
+	}
+  return num;
+	
+}
+AR.Utility.findMaxVal= function(dataTable, fields){
+	var max,
+		dataLen = dataTable.getLength(),
+		noOfFields = fields.length,
+		i,j,curVal;
+	curVal = dataTable.dataValue(0,fields[0]);
+	curVal = AR.Utility.removeCommaFromNumber(curVal);
+	max = parseFloat(curVal);
+	for(i=0;i<dataLen;i++){
+		for(j=0;j<noOfFields;j++){
+			curVal = dataTable.dataValue(i,fields[j]);
+			curVal = AR.Utility.removeCommaFromNumber(curVal);
+			curVal = parseFloat(curVal);
+			if(max<curVal){
+				max = curVal;
+			}
+		}
+	}
+	return max;
+}
+	
