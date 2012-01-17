@@ -1,5 +1,13 @@
+/**
+ * An array that holds all the selected measure axis names
+ */
 ARV.selectedMeasureAxis = [];
 
+//TODO
+/**
+ * Populates the 
+ * @param id
+ */
 ARV.addAllCategories = function(id){
 	var selected = $("#"+id+ " option:selected");
 	var selectedVal = $(selected).val();
