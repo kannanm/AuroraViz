@@ -1,51 +1,51 @@
 //TODO create data that is original and create filtered data
-ARV.dataJSON = {
-    id: "4ed630d8ed9be9723687620d",
-    columns: [
-        {
-        id: "company",
-        name: "Company",
-        field: "company",
-        editor: TextCellEditor},
-    {
-        id: "sales",
-        name: "Sales",
-        field: "sales",
-        editor: TextCellEditor},
-    {
-        id: "revenue",
-        name: "Revenue",
-        field: "revenue",
-        editor: TextCellEditor},
-    {
-        id: "profit",
-        name: "Profit",
-        field: "profit",
-        editor: TextCellEditor}
-    ],
-    data: [
-        {
-        company: "LG",
-        sales: 41,
-        revenue: 22,
-        profit: 10},
-    {
-        company: "Samsung",
-        sales: 24,
-        revenue: 12,
-        profit: 20},
-    {
-        company: "Philips",
-        sales: 20,
-        revenue: 15,
-        profit: 7},
-    {
-        company: "GE",
-        sales: 55,
-        revenue: 34,
-        profit: 25}
-    ]
-};
+//ARV.dataJSON = {
+//    id: "4ed630d8ed9be9723687620d",
+//    columns: [
+//        {
+//        id: "company",
+//        name: "Company",
+//        field: "company",
+//        editor: TextCellEditor},
+//    {
+//        id: "sales",
+//        name: "Sales",
+//        field: "sales",
+//        editor: TextCellEditor},
+//    {
+//        id: "revenue",
+//        name: "Revenue",
+//        field: "revenue",
+//        editor: TextCellEditor},
+//    {
+//        id: "profit",
+//        name: "Profit",
+//        field: "profit",
+//        editor: TextCellEditor}
+//    ],
+//    data: [
+//        {
+//        company: "LG",
+//        sales: 41,
+//        revenue: 22,
+//        profit: 10},
+//    {
+//        company: "Samsung",
+//        sales: 24,
+//        revenue: 12,
+//        profit: 20},
+//    {
+//        company: "Philips",
+//        sales: 20,
+//        revenue: 15,
+//        profit: 7},
+//    {
+//        company: "GE",
+//        sales: 55,
+//        revenue: 34,
+//        profit: 25}
+//    ]
+//};
 ARV.editableGridOptions = {
     editable: true,
     enableAddRow: true,
