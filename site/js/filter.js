@@ -16,7 +16,7 @@ ARV.addAllCategories = function(id){
 	var option;
 	var originalData = ARV.dataJSON.data;
 	for(i=0;i<originalData.length;i++){
-		 var dataItem = originalData[i]
+		 var dataItem = originalData[i];
 		 option = $('<option />').val(dataItem[selectedVal]).append(dataItem[selectedVal]).attr("selected", "selected");
 		 $(categories).append(option);
 	}
@@ -207,7 +207,7 @@ ARV.checkThenPush = function(arr,val){
 	if(val){
 		arr.push(val);
 	}
-}
+};
 
 /**
  * Update the selected measure axis 

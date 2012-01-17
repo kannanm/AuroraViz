@@ -225,4 +225,4 @@ AR.LineGraph = function(graphDef) {
         self.setHorRules(AR.Utility.findMax(graphDef.data), AR.Utility.scale.linear);
     };
 };
-AR.LineGraph.prototype = new AR.Graph();;
+AR.LineGraph.prototype = new AR.Graph();

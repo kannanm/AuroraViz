@@ -139,7 +139,7 @@ AR.PieGraph = function(graphDef) {
         wedges.adjustPosition(self._dimension);
     };
 };
-AR.PieGraph.prototype = new AR.Graph();;
+AR.PieGraph.prototype = new AR.Graph();
 
 /**
  * The basefunction for the Donut initialization.
@@ -276,4 +276,4 @@ AR.DonutGraph = function(graphDef) {
         wedges.adjustPosition(self._dimension);
     };
 };
-AR.DonutGraph.prototype = new AR.Graph();;
+AR.DonutGraph.prototype = new AR.Graph();

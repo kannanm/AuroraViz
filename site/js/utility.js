@@ -1,39 +1,39 @@
 /**
- * A map color picker call back functions 
+ * A map color picker call back functions
  */
 ARV.colorPickerCB = {
-		chartGenerator : function(hex,rgb){
-			ARV.modifyJSON();
-		},
-		dashboard: function(hex,rgb){
-			ARV.updateSelectedElement();
-		}
+    chartGenerator: function(hex, rgb) {
+        ARV.modifyJSON();
+    },
+    dashboard: function(hex, rgb) {
+        ARV.updateSelectedElement();
+    }
 };
 /**
- * A map for create slider callback functions 
+ * A map for create slider callback functions
  */
 ARV.createSlidersCB = {
-		chartGenerator :function(event, ui) {
-			var sliderID = $(this).attr("id");
-		    var textID = sliderID.substr(0, sliderID.indexOf("Slider"));
-            $("#" + textID).val(ui.value);
-            ARV.modifyJSON();
-        },
-        dashboard:function(event, ui){
-        	var sliderID = $(this).attr("id");
-		    var textID = sliderID.substr(0, sliderID.indexOf("Slider"));
-            $("#" + textID).val(ui.value);
-        	ARV.updateSelectedElement();
-        }
+    chartGenerator: function(event, ui) {
+        var sliderID = $(this).attr("id");
+        var textID = sliderID.substr(0, sliderID.indexOf("Slider"));
+        $("#" + textID).val(ui.value);
+        ARV.modifyJSON();
+    },
+    dashboard: function(event, ui) {
+        var sliderID = $(this).attr("id");
+        var textID = sliderID.substr(0, sliderID.indexOf("Slider"));
+        $("#" + textID).val(ui.value);
+        ARV.updateSelectedElement();
+    }
 };
 /**
  * Initialize the color picker
  * @param cb {function} The call back function for the change event
  */
-ARV.initializeColorPicker = function(cb){
-	$(".colorPicker").miniColors({
-				change:cb
-	});    
+ARV.initializeColorPicker = function(cb) {
+    $(".colorPicker").miniColors({
+        change: cb
+    });
 };
 
 /**
@@ -55,7 +55,7 @@ ARV.createSliders = function(cb) {
             min: min,
             max: max,
             value: 2,
-            slide:cb
+            slide: cb
         });
         $(this).slider("value", $("#" + textID).val()); /* $( "#"+textID).val($(this).slider( "value" ) ); */
     });
@@ -63,14 +63,15 @@ ARV.createSliders = function(cb) {
 
 /**
  * Convert the rgb color value to hexadecimal value
- * @param rgb {String} The rgb color value e.g. rgb(0,0,0) 
+ * @param rgb {String} The rgb color value e.g. rgb(0,0,0)
  * @returns {String} Returns the hexadecimal notation of the color e.g. #000000
  */
 
-ARV.rgb2hex=  function(rgb) {
+ARV.rgb2hex = function(rgb) {
     rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+
     function hex(x) {
-        return ("0" + parseInt(x).toString(16)).slice(-2);
+        return ("0" + parseInt(x, 10).toString(16)).slice(-2);
     }
     return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
 };
@@ -80,32 +81,30 @@ ARV.rgb2hex=  function(rgb) {
  * @param matrix {String} The matrix angle notation e.g. matrix(0, 1, -1, 0, 0px, 0px)
  * @returns The angle for the <tt>matrix</tt> notation e.g. 90
  */
-ARV.matrixToDegree = function(matrix){
-	console.log(matrix);
-	var pat = /^matrix\((-*\d*.\d*),\s*(-*\d*.\d*),\s*(-*\d*.\d*),\s*(-*\d*.\d*),\s*(-*\d*.\d*)px,\s*(-*\d*.\d*)px\)/;
-	matrix = matrix.match(pat);
-	if(matrix === null ){
-		return 0;
-	}
-	var sign = matrix[2]!=0 ? matrix[2]/Math.abs(matrix[2]) : 0;
-	var degree = Math.acos(matrix[1])*180/Math.PI
-	console.log((sign*degree).toFixed(0));
-	return (sign*degree).toFixed(0);
+ARV.matrixToDegree = function(matrix) {
+    var pat = /^matrix\((-*\d*.\d*),\s*(-*\d*.\d*),\s*(-*\d*.\d*),\s*(-*\d*.\d*),\s*(-*\d*.\d*)px,\s*(-*\d*.\d*)px\)/;
+    matrix = matrix.match(pat);
+    if (matrix === null) {
+        return 0;
+    }
+    var sign = matrix[2] !== 0 ? matrix[2] / Math.abs(matrix[2]) : 0;
+    var degree = Math.acos(matrix[1]) * 180 / Math.PI;
+    return (sign * degree).toFixed(0);
 };
 
 /**
  * Return the selected chart type
  * @returns {String}  the selected chart type
  */
-ARV.getSelectedChartType = function(){
-	return $("#chartTypes option:selected").attr("value");
+ARV.getSelectedChartType = function() {
+    return $("#chartTypes option:selected").attr("value");
 };
 
 /**
- * Get the selected option for the select dom element with id attribute equal to <tt>id</tt> 
+ * Get the selected option for the select dom element with id attribute equal to <tt>id</tt>
  * @param id The id of the dom element
  * @returns the selected option
  */
-ARV.getSelectedValue = function(id){
-	return $("#"+id+" option:selected").val();
-}
+ARV.getSelectedValue = function(id) {
+    return $("#" + id + " option:selected").val();
+};

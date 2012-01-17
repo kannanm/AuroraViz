@@ -1,6 +1,6 @@
 //TODO create data that is original and create filtered data
 /**
- * The original data 
+ * The original data
  */
 ARV.dataJSON = {
     id: "4ed630d8ed9be9723687620d",
@@ -90,24 +90,26 @@ ARV.createDataForTable = function() {
 //TODO Do this in one parse
 /**
  * Populate the select dom element for the map view.
- * @param div The id of the dom element 
+ * @param div The id of the dom element
  */
-ARV.populateSingleSelectForMap = function(div){
-	var columns = ARV.dataJSON.columns;
-	if($("#"+div).is(".select-deselect")){
-		 option = $('<option />').val("");
-		 $("#"+div).append(option);
-	}
-	for (i = 0; i < columns.length; i++) {
-	    option = $('<option />').val(columns[i].field).append(columns[i].name);
-	    $("#"+div).append(option);
-	}
-	if($("#"+div).is(".select-deselect")){
-		 $("#"+div).chosen({allow_single_deselect: true});
-	}else{
-		$("#"+div).chosen();
-	}
-	
+ARV.populateSingleSelectForMap = function(div) {
+    var columns = ARV.dataJSON.columns;
+    if ($("#" + div).is(".select-deselect")) {
+        option = $('<option />').val("");
+        $("#" + div).append(option);
+    }
+    for (i = 0; i < columns.length; i++) {
+        option = $('<option />').val(columns[i].field).append(columns[i].name);
+        $("#" + div).append(option);
+    }
+    if ($("#" + div).is(".select-deselect")) {
+        $("#" + div).chosen({
+            allow_single_deselect: true
+        });
+    } else {
+        $("#" + div).chosen();
+    }
+
 };
 ARV.populateSingleSelectForMap("categoryListForMap");
 ARV.populateSingleSelectForMap("latitudeForMap");
@@ -118,14 +120,14 @@ ARV.populateSingleSelectForMap("sizeForMap");
 /**
  * Update the data for the single series graph. Example data format for single series graph:
  * <pre>"data": [{
-        "value": 22,
-        "label": "LG"
-        },
-    	{
-        "value": 12,
-        "label": "Samsung"
-        }
-       ]</pre>
+ "value": 22,
+ "label": "LG"
+ },
+ {
+ "value": 12,
+ "label": "Samsung"
+ }
+ ]</pre>
  */
 ARV.modifyDataForSingleSeries = function() {
     var dataArr = [];
@@ -168,7 +170,7 @@ ARV.updateCategoryArray = function() {
 };
 /**
  * Returns the data for the <tt>seriesname</tt>
- * @param seriesname {String} 
+ * @param seriesname {String}
  * @returns The data array for the <tt>seriesname</tt>
  */
 ARV.getDataArrayForSeries = function(seriesname) {
@@ -214,34 +216,34 @@ ARV.updateDatasetArray = function() {
 };
 
 /**
- * Update the data and the categories for a multiseries graph. Example multiseries data: 
+ * Update the data and the categories for a multiseries graph. Example multiseries data:
  * <pre>
  * "categories": [{
-    "category": [{
-      "label": "LG"
-    },
-              {
-      "label": "GE"
-    }]
-  }],
-  "dataset": [{
-    "seriesname": "sales",
-    "data": [{
-      "value": 41
-    },
-              {
-      "value": 55
-    }]
-  },
-        {
-    "seriesname": "revenue",
-    "data": [{
-      "value": 22
-    },
-              {
-      "value": 34
-    }]
-  }]
+ "category": [{
+ "label": "LG"
+ },
+ {
+ "label": "GE"
+ }]
+ }],
+ "dataset": [{
+ "seriesname": "sales",
+ "data": [{
+ "value": 41
+ },
+ {
+ "value": 55
+ }]
+ },
+ {
+ "seriesname": "revenue",
+ "data": [{
+ "value": 22
+ },
+ {
+ "value": 34
+ }]
+ }]
  * </pre>
  */
 ARV.updateDataForMultiSeries = function() {
@@ -252,36 +254,34 @@ ARV.updateDataForMultiSeries = function() {
 /**
  * Updates the data for the bubble chart. Example data format for the bubble chart:
  * <pre> "data": [{
-        "x": 41,
-        "y": 22,
-        "z": 10,
-        "label": "LG"
-        },
-    	{
-        "x": 24,
-        "y": 12,
-        "z": 20,
-        "label": "Samsung"
-        }
-       ]</pre>
+ "x": 41,
+ "y": 22,
+ "z": 10,
+ "label": "LG"
+ },
+ {
+ "x": 24,
+ "y": 12,
+ "z": 20,
+ "label": "Samsung"
+ }
+ ]</pre>
  */
 ARV.updateDataForBubbleChart = function() {
     var dataArr = [],
-    	obj ={},
-    	index = 0,
-    	xValue,	yValue, zValue,
-    	dataItem,
-    	selected = $("#measureAxisList option:selected"),
-    	x = $(selected[0]).val(),
-    	y = $(selected[1]).val(),
-    	z = $(selected[2]).val(),
+        obj = {},
+        index = 0,
+        xValue, yValue, zValue, dataItem, selected = $("#measureAxisList option:selected"),
+        x = $(selected[0]).val(),
+        y = $(selected[1]).val(),
+        z = $(selected[2]).val(),
         labelField = $("#categoryAxisList option:selected").val();
-    
+
     for (index = 0; index < ARV.filteredData.data.length; index++) {
         dataItem = ARV.filteredData.data[index];
-        xValue = parseInt(dataItem[x],10);
-        yValue = parseInt(dataItem[y],10);
-        zValue = parseInt(dataItem[z],10);
+        xValue = parseInt(dataItem[x], 10);
+        yValue = parseInt(dataItem[y], 10);
+        zValue = parseInt(dataItem[z], 10);
         if (isNaN(xValue) || isNaN(yValue) || isNaN(zValue)) {
             $("#dialog-illegal-data").dialog("open");
             return undefined;
@@ -292,67 +292,65 @@ ARV.updateDataForBubbleChart = function() {
             z: zValue,
             label: dataItem[labelField]
         };
-       dataArr.push(obj);
+        dataArr.push(obj);
     }
     ARV.defaultData.BubbleGraph = dataArr;
 };
 /**
- * Updates the data for the map. Takes the latitude, longitude,size and category measures 
- * and creates a JSON for the map. 
+ * Updates the data for the map. Takes the latitude, longitude,size and category measures
+ * and creates a JSON for the map.
  * e.g. JSON for map <pre>
- * "data": [{ 
-        "lat": 22,
-        "lon": 22,
-        "size": 10,
-        "category": "LG"
-        },
-    	{
-        "lat": 12,
-        "lon": 12,
-        "size": 20,
-        "category": "Samsung"
-        }
-    ]</pre>
+ * "data": [{
+ "lat": 22,
+ "lon": 22,
+ "size": 10,
+ "category": "LG"
+ },
+ {
+ "lat": 12,
+ "lon": 12,
+ "size": 20,
+ "category": "Samsung"
+ }
+ ]</pre>
  */
-ARV.updateDataForMap = function(){
-	var dataArr = [],
- 		obj ={},
- 		index = 0,
- 		xValue,	yValue, zValue,
- 		dataItem,
- 		lat = $("#latitudeForMap option:selected").val(),
- 		long = $("#longitudeForMap option:selected").val(),
- 		size = $("#sizeForMap option:selected").val(),
- 		category = $("#categoryListForMap option:selected").val() ;
-	for (index = 0; index < ARV.filteredData.data.length; index++) {
-		dataItem = ARV.filteredData.data[index];
-		latValue = parseInt(dataItem[lat],10);
-		longValue = parseInt(dataItem[long],10);
-		sizeValue = parseInt(dataItem[size] || 10 ,10);
-		if (isNaN(latValue) || isNaN(longValue) || isNaN(sizeValue)) {
-			$("#dialog-illegal-data").dialog("open");
-			return undefined;
-		}
-		obj = {
-			lat: latValue,
-			lon: longValue,
-			size: sizeValue,
-			category: dataItem[category] || " "
-		};
-		dataArr.push(obj);
-	}
-	ARV.defaultData.MapGraph = dataArr;
+ARV.updateDataForMap = function() {
+    var dataArr = [],
+        obj = {},
+        index = 0,
+        xValue, yValue, zValue, dataItem, lat = $("#latitudeForMap option:selected").val(),
+        long = $("#longitudeForMap option:selected").val(),
+        size = $("#sizeForMap option:selected").val(),
+        category = $("#categoryListForMap option:selected").val();
+    for (index = 0; index < ARV.filteredData.data.length; index++) {
+        dataItem = ARV.filteredData.data[index];
+        latValue = parseInt(dataItem[lat], 10);
+        longValue = parseInt(dataItem[long], 10);
+        sizeValue = parseInt(dataItem[size] || 10, 10);
+        if (isNaN(latValue) || isNaN(longValue) || isNaN(sizeValue)) {
+            $("#dialog-illegal-data").dialog("open");
+            return undefined;
+        }
+        obj = {
+            lat: latValue,
+            lon: longValue,
+            size: sizeValue,
+            category: dataItem[category] || " "
+        };
+        dataArr.push(obj);
+    }
+    ARV.defaultData.MapGraph = dataArr;
 };
 
 /**
  * The function calls the update data method for all the types for the graph viz single series, multiseries,
- * bubble chart. 
+ * bubble chart.
  */
-ARV.updateDataForVisualizations = function(){
-	if(ARV.filteredData.data.length === 0){
-		$("#chart").html("Select some fields to view data");
-		return;
-	}
+ARV.updateDataForVisualizations = function() {
+    if (ARV.filteredData.data.length === 0) {
+        $("#chart").html("Select some fields to view data");
+        return;
+    }
     var noOfSelected = ARV.getNumberOfSelectedMeasureAxis();
     try {
         if (noOfSelected === 1) {
@@ -369,8 +367,8 @@ ARV.updateDataForVisualizations = function(){
     catch (e) {
         alert(e);
     }
-    if("Map" === $("#chartTypes option:selected").attr("value")){
-    	ARV.updateDataForMap();
+    if ("Map" === $("#chartTypes option:selected").attr("value")) {
+        ARV.updateDataForMap();
     }
     ARV.createDataForTable();
     ARV.refreshTable();
@@ -378,49 +376,49 @@ ARV.updateDataForVisualizations = function(){
 };
 
 
-(function(){
-	var data = ARV.dataJSON.data;
-	var columns = ARV.dataJSON.columns;
-	var i = 0;
-	var option;
-	for (i = 0; i < columns.length; i++) {
-	    option = $('<option />').val(columns[i].field).append(columns[i].name);
-	    if (i === 1) {
-	        option.attr("selected", "selected");
-	    }
-	    $("#measureAxisList").append(option);
-	}
-	$("#measureAxisList").chosen();
+(function() {
+    var data = ARV.dataJSON.data;
+    var columns = ARV.dataJSON.columns;
+    var i = 0;
+    var option;
+    for (i = 0; i < columns.length; i++) {
+        option = $('<option />').val(columns[i].field).append(columns[i].name);
+        if (i === 1) {
+            option.attr("selected", "selected");
+        }
+        $("#measureAxisList").append(option);
+    }
+    $("#measureAxisList").chosen();
 
-	for (i = 0; i < columns.length; i++) {
-	    option = $('<option />').val(columns[i].field).append(columns[i].name);
-	    if (i === 0) {
-	        option.attr("selected", "selected");
-	    }
-	    $("#categoryAxisList").append(option);
-	}
-	$("#categoryAxisList").chosen();
-	 $("#dialog-illegal-data").dialog({
-	        modal: true,
-	        autoOpen: false,
-	        buttons: {
-	            Ok: function() {
-	                $(this).dialog("close");
-	            }
-	        }
-	    });
-	
-})();
+    for (i = 0; i < columns.length; i++) {
+        option = $('<option />').val(columns[i].field).append(columns[i].name);
+        if (i === 0) {
+            option.attr("selected", "selected");
+        }
+        $("#categoryAxisList").append(option);
+    }
+    $("#categoryAxisList").chosen();
+    $("#dialog-illegal-data").dialog({
+        modal: true,
+        autoOpen: false,
+        buttons: {
+            Ok: function() {
+                $(this).dialog("close");
+            }
+        }
+    });
+
+}());
 
 $("#categoryAxisList").chosen().change(ARV.updateDataForVisualizations);
 $("#measureAxisList").chosen().change(ARV.updateDataForVisualizations);
-$("#dataUpdater").live("click",function() {
-	ARV.updateDataForVisualizations();
+$("#dataUpdater").live("click", function() {
+    ARV.updateDataForVisualizations();
 });
 
 /**
- * The filtered data 
+ * The filtered data
  */
 ARV.filteredData = {};
-//Deep copy the original data into the filtered data so that the original data does not change 
-jQuery.extend(ARV.filteredData,ARV.dataJSON);
+//Deep copy the original data into the filtered data so that the original data does not change
+jQuery.extend(ARV.filteredData, ARV.dataJSON);

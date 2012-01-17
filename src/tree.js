@@ -103,7 +103,7 @@ AR.TreeGraph = function(graphDef) {
     self.setTop(10);
     self.setBottom(10);
 };
-AR.TreeGraph.prototype = new AR.Graph();;
+AR.TreeGraph.prototype = new AR.Graph();
 
 
 
@@ -255,4 +255,4 @@ AR.SunBurstGraph = function(graphDef) {
     self.setLeft(20);
     self.setBottom(-40);
 };
-AR.SunBurstGraph.prototype = new AR.Graph();;
+AR.SunBurstGraph.prototype = new AR.Graph();

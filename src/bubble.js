@@ -197,4 +197,3 @@ AR.BubbleGraph = function(graphDef) {
 	};
 };
 AR.BubbleGraph.prototype = new AR.Graph();
-;
