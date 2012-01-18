@@ -1,18 +1,24 @@
 /**
+ * @Description The top-level utility functions namespace.
+ * @namespace The top-level utility functions namespace, <tt>ARV.Utility</tt>. All the utility  are in this namespace
+ */
+
+ARV.Utility = {};
+/**
  * A map color picker call back functions
  */
-ARV.colorPickerCB = {
+ARV.Utility.colorPickerCB = {
     chartGenerator: function(hex, rgb) {
         ARV.modifyJSON();
     },
     dashboard: function(hex, rgb) {
-        ARV.updateSelectedElement();
+        ARV.Dashboard.updateSelectedElement();
     }
 };
 /**
  * A map for create slider callback functions
  */
-ARV.createSlidersCB = {
+ARV.Utility.createSlidersCB = {
     chartGenerator: function(event, ui) {
         var sliderID = $(this).attr("id");
         var textID = sliderID.substr(0, sliderID.indexOf("Slider"));
@@ -23,14 +29,14 @@ ARV.createSlidersCB = {
         var sliderID = $(this).attr("id");
         var textID = sliderID.substr(0, sliderID.indexOf("Slider"));
         $("#" + textID).val(ui.value);
-        ARV.updateSelectedElement();
+        ARV.Dashboard.updateSelectedElement();
     }
 };
 /**
  * Initialize the color picker
  * @param cb {function} The call back function for the change event
  */
-ARV.initializeColorPicker = function(cb) {
+ARV.Utility.initializeColorPicker = function(cb) {
     $(".colorPicker").miniColors({
         change: cb
     });
@@ -40,7 +46,7 @@ ARV.initializeColorPicker = function(cb) {
  * Create sliders
  * @param cb {function} The call back function for the slide event
  */
-ARV.createSliders = function(cb) {
+ARV.Utility.createSliders = function(cb) {
     $(".slider").each(function() {
         var sliderID = $(this).attr("id");
         var textID = sliderID.substr(0, sliderID.indexOf("Slider"));
@@ -67,7 +73,7 @@ ARV.createSliders = function(cb) {
  * @returns {String} Returns the hexadecimal notation of the color e.g. #000000
  */
 
-ARV.rgb2hex = function(rgb) {
+ARV.Utility.rgb2hex = function(rgb) {
     rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
 
     function hex(x) {
@@ -81,7 +87,7 @@ ARV.rgb2hex = function(rgb) {
  * @param matrix {String} The matrix angle notation e.g. matrix(0, 1, -1, 0, 0px, 0px)
  * @returns The angle for the <tt>matrix</tt> notation e.g. 90
  */
-ARV.matrixToDegree = function(matrix) {
+ARV.Utility.matrixToDegree = function(matrix) {
     var pat = /^matrix\((-*\d*.\d*),\s*(-*\d*.\d*),\s*(-*\d*.\d*),\s*(-*\d*.\d*),\s*(-*\d*.\d*)px,\s*(-*\d*.\d*)px\)/;
     matrix = matrix.match(pat);
     if (matrix === null) {
@@ -96,7 +102,7 @@ ARV.matrixToDegree = function(matrix) {
  * Return the selected chart type
  * @returns {String}  the selected chart type
  */
-ARV.getSelectedChartType = function() {
+ARV.Utility.getSelectedChartType = function() {
     return $("#chartTypes option:selected").attr("value");
 };
 
@@ -105,6 +111,6 @@ ARV.getSelectedChartType = function() {
  * @param id The id of the dom element
  * @returns the selected option
  */
-ARV.getSelectedValue = function(id) {
+ARV.Utility.getSelectedValue = function(id) {
     return $("#" + id + " option:selected").val();
 };

@@ -142,7 +142,7 @@ ARV.addColorsDiv = function() {
     }
     colorsDiv.append('<button id="addColorBtn" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-circle-plus"></span></button>');
 
-    ARV.initializeColorPicker(ARV.colorPickerCB.chartGenerator);
+    ARV.Utility.initializeColorPicker(ARV.Utility.colorPickerCB.chartGenerator);
 };
 
 /**
@@ -214,7 +214,7 @@ ARV.addEventListeners = function() {
         $(this).before('<button id="delColor' + (ARV.paletteColorCounter) + '"  class="delColorBtn">x</button>');
         $("#delColor" + (ARV.paletteColorCounter)).button();
         ARV.paletteColorCounter++;
-        ARV.initializeColorPicker(ARV.colorPickerCB.chartGenerator);
+        ARV.Utility.initializeColorPicker(ARV.Utility.colorPickerCB.chartGenerator);
     });
 
     //Whenever we change the option in the presetPalette The colors are loaded accordingly
@@ -236,8 +236,8 @@ ARV.addEventListeners = function() {
         ARV.reset();
         var selectedVal = $("#chartTypes option:selected").attr("value");
         ARV.performActionsBasedOnChart(selectedVal);
-        ARV.createSliders(ARV.createSlidersCB.chartGenerator);
-        ARV.initializeColorPicker(ARV.colorPickerCB.chartGenerator);
+        ARV.Utility.createSliders(ARV.Utility.createSlidersCB.chartGenerator);
+        ARV.Utility.initializeColorPicker(ARV.Utility.colorPickerCB.chartGenerator);
 
     });
 
@@ -287,7 +287,7 @@ ARV.initChartGenerator = function() {
         }
         $('#presetPalette').append(option);
     }
-    ARV.createSliders(ARV.createSlidersCB.chartGenerator);
+    ARV.Utility.createSliders(ARV.Utility.createSlidersCB.chartGenerator);
     ARV.addColorsDiv();
     ARV.addEventListeners();
     $("#measureAxisList").chosen().trigger("change");

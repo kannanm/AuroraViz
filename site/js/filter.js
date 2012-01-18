@@ -214,9 +214,9 @@ ARV.checkThenPush = function(arr,val){
  */
 ARV.updateSelectedMeasureAxisForMap = function(){
 	ARV.selectedMeasureAxis = [];
-	ARV.checkThenPush(ARV.selectedMeasureAxis,ARV.getSelectedValue("latitudeForMap"));
-	ARV.checkThenPush(ARV.selectedMeasureAxis,ARV.getSelectedValue("longitudeForMap"));
-	ARV.checkThenPush(ARV.selectedMeasureAxis,ARV.getSelectedValue("sizeForMap"));
+	ARV.checkThenPush(ARV.selectedMeasureAxis,ARV.Utility.getSelectedValue("latitudeForMap"));
+	ARV.checkThenPush(ARV.selectedMeasureAxis,ARV.Utility.getSelectedValue("longitudeForMap"));
+	ARV.checkThenPush(ARV.selectedMeasureAxis,ARV.Utility.getSelectedValue("sizeForMap"));
 };
 
 /**
