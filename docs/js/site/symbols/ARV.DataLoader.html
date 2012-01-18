@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - ARV.Utility</title>
+		<title>JsDoc Reference - ARV.DataLoader</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -202,7 +202,7 @@ ul.inheritsList {
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace ARV.Utility
+				Namespace ARV.DataLoader
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -210,16 +210,16 @@ ul.inheritsList {
 				
 				
 			
-				The top-level utility functions namespace, <tt>ARV.Utility</tt>. All the utility  are in this namespace
+				The top-level dataloader namespace, <tt>ARV.DataLoader</tt>. All           the functions related preparing the data for the aurora source in the particular           format are here.
 				
 				
-					<br /><i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_site_js_utility.js.html">utility.js</a>.
+					<br /><i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_site_js_dataLoader.js.html">dataLoader.js</a>.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class ARV.Utility.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class ARV.DataLoader.">
 				<caption>Namespace Summary</caption>
 				<thead>
 					<tr>
@@ -232,9 +232,9 @@ ul.inheritsList {
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/ARV.Utility.html#constructor">ARV.Utility</a></b>
+								<b><a href="../symbols/ARV.DataLoader.html#constructor">ARV.DataLoader</a></b>
 							</div>
-							<div class="description">The top-level utility functions namespace.</div>
+							<div class="description">The top-level dataloader namespace.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -245,7 +245,7 @@ ul.inheritsList {
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class ARV.Utility.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class ARV.DataLoader.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -259,9 +259,9 @@ ul.inheritsList {
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								ARV.Utility.<b><a href="../symbols/ARV.Utility.html#.colorPickerCB">colorPickerCB</a></b>
+								ARV.DataLoader.<b><a href="../symbols/ARV.DataLoader.html#.dataJSON">dataJSON</a></b>
 								</div>
-								<div class="description">A map color picker call back functions</div>
+								<div class="description">The original data</div>
 							</td>
 						</tr>
 					
@@ -269,9 +269,9 @@ ul.inheritsList {
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								ARV.Utility.<b><a href="../symbols/ARV.Utility.html#.createSlidersCB">createSlidersCB</a></b>
+								ARV.DataLoader.<b><a href="../symbols/ARV.DataLoader.html#.filteredData">filteredData</a></b>
 								</div>
-								<div class="description">A map for create slider callback functions</div>
+								<div class="description">The filtered data</div>
 							</td>
 						</tr>
 					
@@ -286,7 +286,7 @@ ul.inheritsList {
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class ARV.Utility.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class ARV.DataLoader.">
 					<caption>Method Summary</caption>
 					<thead>
 						<tr>
@@ -299,54 +299,90 @@ ul.inheritsList {
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.Utility.<b><a href="../symbols/ARV.Utility.html#.createSliders">createSliders</a></b>(cb)
+								<div class="fixedFont">ARV.DataLoader.<b><a href="../symbols/ARV.DataLoader.html#.createDataForTable">createDataForTable</a></b>()
 								</div>
-								<div class="description">Create sliders</div>
+								<div class="description">Populate the <tt>ARV.DataLoader.TableData</tt> and <tt>ARV.DataLoader.TableColumns</tt> from the filtered data<tt>ARV.DataLoader.TableData</tt> and <tt>ARV.DataLoader.TableColumns</tt> will be used to create the SlickGriddatatable</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.Utility.<b><a href="../symbols/ARV.Utility.html#.getSelectedChartType">getSelectedChartType</a></b>()
+								<div class="fixedFont">ARV.DataLoader.<b><a href="../symbols/ARV.DataLoader.html#.getDataArrayForSeries">getDataArrayForSeries</a></b>(seriesname)
 								</div>
-								<div class="description">Return the selected chart type</div>
+								<div class="description">Returns the data for the <tt>seriesname</tt></div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.Utility.<b><a href="../symbols/ARV.Utility.html#.getSelectedValue">getSelectedValue</a></b>(id)
+								<div class="fixedFont">ARV.DataLoader.<b><a href="../symbols/ARV.DataLoader.html#.modifyDataForSingleSeries">modifyDataForSingleSeries</a></b>()
 								</div>
-								<div class="description">Get the selected option for the select dom element with id attribute equal to <tt>id</tt></div>
+								<div class="description">Update the data for the single series graph.</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.Utility.<b><a href="../symbols/ARV.Utility.html#.initializeColorPicker">initializeColorPicker</a></b>(cb)
+								<div class="fixedFont">ARV.DataLoader.<b><a href="../symbols/ARV.DataLoader.html#.populateSingleSelectForMap">populateSingleSelectForMap</a></b>(div)
 								</div>
-								<div class="description">Initialize the color picker</div>
+								<div class="description">Populate the select dom element for the map view.</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.Utility.<b><a href="../symbols/ARV.Utility.html#.matrixToDegree">matrixToDegree</a></b>(matrix)
+								<div class="fixedFont">ARV.DataLoader.<b><a href="../symbols/ARV.DataLoader.html#.updateCategoryArray">updateCategoryArray</a></b>()
 								</div>
-								<div class="description">Convert the matrix angle notation to the degree notation</div>
+								<div class="description">Update the categories array for a multiseries graph</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.Utility.<b><a href="../symbols/ARV.Utility.html#.rgb2hex">rgb2hex</a></b>(rgb)
+								<div class="fixedFont">ARV.DataLoader.<b><a href="../symbols/ARV.DataLoader.html#.updateDataForBubbleChart">updateDataForBubbleChart</a></b>()
 								</div>
-								<div class="description">Convert the rgb color value to hexadecimal value</div>
+								<div class="description">Updates the data for the bubble chart.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">ARV.DataLoader.<b><a href="../symbols/ARV.DataLoader.html#.updateDataForMap">updateDataForMap</a></b>()
+								</div>
+								<div class="description">Updates the data for the map.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">ARV.DataLoader.<b><a href="../symbols/ARV.DataLoader.html#.updateDataForMultiSeries">updateDataForMultiSeries</a></b>()
+								</div>
+								<div class="description">Update the data and the categories for a multiseries graph.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">ARV.DataLoader.<b><a href="../symbols/ARV.DataLoader.html#.updateDataForVisualizations">updateDataForVisualizations</a></b>()
+								</div>
+								<div class="description">The function calls the update data method for all the types for the graph viz single series, multiseries,bubble chart.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">ARV.DataLoader.<b><a href="../symbols/ARV.DataLoader.html#.updateDatasetArray">updateDatasetArray</a></b>()
+								</div>
+								<div class="description">Updates the data set for a multiseries graph</div>
 							</td>
 						</tr>
 					
@@ -367,11 +403,11 @@ ul.inheritsList {
 				</div>
 				
 				<div class="fixedFont">
-						<b>ARV.Utility</b>
+						<b>ARV.DataLoader</b>
 				</div>
 				
 				<div class="description">
-					The top-level utility functions namespace.
+					The top-level dataloader namespace.
 					
 				</div>
 				
@@ -395,15 +431,15 @@ ul.inheritsList {
 					Field Detail
 				</div>
 				
-					<a name=".colorPickerCB"> </a>
+					<a name=".dataJSON"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">ARV.Utility.</span><b>colorPickerCB</b>
+					<span class="light">ARV.DataLoader.</span><b>dataJSON</b>
 					
 					</div>
 					<div class="description">
-						A map color picker call back functions
+						The original data
 						
 						
 					</div>
@@ -417,15 +453,15 @@ ul.inheritsList {
 
 					<hr />
 				
-					<a name=".createSlidersCB"> </a>
+					<a name=".filteredData"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">ARV.Utility.</span><b>createSlidersCB</b>
+					<span class="light">ARV.DataLoader.</span><b>filteredData</b>
 					
 					</div>
 					<div class="description">
-						A map for create slider callback functions
+						The filtered data
 						
 						
 					</div>
@@ -447,15 +483,40 @@ ul.inheritsList {
 					Method Detail
 				</div>
 				
-					<a name=".createSliders"> </a>
+					<a name=".createDataForTable"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">ARV.Utility.</span><b>createSliders</b>(cb)
+					<span class="light">ARV.DataLoader.</span><b>createDataForTable</b>()
 					
 					</div>
 					<div class="description">
-						Create sliders
+						Populate the <tt>ARV.DataLoader.TableData</tt> and <tt>ARV.DataLoader.TableColumns</tt> from the filtered data<tt>ARV.DataLoader.TableData</tt> and <tt>ARV.DataLoader.TableColumns</tt> will be used to create the SlickGriddatatable
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".getDataArrayForSeries"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">ARV.DataLoader.</span><b>getDataArrayForSeries</b>(seriesname)
+					
+					</div>
+					<div class="description">
+						Returns the data for the <tt>seriesname</tt>
 						
 						
 					</div>
@@ -467,37 +528,12 @@ ul.inheritsList {
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>cb</b>
+									<b>seriesname</b>
 									
 								</dt>
-								<dd>{function} The call back function for the slide event</dd>
+								<dd>{String}</dd>
 							
 							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".getSelectedChartType"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					<span class="light">{String}</span>
-					<span class="light">ARV.Utility.</span><b>getSelectedChartType</b>()
-					
-					</div>
-					<div class="description">
-						Return the selected chart type
-						
-						
-					</div>
-					
-					
-					
 						
 						
 						
@@ -506,7 +542,7 @@ ul.inheritsList {
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{String}</span> the selected chart type</dd>
+								<dd>The data array for the <tt>seriesname</tt></dd>
 							
 							</dl>
 						
@@ -515,15 +551,48 @@ ul.inheritsList {
 
 					<hr />
 				
-					<a name=".getSelectedValue"> </a>
+					<a name=".modifyDataForSingleSeries"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">ARV.Utility.</span><b>getSelectedValue</b>(id)
+					<span class="light">ARV.DataLoader.</span><b>modifyDataForSingleSeries</b>()
 					
 					</div>
 					<div class="description">
-						Get the selected option for the select dom element with id attribute equal to <tt>id</tt>
+						Update the data for the single series graph. Example data format for single series graph:<pre>"data": [{
+ "value": 22,
+ "label": "LG"
+ },
+ {
+ "value": 12,
+ "label": "Samsung"
+ }
+ ]</pre>
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".populateSingleSelectForMap"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">ARV.DataLoader.</span><b>populateSingleSelectForMap</b>(div)
+					
+					</div>
+					<div class="description">
+						Populate the select dom element for the map view.
 						
 						
 					</div>
@@ -535,7 +604,7 @@ ul.inheritsList {
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>id</b>
+									<b>div</b>
 									
 								</dt>
 								<dd>The id of the dom element</dd>
@@ -546,44 +615,26 @@ ul.inheritsList {
 						
 						
 						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd>the selected option</dd>
-							
-							</dl>
-						
 						
 						
 
 					<hr />
 				
-					<a name=".initializeColorPicker"> </a>
+					<a name=".updateCategoryArray"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">ARV.Utility.</span><b>initializeColorPicker</b>(cb)
+					<span class="light">ARV.DataLoader.</span><b>updateCategoryArray</b>()
 					
 					</div>
 					<div class="description">
-						Initialize the color picker
+						Update the categories array for a multiseries graph
 						
 						
 					</div>
 					
 					
 					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>cb</b>
-									
-								</dt>
-								<dd>{function} The call back function for the change event</dd>
-							
-							</dl>
 						
 						
 						
@@ -594,15 +645,27 @@ ul.inheritsList {
 
 					<hr />
 				
-					<a name=".matrixToDegree"> </a>
+					<a name=".updateDataForBubbleChart"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">ARV.Utility.</span><b>matrixToDegree</b>(matrix)
+					<span class="light">ARV.DataLoader.</span><b>updateDataForBubbleChart</b>()
 					
 					</div>
 					<div class="description">
-						Convert the matrix angle notation to the degree notation
+						Updates the data for the bubble chart. Example data format for the bubble chart:<pre> "data": [{
+ "x": 41,
+ "y": 22,
+ "z": 10,
+ "label": "LG"
+ },
+ {
+ "x": 24,
+ "y": 12,
+ "z": 20,
+ "label": "Samsung"
+ }
+ ]</pre>
 						
 						
 					</div>
@@ -610,42 +673,36 @@ ul.inheritsList {
 					
 					
 						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>matrix</b>
-									
-								</dt>
-								<dd>{String} The matrix angle notation e.g. matrix(0, 1, -1, 0, 0px, 0px)</dd>
-							
-							</dl>
 						
 						
 						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd>The angle for the <tt>matrix</tt> notation e.g. 90</dd>
-							
-							</dl>
 						
 						
 						
 
 					<hr />
 				
-					<a name=".rgb2hex"> </a>
+					<a name=".updateDataForMap"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
-					<span class="light">{String}</span>
-					<span class="light">ARV.Utility.</span><b>rgb2hex</b>(rgb)
+					
+					<span class="light">ARV.DataLoader.</span><b>updateDataForMap</b>()
 					
 					</div>
 					<div class="description">
-						Convert the rgb color value to hexadecimal value
+						Updates the data for the map. Takes the latitude, longitude,size and category measuresand creates a JSON for the map.e.g. JSON for map <pre>"data": [{
+ "lat": 22,
+ "lon": 22,
+ "size": 10,
+ "category": "LG"
+ },
+ {
+ "lat": 12,
+ "lon": 12,
+ "size": 20,
+ "category": "Samsung"
+ }
+ ]</pre>
 						
 						
 					</div>
@@ -653,27 +710,109 @@ ul.inheritsList {
 					
 					
 						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>rgb</b>
-									
-								</dt>
-								<dd>{String} The rgb color value e.g. rgb(0,0,0)</dd>
-							
-							</dl>
 						
 						
 						
 						
 						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{String}</span> Returns the hexadecimal notation of the color e.g. #000000</dd>
-							
-							</dl>
+						
+
+					<hr />
+				
+					<a name=".updateDataForMultiSeries"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">ARV.DataLoader.</span><b>updateDataForMultiSeries</b>()
+					
+					</div>
+					<div class="description">
+						Update the data and the categories for a multiseries graph. Example multiseries data:<pre>"categories": [{
+ "category": [{
+ "label": "LG"
+ },
+ {
+ "label": "GE"
+ }]
+ }],
+ "dataset": [{
+ "seriesname": "sales",
+ "data": [{
+ "value": 41
+ },
+ {
+ "value": 55
+ }]
+ },
+ {
+ "seriesname": "revenue",
+ "data": [{
+ "value": 22
+ },
+ {
+ "value": 34
+ }]
+ }]</pre>
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".updateDataForVisualizations"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">ARV.DataLoader.</span><b>updateDataForVisualizations</b>()
+					
+					</div>
+					<div class="description">
+						The function calls the update data method for all the types for the graph viz single series, multiseries,bubble chart.
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".updateDatasetArray"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">ARV.DataLoader.</span><b>updateDatasetArray</b>()
+					
+					</div>
+					<div class="description">
+						Updates the data set for a multiseries graph
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
 						
 						
 						

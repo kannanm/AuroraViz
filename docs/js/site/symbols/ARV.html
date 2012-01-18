@@ -189,6 +189,8 @@ ul.inheritsList {
 	
 	<li><a href="../symbols/ARV.Dashboard.html">ARV.Dashboard</a></li>
 	
+	<li><a href="../symbols/ARV.DataLoader.html">ARV.DataLoader</a></li>
+	
 	<li><a href="../symbols/ARV.Utility.html">ARV.Utility</a></li>
 	
 </ul>
@@ -287,16 +289,6 @@ ul.inheritsList {
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								ARV.<b><a href="../symbols/ARV.html#.dataJSON">dataJSON</a></b>
-								</div>
-								<div class="description">The original data</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
 								ARV.<b><a href="../symbols/ARV.html#.defaultCategories">defaultCategories</a></b>
 								</div>
 								<div class="description">Categories for multiseries graph</div>
@@ -320,16 +312,6 @@ ul.inheritsList {
 								ARV.<b><a href="../symbols/ARV.html#.defaultDataSet">defaultDataSet</a></b>
 								</div>
 								<div class="description">The data set for multiseries graph</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								ARV.<b><a href="../symbols/ARV.html#.filteredData">filteredData</a></b>
-								</div>
-								<div class="description">The filtered data</div>
 							</td>
 						</tr>
 					
@@ -451,15 +433,6 @@ ul.inheritsList {
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.<b><a href="../symbols/ARV.html#.createDataForTable">createDataForTable</a></b>()
-								</div>
-								<div class="description">Populate the <tt>ARV.TableData</tt> and <tt>ARV.TableColumns</tt> from the filtered data<tt>ARV.TableData</tt> and <tt>ARV.TableColumns</tt> will be used to create the SlickGriddatatable</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
 								<div class="fixedFont">ARV.<b><a href="../symbols/ARV.html#.createRangeSlider">createRangeSlider</a></b>(id, min, max, measureFeild)
 								</div>
 								<div class="description">Create range slider for the measure fields</div>
@@ -505,15 +478,6 @@ ul.inheritsList {
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.<b><a href="../symbols/ARV.html#.getDataArrayForSeries">getDataArrayForSeries</a></b>(seriesname)
-								</div>
-								<div class="description">Returns the data for the <tt>seriesname</tt></div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
 								<div class="fixedFont">ARV.<b><a href="../symbols/ARV.html#.getGraphType">getGraphType</a></b>()
 								</div>
 								<div class="description">The function returns the graph type selected</div>
@@ -525,7 +489,7 @@ ul.inheritsList {
 							<td class="nameDescription">
 								<div class="fixedFont">ARV.<b><a href="../symbols/ARV.html#.getMaxOfMeasureField">getMaxOfMeasureField</a></b>(measureField)
 								</div>
-								<div class="description">Finds the maximum value of the <tt>measureField</tt> from <tt>ARV.filteredData.data</tt></div>
+								<div class="description">Finds the maximum value of the <tt>measureField</tt> from <tt>ARV.DataLoader.filteredData.data</tt></div>
 							</td>
 						</tr>
 					
@@ -543,7 +507,7 @@ ul.inheritsList {
 							<td class="nameDescription">
 								<div class="fixedFont">ARV.<b><a href="../symbols/ARV.html#.getMinOfMeasureField">getMinOfMeasureField</a></b>(measureField)
 								</div>
-								<div class="description">Finds the minimum value of the <tt>measureField</tt> from <tt>ARV.filteredData.data</tt></div>
+								<div class="description">Finds the minimum value of the <tt>measureField</tt> from <tt>ARV.DataLoader.filteredData.data</tt></div>
 							</td>
 						</tr>
 					
@@ -568,15 +532,6 @@ ul.inheritsList {
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.<b><a href="../symbols/ARV.html#.modifyDataForSingleSeries">modifyDataForSingleSeries</a></b>()
-								</div>
-								<div class="description">Update the data for the single series graph.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
 								<div class="fixedFont">ARV.<b><a href="../symbols/ARV.html#.modifyJSON">modifyJSON</a></b>(div)
 								</div>
 								<div class="description">This function updates the JSON for the graph whenever the user makes changes on the front endthis function is called.</div>
@@ -589,15 +544,6 @@ ul.inheritsList {
 								<div class="fixedFont">ARV.<b><a href="../symbols/ARV.html#.performActionsBasedOnChart">performActionsBasedOnChart</a></b>(chartType)
 								</div>
 								<div class="description"></div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">ARV.<b><a href="../symbols/ARV.html#.populateSingleSelectForMap">populateSingleSelectForMap</a></b>(div)
-								</div>
-								<div class="description">Populate the select dom element for the map view.</div>
 							</td>
 						</tr>
 					
@@ -670,60 +616,6 @@ ul.inheritsList {
 								<div class="fixedFont">ARV.<b><a href="../symbols/ARV.html#.toggleParameters">toggleParameters</a></b>(isMap)
 								</div>
 								<div class="description">The function display/hides the category/measure axis divs according to the chart type selected</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">ARV.<b><a href="../symbols/ARV.html#.updateCategoryArray">updateCategoryArray</a></b>()
-								</div>
-								<div class="description">Update the categories array for a multiseries graph</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">ARV.<b><a href="../symbols/ARV.html#.updateDataForBubbleChart">updateDataForBubbleChart</a></b>()
-								</div>
-								<div class="description">Updates the data for the bubble chart.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">ARV.<b><a href="../symbols/ARV.html#.updateDataForMap">updateDataForMap</a></b>()
-								</div>
-								<div class="description">Updates the data for the map.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">ARV.<b><a href="../symbols/ARV.html#.updateDataForMultiSeries">updateDataForMultiSeries</a></b>()
-								</div>
-								<div class="description">Update the data and the categories for a multiseries graph.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">ARV.<b><a href="../symbols/ARV.html#.updateDataForVisualizations">updateDataForVisualizations</a></b>()
-								</div>
-								<div class="description">The function calls the update data method for all the types for the graph viz single series, multiseries,bubble chart.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">ARV.<b><a href="../symbols/ARV.html#.updateDatasetArray">updateDatasetArray</a></b>()
-								</div>
-								<div class="description">Updates the data set for a multiseries graph</div>
 							</td>
 						</tr>
 					
@@ -883,31 +775,6 @@ ul.inheritsList {
 
 					<hr />
 				
-					<a name=".dataJSON"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">ARV.</span><b>dataJSON</b>
-					
-					</div>
-					<div class="description">
-						The original data
-						
-							<br />
-							<i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_site_js_dataLoader.js.html">dataLoader.js</a>.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
 					<a name=".defaultCategories"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
@@ -961,31 +828,6 @@ ul.inheritsList {
 					</div>
 					<div class="description">
 						The data set for multiseries graph
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".filteredData"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">ARV.</span><b>filteredData</b>
-					
-					</div>
-					<div class="description">
-						The filtered data
-						
-							<br />
-							<i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_site_js_dataLoader.js.html">dataLoader.js</a>.
 						
 						
 					</div>
@@ -1294,34 +1136,6 @@ ul.inheritsList {
 
 					<hr />
 				
-					<a name=".createDataForTable"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">ARV.</span><b>createDataForTable</b>()
-					
-					</div>
-					<div class="description">
-						Populate the <tt>ARV.TableData</tt> and <tt>ARV.TableColumns</tt> from the filtered data<tt>ARV.TableData</tt> and <tt>ARV.TableColumns</tt> will be used to create the SlickGriddatatable
-						
-							<br />
-							<i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_site_js_dataLoader.js.html">dataLoader.js</a>.
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
 					<a name=".createRangeSlider"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
@@ -1542,52 +1356,6 @@ ul.inheritsList {
 
 					<hr />
 				
-					<a name=".getDataArrayForSeries"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">ARV.</span><b>getDataArrayForSeries</b>(seriesname)
-					
-					</div>
-					<div class="description">
-						Returns the data for the <tt>seriesname</tt>
-						
-							<br />
-							<i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_site_js_dataLoader.js.html">dataLoader.js</a>.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>seriesname</b>
-									
-								</dt>
-								<dd>{String}</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd>The data array for the <tt>seriesname</tt></dd>
-							
-							</dl>
-						
-						
-						
-
-					<hr />
-				
 					<a name=".getGraphType"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
@@ -1631,7 +1399,7 @@ ul.inheritsList {
 					
 					</div>
 					<div class="description">
-						Finds the maximum value of the <tt>measureField</tt> from <tt>ARV.filteredData.data</tt>
+						Finds the maximum value of the <tt>measureField</tt> from <tt>ARV.DataLoader.filteredData.data</tt>
 						
 							<br />
 							<i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_site_js_filter.js.html">filter.js</a>.
@@ -1723,7 +1491,7 @@ ul.inheritsList {
 					
 					</div>
 					<div class="description">
-						Finds the minimum value of the <tt>measureField</tt> from <tt>ARV.filteredData.data</tt>
+						Finds the minimum value of the <tt>measureField</tt> from <tt>ARV.DataLoader.filteredData.data</tt>
 						
 							<br />
 							<i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_site_js_filter.js.html">filter.js</a>.
@@ -1824,42 +1592,6 @@ ul.inheritsList {
 
 					<hr />
 				
-					<a name=".modifyDataForSingleSeries"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">ARV.</span><b>modifyDataForSingleSeries</b>()
-					
-					</div>
-					<div class="description">
-						Update the data for the single series graph. Example data format for single series graph:<pre>"data": [{
- "value": 22,
- "label": "LG"
- },
- {
- "value": 12,
- "label": "Samsung"
- }
- ]</pre>
-						
-							<br />
-							<i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_site_js_dataLoader.js.html">dataLoader.js</a>.
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
 					<a name=".modifyJSON"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
@@ -1926,45 +1658,6 @@ ul.inheritsList {
 									
 								</dt>
 								<dd></dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".populateSingleSelectForMap"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">ARV.</span><b>populateSingleSelectForMap</b>(div)
-					
-					</div>
-					<div class="description">
-						Populate the select dom element for the map view.
-						
-							<br />
-							<i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_site_js_dataLoader.js.html">dataLoader.js</a>.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>div</b>
-									
-								</dt>
-								<dd>The id of the dom element</dd>
 							
 							</dl>
 						
@@ -2257,223 +1950,6 @@ ul.inheritsList {
 
 					<hr />
 				
-					<a name=".updateCategoryArray"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">ARV.</span><b>updateCategoryArray</b>()
-					
-					</div>
-					<div class="description">
-						Update the categories array for a multiseries graph
-						
-							<br />
-							<i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_site_js_dataLoader.js.html">dataLoader.js</a>.
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".updateDataForBubbleChart"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">ARV.</span><b>updateDataForBubbleChart</b>()
-					
-					</div>
-					<div class="description">
-						Updates the data for the bubble chart. Example data format for the bubble chart:<pre> "data": [{
- "x": 41,
- "y": 22,
- "z": 10,
- "label": "LG"
- },
- {
- "x": 24,
- "y": 12,
- "z": 20,
- "label": "Samsung"
- }
- ]</pre>
-						
-							<br />
-							<i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_site_js_dataLoader.js.html">dataLoader.js</a>.
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".updateDataForMap"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">ARV.</span><b>updateDataForMap</b>()
-					
-					</div>
-					<div class="description">
-						Updates the data for the map. Takes the latitude, longitude,size and category measuresand creates a JSON for the map.e.g. JSON for map <pre>"data": [{
- "lat": 22,
- "lon": 22,
- "size": 10,
- "category": "LG"
- },
- {
- "lat": 12,
- "lon": 12,
- "size": 20,
- "category": "Samsung"
- }
- ]</pre>
-						
-							<br />
-							<i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_site_js_dataLoader.js.html">dataLoader.js</a>.
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".updateDataForMultiSeries"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">ARV.</span><b>updateDataForMultiSeries</b>()
-					
-					</div>
-					<div class="description">
-						Update the data and the categories for a multiseries graph. Example multiseries data:<pre>"categories": [{
- "category": [{
- "label": "LG"
- },
- {
- "label": "GE"
- }]
- }],
- "dataset": [{
- "seriesname": "sales",
- "data": [{
- "value": 41
- },
- {
- "value": 55
- }]
- },
- {
- "seriesname": "revenue",
- "data": [{
- "value": 22
- },
- {
- "value": 34
- }]
- }]</pre>
-						
-							<br />
-							<i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_site_js_dataLoader.js.html">dataLoader.js</a>.
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".updateDataForVisualizations"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">ARV.</span><b>updateDataForVisualizations</b>()
-					
-					</div>
-					<div class="description">
-						The function calls the update data method for all the types for the graph viz single series, multiseries,bubble chart.
-						
-							<br />
-							<i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_site_js_dataLoader.js.html">dataLoader.js</a>.
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".updateDatasetArray"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">ARV.</span><b>updateDatasetArray</b>()
-					
-					</div>
-					<div class="description">
-						Updates the data set for a multiseries graph
-						
-							<br />
-							<i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_site_js_dataLoader.js.html">dataLoader.js</a>.
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
 					<a name=".updateGraphProperties"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
@@ -2626,7 +2102,7 @@ ul.inheritsList {
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Wed Jan 18 2012 17:17:11 GMT+0530 (IST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Wed Jan 18 2012 17:34:42 GMT+0530 (IST)
 		</div>
 	</body>
 </html>

@@ -1,8 +1,16 @@
 //TODO create data that is original and create filtered data
+
+/**
+ * @Description The top-level dataloader namespace.
+ * @namespace The top-level dataloader namespace, <tt>ARV.DataLoader</tt>. All
+ *            the functions related preparing the data for the aurora source in the particular
+ *            format are here.
+ */
+ARV.DataLoader = {};
 /**
  * The original data
  */
-ARV.dataJSON = {
+ARV.DataLoader.dataJSON = {
     id: "4ed630d8ed9be9723687620d",
     columns: [
         {
@@ -49,7 +57,7 @@ ARV.dataJSON = {
         profit: 25}
     ]
 };
-ARV.editableGridOptions = {
+ARV.DataLoader.editableGridOptions = {
     editable: true,
     enableAddRow: true,
     enableCellNavigation: true,
@@ -58,7 +66,7 @@ ARV.editableGridOptions = {
     autoEdit: false,
     autoHeight: true
 };
-ARV.gridOptions = {
+ARV.DataLoader.gridOptions = {
     enableCellNavigation: true,
     enableColumnReorder: true,
     autoHeight: true,
@@ -66,24 +74,26 @@ ARV.gridOptions = {
 };
 
 /**
- * Populate the <tt>ARV.TableData</tt> and <tt>ARV.TableColumns</tt> from the filtered data
- * <tt>ARV.TableData</tt> and <tt>ARV.TableColumns</tt> will be used to create the SlickGrid
+ * Populate the <tt>ARV.DataLoader.TableData</tt> and <tt>ARV.DataLoader.TableColumns</tt> from the filtered data
+ * <tt>ARV.DataLoader.TableData</tt> and <tt>ARV.DataLoader.TableColumns</tt> will be used to create the SlickGrid
  * datatable
  */
-ARV.createDataForTable = function() {
-    var i, label;
+ARV.DataLoader.createDataForTable = function() {
+    var i, 
+    	label,
+    	dataLoadNS = ARV.DataLoader;
     var categoryLabel = $("#categoryAxisList option:selected").val();
     var measureLabels = $("#measureAxisList option:selected");
-    var columns = ARV.filteredData.columns;
-    ARV.TableColumns = [];
-    ARV.TableData = [];
-    for (i = 0; i < ARV.filteredData.data.length; i++) {
-        ARV.TableData.push(ARV.filteredData.data[i]);
+    var columns = dataLoadNS.filteredData.columns;
+    dataLoadNS.TableColumns = [];
+    dataLoadNS.TableData = [];
+    for (i = 0; i < dataLoadNS.filteredData.data.length; i++) {
+        dataLoadNS.TableData.push(dataLoadNS.filteredData.data[i]);
     }
-    ARV.TableColumns.push(jlinq.from(columns).equals("field", categoryLabel).select()[0]);
+    dataLoadNS.TableColumns.push(jlinq.from(columns).equals("field", categoryLabel).select()[0]);
     for (i = 0; i < measureLabels.length; i++) {
         label = $(measureLabels[i]).val();
-        ARV.TableColumns.push(jlinq.from(columns).equals("field", label).select()[0]);
+        dataLoadNS.TableColumns.push(jlinq.from(columns).equals("field", label).select()[0]);
     }
 };
 
@@ -92,8 +102,8 @@ ARV.createDataForTable = function() {
  * Populate the select dom element for the map view.
  * @param div The id of the dom element
  */
-ARV.populateSingleSelectForMap = function(div) {
-    var columns = ARV.dataJSON.columns;
+ARV.DataLoader.populateSingleSelectForMap = function(div) {
+    var columns = ARV.DataLoader.dataJSON.columns;
     if ($("#" + div).is(".select-deselect")) {
         option = $('<option />').val("");
         $("#" + div).append(option);
@@ -111,10 +121,10 @@ ARV.populateSingleSelectForMap = function(div) {
     }
 
 };
-ARV.populateSingleSelectForMap("categoryListForMap");
-ARV.populateSingleSelectForMap("latitudeForMap");
-ARV.populateSingleSelectForMap("longitudeForMap");
-ARV.populateSingleSelectForMap("sizeForMap");
+ARV.DataLoader.populateSingleSelectForMap("categoryListForMap");
+ARV.DataLoader.populateSingleSelectForMap("latitudeForMap");
+ARV.DataLoader.populateSingleSelectForMap("longitudeForMap");
+ARV.DataLoader.populateSingleSelectForMap("sizeForMap");
 
 
 /**
@@ -129,12 +139,12 @@ ARV.populateSingleSelectForMap("sizeForMap");
  }
  ]</pre>
  */
-ARV.modifyDataForSingleSeries = function() {
+ARV.DataLoader.modifyDataForSingleSeries = function() {
     var dataArr = [];
     var selected = $("#measureAxisList option:selected");
     var field = $(selected[0]).val();
     labelField = $("#categoryAxisList option:selected").val();
-    var data = ARV.filteredData.data;
+    var data = ARV.DataLoader.filteredData.data;
     for (i = 0; i < data.length; i++) {
         var dataElement = data[i];
         var value = parseInt(dataElement[field], 10);
@@ -154,13 +164,13 @@ ARV.modifyDataForSingleSeries = function() {
 /**
  * Update the categories array for a multiseries graph
  */
-ARV.updateCategoryArray = function() {
+ARV.DataLoader.updateCategoryArray = function() {
     ARV.defaultCategories[0].category = [];
     var labelField = $("#categoryAxisList option:selected").val();
     var obj = {};
     var i = 0;
-    for (i = 0; i < ARV.filteredData.data.length; i++) {
-        var dataElement = ARV.filteredData.data[i];
+    for (i = 0; i < ARV.DataLoader.filteredData.data.length; i++) {
+        var dataElement = ARV.DataLoader.filteredData.data[i];
         category = dataElement[labelField];
         obj = {
             label: category
@@ -173,12 +183,12 @@ ARV.updateCategoryArray = function() {
  * @param seriesname {String}
  * @returns The data array for the <tt>seriesname</tt>
  */
-ARV.getDataArrayForSeries = function(seriesname) {
+ARV.DataLoader.getDataArrayForSeries = function(seriesname) {
     var dataArr = [];
     var obj = {};
     var index = 0;
-    for (index = 0; index < ARV.filteredData.data.length; index++) {
-        var dataElement = ARV.filteredData.data[index];
+    for (index = 0; index < ARV.DataLoader.filteredData.data.length; index++) {
+        var dataElement = ARV.DataLoader.filteredData.data[index];
         var value = parseInt(dataElement[seriesname], 10);
         if (isNaN(value)) {
             $("#dialog-illegal-data").dialog("open");
@@ -194,7 +204,7 @@ ARV.getDataArrayForSeries = function(seriesname) {
 /**
  * Updates the data set for a multiseries graph
  */
-ARV.updateDatasetArray = function() {
+ARV.DataLoader.updateDatasetArray = function() {
     var dataSet = [];
     var obj = {},
         seriesname;
@@ -202,7 +212,7 @@ ARV.updateDatasetArray = function() {
     var index = 0;
     for (index = 0; index < selected.length; index++) {
         seriesname = $(selected[index]).val();
-        var data = ARV.getDataArrayForSeries(seriesname);
+        var data = ARV.DataLoader.getDataArrayForSeries(seriesname);
         if (!data) {
             return;
         }
@@ -246,9 +256,9 @@ ARV.updateDatasetArray = function() {
  }]
  * </pre>
  */
-ARV.updateDataForMultiSeries = function() {
-    ARV.updateCategoryArray();
-    ARV.updateDatasetArray();
+ARV.DataLoader.updateDataForMultiSeries = function() {
+    ARV.DataLoader.updateCategoryArray();
+    ARV.DataLoader.updateDatasetArray();
 };
 
 /**
@@ -267,7 +277,7 @@ ARV.updateDataForMultiSeries = function() {
  }
  ]</pre>
  */
-ARV.updateDataForBubbleChart = function() {
+ARV.DataLoader.updateDataForBubbleChart = function() {
     var dataArr = [],
         obj = {},
         index = 0,
@@ -277,8 +287,8 @@ ARV.updateDataForBubbleChart = function() {
         z = $(selected[2]).val(),
         labelField = $("#categoryAxisList option:selected").val();
 
-    for (index = 0; index < ARV.filteredData.data.length; index++) {
-        dataItem = ARV.filteredData.data[index];
+    for (index = 0; index < ARV.DataLoader.filteredData.data.length; index++) {
+        dataItem = ARV.DataLoader.filteredData.data[index];
         xValue = parseInt(dataItem[x], 10);
         yValue = parseInt(dataItem[y], 10);
         zValue = parseInt(dataItem[z], 10);
@@ -314,7 +324,7 @@ ARV.updateDataForBubbleChart = function() {
  }
  ]</pre>
  */
-ARV.updateDataForMap = function() {
+ARV.DataLoader.updateDataForMap = function() {
     var dataArr = [],
         obj = {},
         index = 0,
@@ -322,8 +332,8 @@ ARV.updateDataForMap = function() {
         long = $("#longitudeForMap option:selected").val(),
         size = $("#sizeForMap option:selected").val(),
         category = $("#categoryListForMap option:selected").val();
-    for (index = 0; index < ARV.filteredData.data.length; index++) {
-        dataItem = ARV.filteredData.data[index];
+    for (index = 0; index < ARV.DataLoader.filteredData.data.length; index++) {
+        dataItem = ARV.DataLoader.filteredData.data[index];
         latValue = parseInt(dataItem[lat], 10);
         longValue = parseInt(dataItem[long], 10);
         sizeValue = parseInt(dataItem[size] || 10, 10);
@@ -346,21 +356,22 @@ ARV.updateDataForMap = function() {
  * The function calls the update data method for all the types for the graph viz single series, multiseries,
  * bubble chart.
  */
-ARV.updateDataForVisualizations = function() {
-    if (ARV.filteredData.data.length === 0) {
+ARV.DataLoader.updateDataForVisualizations = function() {
+	var dataLoadNS = ARV.DataLoader;
+    if (dataLoadNS.filteredData.data.length === 0) {
         $("#chart").html("Select some fields to view data");
         return;
     }
     var noOfSelected = ARV.getNumberOfSelectedMeasureAxis();
     try {
         if (noOfSelected === 1) {
-            ARV.modifyDataForSingleSeries();
+            dataLoadNS.modifyDataForSingleSeries();
         }
         if (noOfSelected > 1) {
-            ARV.modifyDataForSingleSeries();
-            ARV.updateDataForMultiSeries();
+            dataLoadNS.modifyDataForSingleSeries();
+            dataLoadNS.updateDataForMultiSeries();
             if (noOfSelected === 3) {
-                ARV.updateDataForBubbleChart();
+                dataLoadNS.updateDataForBubbleChart();
             }
         }
     }
@@ -368,17 +379,18 @@ ARV.updateDataForVisualizations = function() {
         alert(e);
     }
     if ("Map" === $("#chartTypes option:selected").attr("value")) {
-        ARV.updateDataForMap();
+        dataLoadNS.updateDataForMap();
     }
-    ARV.createDataForTable();
+    dataLoadNS.createDataForTable();
     ARV.refreshTable();
     ARV.refreshGraph();
 };
 
 
 (function() {
-    var data = ARV.dataJSON.data;
-    var columns = ARV.dataJSON.columns;
+	var dataLoadNS = ARV.DataLoader;
+    var data = dataLoadNS.dataJSON.data;
+    var columns = dataLoadNS.dataJSON.columns;
     var i = 0;
     var option;
     for (i = 0; i < columns.length; i++) {
@@ -410,15 +422,15 @@ ARV.updateDataForVisualizations = function() {
 
 }());
 
-$("#categoryAxisList").chosen().change(ARV.updateDataForVisualizations);
-$("#measureAxisList").chosen().change(ARV.updateDataForVisualizations);
+$("#categoryAxisList").chosen().change(ARV.DataLoader.updateDataForVisualizations);
+$("#measureAxisList").chosen().change(ARV.DataLoader.updateDataForVisualizations);
 $("#dataUpdater").live("click", function() {
-    ARV.updateDataForVisualizations();
+    ARV.DataLoader.updateDataForVisualizations();
 });
 
 /**
  * The filtered data
  */
-ARV.filteredData = {};
+ARV.DataLoader.filteredData = {};
 //Deep copy the original data into the filtered data so that the original data does not change
-jQuery.extend(ARV.filteredData, ARV.dataJSON);
+jQuery.extend(ARV.DataLoader.filteredData, ARV.DataLoader.dataJSON);

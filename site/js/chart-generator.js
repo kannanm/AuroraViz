@@ -261,7 +261,7 @@ ARV.refreshTable = function() {
     table.append(title);
     table.append(div);
     $("#chart").append(table);
-    ARV.grid = new Slick.Grid("#tableCont", ARV.TableData, ARV.TableColumns, ARV.gridOptions);
+    ARV.grid = new Slick.Grid("#tableCont", ARV.DataLoader.TableData, ARV.DataLoader.TableColumns, ARV.DataLoader.gridOptions);
 };
 /**
  *

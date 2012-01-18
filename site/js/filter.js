@@ -14,7 +14,7 @@ ARV.addAllCategories = function(id){
 	$(categories).empty();
 	var i = 0;
 	var option;
-	var originalData = ARV.dataJSON.data;
+	var originalData = ARV.DataLoader.dataJSON.data;
 	for(i=0;i<originalData.length;i++){
 		 var dataItem = originalData[i];
 		 option = $('<option />').val(dataItem[selectedVal]).append(dataItem[selectedVal]).attr("selected", "selected");
@@ -86,9 +86,9 @@ ARV.getCategoryFilteredData = function(originalData){
  * Filter the data and update the data to show the visualization
  */
 ARV.filterData = function(){
-	var categoryFilteredData = ARV.getCategoryFilteredData(ARV.dataJSON.data);
-	ARV.filteredData.data = ARV.getMeasureFilteredData(categoryFilteredData);
-	ARV.updateDataForVisualizations();
+	var categoryFilteredData = ARV.getCategoryFilteredData(ARV.DataLoader.dataJSON.data);
+	ARV.DataLoader.filteredData.data = ARV.getMeasureFilteredData(categoryFilteredData);
+	ARV.DataLoader.updateDataForVisualizations();
 };
 
 $("#categoryValues").chosen().change(ARV.filterData);
@@ -130,21 +130,21 @@ ARV.createRangeSlider = function(id,min,max,measureFeild){
 };
 
 /**
- * Finds the minimum value of the <tt>measureField</tt> from <tt>ARV.filteredData.data</tt>
+ * Finds the minimum value of the <tt>measureField</tt> from <tt>ARV.DataLoader.filteredData.data</tt>
  * @param measureField {String} The measure field
  * @returns {Number} The minimum value of the <tt>measureField</tt>
  */
 ARV.getMinOfMeasureField = function(measureField){
-	var minValObj = jlinq.from(ARV.filteredData.data).min(measureField);
+	var minValObj = jlinq.from(ARV.DataLoader.filteredData.data).min(measureField);
 	return minValObj[measureField];
 };
 /**
- * Finds the maximum value of the <tt>measureField</tt> from <tt>ARV.filteredData.data</tt>
+ * Finds the maximum value of the <tt>measureField</tt> from <tt>ARV.DataLoader.filteredData.data</tt>
  * @param measureField {String} The measure field
  * @returns {Number} The maximum value of the <tt>measureField</tt>
  */
 ARV.getMaxOfMeasureField = function(measureField){
-	var minValObj = jlinq.from(ARV.filteredData.data).max(measureField);
+	var minValObj = jlinq.from(ARV.DataLoader.filteredData.data).max(measureField);
 	return minValObj[measureField];
 };
 
