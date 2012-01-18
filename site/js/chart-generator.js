@@ -1,3 +1,4 @@
+
 ARV.paletteColorCounter = 0;
 ARV.paletteChanged = false;
 
