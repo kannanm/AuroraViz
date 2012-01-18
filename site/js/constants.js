@@ -3,6 +3,7 @@
  * @namespace The top-level aurora visualisation namespace, <tt>ARV</tt>.
  */
 var ARV = {};
+
 /**
  * The functions returns an html string to populate chart specific options
  * 

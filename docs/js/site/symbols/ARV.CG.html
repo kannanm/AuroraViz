@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - ARV.Filter</title>
+		<title>JsDoc Reference - ARV.CG</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -206,7 +206,7 @@ ul.inheritsList {
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace ARV.Filter
+				Namespace ARV.CG
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -214,16 +214,16 @@ ul.inheritsList {
 				
 				
 			
-				The top-level filter namespace, <tt>ARV.Filter</tt>. All           the functions related to the filtering the data. The functions in the name space           provide category and measure filtering
+				The top-level chart generator namespace, <tt>ARV.CG</tt>. All           the functions and fields which are used in chart generation come under this namespace
 				
 				
-					<br /><i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_site_js_filter.js.html">filter.js</a>.
+					<br /><i>Defined in: </i> <a href="../symbols/src/D__personal_aurora-viz_site_js_chart-generator.js.html">chart-generator.js</a>.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class ARV.Filter.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class ARV.CG.">
 				<caption>Namespace Summary</caption>
 				<thead>
 					<tr>
@@ -236,9 +236,9 @@ ul.inheritsList {
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/ARV.Filter.html#constructor">ARV.Filter</a></b>
+								<b><a href="../symbols/ARV.CG.html#constructor">ARV.CG</a></b>
 							</div>
-							<div class="description">The top-level filter namespace.</div>
+							<div class="description">The top-level chart generator namespace.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -249,7 +249,7 @@ ul.inheritsList {
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class ARV.Filter.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class ARV.CG.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -263,9 +263,19 @@ ul.inheritsList {
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								ARV.Filter.<b><a href="../symbols/ARV.Filter.html#.selectedMeasureAxis">selectedMeasureAxis</a></b>
+								ARV.CG.<b><a href="../symbols/ARV.CG.html#.paletteChanged">paletteChanged</a></b>
 								</div>
-								<div class="description">An array that holds all the selected measure axis names</div>
+								<div class="description">true if the preset palette has been changed, false otherwise</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								ARV.CG.<b><a href="../symbols/ARV.CG.html#.paletteColorCounter">paletteColorCounter</a></b>
+								</div>
+								<div class="description">Counter for the number of palette Colors on the palette tab</div>
 							</td>
 						</tr>
 					
@@ -280,7 +290,7 @@ ul.inheritsList {
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class ARV.Filter.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class ARV.CG.">
 					<caption>Method Summary</caption>
 					<thead>
 						<tr>
@@ -293,126 +303,144 @@ ul.inheritsList {
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.Filter.<b><a href="../symbols/ARV.Filter.html#.addAllCategories">addAllCategories</a></b>(id)
+								<div class="fixedFont">ARV.CG.<b><a href="../symbols/ARV.CG.html#.addColorsDiv">addColorsDiv</a></b>()
 								</div>
-								<div class="description">Populates the category filter with all the category values of the selected category axis</div>
+								<div class="description">Adds the colors to the according to the palette chosen to the palette tab.</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.Filter.<b><a href="../symbols/ARV.Filter.html#.addMeasureFilters">addMeasureFilters</a></b>()
+								<div class="fixedFont">ARV.CG.<b><a href="../symbols/ARV.CG.html#.addEventListeners">addEventListeners</a></b>()
 								</div>
-								<div class="description">Creates the measure filteres according to the measure axis selected</div>
+								<div class="description">The function adds event listeners to the different dom objects</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.Filter.<b><a href="../symbols/ARV.Filter.html#.checkThenPush">checkThenPush</a></b>(arr, val)
+								<div class="fixedFont">ARV.CG.<b><a href="../symbols/ARV.CG.html#.checkPaletteChanged">checkPaletteChanged</a></b>()
 								</div>
-								<div class="description">Check if the <tt>val</tt> is defined and push in <tt>arr</tt></div>
+								<div class="description">The function checks if the palette has changed and if the palette has changed, it createsan array of colors and sets it in <tt>graphDef</tt></div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.Filter.<b><a href="../symbols/ARV.Filter.html#.createRangeSlider">createRangeSlider</a></b>(id, min, max, measureFeild)
+								<div class="fixedFont">ARV.CG.<b><a href="../symbols/ARV.CG.html#.getData">getData</a></b>(chartType)
 								</div>
-								<div class="description">Create range slider for the measure fields</div>
+								<div class="description">Creates the JSON <tt>graphDef</tt> for the chart.</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.Filter.<b><a href="../symbols/ARV.Filter.html#.filterData">filterData</a></b>()
+								<div class="fixedFont">ARV.CG.<b><a href="../symbols/ARV.CG.html#.getGraphType">getGraphType</a></b>()
 								</div>
-								<div class="description">Filter the data and update the data to show the visualization</div>
+								<div class="description">The function returns the graph type selected</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.Filter.<b><a href="../symbols/ARV.Filter.html#.getCategoryFilteredData">getCategoryFilteredData</a></b>(originalData)
+								<div class="fixedFont">ARV.CG.<b><a href="../symbols/ARV.CG.html#.getNumberOfSelectedMeasureAxis">getNumberOfSelectedMeasureAxis</a></b>()
 								</div>
-								<div class="description">Calculate and return the data filtered after applying filters based selected category filter values</div>
+								<div class="description">The function returns the number of measure axis</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.Filter.<b><a href="../symbols/ARV.Filter.html#.getMaxOfMeasureField">getMaxOfMeasureField</a></b>(measureField)
+								<div class="fixedFont">ARV.CG.<b><a href="../symbols/ARV.CG.html#.initChartGenerator">initChartGenerator</a></b>()
 								</div>
-								<div class="description">Finds the maximum value of the <tt>measureField</tt> from <tt>ARV.DataLoader.filteredData.data</tt></div>
+								<div class="description">The initialize function of the chart generator.</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.Filter.<b><a href="../symbols/ARV.Filter.html#.getMeasureFilteredData">getMeasureFilteredData</a></b>(originalData)
+								<div class="fixedFont">ARV.CG.<b><a href="../symbols/ARV.CG.html#.modifyJSON">modifyJSON</a></b>(div)
 								</div>
-								<div class="description">Calculate and return the data filtered after applying filters based selected measure filter values</div>
+								<div class="description">This function updates the JSON for the graph whenever the user makes changes on the front endthis function is called.</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.Filter.<b><a href="../symbols/ARV.Filter.html#.getMinOfMeasureField">getMinOfMeasureField</a></b>(measureField)
+								<div class="fixedFont">ARV.CG.<b><a href="../symbols/ARV.CG.html#.performActionsBasedOnChart">performActionsBasedOnChart</a></b>(chartType)
 								</div>
-								<div class="description">Finds the minimum value of the <tt>measureField</tt> from <tt>ARV.DataLoader.filteredData.data</tt></div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.Filter.<b><a href="../symbols/ARV.Filter.html#.setAllDeselected">setAllDeselected</a></b>(elem)
+								<div class="fixedFont">ARV.CG.<b><a href="../symbols/ARV.CG.html#.refreshGraph">refreshGraph</a></b>()
 								</div>
-								<div class="description">Remove the attribute "selected" for the select input element <tt>elem</tt> i.e deselect all the options</div>
+								<div class="description"></div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.Filter.<b><a href="../symbols/ARV.Filter.html#.setAllSelected">setAllSelected</a></b>(elem)
+								<div class="fixedFont">ARV.CG.<b><a href="../symbols/ARV.CG.html#.refreshTable">refreshTable</a></b>()
 								</div>
-								<div class="description">Set the value attribute "selected" equal to "selected" for the input element <tt>elem</tt></div>
+								<div class="description">When the options are changed and the chart type selected is a table, then the function is calledCreates the slick grid table with the changed options</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.Filter.<b><a href="../symbols/ARV.Filter.html#.updateMeasureFiltersForMap">updateMeasureFiltersForMap</a></b>()
+								<div class="fixedFont">ARV.CG.<b><a href="../symbols/ARV.CG.html#.reset">reset</a></b>()
 								</div>
-								<div class="description">Update the measure filters for map</div>
+								<div class="description">The function clears the cahrt area and the "dataDiv" and removes all the "tipsy" elementsIt also unloads the google map chart if it has been loaded</div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.Filter.<b><a href="../symbols/ARV.Filter.html#.updateSelectedMeasureAxisForMap">updateSelectedMeasureAxisForMap</a></b>()
+								<div class="fixedFont">ARV.CG.<b><a href="../symbols/ARV.CG.html#.showGraph">showGraph</a></b>(graphType, div, graphDef)
 								</div>
-								<div class="description">Update the selected measure axis</div>
+								<div class="description">The function creates an instance of the <tt>graphType</tt> and renders it to the <tt>div</tt></div>
 							</td>
 						</tr>
 					
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">ARV.Filter.<b><a href="../symbols/ARV.Filter.html#.updateSeletectedMeasureAxis">updateSeletectedMeasureAxis</a></b>()
+								<div class="fixedFont">ARV.CG.<b><a href="../symbols/ARV.CG.html#.toggleParameters">toggleParameters</a></b>(isMap)
 								</div>
-								<div class="description">The function is called when measure axis is changed.It changes <tt>ARV.Filter.selectedMeasureAxis</tt></div>
+								<div class="description">The function display/hides the category/measure axis divs according to the chart type selected</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">ARV.CG.<b><a href="../symbols/ARV.CG.html#.updateGraphProperties">updateGraphProperties</a></b>()
+								</div>
+								<div class="description">The function sets the properties of chart in the graphDef</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">ARV.CG.<b><a href="../symbols/ARV.CG.html#.updateStyleProperties">updateStyleProperties</a></b>()
+								</div>
+								<div class="description">The function gets the style property value from the front end and sets these style properties in graphDef</div>
 							</td>
 						</tr>
 					
@@ -433,11 +461,11 @@ ul.inheritsList {
 				</div>
 				
 				<div class="fixedFont">
-						<b>ARV.Filter</b>
+						<b>ARV.CG</b>
 				</div>
 				
 				<div class="description">
-					The top-level filter namespace.
+					The top-level chart generator namespace.
 					
 				</div>
 				
@@ -461,15 +489,37 @@ ul.inheritsList {
 					Field Detail
 				</div>
 				
-					<a name=".selectedMeasureAxis"> </a>
+					<a name=".paletteChanged"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">ARV.Filter.</span><b>selectedMeasureAxis</b>
+					<span class="light">ARV.CG.</span><b>paletteChanged</b>
 					
 					</div>
 					<div class="description">
-						An array that holds all the selected measure axis names
+						true if the preset palette has been changed, false otherwise
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".paletteColorCounter"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">ARV.CG.</span><b>paletteColorCounter</b>
+					
+					</div>
+					<div class="description">
+						Counter for the number of palette Colors on the palette tab
 						
 						
 					</div>
@@ -491,51 +541,15 @@ ul.inheritsList {
 					Method Detail
 				</div>
 				
-					<a name=".addAllCategories"> </a>
+					<a name=".addColorsDiv"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">ARV.Filter.</span><b>addAllCategories</b>(id)
+					<span class="light">ARV.CG.</span><b>addColorsDiv</b>()
 					
 					</div>
 					<div class="description">
-						Populates the category filter with all the category values of the selected category axis
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{String}</span> <b>id</b>
-									
-								</dt>
-								<dd>the id of the category dom element from where the selected category axis is to be taken</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".addMeasureFilters"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">ARV.Filter.</span><b>addMeasureFilters</b>()
-					
-					</div>
-					<div class="description">
-						Creates the measure filteres according to the measure axis selected
+						Adds the colors to the according to the palette chosen to the palette tab. The user canadd or remove colors from the palette
 						
 						
 					</div>
@@ -552,111 +566,15 @@ ul.inheritsList {
 
 					<hr />
 				
-					<a name=".checkThenPush"> </a>
+					<a name=".addEventListeners"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">ARV.Filter.</span><b>checkThenPush</b>(arr, val)
+					<span class="light">ARV.CG.</span><b>addEventListeners</b>()
 					
 					</div>
 					<div class="description">
-						Check if the <tt>val</tt> is defined and push in <tt>arr</tt>
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>arr</b>
-									
-								</dt>
-								<dd>{Array} The array in which the <tt>val</tt> is to be pushed</dd>
-							
-								<dt>
-									<b>val</b>
-									
-								</dt>
-								<dd>{Number} The value to be pushed</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".createRangeSlider"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">ARV.Filter.</span><b>createRangeSlider</b>(id, min, max, measureFeild)
-					
-					</div>
-					<div class="description">
-						Create range slider for the measure fields
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>id</b>
-									
-								</dt>
-								<dd>{Number} random id is created to append to the slider dom element id. Thus the id of the slider would be <tt>id</tt>+"Slider"</dd>
-							
-								<dt>
-									<b>min</b>
-									
-								</dt>
-								<dd>{Number} The min value of the measure field</dd>
-							
-								<dt>
-									<b>max</b>
-									
-								</dt>
-								<dd>{Number} The max value of the measure field</dd>
-							
-								<dt>
-									<b>measureFeild</b>
-									
-								</dt>
-								<dd>{String} The measure field</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".filterData"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">ARV.Filter.</span><b>filterData</b>()
-					
-					</div>
-					<div class="description">
-						Filter the data and update the data to show the visualization
+						The function adds event listeners to the different dom objects
 						
 						
 					</div>
@@ -673,15 +591,40 @@ ul.inheritsList {
 
 					<hr />
 				
-					<a name=".getCategoryFilteredData"> </a>
+					<a name=".checkPaletteChanged"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">ARV.CG.</span><b>checkPaletteChanged</b>()
+					
+					</div>
+					<div class="description">
+						The function checks if the palette has changed and if the palette has changed, it createsan array of colors and sets it in <tt>graphDef</tt>
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".getData"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					<span class="light">{Object}</span>
-					<span class="light">ARV.Filter.</span><b>getCategoryFilteredData</b>(originalData)
+					<span class="light">ARV.CG.</span><b>getData</b>(chartType)
 					
 					</div>
 					<div class="description">
-						Calculate and return the data filtered after applying filters based selected category filter values
+						Creates the JSON <tt>graphDef</tt> for the chart. The aurora source uses<tt>graphDef</tt> to generate chart
 						
 						
 					</div>
@@ -693,10 +636,10 @@ ul.inheritsList {
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>originalData</b>
+									<b>chartType</b>
 									
 								</dt>
-								<dd>{Object} The data to be filtered</dd>
+								<dd></dd>
 							
 							</dl>
 						
@@ -707,7 +650,7 @@ ul.inheritsList {
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{Object}</span> The filtered data</dd>
+								<dd><span class="light fixedFont">{Object}</span> graphDef</dd>
 							
 							</dl>
 						
@@ -716,32 +659,53 @@ ul.inheritsList {
 
 					<hr />
 				
-					<a name=".getMaxOfMeasureField"> </a>
+					<a name=".getGraphType"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{String}</span>
+					<span class="light">ARV.CG.</span><b>getGraphType</b>()
+					
+					</div>
+					<div class="description">
+						The function returns the graph type selected
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{String}</span> The graph type</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".getNumberOfSelectedMeasureAxis"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					<span class="light">{Number}</span>
-					<span class="light">ARV.Filter.</span><b>getMaxOfMeasureField</b>(measureField)
+					<span class="light">ARV.CG.</span><b>getNumberOfSelectedMeasureAxis</b>()
 					
 					</div>
 					<div class="description">
-						Finds the maximum value of the <tt>measureField</tt> from <tt>ARV.DataLoader.filteredData.data</tt>
+						The function returns the number of measure axis
 						
 						
 					</div>
 					
 					
 					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>measureField</b>
-									
-								</dt>
-								<dd>{String} The measure field</dd>
-							
-							</dl>
 						
 						
 						
@@ -750,7 +714,7 @@ ul.inheritsList {
 							<dl class="detailList">
 							<dt class="heading">Returns:</dt>
 							
-								<dd><span class="light fixedFont">{Number}</span> The maximum value of the <tt>measureField</tt></dd>
+								<dd><span class="light fixedFont">{Number}</span> The number of selected measure axis</dd>
 							
 							</dl>
 						
@@ -759,15 +723,40 @@ ul.inheritsList {
 
 					<hr />
 				
-					<a name=".getMeasureFilteredData"> </a>
+					<a name=".initChartGenerator"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
-					<span class="light">{Object}</span>
-					<span class="light">ARV.Filter.</span><b>getMeasureFilteredData</b>(originalData)
+					
+					<span class="light">ARV.CG.</span><b>initChartGenerator</b>()
 					
 					</div>
 					<div class="description">
-						Calculate and return the data filtered after applying filters based selected measure filter values
+						The initialize function of the chart generator. Populates the palette tab,Makes jquery ui sliders, adds event listeners, triggers event to render chart
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".modifyJSON"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">ARV.CG.</span><b>modifyJSON</b>(div)
+					
+					</div>
+					<div class="description">
+						This function updates the JSON for the graph whenever the user makes changes on the front endthis function is called.
 						
 						
 					</div>
@@ -779,38 +768,31 @@ ul.inheritsList {
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>originalData</b>
+									<span class="light fixedFont">{string}</span> <b>div</b>
 									
 								</dt>
-								<dd>{Object} The data to be filtered</dd>
+								<dd>The div id in which the chart is to be populated</dd>
 							
 							</dl>
 						
 						
 						
 						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{Object}</span> The filtered data</dd>
-							
-							</dl>
 						
 						
 						
 
 					<hr />
 				
-					<a name=".getMinOfMeasureField"> </a>
+					<a name=".performActionsBasedOnChart"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
-					<span class="light">{Number}</span>
-					<span class="light">ARV.Filter.</span><b>getMinOfMeasureField</b>(measureField)
+					
+					<span class="light">ARV.CG.</span><b>performActionsBasedOnChart</b>(chartType)
 					
 					</div>
 					<div class="description">
-						Finds the minimum value of the <tt>measureField</tt> from <tt>ARV.DataLoader.filteredData.data</tt>
+						
 						
 						
 					</div>
@@ -822,38 +804,106 @@ ul.inheritsList {
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>measureField</b>
+									<b>chartType</b>
 									
 								</dt>
-								<dd>{String} The measure field</dd>
+								<dd></dd>
 							
 							</dl>
 						
 						
 						
 						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{Number}</span> The minimum value of the <tt>measureField</tt></dd>
-							
-							</dl>
 						
 						
 						
 
 					<hr />
 				
-					<a name=".setAllDeselected"> </a>
+					<a name=".refreshGraph"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">ARV.Filter.</span><b>setAllDeselected</b>(elem)
+					<span class="light">ARV.CG.</span><b>refreshGraph</b>()
 					
 					</div>
 					<div class="description">
-						Remove the attribute "selected" for the select input element <tt>elem</tt> i.e deselect all the options
+						
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".refreshTable"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">ARV.CG.</span><b>refreshTable</b>()
+					
+					</div>
+					<div class="description">
+						When the options are changed and the chart type selected is a table, then the function is calledCreates the slick grid table with the changed options
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".reset"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">ARV.CG.</span><b>reset</b>()
+					
+					</div>
+					<div class="description">
+						The function clears the cahrt area and the "dataDiv" and removes all the "tipsy" elementsIt also unloads the google map chart if it has been loaded
+						
+						
+					</div>
+					
+					
+					
+						
+						
+						
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name=".showGraph"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					
+					<span class="light">ARV.CG.</span><b>showGraph</b>(graphType, div, graphDef)
+					
+					</div>
+					<div class="description">
+						The function creates an instance of the <tt>graphType</tt> and renders it to the <tt>div</tt>
 						
 						
 					</div>
@@ -865,10 +915,22 @@ ul.inheritsList {
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>elem</b>
+									<b>graphType</b>
 									
 								</dt>
-								<dd>The element for which all the options have to be set to deselected</dd>
+								<dd>{String} The graph type</dd>
+							
+								<dt>
+									<b>div</b>
+									
+								</dt>
+								<dd>{Optional} The div id in which the chart is to be rendered. If undefined it is rendered to the div with id "chart"</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Optional}</span> <b>graphDef</b>
+									
+								</dt>
+								<dd>This is the JSON that is passed to the Aurora source. If undefined then <tt>ARV.graphDef</tt> is taken.</dd>
 							
 							</dl>
 						
@@ -881,15 +943,15 @@ ul.inheritsList {
 
 					<hr />
 				
-					<a name=".setAllSelected"> </a>
+					<a name=".toggleParameters"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">ARV.Filter.</span><b>setAllSelected</b>(elem)
+					<span class="light">ARV.CG.</span><b>toggleParameters</b>(isMap)
 					
 					</div>
 					<div class="description">
-						Set the value attribute "selected" equal to "selected" for the input element <tt>elem</tt>
+						The function display/hides the category/measure axis divs according to the chart type selected
 						
 						
 					</div>
@@ -901,10 +963,10 @@ ul.inheritsList {
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<b>elem</b>
+									<b>isMap</b>
 									
 								</dt>
-								<dd>The element for which all the options have to be set to selected</dd>
+								<dd></dd>
 							
 							</dl>
 						
@@ -917,15 +979,15 @@ ul.inheritsList {
 
 					<hr />
 				
-					<a name=".updateMeasureFiltersForMap"> </a>
+					<a name=".updateGraphProperties"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">ARV.Filter.</span><b>updateMeasureFiltersForMap</b>()
+					<span class="light">ARV.CG.</span><b>updateGraphProperties</b>()
 					
 					</div>
 					<div class="description">
-						Update the measure filters for map
+						The function sets the properties of chart in the graphDef
 						
 						
 					</div>
@@ -942,40 +1004,15 @@ ul.inheritsList {
 
 					<hr />
 				
-					<a name=".updateSelectedMeasureAxisForMap"> </a>
+					<a name=".updateStyleProperties"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">ARV.Filter.</span><b>updateSelectedMeasureAxisForMap</b>()
+					<span class="light">ARV.CG.</span><b>updateStyleProperties</b>()
 					
 					</div>
 					<div class="description">
-						Update the selected measure axis
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".updateSeletectedMeasureAxis"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">ARV.Filter.</span><b>updateSeletectedMeasureAxis</b>()
-					
-					</div>
-					<div class="description">
-						The function is called when measure axis is changed.It changes <tt>ARV.Filter.selectedMeasureAxis</tt>
+						The function gets the style property value from the front end and sets these style properties in graphDef
 						
 						
 					</div>

@@ -341,7 +341,7 @@ ARV.Dashboard.setReportResizable = function() {
 			graphDef.width = ui.size.width;
 			graphDef.height = ui.size.height;
 			$(this).html("");
-			ARV.showGraph(graphDef.graphType, containerID, graphDef);
+			ARV.CG.showGraph(graphDef.graphType, containerID, graphDef);
 			// TODO: Following is a cheap hack to make the report resizable
 			// again. Change it
 			$('#saveBtn').trigger('click');
@@ -597,7 +597,7 @@ ARV.Dashboard.initDashboard = function() {
 		var div = $("<div/>").addClass("element-container").addClass("draggable").append(svgContainer);
 		var graphType = dashNS.GraphData[id].graphType;
 		$("#dashboardEditor").append(div);
-		ARV.showGraph(graphType, containerID, dashNS.GraphData[id]);
+		ARV.CG.showGraph(graphType, containerID, dashNS.GraphData[id]);
 		$(".draggable").draggable({
 			containment : "parent"
 		});
@@ -669,7 +669,7 @@ ARV.Dashboard.initDashboard = function() {
 		$(".report").each(function() {
 			var containerID = $(this).attr("id");
 			var graphDef = dashNS.originalGraphData[containerID].graphDef;
-			ARV.showGraph(graphDef.graphType, containerID, graphDef);
+			ARV.CG.showGraph(graphDef.graphType, containerID, graphDef);
 		});
 		dashNS.removeSelectedElemStyling();
 	});

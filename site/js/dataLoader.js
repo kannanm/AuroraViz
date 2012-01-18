@@ -362,7 +362,7 @@ ARV.DataLoader.updateDataForVisualizations = function() {
         $("#chart").html("Select some fields to view data");
         return;
     }
-    var noOfSelected = ARV.getNumberOfSelectedMeasureAxis();
+    var noOfSelected = ARV.CG.getNumberOfSelectedMeasureAxis();
     try {
         if (noOfSelected === 1) {
             dataLoadNS.modifyDataForSingleSeries();
@@ -382,8 +382,8 @@ ARV.DataLoader.updateDataForVisualizations = function() {
         dataLoadNS.updateDataForMap();
     }
     dataLoadNS.createDataForTable();
-    ARV.refreshTable();
-    ARV.refreshGraph();
+    ARV.CG.refreshTable();
+    ARV.CG.refreshGraph();
 };
 
 
