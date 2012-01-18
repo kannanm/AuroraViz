@@ -236,26 +236,48 @@ ARV.GraphData = {
     }
 };
 
+/**
+ * An Object to hold the original Graph data JSON. When the graph is resized
+ * then the graph width and height change. Thus a backup object
+ */
+ARV.originalGraphData = {};
 
-ARV.originalGraphData = {
-
-};
-
-ARV.deleteSymbol = '<button class="delComponentBtn ui-state-default ui-corner-all"><span class="ui-icon ui-icon-trash"></span></button>';
+//TODO heading and label can be combined to one as we can resize the label and size is the only
+//        difference between them
+/**
+ * An array of editable text elements.
+ */
 ARV.editableTextElements = ["heading", "description", "label"];
 ARV.setPosition = function(elem, position) {
     elem.css("position", "absolute");
     elem.css("top", position.top);
     elem.css("left", position.left);
 };
+
+/**
+ * Sets the size of the <tt>div</tt> with width equal to <tt>width</tt> and height equal to <tt>height</tt>
+ * @param div {Object} The element whose size is to be set
+ * @param width {Number} the width
+ * @param height {Number the height
+ */
 ARV.setSize = function(div, width, height) {
     div.css("width", width + 20);
     div.css("height", height + 20);
 };
+
+/**
+ * An object which has the default position of any element that is added. With top equal to zero
+ * and left equal to zero its the top-left corner
+ */
 ARV.defaultPosition = {
     top: "0",
     left: "0"
 };
+
+/**
+ * It is a map of component name to the functions that creates and return an
+ * appropriate dom element for the component
+ */
 ARV.getComponent = {
     heading: function() {
         return $("<label/>").addClass("heading").addClass("component").html("Double Click to edit");
@@ -272,12 +294,18 @@ ARV.getComponent = {
 
 };
 
+/**
+ * Map to hold the component names
+ */
 ARV.components = {
     heading: "heading",
     description: "description",
     label: "label"
 };
 
+/**
+ * Makes the report/chart resizable.
+ */
 ARV.setReportResizable = function() {
     $(".report").resizable({
         aspectRatio: true,
@@ -297,10 +325,23 @@ ARV.setReportResizable = function() {
     });
 };
 
+/**
+ * Removes the parent of the <tt>component</tt>
+ * @param component the component whose parent is to be removed
+ */
 ARV.removeComponentParent = function(component) {
     $(component).parent().remove();
 };
 
+/**
+ * Adds the text component i.e. heading, label or a description field
+ * @param componentClass {string} The class of the component which can be label, heading or description
+ * @param type {string} type of the component which can be textbox or text area
+ * @param [oldComponent] {Object} Optional field if given it means that the the new component to be added
+ *             will be the clone of the <tt>oldComponent</tt>
+ * @param [position] {Object} The position of the <tt>oldComponent</tt>. So the new component to be added
+ *             will be added in the same position
+ */
 ARV.addTextComponents = function(componentClass, type, oldComponent, position) {
     var component;
     if (oldComponent) {
@@ -335,11 +376,18 @@ ARV.addTextComponents = function(componentClass, type, oldComponent, position) {
 
 };
 
-
+/**
+ * Sets the value of <tt>ARV.selectedElement</tt> equal to <tt>elem</tt>.  
+ * @param elem The selected element
+ */
 ARV.setSelected = function(elem) {
     ARV.selectedElement = elem;
 };
 
+//TODO Instead of adding and removing the options again and again We can toggle the visibility
+/**
+ * Map of the component vs the html string for the options of the component
+ */
 ARV.options = {
     text: [
         '<label>Size: </label>',
@@ -356,6 +404,10 @@ ARV.options = {
         ].join(" "),
 };
 
+/**
+ * Inserts the dom elements for editing options. Checks if the selected element is a report or not
+ * and then populates the editing options accordingly
+ */
 ARV.populateOptions = function() {
     var isReport = $(ARV.selectedElement).is(".report");
     var html = isReport ? ARV.options.report : ARV.options.text;
@@ -364,6 +416,11 @@ ARV.populateOptions = function() {
     ARV.initializeColorPicker(ARV.colorPickerCB.dashboard);
     ARV.createSliders(ARV.createSlidersCB.dashboard);
 };
+
+/**
+ * Sets the values in the editing options equal to the property values of
+ * the selected element
+ */
 ARV.setOptionsValues = function() {
     var color = ARV.rgb2hex($(ARV.selectedElement).css("color"));
     var size = parseInt($(ARV.selectedElement).css("font-size"), 10);
@@ -374,14 +431,30 @@ ARV.setOptionsValues = function() {
     $("#textRotateAngle").val(angle);
     $("#textRotateAngleSlider").slider("value", angle);
 };
+
+/**
+ * Removes the styling of the selected element
+ */
 ARV.removeSelectedElemStyling = function() {
     $(".selected").each(function() {
         $(this).removeClass("selected");
     });
 };
+
+/**
+ * Sets the color of the <tt>elem</tt> equal to <tt>color</tt>
+ * @param elem {Object} The object whose color is to be set
+ * @param color {string} The color to be set
+ */
 ARV.setColor = function(elem, color) {
     $(elem).css("color", color);
 };
+
+/**
+ * Sets the angle of the <tt>elem</tt> equal to <tt>angle</tt>
+ * @param elem  {Object} The object whose angle is to be set
+ * @param angle {string} The angle to be set
+ */
 ARV.setTextAngle = function(elem, angle) {
     $(elem).css("-webkit-transform", "rotate(" + angle + "deg)");
     $(elem).css("-moz-transform", "rotate(" + angle + "deg)");
@@ -389,15 +462,28 @@ ARV.setTextAngle = function(elem, angle) {
     $(elem).css("-o-transform", "rotate(" + angle + "deg)");
     $(elem).css("transform", "rotate(" + angle + "deg)");
 };
+
+/**
+ * Sets the size of the <tt>elem</tt> equal to <tt>size</tt> in px
+ * @param elem  {Object} The object whose size is to be set
+ * @param size The size in px
+ */
 ARV.setTextSize = function(elem, size) {
     $(elem).css("font-size", size + "px");
 };
+
+/**
+ * Update the styling of the selected element from the values in the editing options
+ */
 ARV.updateSelectedElement = function() {
     ARV.setColor(ARV.selectedElement, $("#textColor").val());
     ARV.setTextAngle(ARV.selectedElement, $("#textRotateAngle").val());
     ARV.setTextSize(ARV.selectedElement, $("#textSize").val());
 };
 
+/**
+ * Map of the key code to the function which moves the component in appropriate direction
+ */
 ARV.moveMap = {
     37: function(elem, pos) {
         $(elem).css("left", pos.left - 1);
@@ -413,14 +499,25 @@ ARV.moveMap = {
     },
 };
 
+/**
+ * Move the <tt>component</tt> in appropriate direction, according to the <tt>key</tt> pressed
+ * @param component The element to be moved
+ * @param key The key pressed
+ */
 ARV.moveComponent = function(component, key) {
     var parent = $(component).parent();
     var position = $(parent).position();
     ARV.moveMap[key](parent, position);
 };
 
+/**
+ * A counter to hold the no. of reports on the dashboard
+ */
 ARV.noOfReports = 0;
 
+/**
+ * Initialize function for the dashboard
+ */
 ARV.initDashboard = function() {
     //initialize menu bar with jquery ui
     $("#addReports").menubar();
