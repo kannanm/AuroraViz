@@ -9,7 +9,7 @@ ARV.Utility = {};
  */
 ARV.Utility.colorPickerCB = {
     chartGenerator: function(hex, rgb) {
-        ARV.modifyJSON();
+        ARV.CG.modifyJSON();
     },
     dashboard: function(hex, rgb) {
         ARV.Dashboard.updateSelectedElement();
@@ -23,7 +23,7 @@ ARV.Utility.createSlidersCB = {
         var sliderID = $(this).attr("id");
         var textID = sliderID.substr(0, sliderID.indexOf("Slider"));
         $("#" + textID).val(ui.value);
-        ARV.modifyJSON();
+        ARV.CG.modifyJSON();
     },
     dashboard: function(event, ui) {
         var sliderID = $(this).attr("id");
